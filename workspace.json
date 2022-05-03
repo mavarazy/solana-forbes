@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "forbes": "apps/forbes",
+    "forbes-e2e": "apps/forbes-e2e"
+  }
+}
