@@ -3,6 +3,7 @@
   "projects": {
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
-    "migration": "apps/migration"
+    "migration": "apps/migration",
+    "utils": "libs/utils"
   }
 }
