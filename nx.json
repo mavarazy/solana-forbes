@@ -15,9 +15,10 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "Mjc5N2Y1NDItYWRmNS00NmI2LWI3YjgtMGEyM2E3YjdmMDcxfHJlYWQtd3JpdGU="
       }
     }
   },
@@ -43,7 +44,13 @@
         "style": "css",
         "linter": "eslint"
       }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "css",
+        "linter": "eslint"
+      }
     }
   },
-  "defaultProject": "forbes"
+  "defaultProject": "app"
 }

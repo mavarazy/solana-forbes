@@ -1,7 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "forbes": "apps/forbes",
-    "forbes-e2e": "apps/forbes-e2e"
+    "app": "apps/app",
+    "app-e2e": "apps/app-e2e",
+    "migration": "apps/migration"
   }
 }
