@@ -1,3 +1,5 @@
-import { updateDecimals } from './app/update-decimals';
+// import { updatePrices } from './app/update-prices';
+// updatePrices();
+import { updateWallets } from './app/update-wallets';
 
-updateDecimals();
+updateWallets();

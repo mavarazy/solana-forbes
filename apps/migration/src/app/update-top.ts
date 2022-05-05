@@ -51,7 +51,7 @@ export const updateTop = async () => {
       amount: wallet.sol,
       mint: 'So11111111111111111111111111111111111111112',
       worth: wallet.sol * PriceService.getSolWorth(wallet.sol),
-      usd: PriceService.getSolPrice().usd,
+      usd: PriceService.getSolPrice(),
     };
 
     const allTokens: TokenWorth[] = wallet.tokens

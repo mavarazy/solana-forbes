@@ -63,6 +63,7 @@
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.4.0",
     "jest": "27.2.3",
+    "node-fetch": "^3.2.4",
     "nx": "13.10.3",
     "prettier": "^2.5.1",
     "react-test-renderer": "18.0.0",

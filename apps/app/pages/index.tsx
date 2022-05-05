@@ -1,6 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import { ForbesTable } from '../components/forbes-table';
+import { ForbesList } from '../components/forbes-table';
 import { WalletBallance } from '../context';
 import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
@@ -53,7 +53,7 @@ const Home: NextPage<{
   wallets: Array<Pick<WalletBallance, 'id' | 'worth' | 'top'>>;
 }> = ({ wallets }) => (
   <main className="flex flex-1 flex-col">
-    <ForbesTable wallets={wallets} />
+    <ForbesList wallets={wallets} />
   </main>
 );
 

@@ -1,52 +1,77 @@
-import { CoinGeckoAPI } from '@coingecko/cg-api-ts';
-import { RawAccount } from '@solana/spl-token';
+import { Mint, RawAccount } from '@solana/spl-token';
 import { TokenInfo } from '@solana/spl-token-registry';
-import { PriceMap, TokenWorth } from './types';
-import { throttle } from './throttle';
+import { TokenPrice, TokenWorth } from './types';
 import { USDPriceMap } from './usd-price-map';
+import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { getMint } from '@solana/spl-token';
 
-const getPrice = async (coingeckoId: string): Promise<number | null> => {
-  const cg = new CoinGeckoAPI(window.fetch.bind(window));
+const getPrice = async (
+  coingeckoId: string
+): Promise<{ usd: number; cap: number } | null> => {
+  console.log('Getting price for ', coingeckoId);
 
   try {
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${coingeckoId}`
+    );
     const {
-      data: {
-        market_data: {
-          current_price: { usd },
-        },
+      market_data: {
+        current_price: { usd },
+        market_cap: { usd: cap },
       },
-    } = await cg.getCoinsId(coingeckoId);
-    return usd;
+    } = await res.json();
+    console.log('Getting price for ', coingeckoId, 'usd: ', usd, ', cap:', cap);
+    return { usd, cap };
   } catch (err) {
-    console.error(`Failed to fetch ${coingeckoId}`);
+    console.error(`Failed to fetch ${coingeckoId} ${err}`);
   }
+
   return null;
 };
 
-const loadPriceMap = async (tokens: TokenInfo[]): Promise<PriceMap> => {
-  const tokenPricePairs: Array<{
-    token: TokenInfo;
-    price: number | null;
-  }> = await throttle(
-    tokens.map((token) => async () => {
-      const price = await PriceService.getPrice(token.extensions?.coingeckoId!);
-      return { token, price };
-    }),
-    2,
-    1
-  );
-  return tokenPricePairs.reduce((priceMap: PriceMap, { token, price }) => {
-    if (price) {
-      priceMap[token.address] = { usd: price, decimals: token.decimals };
-    }
-    return priceMap;
-  }, {});
+const getTokenMint = async (address: string): Promise<Mint | null> => {
+  try {
+    const connection = new Connection(
+      clusterApiUrl('mainnet-beta'),
+      'confirmed'
+    );
+    const mint = await getMint(connection, new PublicKey(address));
+    return mint;
+  } catch (err) {
+    return null;
+  }
 };
 
-const getSolPrice = () =>
-  USDPriceMap['So11111111111111111111111111111111111111112'];
+const loadTokenPrice = async (token: TokenInfo): Promise<TokenPrice | null> => {
+  if (!token.extensions?.coingeckoId) {
+    console.log('No coingecko extension for ', token.name);
+    return null;
+  }
 
-const getSolWorth = (sol: bigint) => {
+  const price = await PriceService.getPrice(token.extensions.coingeckoId);
+  if (!price) {
+    console.log('Price is missing for ', token.name);
+    return null;
+  }
+
+  console.log('Extracting mint: ', token.address);
+  const mint = await getTokenMint(token.address);
+  if (!mint) {
+    return null;
+  }
+
+  return {
+    mint: token.address,
+    ...price,
+    decimals: mint.decimals,
+    supply: Number(mint.supply) / Math.pow(10, mint.decimals),
+  };
+};
+
+const getSolPrice = (): number =>
+  USDPriceMap['So11111111111111111111111111111111111111112'].usd;
+
+const getSolWorth = (sol: bigint): number => {
   const { usd, decimals } =
     USDPriceMap['So11111111111111111111111111111111111111112'];
   return usd * (Number(sol) / Math.pow(10, decimals));
@@ -80,5 +105,5 @@ export const PriceService = {
   getSolPrice,
   getSolWorth,
   getTokenWorth,
-  loadPriceMap,
+  loadTokenPrice,
 };

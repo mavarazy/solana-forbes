@@ -31,21 +31,28 @@ const getSolBalance = async (accountId: string): Promise<bigint> => {
   return BigInt(balance);
 };
 
-const getWorth = async (sol: bigint, tokens: TokenWorth[]): Promise<number> => {
-  const solWorth = await PriceService.getSolWorth(sol);
-  const allTokenWorth = tokens.reduce((sum, token) => sum + token.worth, 0);
-  return solWorth + allTokenWorth;
-};
-
 const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const sol = await getSolBalance(id);
   const tokens = await getTokens(id);
-  const worth = await getWorth(sol, tokens);
+
+  const amount = Number(sol) / Math.pow(10, 9);
+  const solTokenWallet: TokenWorth = {
+    amount: amount,
+    mint: 'So11111111111111111111111111111111111111112',
+    worth: amount * PriceService.getSolPrice(),
+    usd: PriceService.getSolPrice(),
+  };
+
+  const allTokens: TokenWorth[] = tokens
+    .concat([solTokenWallet])
+    .sort((a, b) => b.worth - a.worth);
+
   return {
     id,
     sol: Number(sol) / Math.pow(10, 9),
-    tokens,
-    worth,
+    top: allTokens.slice(0, 3).filter((worth) => worth.usd),
+    tokens: allTokens,
+    worth: allTokens.reduce((worth, token) => worth + token.worth, 0),
   };
 };
 
@@ -60,12 +67,10 @@ const getAllWalletBalance = async (
 
   console.log(`Found ${newWallets.length} new wallets`);
   const freshWallets = await throttle(
-    newWallets.map(
-      (wallet, i) => async () => {
-        console.log(`Extraxting ${i} wallet ${wallet}`);
-        return WalletService.getWalletBalance(wallet)
-      }
-    ),
+    newWallets.map((wallet, i) => async () => {
+      console.log(`Extraxting ${i} wallet ${wallet}`);
+      return WalletService.getWalletBalance(wallet);
+    }),
     1,
     1
   );

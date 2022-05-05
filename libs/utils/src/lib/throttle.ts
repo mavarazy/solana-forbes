@@ -12,9 +12,7 @@ export async function throttle<T>(
   const pending = Promise.all(
     Array(Math.min(num, tasks.length - start))
       .fill(null)
-      .map((_, i) =>
-        pRetry(tasks[start + i], { retries: 3, minTimeout: 10000 })
-      )
+      .map((_, i) => tasks[start + i]())
   );
 
   const timer = new Promise((resolve) => {
