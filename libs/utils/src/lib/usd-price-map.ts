@@ -1,4 +1,4 @@
-const USDPriceMap = {
+export const USDPriceMap = {
   G2jrxYSoCSzmohxERa2JzSJMuRM4kiNvRA3DnCv7Lzcz: { usd: 0.78253, decimals: 9 },
   AjkPkq3nsyDe1yKcbyZT7N4aK4Evv9om9tzhQD3wsRC: { usd: 1.26, decimals: 8 },
   '8F3kZd9XEpFgNZ4fZnEAC5CJZLewnkNE8QCjdvorGWuW': { usd: 1.26, decimals: 9 },
@@ -137,7 +137,7 @@ const USDPriceMap = {
   },
   '5sM9xxcBTM9rWza6nEgq2cShA87JjTBx1Cu82LjgmaEg': {
     usd: 0.00000318,
-    decimals: 7,
+    decimals: 9,
   },
   AV7NgJV2BsgEukzUTrcUMz3LD37xLcLtygFig5WJ3kQN: { usd: 3.38, decimals: 9 },
   BgeRyFWWGHeVouqfHfcXUxmvfkgekhrXYVqQWf63kpJB: { usd: 0.07061, decimals: 9 },
@@ -322,7 +322,7 @@ const USDPriceMap = {
   FYpdBuyAHSbdaAyD1sKkxyLWbAP8uUW9h6uvdhK74ij1: { usd: 1, decimals: 9 },
   CpFE715P5DnDoJj9FbCRcuyHHeTXNdRnvzNkHvq1o23U: {
     usd: 0.02498831,
-    decimals: 9,
+    decimals: 8,
   },
   '3DHPqxdMXogNNnpqBMF8N4Zs4dn1WR31H7UjWq6FExwG': {
     usd: 0.03177677,
@@ -380,7 +380,7 @@ const USDPriceMap = {
   '5HHv6HAyBtaihyHEapCJvjE6iRbGLRmm3F5EZjz6EzHV': { usd: 0.22947, decimals: 8 },
   '6oYoyFahkKxyvjsdt8JtRr4AQHvvwHEJthwqxQjei2gi': {
     usd: 0.160574,
-    decimals: 18,
+    decimals: 8,
   },
   '3Y2wTtM4kCX8uUSLrKJ8wpajCu1C9LaWWAd7b7Nb2BDw': {
     usd: 0.079881,
@@ -409,12 +409,12 @@ const USDPriceMap = {
   },
   '3jzdrXXKxwkBk82u2eCWASZLCKoZs1LQTg87HBEAmBJw': {
     usd: 1.48871e-7,
-    decimals: 9,
+    decimals: 1,
   },
   frtnaScfGPuo56uyPGmij1QTc64SBdjnXC3RXmcVmxw: { usd: 1.087, decimals: 9 },
   '6xcfmgzPgABAuAfGDhvvLLMfMDur4at7tU7j3NudUviK': {
     usd: 0.00607658,
-    decimals: 3,
+    decimals: 9,
   },
   '8ArKbnnDiq8eRR8hZ1eULMjd2iMAD8AqwyVJRAX7mHQo': {
     usd: 0.109547,
@@ -460,7 +460,7 @@ const USDPriceMap = {
   B8xDqdrHpYLNHQKQ4ARDKurxhkhn2gfZa8WRosCEzXnF: { usd: 18.26, decimals: 9 },
   hapiymAn1QKih3vHmqRQyUWLSCbMjRukuRobAQ66Qj6: { usd: 15.7, decimals: 9 },
   '8pBc4v9GAwCBNWPB5XKA93APexMGAS4qMr37vNke9Ref': { usd: 38658, decimals: 9 },
-  '2ueY1bLcPHfuFzEJq7yN1V2Wrpu8nkun9xG2TVCE1mhD': { usd: 1.39, decimals: 8 },
+  '2ueY1bLcPHfuFzEJq7yN1V2Wrpu8nkun9xG2TVCE1mhD': { usd: 1.39, decimals: 6 },
   FP9ogG7hTdfcTJwn4prF9AVEcfcjLq1GtkqYM4oRn7eY: {
     usd: 0.01410212,
     decimals: 9,
@@ -975,7 +975,7 @@ const USDPriceMap = {
   },
   SNSNkV9zfG5ZKWQs6x4hxvBRV6s8SqMfSGCtECDvdMd: { usd: 0.053671, decimals: 9 },
   CCGLdsokcybeF8NrCcu1RSQK8isNBjBA58kVEMTHTKjx: { usd: 0.987286, decimals: 9 },
-  HtxznfExBatdX28kMFDvmvU1rXVwiG3JSWcNPdFQ4PLh: { usd: 65.71, decimals: 6 },
+  HtxznfExBatdX28kMFDvmvU1rXVwiG3JSWcNPdFQ4PLh: { usd: 65.71, decimals: 8 },
   HWxpSV3QAGzLQzGAtvhSYAEr7sTQugQygnni1gnUGh1D: { usd: 38839, decimals: 10 },
   '7TEcMnoVJtZgpWCdnLu8X15bTtnt4J2zZyBxfV7i2uw7': {
     usd: 0.137105,
@@ -1075,12 +1075,12 @@ const USDPriceMap = {
   A9mUU4qviSctJVPJdBJWkb28deg915LYJKrzQ19ji3FM: { usd: 0.997921, decimals: 6 },
   E2VmbootbVCBkMNNxKQgCLMS1X3NoGMaYAsufaAsf7M: { usd: 0.997921, decimals: 6 },
   FVsXUnbhifqJ4LiXQEbpUtXVdB8T5ADLKqSs5t1oc54F: { usd: 0.997921, decimals: 6 },
-  AGqKX7F4mqJ8x2mUQVangJb5pWQJApaKoUfe5gXM53CV: { usd: 0.997921, decimals: 8 },
+  AGqKX7F4mqJ8x2mUQVangJb5pWQJApaKoUfe5gXM53CV: { usd: 0.997921, decimals: 6 },
   USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX: { usd: 1.003, decimals: 6 },
   '43m2ewFV5nDepieFjT9EmAQnc1HRtAF247RBpLGFem5F': { usd: 1.002, decimals: 8 },
   D3KdBta3p53RV5FoahnJM5tP45h6Fd3AyFYgXTJvGCaK: { usd: 1.001, decimals: 9 },
   Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB: { usd: 1.001, decimals: 6 },
-  B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR: { usd: 1.001, decimals: 8 },
+  B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR: { usd: 1.001, decimals: 6 },
   '9vMJfxuKxXBoEa7rM12mYLMwTacLMLDJqHozw96WQL8i': { usd: 1.001, decimals: 6 },
   '7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT': { usd: 1, decimals: 6 },
   UXPhBoR3qG4UCiGNJfV7MqhHyFqKN68g45GoYvAeL2M: { usd: 0.067183, decimals: 9 },
@@ -1103,7 +1103,7 @@ const USDPriceMap = {
   },
   '2cW8Yosn4tSYJYjfUkcpKnYBSMYDqXfJmQXVu4RJzBTw': {
     usd: 0.04086206,
-    decimals: 18,
+    decimals: 8,
   },
   '5J9yhFRnQZx3RiqHzfQpAffX5UQz3k8vQCZH2g9Z9sDg': { usd: 246.6, decimals: 8 },
   CtDjsryLtwZCLj8TeniV7tWHbkaREfjKDWpvyQvsTyek: { usd: 5.16, decimals: 4 },

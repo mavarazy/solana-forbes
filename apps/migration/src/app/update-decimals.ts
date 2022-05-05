@@ -14,7 +14,7 @@ export const updateDecimals = async () => {
     }
   });
 
-  const mints = await throttle(tasks, 1, 10);
+  const mints = await throttle(tasks, 1, 3);
 
   const priceMap = mints.reduce(
     (agg, { mint, ...rest }) => Object.assign(agg, { [mint]: rest }),
