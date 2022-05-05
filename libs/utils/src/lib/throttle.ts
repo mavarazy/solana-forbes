@@ -1,8 +1,8 @@
-import pRetry from 'p-retry';
+import delay from 'delay';
 
 export async function throttle<T>(
   tasks: Array<() => Promise<T>>,
-  durationSec: number,
+  duration: number,
   num: number,
   start = 0,
   agg: T[] = []
@@ -15,21 +15,12 @@ export async function throttle<T>(
       .map((_, i) => tasks[start + i]())
   );
 
-  const timer = new Promise((resolve) => {
-    setTimeout(resolve, durationSec * 1000);
-  });
-  await timer;
+  await delay(duration);
 
   const completeTasks = await pending;
   if (start + num >= tasks.length) {
     return agg.concat(completeTasks);
   }
 
-  return throttle(
-    tasks,
-    durationSec,
-    num,
-    start + num,
-    agg.concat(completeTasks)
-  );
+  return throttle(tasks, duration, num, start + num, agg.concat(completeTasks));
 }

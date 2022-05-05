@@ -71,7 +71,7 @@ const getAllWalletBalance = async (
       console.log(`Extraxting ${i} wallet ${wallet}`);
       return WalletService.getWalletBalance(wallet);
     }),
-    1,
+    1000,
     1
   );
 

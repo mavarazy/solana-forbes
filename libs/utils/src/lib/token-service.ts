@@ -21,7 +21,7 @@ const getLargestWallets = async (token: string): Promise<WalletBallance[]> => {
       return owner.toString();
     });
 
-    const topWallets = await throttle(extractOwnerAccountTask, 1, 5);
+    const topWallets = await throttle(extractOwnerAccountTask, 1000, 5);
     console.log('Extracted all owners');
 
     return WalletService.getAllWalletBalance(topWallets);

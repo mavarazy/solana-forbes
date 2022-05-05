@@ -9,7 +9,7 @@ export const updatePrices = async () => {
     .filter((token) => token.extensions?.coingeckoId)
     .map((token) => async () => PriceService.loadTokenPrice(token));
 
-  const prices = await throttle(tasks, 1, 1);
+  const prices = await throttle(tasks, 1000, 1);
 
   const priceMap = prices.reduce((agg, price) =>
     price === null ? agg : Object.assign(agg, { [price.mint]: price })

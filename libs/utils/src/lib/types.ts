@@ -3,6 +3,7 @@ export interface TokenWorth {
   amount: number;
   worth: number;
   usd?: number;
+  percent?: number;
 }
 
 export interface WalletBallance {

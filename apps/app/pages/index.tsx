@@ -1,14 +1,13 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesList } from '../components/forbes-table';
-import { WalletBallance } from '../context';
 import { gql } from '@apollo/client';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { hasuraClient, WalletBallance } from '@forbex-nxr/utils';
 import { TokenListProvider } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 200, order_by: { worth: desc }) {
+    wallet(limit: 100, order_by: { worth: desc }) {
       id
       top
       worth
@@ -52,7 +51,7 @@ export async function getStaticProps(context) {
 const Home: NextPage<{
   wallets: Array<Pick<WalletBallance, 'id' | 'worth' | 'top'>>;
 }> = ({ wallets }) => (
-  <main className="flex flex-1 flex-col">
+  <main className="flex flex-1 flex-col bg-gray-200">
     <ForbesList wallets={wallets} />
   </main>
 );
