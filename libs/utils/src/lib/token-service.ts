@@ -14,14 +14,15 @@ const getLargestWallets = async (token: string): Promise<WalletBallance[]> => {
       new PublicKey(token)
     );
 
-    const extractWalletTask = accounts.map((account) => async () => {
+    const extractOwnerAccountTask = accounts.map((account) => async () => {
       const accountBuffer = await connection.getAccountInfo(account.address);
       const accountInfo = AccountLayout.decode(accountBuffer!.data);
       const owner = accountInfo.owner;
       return owner.toString();
     });
 
-    const topWallets = await throttle(extractWalletTask, 1, 5);
+    const topWallets = await throttle(extractOwnerAccountTask, 1, 5);
+    console.log('Extracted all owners');
 
     return WalletService.getAllWalletBalance(topWallets);
   } catch (err) {

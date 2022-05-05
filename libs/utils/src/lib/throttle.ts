@@ -1,4 +1,4 @@
-import pRetry from "p-retry";
+import pRetry from 'p-retry';
 
 export async function throttle<T>(
   tasks: Array<() => Promise<T>>,
@@ -7,13 +7,13 @@ export async function throttle<T>(
   start = 0,
   agg: T[] = []
 ): Promise<T[]> {
-  console.log("Processing ", start, " of ", tasks.length);
+  console.log('Processing ', start, ' of ', tasks.length);
 
   const pending = Promise.all(
     Array(Math.min(num, tasks.length - start))
       .fill(null)
       .map((_, i) =>
-        pRetry(tasks[start + i], { retries: 15, minTimeout: 10000 })
+        pRetry(tasks[start + i], { retries: 3, minTimeout: 10000 })
       )
   );
 

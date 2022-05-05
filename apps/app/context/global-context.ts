@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { TokenInfo } from "@solana/spl-token-registry";
+import { createContext, useContext } from 'react';
+import { TokenInfo } from '@solana/spl-token-registry';
 
 export interface TokenWorth {
   mint: string;
@@ -12,6 +12,7 @@ export interface WalletBallance {
   id: string;
   worth: number;
   sol: number;
+  top: Array<TokenWorth & { info?: TokenInfo }>;
   tokens: TokenWorth[];
 }
 
@@ -25,14 +26,14 @@ export interface AppState {
 
 export const DefaultToken: TokenInfo = {
   chainId: 101,
-  address: "HKfs24UEDQpHS5hUyKYkHd9q7GY5UQ679q2bokeL2whu",
-  symbol: "Test Token",
-  name: "Fake Token",
+  address: 'HKfs24UEDQpHS5hUyKYkHd9q7GY5UQ679q2bokeL2whu',
+  symbol: 'Test Token',
+  name: 'Fake Token',
   decimals: 6,
   logoURI:
-    "https://thumbor.forbes.com/thumbor/400x0/smart/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5fb2dd653912b249a1647b2e%2F960x0.jpg%3FcropX1%3D0%26cropX2%3D400%26cropY1%3D0%26cropY2%3D400",
+    'https://thumbor.forbes.com/thumbor/400x0/smart/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5fb2dd653912b249a1647b2e%2F960x0.jpg%3FcropX1%3D0%26cropX2%3D400%26cropY1%3D0%26cropY2%3D400',
   extensions: {
-    coingeckoId: "tiny",
+    coingeckoId: 'tiny',
   },
 };
 

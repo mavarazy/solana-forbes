@@ -61,9 +61,12 @@ const getAllWalletBalance = async (
   console.log(`Found ${newWallets.length} new wallets`);
   const freshWallets = await throttle(
     newWallets.map(
-      (wallet) => async () => WalletService.getWalletBalance(wallet)
+      (wallet, i) => async () => {
+        console.log(`Extraxting ${i} wallet ${wallet}`);
+        return WalletService.getWalletBalance(wallet)
+      }
     ),
-    5,
+    1,
     1
   );
 

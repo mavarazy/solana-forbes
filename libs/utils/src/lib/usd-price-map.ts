@@ -1869,7 +1869,7 @@ export const USDPriceMap = {
   },
   SNSNkV9zfG5ZKWQs6x4hxvBRV6s8SqMfSGCtECDvdMd: {
     usd: 0.053671,
-    decimals: 3,
+    decimals: 9,
   },
   CCGLdsokcybeF8NrCcu1RSQK8isNBjBA58kVEMTHTKjx: {
     usd: 0.987286,

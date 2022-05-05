@@ -1,18 +1,15 @@
-import { TokenInfo } from "@solana/spl-token-registry";
+import { TokenInfo } from '@solana/spl-token-registry';
 
 export const TokenLogo = ({
   logoURI,
-  size: width,
   className,
-}: Pick<TokenInfo, "logoURI"> & { size: number; className: string }) => (
+}: Pick<TokenInfo, 'logoURI'> & { className: string }) => (
   <img
-    src={logoURI ?? "/default-token-logo.svg"}
-    width={width}
-    height={width}
+    src={logoURI ?? '/default-token-logo.svg'}
     onError={({ currentTarget }) => {
-      if (currentTarget.src !== "/default-token-logo.svg") {
+      if (currentTarget.src !== '/default-token-logo.svg') {
         currentTarget.onerror = null;
-        currentTarget.src = "/default-token-logo.svg";
+        currentTarget.src = '/default-token-logo.svg';
       }
     }}
     className={className}

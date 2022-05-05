@@ -43,6 +43,9 @@ const loadPriceMap = async (tokens: TokenInfo[]): Promise<PriceMap> => {
   }, {});
 };
 
+const getSolPrice = () =>
+  USDPriceMap['So11111111111111111111111111111111111111112'];
+
 const getSolWorth = (sol: bigint) => {
   const { usd, decimals } =
     USDPriceMap['So11111111111111111111111111111111111111112'];
@@ -74,6 +77,7 @@ const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
 
 export const PriceService = {
   getPrice,
+  getSolPrice,
   getSolWorth,
   getTokenWorth,
   loadPriceMap,

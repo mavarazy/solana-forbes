@@ -1,28 +1,60 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesTable } from '../components/forbes-table';
-import { useGlobalState } from '../context';
-import { TokenLogo } from '../components/token-logo';
-import { TokenInfo } from '@solana/spl-token-registry';
+import { WalletBallance } from '../context';
+import { gql } from '@apollo/client';
+import { hasuraClient } from '@forbex-nxr/utils';
+import { TokenListProvider } from '@solana/spl-token-registry';
 
-const TokenPanel = ({ token }: { token: TokenInfo }) => (
-  <div className="p-2 m-2 border-2 rounded-full flex">
-    <TokenLogo {...token} size={48} className="h-8 w-8 mr-4 rounded-full" />
-    <span className="font-base self-center text-xl">{token.name}</span>
-  </div>
-);
+const GetLargestWalletsQuery = gql`
+  query GetLargestWallets {
+    wallet(limit: 200, order_by: { worth: desc }) {
+      id
+      top
+      worth
+    }
+  }
+`;
 
-const Home: NextPage = () => {
+export async function getStaticProps(context) {
   const {
-    state: { currentToken },
-  } = useGlobalState();
+    data: { wallet },
+  } = await hasuraClient.query({ query: GetLargestWalletsQuery });
 
-  return (
-    <main className="flex flex-1 flex-col">
-      <TokenPanel token={currentToken} />
-      <ForbesTable />
-    </main>
+  const resolvedTokens = await new TokenListProvider().resolve();
+
+  const tokenMap = resolvedTokens
+    .getList()
+    .reduce(
+      (agg, tokenInfo) =>
+        Object.assign(agg, { [tokenInfo.address]: tokenInfo }),
+      {}
+    );
+
+  const wallets = wallet.map((wallet) =>
+    Object.assign(
+      { ...wallet },
+      {
+        top: wallet.top.map((top) =>
+          tokenMap[top.mint] ? { ...top, info: tokenMap[top.mint] } : top
+        ),
+      }
+    )
   );
-};
+
+  return {
+    props: {
+      wallets,
+    }, // will be passed to the page component as props
+  };
+}
+
+const Home: NextPage<{
+  wallets: Array<Pick<WalletBallance, 'id' | 'worth' | 'top'>>;
+}> = ({ wallets }) => (
+  <main className="flex flex-1 flex-col">
+    <ForbesTable wallets={wallets} />
+  </main>
+);
 
 export default Home;
