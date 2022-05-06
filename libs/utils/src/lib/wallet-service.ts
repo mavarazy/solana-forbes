@@ -15,12 +15,33 @@ const getTokens = async (accountId: string): Promise<TokenWorth[]> => {
     }
   );
 
-  return Promise.all(
+  const tokens = await Promise.all(
     tokenAccounts.value.map(async (accountBuffer) => {
       const account = AccountLayout.decode(accountBuffer.account.data);
       return PriceService.getTokenWorth(account);
     })
   );
+
+  // There might be more than one account for the same token
+  const tokenMap = tokens.reduce(
+    (agg: { [key in string]: TokenWorth }, token) => {
+      if (agg[token.mint]) {
+        agg[token.mint].amount += token.amount;
+        if (agg[token.mint].percent) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          agg[token.mint].percent += token.percent;
+        }
+        agg[token.mint].worth += token.worth;
+      } else {
+        agg[token.mint] = token;
+      }
+      return agg;
+    },
+    {}
+  );
+
+  return Object.values(tokenMap).sort((a, b) => b.worth - a.worth);
 };
 
 const getSolBalance = async (accountId: string): Promise<bigint> => {

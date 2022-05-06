@@ -2,8 +2,8 @@ export interface TokenWorth {
   mint: string;
   amount: number;
   worth: number;
-  usd?: number;
   percent?: number;
+  usd?: number;
 }
 
 export interface WalletBallance {

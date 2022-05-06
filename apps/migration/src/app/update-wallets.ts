@@ -3,7 +3,7 @@ import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }, offset: 2614) {
+    wallet(order_by: { worth: desc }, offset: 1830) {
       id
     }
   }

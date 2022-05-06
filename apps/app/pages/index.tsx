@@ -3,12 +3,13 @@ import type { NextPage } from 'next';
 import { ForbesList } from '../components/forbes-table';
 import { gql } from '@apollo/client';
 import { hasuraClient, WalletBallance } from '@forbex-nxr/utils';
-import { TokenListProvider } from '@solana/spl-token-registry';
+import { TokenInfo, TokenListProvider } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 100, order_by: { worth: desc }) {
+    wallet(limit: 500, order_by: { worth: desc }) {
       id
+      sol
       top
       worth
     }
@@ -49,7 +50,9 @@ export async function getStaticProps(context) {
 }
 
 const Home: NextPage<{
-  wallets: Array<Pick<WalletBallance, 'id' | 'worth' | 'top'>>;
+  wallets: Array<
+    Pick<WalletBallance, 'id' | 'worth' | 'sol' | 'top'> & { info: TokenInfo }
+  >;
 }> = ({ wallets }) => (
   <main className="flex flex-1 flex-col bg-gray-200">
     <ForbesList wallets={wallets} />
