@@ -1,6 +1,6 @@
 import { Mint, RawAccount } from '@solana/spl-token';
-import { TokenInfo } from '@solana/spl-token-registry';
-import { TokenPrice, TokenWorth } from './types';
+import { TokenInfo, TokenListProvider } from '@solana/spl-token-registry';
+import { TokenInfoSummary, TokenPrice, TokenWorth } from './types';
 import { USDPriceMap } from './usd-price-map';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { getMint } from '@solana/spl-token';
@@ -28,6 +28,22 @@ const getPrice = async (
 
   return null;
 };
+
+const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
+  (resolve) => {
+    new TokenListProvider().resolve().then((resolvedTokens) => {
+      const tokenMap = resolvedTokens.getList().reduce(
+        (agg, tokenInfo) =>
+          Object.assign(agg, {
+            [tokenInfo.address]: { name: tokenInfo.name },
+          }),
+        {}
+      );
+
+      resolve(tokenMap);
+    });
+  }
+);
 
 const getTokenMint = async (address: string): Promise<Mint | null> => {
   try {
@@ -74,6 +90,7 @@ const getSolPrice = (): number =>
 const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
   const mint = account.mint.toString();
   const price = USDPriceMap[mint];
+  const info = (await tokenMap)[mint];
   if (price) {
     const { decimals, usd, cap } = price;
     const amount = Number(account.amount) / Math.pow(10, decimals);
@@ -83,12 +100,14 @@ const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
       mint,
       amount,
       worth,
+      info,
       usd: price.usd,
       percent,
     };
   } else {
     return {
       mint,
+      info,
       amount: Number(account.amount),
       worth: 0,
     };

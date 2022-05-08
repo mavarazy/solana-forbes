@@ -1,4 +1,4 @@
-export * from './class-names';
+export * from './ui';
 export * from './hasura-client';
 export * from './price-service';
 export * from './throttle';
@@ -7,4 +7,4 @@ export * from './wallet-repository';
 export * from './wallet-service';
 export * from './types';
 export * from './usd-price-map';
-export * from './number-utils';
+export * from './ui/number-utils';

@@ -10,7 +10,7 @@ const GetLargestWalletsQuery = gql`
     wallet(
       order_by: { worth: desc }
       where: { nfts: { _gt: "0" } }
-      limit: 500
+      limit: 50
     ) {
       id
       nfts

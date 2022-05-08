@@ -4,14 +4,14 @@ import { throttle } from './throttle';
 import { WalletBallance } from './types';
 import { WalletService } from './wallet-service';
 
-const getLargestWallets = async (token: string): Promise<WalletBallance[]> => {
+const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
   try {
     const connection = new Connection(
       clusterApiUrl('mainnet-beta'),
       'confirmed'
     );
     const { value: accounts } = await connection.getTokenLargestAccounts(
-      new PublicKey(token)
+      new PublicKey(mint)
     );
 
     const extractOwnerAccountTask = accounts.map((account) => async () => {

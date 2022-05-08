@@ -1,8 +1,12 @@
+import { TokenInfo } from '@solana/spl-token-registry';
+
+export type TokenInfoSummary = Pick<TokenInfo, 'logoURI' | 'name'>;
+
 export interface TokenWorth {
   mint: string;
   amount: number;
   worth: number;
-  info?: { logoURI?: string; name?: string };
+  info?: TokenInfoSummary;
   percent?: number;
   usd?: number;
 }
