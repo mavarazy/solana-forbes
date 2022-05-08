@@ -1,5 +1,4 @@
 {
-  "root": "apps/migration",
   "sourceRoot": "apps/migration/src",
   "projectType": "application",
   "targets": {

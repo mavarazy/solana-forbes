@@ -10,9 +10,11 @@ export const SummaryBadge = ({ nfts, tokens }) => (
       icon={faHexagonVerticalNftSlanted}
       className="flex self-center"
     />
-    <span className="self-center ml-1">{nfts.toLocaleString()}</span>
+    <span className="self-center ml-1">{nfts && nfts.toLocaleString()}</span>
 
     <FontAwesomeIcon icon={faCoinFront} className="flex self-center ml-2" />
-    <span className="self-center ml-1">{tokens.toLocaleString()}</span>
+    <span className="self-center ml-1">
+      {tokens && tokens.toLocaleString()}
+    </span>
   </span>
 );

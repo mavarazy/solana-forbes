@@ -4,6 +4,7 @@ import { WalletBallance, TokenWorth } from './types';
 import { PriceService } from './price-service';
 import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
+import { NFTService } from './nft-service';
 
 const getAllTokenWorth = async (accountId: string): Promise<TokenWorth[]> => {
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
@@ -86,7 +87,9 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
       return b.worth - a.worth;
     });
 
-  const nfts = allTokens.filter((token) => token.amount === 1 && !token.usd);
+  const nfts = await NFTService.loadNfts(
+    allTokens.filter((token) => token.amount === 1 && !token.usd)
+  );
 
   return {
     id,
