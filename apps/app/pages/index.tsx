@@ -7,8 +7,13 @@ import { TokenInfo, TokenListProvider } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 500, order_by: { worth: desc }) {
+    wallet(
+      order_by: { worth: desc }
+      where: { nfts: { _gt: "0" } }
+      limit: 500
+    ) {
       id
+      nfts
       sol
       top
       worth
@@ -45,13 +50,15 @@ export async function getStaticProps(context) {
   return {
     props: {
       wallets,
-    }, // will be passed to the page component as props
+    },
   };
 }
 
 const Home: NextPage<{
   wallets: Array<
-    Pick<WalletBallance, 'id' | 'worth' | 'sol' | 'top'> & { info: TokenInfo }
+    Omit<WalletBallance, 'tokens'> & {
+      info: TokenInfo;
+    }
   >;
 }> = ({ wallets }) => (
   <main className="flex flex-1 flex-col bg-gray-200">

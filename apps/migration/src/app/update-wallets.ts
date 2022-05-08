@@ -3,7 +3,7 @@ import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }, offset: 1830) {
+    wallet(order_by: { worth: desc }, offset: 0) {
       id
     }
   }
@@ -12,13 +12,21 @@ const GetAllWalletsQuery = gql`
 const UpdateWalletByIdQuery = gql`
   mutation UpdateWalletById(
     $id: String!
+    $sol: numeric!
+    $nfts: numeric!
     $top: jsonb!
     $tokens: jsonb!
-    $worth: money!
+    $worth: numeric!
   ) {
     update_wallet_by_pk(
       pk_columns: { id: $id }
-      _set: { top: $top, tokens: $tokens, worth: $worth }
+      _set: {
+        top: $top
+        tokens: $tokens
+        worth: $worth
+        sol: $sol
+        nfts: $nfts
+      }
     ) {
       id
     }

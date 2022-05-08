@@ -1,11 +1,14 @@
 import { gql } from '@apollo/client';
-import { hasuraClient, WalletBallance } from '@forbex-nxr/utils';
-import { TokenWelth } from '../../components/token-worth-card';
+import { hasuraClient, NumberUtils, WalletBallance } from '@forbex-nxr/utils';
+import { TokenWorthCard } from '../../components/token-worth-card';
 import { NextPage } from 'next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHexagonVerticalNftSlanted } from '@fortawesome/pro-light-svg-icons';
+import { AddressLink } from '../../components/address-link';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 750, order_by: { worth: desc }) {
+    wallet(limit: 50, order_by: { worth: desc }) {
       id
     }
   }
@@ -61,12 +64,46 @@ interface WalletProps {
 
 const Wallet: NextPage = ({ wallet }: WalletProps) => {
   return (
-    <>
-      <div>{wallet.worth}</div>
-      {wallet.tokens.map((token) => (
-        <TokenWelth key={token.mint} {...token} />
-      ))}
-    </>
+    <div>
+      <div className="flex flex-1 flex-col my-8">
+        <span className="flex flex-1 flex-col text-xs absolute top-2 right-2">
+          <div className="self-end">
+            <span className="flex border rounded-full px-2 py-0.5 shadow-lg bg-green-600 text-white font-bold">
+              {wallet.sol.toLocaleString()} SOL
+            </span>
+          </div>
+          {wallet.nfts > 0 && (
+            <div className="self-end mt-1">
+              <span className="flex justify-center border rounded-full px-2 py-0.5 bg-gray-500 text-white font-semibold">
+                <FontAwesomeIcon
+                  icon={faHexagonVerticalNftSlanted}
+                  className="flex self-center"
+                />
+                <span className="self-center ml-1">
+                  {wallet.nfts.toLocaleString()}
+                </span>
+              </span>
+            </div>
+          )}
+        </span>
+        <AddressLink address={wallet.id}>
+          <div className="flex flex-col text-2xl self-center mt-2 font-bold text-gray-900 px-2 justify-center items-center hover:text-indigo-500 cursor-pointer">
+            <span className="flex flex-1 justify-center">
+              <span>{NumberUtils.asHuman(wallet.worth)}</span>
+            </span>
+            <span className="flex text-xs font-bold">{wallet.id}</span>
+          </div>
+        </AddressLink>
+      </div>
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {wallet.tokens.map((token) => (
+          <TokenWorthCard key={token.mint} {...token} />
+        ))}
+      </div>
+    </div>
   );
 };
 

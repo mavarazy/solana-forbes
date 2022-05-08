@@ -5,7 +5,7 @@ import { PriceService } from './price-service';
 import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
 
-const getTokens = async (accountId: string): Promise<TokenWorth[]> => {
+const getAllTokenWorth = async (accountId: string): Promise<TokenWorth[]> => {
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
   const tokenAccounts = await connection.getTokenAccountsByOwner(
@@ -54,7 +54,7 @@ const getSolBalance = async (accountId: string): Promise<bigint> => {
 
 const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const sol = await getSolBalance(id);
-  const tokens = await getTokens(id);
+  const tokens = await getAllTokenWorth(id);
 
   const amount = Number(sol) / Math.pow(10, 9);
   const solTokenWallet: TokenWorth = {
@@ -68,9 +68,15 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
     .concat([solTokenWallet])
     .sort((a, b) => b.worth - a.worth);
 
+  const nfts = allTokens.reduce(
+    (sum, { amount, usd }) => (amount === 1 && !usd ? sum + 1 : sum),
+    0
+  );
+
   return {
     id,
     sol: Number(sol) / Math.pow(10, 9),
+    nfts,
     top: allTokens.slice(0, 3).filter((worth) => worth.usd),
     tokens: allTokens,
     worth: allTokens.reduce((worth, token) => worth + token.worth, 0),

@@ -5,10 +5,8 @@ const asHuman = (amount: number): string => {
     return `${(amount / 1_000_000_000).toLocaleString()} Billions`;
   } else if (amount > 1_000_000) {
     return `${(amount / 1_000_000).toLocaleString()} Millions`;
-  } else if (amount > 1_000) {
-    return `${(amount / 1_000).toLocaleString()} Thousands`;
   }
-  return `${amount}`;
+  return `${amount.toLocaleString()}`;
 };
 
 export const NumberUtils = {
