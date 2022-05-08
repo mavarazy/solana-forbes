@@ -35,7 +35,10 @@ const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
       const tokenMap = resolvedTokens.getList().reduce(
         (agg, tokenInfo) =>
           Object.assign(agg, {
-            [tokenInfo.address]: { name: tokenInfo.name },
+            [tokenInfo.address]: {
+              name: tokenInfo.name,
+              logoURI: tokenInfo.logoURI,
+            },
           }),
         {}
       );
@@ -90,7 +93,8 @@ const getSolPrice = (): number =>
 const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
   const mint = account.mint.toString();
   const price = USDPriceMap[mint];
-  const info = (await tokenMap)[mint];
+  const info = (await tokenMap)[mint] ?? null;
+  console.log(info);
   if (price) {
     const { decimals, usd, cap } = price;
     const amount = Number(account.amount) / Math.pow(10, decimals);

@@ -15,8 +15,9 @@ export interface WalletBallance {
   id: string;
   worth: number;
   sol: number;
-  nfts: number;
   top: TokenWorth[];
+  summary: { nfts: number; tokens: number };
+  nfts: TokenWorth[];
   tokens: TokenWorth[];
 }
 

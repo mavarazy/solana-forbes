@@ -60,25 +60,44 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const solTokenWallet: TokenWorth = {
     amount: amount,
     mint: 'So11111111111111111111111111111111111111112',
+    info: {
+      name: 'Wrapped SOL',
+      logoURI:
+        'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png',
+    },
     worth: amount * PriceService.getSolPrice(),
     usd: PriceService.getSolPrice(),
   };
 
   const allTokens: TokenWorth[] = tokens
     .concat([solTokenWallet])
-    .sort((a, b) => b.worth - a.worth);
+    .sort((a: TokenWorth, b: TokenWorth) => {
+      if (a.worth === b.worth) {
+        if (b.info && a.info) {
+          return a.info.name.localeCompare(b.info.name);
+        } else if (b.info) {
+          return 1;
+        } else if (a.info) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+      return b.worth - a.worth;
+    });
 
-  const nfts = allTokens.reduce(
-    (sum, { amount, usd }) => (amount === 1 && !usd ? sum + 1 : sum),
-    0
-  );
+  const nfts = allTokens.filter((token) => token.amount === 1 && !token.usd);
 
   return {
     id,
+    summary: {
+      nfts: nfts.length,
+      tokens: tokens.length - nfts.length,
+    },
     sol: Number(sol) / Math.pow(10, 9),
     nfts,
     top: allTokens.slice(0, 3).filter((worth) => worth.usd),
-    tokens: allTokens,
+    tokens: allTokens.filter((token) => !nfts.includes(token)),
     worth: allTokens.reduce((worth, token) => worth + token.worth, 0),
   };
 };

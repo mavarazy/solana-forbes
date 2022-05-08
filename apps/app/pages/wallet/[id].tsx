@@ -2,20 +2,20 @@ import { gql } from '@apollo/client';
 import {
   hasuraClient,
   NumberUtils,
-  TokenWorth,
   WalletBallance,
+  WalletService,
 } from '@forbex-nxr/utils';
 import { TokenWorthCard } from '../../components/token-worth-card';
 import { NextPage } from 'next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHexagonVerticalNftSlanted } from '@fortawesome/pro-light-svg-icons';
 import { AddressLink } from '../../components/address-link';
-import { TokenListProvider } from '@solana/spl-token-registry';
 import { useRouter } from 'next/router';
+import { NFTCard } from '../../components/nft-card';
+import { SummaryBadge } from '../../components/summary-badge';
+import { SolBadge } from '../../components/sol-badge';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 50, order_by: { worth: desc }) {
+    wallet(limit: 10, order_by: { worth: desc }) {
       id
     }
   }
@@ -50,56 +50,34 @@ export async function getStaticPaths() {
   return { paths, fallback: true };
 }
 
-// This also gets called at build time
-export async function getStaticProps({ params }) {
+const loadWalletFromHasura = async (id: string) => {
   const {
     data: { wallet_by_pk: wallet },
   } = await hasuraClient.query({
     query: GetWalletByIdQuery,
-    variables: params,
+    variables: { id },
   });
 
-  const resolvedTokens = await new TokenListProvider().resolve();
+  return wallet ?? null;
+};
 
-  const tokenMap = resolvedTokens
-    .getList()
-    .reduce(
-      (agg, tokenInfo) =>
-        Object.assign(agg, { [tokenInfo.address]: tokenInfo }),
-      {}
-    );
+const loadWalletFromSolana = async (id: string) => {
+  const wallet = await WalletService.getWalletBalance(id);
+  return wallet;
+};
 
-  const walletWithTokenInfo = Object.assign(
-    { ...wallet },
-    {
-      top: wallet.top.map((token) =>
-        tokenMap[token.mint] ? { ...token, info: tokenMap[token.mint] } : token
-      ),
-      tokens: wallet.tokens
-        .map((token) =>
-          tokenMap[token.mint]
-            ? { ...token, info: tokenMap[token.mint] }
-            : token
-        )
-        .sort((a: TokenWorth, b: TokenWorth) => {
-          if (a.worth === b.worth) {
-            if (b.info && a.info) {
-              return a.info.name.localeCompare(b.info.name);
-            } else if (b.info) {
-              return 1;
-            } else if (a.info) {
-              return -1;
-            } else {
-              return 0;
-            }
-          }
-          return b.worth - a.worth;
-        }),
-    }
-  );
+const loadWallet = async (id: string) => {
+  const wallet = await loadWalletFromSolana(id);
+  if (wallet) {
+    return wallet;
+  }
+  return loadWalletFromHasura(id);
+};
 
-  // Pass post data to the page via props
-  return { props: { wallet: walletWithTokenInfo } };
+// This also gets called at build time
+export async function getStaticProps({ params: { id } }) {
+  const wallet = await loadWallet(id);
+  return { props: { wallet } };
 }
 
 interface WalletProps {
@@ -118,23 +96,11 @@ const Wallet: NextPage = (props: WalletProps) => {
       <div className="flex flex-1 flex-col my-8">
         <span className="flex flex-1 flex-col text-xs absolute top-2 right-2">
           <div className="self-end">
-            <span className="flex border rounded-full px-2 py-0.5 shadow-lg bg-green-600 text-white font-bold">
-              {wallet.sol.toLocaleString()} SOL
-            </span>
+            <SolBadge sol={wallet.sol} />
           </div>
-          {wallet.nfts > 0 && (
-            <div className="self-end mt-1">
-              <span className="flex justify-center border rounded-full px-2 py-0.5 bg-gray-500 text-white font-semibold">
-                <FontAwesomeIcon
-                  icon={faHexagonVerticalNftSlanted}
-                  className="flex self-center"
-                />
-                <span className="self-center ml-1">
-                  {wallet.nfts.toLocaleString()}
-                </span>
-              </span>
-            </div>
-          )}
+          <div className="self-end mt-1">
+            <SummaryBadge {...wallet.summary} />
+          </div>
         </span>
         <AddressLink address={wallet.id}>
           <div className="flex flex-col text-5xl self-center mt-2 font-bold text-gray-900 px-2 justify-center items-center hover:text-indigo-500 cursor-pointer">
@@ -151,6 +117,14 @@ const Wallet: NextPage = (props: WalletProps) => {
       >
         {wallet.tokens.map((token) => (
           <TokenWorthCard key={token.mint} {...token} />
+        ))}
+      </div>
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-40"
+      >
+        {wallet.nfts.map((nft) => (
+          <NFTCard key={nft.mint} {...nft} />
         ))}
       </div>
     </div>

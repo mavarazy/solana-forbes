@@ -1,10 +1,10 @@
 import { NumberUtils, WalletBallance } from '@forbex-nxr/utils';
-import { faHexagonVerticalNftSlanted } from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenInfo } from '@solana/spl-token-registry';
 import React from 'react';
 import { TokenWorthCard } from '../token-worth-card';
 import Link from 'next/link';
+import { SummaryBadge } from '../summary-badge';
+import { SolBadge } from '../sol-badge';
 
 interface ForbesTableProps {
   wallets: Array<Omit<WalletBallance, 'tokens'> & { info: TokenInfo }>;
@@ -13,7 +13,7 @@ interface ForbesTableProps {
 export function ForbesList({ wallets }: ForbesTableProps) {
   return (
     <div className="m-10">
-      {wallets.map(({ id, worth, sol, nfts, top }, i) => (
+      {wallets.map(({ id, worth, sol, summary, top }, i) => (
         <div
           key={id}
           className="flex flex-col rounded-xl max-w-6xl self-center m-4 divide-y relative shadow-xl bg-white"
@@ -24,23 +24,9 @@ export function ForbesList({ wallets }: ForbesTableProps) {
             </span>
             <span className="flex flex-1 flex-col text-xs absolute top-2 right-2">
               <div className="self-end">
-                <span className="flex border rounded-full px-2 py-0.5 shadow-lg bg-green-600 text-white font-bold">
-                  {sol.toLocaleString()} SOL
-                </span>
+                <SolBadge sol={sol} />
               </div>
-              {nfts > 0 && (
-                <div className="self-end mt-1">
-                  <span className="flex justify-center border rounded-full px-2 py-0.5 bg-gray-500 text-white font-semibold">
-                    <FontAwesomeIcon
-                      icon={faHexagonVerticalNftSlanted}
-                      className="flex self-center"
-                    />
-                    <span className="self-center ml-1">
-                      {nfts.toLocaleString()}
-                    </span>
-                  </span>
-                </div>
-              )}
+              <SummaryBadge {...summary} />
             </span>
             <Link href={`wallet/${id}`} passHref>
               <div className="flex flex-col text-2xl self-center mt-2 font-bold text-gray-900 px-2 justify-center items-center hover:text-indigo-500 cursor-pointer">
