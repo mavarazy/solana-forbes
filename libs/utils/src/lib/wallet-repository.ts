@@ -7,10 +7,9 @@ const GetWalletByIdQuery = gql`
     wallet_by_pk(id: $id) {
       id
       sol
-      summary
-      tokens
-      top
       worth
+      tokens
+      summary
     }
   }
 `;
