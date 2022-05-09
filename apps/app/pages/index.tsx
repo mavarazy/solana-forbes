@@ -7,11 +7,7 @@ import { TokenInfo, TokenListProvider } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(
-      order_by: { worth: desc }
-      where: { nfts: { _gt: "0" } }
-      limit: 50
-    ) {
+    wallet(order_by: { worth: desc }, limit: 10) {
       id
       nfts
       sol

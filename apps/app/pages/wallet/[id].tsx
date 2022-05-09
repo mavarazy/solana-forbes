@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { NFTCard } from '../../components/nft-card';
 import { SummaryBadge } from '../../components/summary-badge';
 import { SolBadge } from '../../components/sol-badge';
+import { WorthCard } from 'apps/app/components/worth-card';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
@@ -92,23 +93,10 @@ const Wallet: NextPage = (props: WalletProps) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="m-10 relative">
-      <div className="flex flex-1 flex-col my-8">
-        <span className="flex flex-1 flex-col text-xs absolute top-2 right-2">
-          <div className="self-end">
-            <SolBadge sol={wallet.sol} />
-          </div>
-          <div className="self-end mt-1">
-            <SummaryBadge {...wallet.summary} />
-          </div>
-        </span>
+    <div className="p-10 bg-gray-200">
+      <div className="mb-20">
         <AddressLink address={wallet.id}>
-          <div className="flex flex-col text-5xl self-center mt-2 font-bold text-gray-900 px-2 justify-center items-center hover:text-indigo-500 cursor-pointer">
-            <span className="flex flex-1 justify-center">
-              <span>{NumberUtils.asHuman(wallet.worth)}</span>
-            </span>
-            <span className="flex text-xl mt-2 font-bold">{wallet.id}</span>
-          </div>
+          <WorthCard wallet={wallet} />
         </AddressLink>
       </div>
       <div

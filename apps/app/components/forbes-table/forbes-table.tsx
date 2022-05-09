@@ -5,6 +5,7 @@ import { TokenWorthCard } from '../token-worth-card';
 import Link from 'next/link';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
+import { WorthCard } from '../worth-card';
 
 interface ForbesTableProps {
   wallets: Array<Omit<WalletBallance, 'tokens'> & { info: TokenInfo }>;
@@ -12,37 +13,21 @@ interface ForbesTableProps {
 
 export function ForbesList({ wallets }: ForbesTableProps) {
   return (
-    <div className="m-10">
-      {wallets.map(({ id, worth, sol, summary, top }, i) => (
+    <div className="m-10 p-10">
+      {wallets.map((wallet, i) => (
         <div
-          key={id}
-          className="flex flex-col rounded-xl max-w-6xl self-center m-4 divide-y relative shadow-xl bg-white"
+          key={wallet.id}
+          className="flex flex-col rounded-xl max-w-6xl self-center m-4 relative shadow-xl bg-white p-10 gap-10"
         >
-          <div className="flex flex-1 flex-col my-8">
-            <span className="absolute top-2 left-2 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
-              # {i + 1}
-            </span>
-            <span className="flex flex-1 flex-col text-xs absolute top-2 right-2">
-              <div className="self-end">
-                <SolBadge sol={sol} />
-              </div>
-              <SummaryBadge {...summary} />
-            </span>
-            <Link href={`wallet/${id}`} passHref>
-              <div className="flex flex-col text-2xl self-center mt-2 font-bold text-gray-900 px-2 justify-center items-center hover:text-indigo-500 cursor-pointer">
-                <span className="flex flex-1 justify-center">
-                  <span>{NumberUtils.asHuman(worth)}</span>
-                </span>
-                <span className="flex text-xs font-bold">{id}</span>
-              </div>
+          <div className="flex flex-1">
+            <Link href={`wallet/${wallet.id}`} passHref>
+              <WorthCard rank={i + 1} wallet={wallet} />
             </Link>
           </div>
-          <div className="flex flex-1 items-center">
-            {top
-              .filter((token) => token.usd)
-              .map((token) => (
-                <TokenWorthCard key={token.mint} {...token} />
-              ))}
+          <div className="flex flex-1 items-center gap-4">
+            {wallet.top.map((token) => (
+              <TokenWorthCard key={token.mint} {...token} />
+            ))}
           </div>
         </div>
       ))}

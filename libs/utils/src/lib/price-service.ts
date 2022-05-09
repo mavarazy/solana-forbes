@@ -102,8 +102,6 @@ const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
       percent > 0
         ? Math.min(usd * amount, (percent * cap) / 100)
         : usd * amount;
-    console.log(worth);
-    console.log(worth);
     return {
       mint,
       amount,
