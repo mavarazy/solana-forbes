@@ -11,33 +11,39 @@ const loadNfts = async (tokens: TokenWorth[]): Promise<NftWorth[]> => {
     .nfts()
     .findNftsByMintList(tokens.map((token) => new PublicKey(token.mint)));
 
-  return Promise.all(
-    nfts
-      .filter((nft): nft is Nft => nft !== null)
-      .map(async (nft) => {
-        const type = nft.isOriginal() ? 'original' : 'print';
-        try {
-          const metadata = await nft.metadataTask.run();
-          return {
-            info: {
-              logoURI: metadata.image ?? 'https://via.placeholder.com/200',
-              name: nft.name ?? metadata.name ?? 'Unknown',
-            },
-            type,
-            mint: nft.mint.toString(),
-          };
-        } catch (err) {
-          return {
-            info: {
-              logoURI: 'https://via.placeholder.com/200',
-              name: nft.name ?? 'Broken',
-            },
-            type,
-            mint: nft.mint.toString(),
-          };
-        }
-      })
+  const nftWorth: Array<NftWorth | null> = await Promise.all(
+    nfts.map(async (nft, i) => {
+      if (!nft) {
+        return null;
+      }
+      const type = nft.isOriginal() ? 'original' : 'print';
+      const owns = tokens[i].amount === 1;
+      try {
+        const metadata = await nft.metadataTask.run();
+        return {
+          info: {
+            logoURI: metadata.image ?? 'https://via.placeholder.com/200',
+            name: nft.name ?? metadata.name ?? 'Unknown',
+          },
+          type,
+          owns,
+          mint: nft.mint.toString(),
+        };
+      } catch (err) {
+        return {
+          info: {
+            logoURI: 'https://via.placeholder.com/200',
+            name: nft.name ?? 'Broken',
+          },
+          type,
+          owns,
+          mint: nft.mint.toString(),
+        };
+      }
+    })
   );
+
+  return await nftWorth.filter((nft): nft is NftWorth => nft !== null);
 };
 
 export const NFTService = {

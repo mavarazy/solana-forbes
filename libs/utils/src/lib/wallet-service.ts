@@ -6,7 +6,10 @@ import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
 import { NFTService } from './nft-service';
 
-const getAllTokenWorth = async (accountId: string): Promise<TokenWorth[]> => {
+const getAllTokenWorth = async (
+  accountId: string,
+  solToken: TokenWorth
+): Promise<TokenWorth[]> => {
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
   const tokenAccounts = await connection.getTokenAccountsByOwner(
@@ -39,7 +42,9 @@ const getAllTokenWorth = async (accountId: string): Promise<TokenWorth[]> => {
       }
       return agg;
     },
-    {}
+    {
+      [solToken.mint]: solToken,
+    }
   );
 
   return Object.values(tokenMap).sort((a, b) => b.worth - a.worth);
@@ -55,8 +60,6 @@ const getSolBalance = async (accountId: string): Promise<bigint> => {
 
 const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const sol = await getSolBalance(id);
-  const tokens = await getAllTokenWorth(id);
-
   const amount = Number(sol) / Math.pow(10, 9);
   const solWorth: TokenWorth = {
     amount: amount,
@@ -70,9 +73,10 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
     usd: PriceService.getSolPrice(),
   };
 
-  const allTokens: TokenWorth[] = tokens
-    .concat([solWorth])
-    .sort((a: TokenWorth, b: TokenWorth) => {
+  const tokens = await getAllTokenWorth(id, solWorth);
+
+  const allTokens: TokenWorth[] = tokens.sort(
+    (a: TokenWorth, b: TokenWorth) => {
       if (a.worth === b.worth) {
         if (b.info && a.info) {
           return a.info.name.localeCompare(b.info.name);
@@ -85,7 +89,8 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
         }
       }
       return b.worth - a.worth;
-    });
+    }
+  );
 
   const nfts = await NFTService.loadNfts(
     allTokens.filter(
@@ -128,7 +133,7 @@ const getAllWalletBalance = async (
     1
   );
 
-  WalletRepository.createWallets(freshWallets);
+  WalletRepository.createWalletsInBatch(freshWallets);
 
   return existingWallets.concat(freshWallets);
 };

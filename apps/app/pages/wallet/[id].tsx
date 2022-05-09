@@ -1,18 +1,11 @@
 import { gql } from '@apollo/client';
-import {
-  hasuraClient,
-  NumberUtils,
-  WalletBallance,
-  WalletService,
-} from '@forbex-nxr/utils';
-import { TokenWorthCard } from '../../components/token-worth-card';
+import { hasuraClient, WalletBallance, WalletService } from '@forbex-nxr/utils';
 import { NextPage } from 'next';
 import { AddressLink } from '../../components/address-link';
 import { useRouter } from 'next/router';
-import { NFTCard } from '../../components/nft-card';
-import { SummaryBadge } from '../../components/summary-badge';
-import { SolBadge } from '../../components/sol-badge';
-import { WorthCard } from 'apps/app/components/worth-card';
+import { WorthCard } from '../../components/worth-card';
+import { TokenPanel } from '../../components/token-panel';
+import { NftPanel } from '../../components/nft-panel';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
@@ -92,6 +85,20 @@ const Wallet: NextPage = (props: WalletProps) => {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+  const pricedTokens = wallet.tokens.filter((token) => token.worth > 0);
+
+  const infoTokens = wallet.tokens.filter(
+    (token) => token.worth === 0 && token.info && !token.usd
+  );
+
+  const devTokens = wallet.tokens.filter(
+    (token) => token.worth === 0 && !token.info
+  );
+
+  const ownedNfts = wallet.nfts.filter((nft) => nft.owns);
+  const previousNfts = wallet.nfts.filter((nft) => !nft.owns);
+
   return (
     <div className="p-10 bg-gray-200">
       <div className="mb-20">
@@ -99,22 +106,11 @@ const Wallet: NextPage = (props: WalletProps) => {
           <WorthCard wallet={wallet} />
         </AddressLink>
       </div>
-      <div
-        role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {wallet.tokens.map((token) => (
-          <TokenWorthCard key={token.mint} {...token} />
-        ))}
-      </div>
-      <div
-        role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-40"
-      >
-        {wallet.nfts.map((nft) => (
-          <NFTCard key={nft.mint} {...nft} />
-        ))}
-      </div>
+      <TokenPanel name="Priced tokens" tokens={pricedTokens} />
+      <TokenPanel name="Unpriced tokens" tokens={infoTokens} />
+      <TokenPanel name="Dev tokens" tokens={devTokens} />
+      <NftPanel name="NFT's" nfts={ownedNfts} />
+      <NftPanel name="Previously owned NFT's" nfts={previousNfts} />
     </div>
   );
 };

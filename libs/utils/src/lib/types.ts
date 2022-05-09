@@ -17,6 +17,12 @@ export interface NftWorth {
   type: NftType;
   mint: string;
   info: TokenInfoSummary;
+  owns: boolean;
+}
+
+export interface WalletSummary {
+  nfts: number;
+  tokens: number;
 }
 
 export interface WalletBallance {
@@ -24,7 +30,7 @@ export interface WalletBallance {
   worth: number;
   sol: number;
   top: TokenWorth[];
-  summary: { nfts: number; tokens: number };
+  summary: WalletSummary;
   nfts: NftWorth[];
   tokens: TokenWorth[];
 }

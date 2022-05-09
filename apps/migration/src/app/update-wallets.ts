@@ -1,33 +1,14 @@
 import { gql } from '@apollo/client';
-import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
+import {
+  hasuraClient,
+  throttle,
+  WalletRepository,
+  WalletService,
+} from '@forbex-nxr/utils';
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
     wallet(order_by: { worth: desc }, offset: 0) {
-      id
-    }
-  }
-`;
-
-const UpdateWalletByIdQuery = gql`
-  mutation UpdateWalletById(
-    $id: String!
-    $sol: numeric!
-    $nfts: numeric!
-    $top: jsonb!
-    $tokens: jsonb!
-    $worth: numeric!
-  ) {
-    update_wallet_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        top: $top
-        tokens: $tokens
-        worth: $worth
-        sol: $sol
-        nfts: $nfts
-      }
-    ) {
       id
     }
   }
@@ -41,13 +22,10 @@ export const updateWallets = async () => {
   const tasks = wallet.map(({ id }) => async () => {
     try {
       console.log('Updating: start ', id);
-      const balance = await WalletService.getWalletBalance(id);
+      const wallet = await WalletService.getWalletBalance(id);
       console.log('Updating: got balance ', id);
 
-      await hasuraClient.mutate({
-        mutation: UpdateWalletByIdQuery,
-        variables: balance,
-      });
+      await WalletRepository.updateWallet(wallet);
 
       console.log('Updating: done ', id);
     } catch (err) {
