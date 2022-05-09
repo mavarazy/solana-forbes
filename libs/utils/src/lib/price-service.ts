@@ -90,18 +90,6 @@ const loadTokenPrice = async (token: TokenInfo): Promise<TokenPrice | null> => {
 const getSolPrice = (): number =>
   USDPriceMap['So11111111111111111111111111111111111111112'].usd;
 
-const getWorth = (account: RawAccount, price?: TokenPrice) => {
-  if (price) {
-    const { decimals, usd, cap } = price;
-    const amount = Number(account.amount) / Math.pow(10, decimals);
-    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
-    return percent > 0
-      ? Math.min(usd * amount, (percent * cap) / 100)
-      : usd * amount;
-  }
-  return 0;
-};
-
 const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
   const mint = account.mint.toString();
   const price = USDPriceMap[mint];

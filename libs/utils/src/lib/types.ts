@@ -17,6 +17,10 @@ export interface NftWorth {
   type: NftType;
   mint: string;
   info: TokenInfoSummary;
+  collection?: {
+    name: string | null;
+    family: string | null;
+  };
   owns: boolean;
 }
 

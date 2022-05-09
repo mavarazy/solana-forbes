@@ -6,6 +6,12 @@ import { useRouter } from 'next/router';
 import { WorthCard } from '../../components/worth-card';
 import { TokenPanel } from '../../components/token-panel';
 import { NftPanel } from '../../components/nft-panel';
+import {
+  faCode,
+  faCoinFront,
+  faDollarCircle,
+  faDollarSign,
+} from '@fortawesome/pro-light-svg-icons';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
@@ -106,9 +112,17 @@ const Wallet: NextPage = (props: WalletProps) => {
           <WorthCard wallet={wallet} />
         </AddressLink>
       </div>
-      <TokenPanel name="Priced tokens" tokens={pricedTokens} />
-      <TokenPanel name="Unpriced tokens" tokens={infoTokens} />
-      <TokenPanel name="Dev tokens" tokens={devTokens} />
+      <TokenPanel
+        icon={faDollarCircle}
+        name="Priced tokens"
+        tokens={pricedTokens}
+      />
+      <TokenPanel
+        icon={faCoinFront}
+        name="Unpriced tokens"
+        tokens={infoTokens}
+      />
+      <TokenPanel icon={faCode} name="Dev tokens" tokens={devTokens} />
       <NftPanel name="NFT's" nfts={ownedNfts} />
       <NftPanel name="Previously owned NFT's" nfts={previousNfts} />
     </div>

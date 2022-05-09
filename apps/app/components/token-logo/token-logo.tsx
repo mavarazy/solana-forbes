@@ -12,6 +12,7 @@ export const TokenLogo = ({
         currentTarget.src = '/default-token-logo.svg';
       }
     }}
+    alt="Token name"
     className={className}
   />
 );

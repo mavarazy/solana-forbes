@@ -16,7 +16,7 @@ const loadNfts = async (tokens: TokenWorth[]): Promise<NftWorth[]> => {
       if (!nft) {
         return null;
       }
-      const type = nft.isOriginal() ? 'original' : 'print';
+      const type = nft.isPrint() ? 'print' : 'original';
       const owns = tokens[i].amount === 1;
       try {
         const metadata = await nft.metadataTask.run();
@@ -24,6 +24,10 @@ const loadNfts = async (tokens: TokenWorth[]): Promise<NftWorth[]> => {
           info: {
             logoURI: metadata.image ?? 'https://via.placeholder.com/200',
             name: nft.name ?? metadata.name ?? 'Unknown',
+          },
+          collection: {
+            name: metadata.collection?.name ?? null,
+            family: metadata.collection?.family ?? metadata.symbol ?? null,
           },
           type,
           owns,
