@@ -1,5 +1,10 @@
 import { gql } from '@apollo/client';
-import { hasuraClient, WalletBallance, WalletService } from '@forbex-nxr/utils';
+import {
+  hasuraClient,
+  WalletBallance,
+  WalletRepository,
+  WalletService,
+} from '@forbex-nxr/utils';
 import { NextPage } from 'next';
 import { AddressLink } from '../../components/address-link';
 import { useRouter } from 'next/router';
@@ -9,20 +14,8 @@ import { NftPanel } from '../../components/nft-panel';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 10, order_by: { worth: desc }) {
+    wallet(limit: 50, order_by: { worth: desc }) {
       id
-    }
-  }
-`;
-
-const GetWalletByIdQuery = gql`
-  query GetWalletById($id: String!) {
-    wallet_by_pk(id: $id) {
-      id
-      sol
-      tokens
-      top
-      worth
     }
   }
 `;
@@ -44,28 +37,12 @@ export async function getStaticPaths() {
   return { paths, fallback: true };
 }
 
-const loadWalletFromHasura = async (id: string) => {
-  const {
-    data: { wallet_by_pk: wallet },
-  } = await hasuraClient.query({
-    query: GetWalletByIdQuery,
-    variables: { id },
-  });
-
-  return wallet ?? null;
-};
-
-const loadWalletFromSolana = async (id: string) => {
-  const wallet = await WalletService.getWalletBalance(id);
-  return wallet;
-};
-
 const loadWallet = async (id: string) => {
-  const wallet = await loadWalletFromSolana(id);
+  const wallet = await WalletRepository.getById(id);
   if (wallet) {
     return wallet;
   }
-  return loadWalletFromHasura(id);
+  return WalletService.getWalletBalance(id);
 };
 
 // This also gets called at build time

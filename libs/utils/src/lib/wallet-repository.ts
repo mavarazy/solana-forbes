@@ -2,6 +2,19 @@ import { gql } from '@apollo/client';
 import { WalletBallance } from './types';
 import { hasuraClient } from './hasura-client';
 
+const GetWalletByIdQuery = gql`
+  query GetWalletById($id: String!) {
+    wallet_by_pk(id: $id) {
+      id
+      sol
+      summary
+      tokens
+      top
+      worth
+    }
+  }
+`;
+
 const GetWalletsInQuery = gql`
   query GetWallets($wallets: [String!]) {
     wallet(where: { id: { _in: $wallets } }) {
@@ -16,7 +29,6 @@ const InsertWalletQuery = gql`
     $id: String!
     $sol: numeric!
     $summary: jsonb!
-    $nfts: jsonb!
     $top: jsonb!
     $tokens: jsonb!
     $worth: numeric!
@@ -26,7 +38,6 @@ const InsertWalletQuery = gql`
         id: $id
         sol: $sol
         summary: $summary
-        nfts: $nfts
         top: $top
         tokens: $tokens
         worth: $worth
@@ -38,7 +49,6 @@ const InsertWalletQuery = gql`
       tokens
       worth
       sol
-      nfts
       summary
     }
   }
@@ -49,7 +59,6 @@ const UpdateWalletByIdQuery = gql`
     $id: String!
     $sol: numeric!
     $summary: jsonb!
-    $nfts: jsonb!
     $top: jsonb!
     $tokens: jsonb!
     $worth: numeric!
@@ -61,7 +70,6 @@ const UpdateWalletByIdQuery = gql`
         tokens: $tokens
         worth: $worth
         sol: $sol
-        nfts: $nfts
         summary: $summary
       }
     ) {
@@ -70,7 +78,6 @@ const UpdateWalletByIdQuery = gql`
       tokens
       worth
       sol
-      nfts
       summary
     }
   }
@@ -117,7 +124,19 @@ const updateWallet = async (
   return createWallet(wallet);
 };
 
+const getById = async (id: string) => {
+  const {
+    data: { wallet_by_pk: wallet },
+  } = await hasuraClient.query({
+    query: GetWalletByIdQuery,
+    variables: { id },
+  });
+
+  return wallet ?? null;
+};
+
 export const WalletRepository = {
+  getById,
   fetchExistingWallets,
   createWallet,
   createWalletsInBatch,
