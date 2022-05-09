@@ -1,25 +1,43 @@
-import { getMint } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
-import { Metaplex } from '@metaplex-foundation/js-next';
-import { TokenWorth } from './types';
+import { NftWorth, TokenWorth } from './types';
+import { Nft } from '@metaplex-foundation/js-next';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Metaplex = require('@metaplex-foundation/js-next').Metaplex;
 
-const loadNfts = async (tokens: TokenWorth[]): Promise<TokenWorth[]> => {
+const loadNfts = async (tokens: TokenWorth[]): Promise<NftWorth[]> => {
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-  const checkedTokens: Array<TokenWorth | null> = await Promise.all(
-    tokens.map(async (token) => {
-      const mintAddress = new PublicKey(token.mint);
-      const mintData = await getMint(connection, mintAddress);
-      if (mintData.supply === BigInt(1)) {
-        const nft = await new Metaplex(connection)
-          .nfts()
-          .findNftByMint(mintAddress);
-        console.log(nft);
-        return token;
-      }
-      return null;
-    })
+  const metaplex = new Metaplex(connection);
+  const nfts: Array<Nft | null> = await metaplex
+    .nfts()
+    .findNftsByMintList(tokens.map((token) => new PublicKey(token.mint)));
+
+  return Promise.all(
+    nfts
+      .filter((nft): nft is Nft => nft !== null)
+      .map(async (nft) => {
+        const type = nft.isOriginal() ? 'original' : 'print';
+        try {
+          const metadata = await nft.metadataTask.run();
+          return {
+            info: {
+              logoURI: metadata.image ?? 'https://via.placeholder.com/200',
+              name: nft.name ?? metadata.name ?? 'Unknown',
+            },
+            type,
+            mint: nft.mint.toString(),
+          };
+        } catch (err) {
+          return {
+            info: {
+              logoURI: 'https://via.placeholder.com/200',
+              name: nft.name ?? 'Broken',
+            },
+            type,
+            mint: nft.mint.toString(),
+          };
+        }
+      })
   );
-  return checkedTokens.filter((token): token is TokenWorth => token !== null);
 };
 
 export const NFTService = {

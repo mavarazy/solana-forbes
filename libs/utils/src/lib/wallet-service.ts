@@ -58,7 +58,7 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const tokens = await getAllTokenWorth(id);
 
   const amount = Number(sol) / Math.pow(10, 9);
-  const solTokenWallet: TokenWorth = {
+  const solWorth: TokenWorth = {
     amount: amount,
     mint: 'So11111111111111111111111111111111111111112',
     info: {
@@ -71,7 +71,7 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   };
 
   const allTokens: TokenWorth[] = tokens
-    .concat([solTokenWallet])
+    .concat([solWorth])
     .sort((a: TokenWorth, b: TokenWorth) => {
       if (a.worth === b.worth) {
         if (b.info && a.info) {
@@ -88,7 +88,9 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
     });
 
   const nfts = await NFTService.loadNfts(
-    allTokens.filter((token) => token.amount === 1 && !token.usd)
+    allTokens.filter(
+      (token) => (token.amount === 1 || token.amount === 0) && !token.usd
+    )
   );
 
   return {
@@ -100,7 +102,9 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
     sol: Number(sol) / Math.pow(10, 9),
     nfts,
     top: allTokens.slice(0, 3).filter((worth) => worth.usd),
-    tokens: allTokens.filter((token) => !nfts.includes(token)),
+    tokens: allTokens.filter(
+      (token) => !nfts.some((nft) => nft.mint === token.mint)
+    ),
     worth: allTokens.reduce((worth, token) => worth + token.worth, 0),
   };
 };

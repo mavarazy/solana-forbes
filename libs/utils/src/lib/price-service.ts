@@ -97,8 +97,13 @@ const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
   if (price) {
     const { decimals, usd, cap } = price;
     const amount = Number(account.amount) / Math.pow(10, decimals);
-    const percent = (100 * amount) / price.supply;
-    const worth = Math.min(usd * amount, (percent * cap) / 100);
+    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
+    const worth =
+      percent > 0
+        ? Math.min(usd * amount, (percent * cap) / 100)
+        : usd * amount;
+    console.log(worth);
+    console.log(worth);
     return {
       mint,
       amount,

@@ -11,13 +11,21 @@ export interface TokenWorth {
   usd?: number;
 }
 
+type NftType = 'original' | 'print';
+
+export interface NftWorth {
+  type: NftType;
+  mint: string;
+  info: TokenInfoSummary;
+}
+
 export interface WalletBallance {
   id: string;
   worth: number;
   sol: number;
   top: TokenWorth[];
   summary: { nfts: number; tokens: number };
-  nfts: TokenWorth[];
+  nfts: NftWorth[];
   tokens: TokenWorth[];
 }
 
