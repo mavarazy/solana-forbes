@@ -19,9 +19,13 @@ export const WorthCard = ({
           # {rank}
         </span>
       )}
-      <span className="flex flex-1 flex-col text-xs absolute top-2 right-2 gap-1">
-        <SolBadge sol={sol} />
-        <SummaryBadge {...summary} />
+      <span className="flex flex-1 flex-col text-xs absolute top-4 right-4 gap-1">
+        <div className="flex self-end">
+          <SolBadge sol={sol} />
+        </div>
+        <div className="flex self-end">
+          <SummaryBadge {...summary} />
+        </div>
       </span>
       <div className="flex flex-col text-4xl self-center mt-2 font-bold px-2 justify-center items-center cursor-pointer">
         <span className="flex flex-1 justify-center">

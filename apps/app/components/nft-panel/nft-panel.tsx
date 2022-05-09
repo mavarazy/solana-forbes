@@ -1,8 +1,7 @@
 import { NftWorth } from '@forbex-nxr/utils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHexagonVerticalNft } from '@fortawesome/pro-light-svg-icons';
 import { NFTCard } from '../nft-card';
 import React, { useMemo } from 'react';
+import { TokenTypeIcon } from '../token-type-icon';
 
 interface TokenPanelProps {
   name: string;
@@ -34,10 +33,7 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
   return (
     <>
       <span className="flex text-4xl my-10">
-        <FontAwesomeIcon
-          icon={faHexagonVerticalNft}
-          className="m-4 h-16 w-16 flex"
-        />
+        <TokenTypeIcon type="nfts" className="m-4 h-16 w-16 flex" />
         <span className="flex self-center">
           {name} ({nfts.length})
         </span>

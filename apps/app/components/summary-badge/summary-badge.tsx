@@ -1,20 +1,15 @@
-import {
-  faCoinFront,
-  faHexagonVerticalNftSlanted,
-} from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TokenSummary } from '@forbex-nxr/utils';
+import { TokenTypeIcon } from '../token-type-icon';
 
-export const SummaryBadge = ({ nfts, tokens }) => (
+export const SummaryBadge = ({ nfts, priced, general, dev }: TokenSummary) => (
   <span className="flex justify-center border rounded-full px-3 py-0.5 bg-gray-500 text-white font-semibold">
-    <FontAwesomeIcon
-      icon={faHexagonVerticalNftSlanted}
-      className="flex self-center"
-    />
-    <span className="self-center ml-1">{nfts && nfts.toLocaleString()}</span>
-
-    <FontAwesomeIcon icon={faCoinFront} className="flex self-center ml-2" />
-    <span className="self-center ml-1">
-      {tokens && tokens.toLocaleString()}
-    </span>
+    <TokenTypeIcon type="nfts" className="flex self-center" />
+    <span className="self-center mx-2">{nfts}</span>
+    <TokenTypeIcon type="priced" className="flex self-center" />
+    <span className="self-center mx-2">{priced}</span>
+    <TokenTypeIcon type="general" className="flex self-center" />
+    <span className="self-center mx-2">{general}</span>
+    <TokenTypeIcon type="dev" className="flex self-center" />
+    <span className="self-center mx-2">{dev}</span>
   </span>
 );

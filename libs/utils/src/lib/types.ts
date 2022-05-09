@@ -24,19 +24,24 @@ export interface NftWorth {
   owns: boolean;
 }
 
-export interface WalletSummary {
-  nfts: number;
-  tokens: number;
-}
+export type TokenWorthSummary = {
+  priced: TokenWorth[];
+  general: TokenWorth[];
+  dev: TokenWorth[];
+  nfts: NftWorth[];
+};
+
+export type TokenType = keyof TokenWorthSummary;
+
+export type TokenSummary = { [key in TokenType]: number };
 
 export interface WalletBallance {
   id: string;
   worth: number;
   sol: number;
   top: TokenWorth[];
-  summary: WalletSummary;
-  nfts: NftWorth[];
-  tokens: TokenWorth[];
+  summary: TokenSummary;
+  tokens: TokenWorthSummary;
 }
 
 export interface TokenPrice {

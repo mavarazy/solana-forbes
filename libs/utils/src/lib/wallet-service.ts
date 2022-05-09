@@ -1,54 +1,9 @@
-import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { AccountLayout } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
-import { WalletBallance, TokenWorth } from './types';
-import { PriceService } from './price-service';
+import { WalletBallance } from './types';
 import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
-import { NFTService } from './nft-service';
-
-const getAllTokenWorth = async (
-  accountId: string,
-  solToken: TokenWorth
-): Promise<TokenWorth[]> => {
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-
-  const tokenAccounts = await connection.getTokenAccountsByOwner(
-    new PublicKey(accountId),
-    {
-      programId: TOKEN_PROGRAM_ID,
-    }
-  );
-
-  const tokens = await Promise.all(
-    tokenAccounts.value.map(async (accountBuffer) => {
-      const account = AccountLayout.decode(accountBuffer.account.data);
-      return PriceService.getTokenWorth(account);
-    })
-  );
-
-  // There might be more than one account for the same token
-  const tokenMap = tokens.reduce(
-    (agg: { [key in string]: TokenWorth }, token) => {
-      if (agg[token.mint]) {
-        agg[token.mint].amount += token.amount;
-        if (agg[token.mint].percent) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          agg[token.mint].percent += token.percent;
-        }
-        agg[token.mint].worth += token.worth;
-      } else {
-        agg[token.mint] = token;
-      }
-      return agg;
-    },
-    {
-      [solToken.mint]: solToken,
-    }
-  );
-
-  return Object.values(tokenMap).sort((a, b) => b.worth - a.worth);
-};
+import { TokenWorthService } from './token-worth-service';
 
 const getSolBalance = async (accountId: string): Promise<bigint> => {
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
@@ -60,57 +15,20 @@ const getSolBalance = async (accountId: string): Promise<bigint> => {
 
 const getWalletBalance = async (id: string): Promise<WalletBallance> => {
   const sol = await getSolBalance(id);
-  const amount = Number(sol) / Math.pow(10, 9);
-  const solWorth: TokenWorth = {
-    amount: amount,
-    mint: 'So11111111111111111111111111111111111111112',
-    info: {
-      name: 'Wrapped SOL',
-      logoURI:
-        'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png',
-    },
-    worth: amount * PriceService.getSolPrice(),
-    usd: PriceService.getSolPrice(),
-  };
-
-  const tokens = await getAllTokenWorth(id, solWorth);
-
-  const allTokens: TokenWorth[] = tokens.sort(
-    (a: TokenWorth, b: TokenWorth) => {
-      if (a.worth === b.worth) {
-        if (b.info && a.info) {
-          return a.info.name.localeCompare(b.info.name);
-        } else if (b.info) {
-          return 1;
-        } else if (a.info) {
-          return -1;
-        } else {
-          return 0;
-        }
-      }
-      return b.worth - a.worth;
-    }
-  );
-
-  const nfts = await NFTService.loadNfts(
-    allTokens.filter(
-      (token) => (token.amount === 1 || token.amount === 0) && !token.usd
-    )
-  );
+  const tokens = await TokenWorthService.getTokenBalance(id, sol);
 
   return {
     id,
     summary: {
-      nfts: nfts.length,
-      tokens: tokens.length - nfts.length,
+      general: tokens.general.length,
+      nfts: tokens.nfts.length,
+      dev: tokens.dev.length,
+      priced: tokens.priced.length,
     },
     sol: Number(sol) / Math.pow(10, 9),
-    nfts,
-    top: allTokens.slice(0, 3).filter((worth) => worth.usd),
-    tokens: allTokens.filter(
-      (token) => !nfts.some((nft) => nft.mint === token.mint)
-    ),
-    worth: allTokens.reduce((worth, token) => worth + token.worth, 0),
+    top: tokens.priced.slice(0, 3),
+    tokens,
+    worth: tokens.priced.reduce((worth, token) => worth + token.worth, 0),
   };
 };
 
@@ -138,7 +56,35 @@ const getAllWalletBalance = async (
   return existingWallets.concat(freshWallets);
 };
 
+const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
+  try {
+    const connection = new Connection(
+      clusterApiUrl('mainnet-beta'),
+      'confirmed'
+    );
+    const { value: accounts } = await connection.getTokenLargestAccounts(
+      new PublicKey(mint)
+    );
+
+    const extractOwnerAccountTask = accounts.map((account) => async () => {
+      const accountBuffer = await connection.getAccountInfo(account.address);
+      const accountInfo = AccountLayout.decode(accountBuffer!.data);
+      const owner = accountInfo.owner;
+      return owner.toString();
+    });
+
+    const topWallets = await throttle(extractOwnerAccountTask, 1000, 5);
+    console.log('Extracted all owners');
+
+    return WalletService.getAllWalletBalance(topWallets);
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
 export const WalletService = {
   getWalletBalance,
+  getLargestWallets,
   getAllWalletBalance,
 };

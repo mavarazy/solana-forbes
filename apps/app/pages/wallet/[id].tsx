@@ -6,12 +6,6 @@ import { useRouter } from 'next/router';
 import { WorthCard } from '../../components/worth-card';
 import { TokenPanel } from '../../components/token-panel';
 import { NftPanel } from '../../components/nft-panel';
-import {
-  faCode,
-  faCoinFront,
-  faDollarCircle,
-  faDollarSign,
-} from '@fortawesome/pro-light-svg-icons';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
@@ -92,19 +86,6 @@ const Wallet: NextPage = (props: WalletProps) => {
     return <div>Loading...</div>;
   }
 
-  const pricedTokens = wallet.tokens.filter((token) => token.worth > 0);
-
-  const infoTokens = wallet.tokens.filter(
-    (token) => token.worth === 0 && token.info && !token.usd
-  );
-
-  const devTokens = wallet.tokens.filter(
-    (token) => token.worth === 0 && !token.info
-  );
-
-  const ownedNfts = wallet.nfts.filter((nft) => nft.owns);
-  const previousNfts = wallet.nfts.filter((nft) => !nft.owns);
-
   return (
     <div className="p-10 bg-gray-200">
       <div className="mb-20">
@@ -112,19 +93,25 @@ const Wallet: NextPage = (props: WalletProps) => {
           <WorthCard wallet={wallet} />
         </AddressLink>
       </div>
+      <NftPanel
+        name="Owned NFT's"
+        nfts={wallet.tokens.nfts.filter((nft) => nft.owns)}
+      />
+      <NftPanel
+        name="Previously owned NFT's"
+        nfts={wallet.tokens.nfts.filter((nft) => !nft.owns)}
+      />
       <TokenPanel
-        icon={faDollarCircle}
+        type="priced"
         name="Priced tokens"
-        tokens={pricedTokens}
+        tokens={wallet.tokens.priced}
       />
       <TokenPanel
-        icon={faCoinFront}
-        name="Unpriced tokens"
-        tokens={infoTokens}
+        type="general"
+        name="General tokens"
+        tokens={wallet.tokens.general}
       />
-      <TokenPanel icon={faCode} name="Dev tokens" tokens={devTokens} />
-      <NftPanel name="NFT's" nfts={ownedNfts} />
-      <NftPanel name="Previously owned NFT's" nfts={previousNfts} />
+      <TokenPanel type="dev" name="Dev tokens" tokens={wallet.tokens.dev} />
     </div>
   );
 };

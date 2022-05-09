@@ -1,18 +1,17 @@
-import { TokenWorth } from '@forbex-nxr/utils';
+import { TokenType, TokenWorth } from '@forbex-nxr/utils';
 import { TokenWorthCard } from '../../components/token-worth-card';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useMemo } from 'react';
 import { TokenToggle } from './token-toggle';
 import { useToggle } from 'react-use';
+import { TokenTypeIcon } from '../token-type-icon';
 
 interface TokenPanelProps {
-  icon: IconDefinition;
+  type: TokenType;
   name: string;
   tokens: TokenWorth[];
 }
 
-export const TokenPanel = ({ icon, tokens, name }: TokenPanelProps) => {
+export const TokenPanel = ({ type, tokens, name }: TokenPanelProps) => {
   const [toggle, onToggle] = useToggle(false);
   const [zeroTokens, nonZeroTokens] = useMemo(
     () =>
@@ -33,7 +32,7 @@ export const TokenPanel = ({ icon, tokens, name }: TokenPanelProps) => {
   return (
     <>
       <span className="flex text-4xl my-10">
-        <FontAwesomeIcon icon={icon} className="m-4 h-16 w-16 flex" />
+        <TokenTypeIcon type={type} className="m-4 h-16 w-16 flex" />
         <div className="flex flex-1 flex-col justify-center">
           <span className="flex self-start">
             {name} ({nonZeroTokens.length})
