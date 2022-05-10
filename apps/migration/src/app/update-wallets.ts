@@ -8,7 +8,7 @@ import {
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }, where: { summary: { _is_null: true } }) {
+    wallet(order_by: { worth: desc }, offset: 24) {
       id
     }
   }
@@ -34,6 +34,6 @@ export const updateWallets = async () => {
   });
 
   console.log('Started');
-  await throttle(tasks, 1000, 2);
+  await throttle(tasks, 500, 1);
   console.log('Done');
 };

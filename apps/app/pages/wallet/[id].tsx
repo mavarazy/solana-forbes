@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { WorthCard } from '../../components/worth-card';
 import { TokenPanel } from '../../components/token-panel';
 import { NftPanel } from '../../components/nft-panel';
+import { useEffect, useState } from 'react';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
@@ -38,9 +39,13 @@ export async function getStaticPaths() {
 }
 
 const loadWallet = async (id: string) => {
-  const wallet = await WalletRepository.getById(id);
-  if (wallet) {
-    return wallet;
+  try {
+    const wallet = await WalletRepository.getById(id);
+    if (wallet) {
+      return wallet;
+    }
+  } catch (err) {
+    return null;
   }
   return WalletService.getWalletBalance(id);
 };
@@ -48,19 +53,36 @@ const loadWallet = async (id: string) => {
 // This also gets called at build time
 export async function getStaticProps({ params: { id } }) {
   const wallet = await loadWallet(id);
-  return { props: { wallet } };
+  if (wallet) {
+    return { props: { wallet } };
+  }
+  return { props: { id } };
 }
 
 interface WalletProps {
-  wallet: WalletBallance;
+  id?: string;
+  wallet: WalletBallance | null;
 }
 
 const Wallet: NextPage = (props: WalletProps) => {
   const router = useRouter();
-  const { wallet } = props;
+  const { id } = props;
+  const [wallet, setWallet] = useState<WalletBallance>(props.wallet);
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
+  useEffect(() => {
+    if (id) {
+      WalletService.getWalletBalance(id).then((wallet) => {
+        setWallet(wallet);
+      });
+    }
+  }, [id]);
+
+  if (router.isFallback || !wallet) {
+    return (
+      <div className="flex flex-1 justify-center items-center">
+        <div className="text-4xl font-bold">Loading...</div>
+      </div>
+    );
   }
 
   return (
