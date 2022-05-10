@@ -6,12 +6,6 @@ export const TokenLogo = ({
 }: Pick<TokenInfo, 'logoURI'> & { className: string }) => (
   <img
     src={logoURI ?? '/default-token-logo.svg'}
-    onError={({ currentTarget }) => {
-      if (currentTarget.src !== '/default-token-logo.svg') {
-        currentTarget.onerror = null;
-        currentTarget.src = '/default-token-logo.svg';
-      }
-    }}
     alt="Token name"
     className={className}
   />

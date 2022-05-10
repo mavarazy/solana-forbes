@@ -4,9 +4,12 @@ import { WalletBallance } from './types';
 import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
 import { TokenWorthService } from './token-worth-service';
+import { ProgramFlagService } from './program-flag-service';
 
-const getSolBalance = async (accountId: string): Promise<bigint> => {
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+const getSolBalance = async (
+  connection: Connection,
+  accountId: string
+): Promise<bigint> => {
   const publicKey = new PublicKey(accountId);
   const balance = await connection.getBalance(publicKey);
 
@@ -14,8 +17,14 @@ const getSolBalance = async (accountId: string): Promise<bigint> => {
 };
 
 const getWalletBalance = async (id: string): Promise<WalletBallance> => {
-  const sol = await getSolBalance(id);
-  const tokens = await TokenWorthService.getTokenBalance(id, sol);
+  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+
+  // TODO this can be executed in parallel
+  const [sol, tokens, program] = await Promise.all([
+    getSolBalance(connection, id),
+    TokenWorthService.getTokenBalance(connection, id),
+    ProgramFlagService.isProgram(connection, id),
+  ]);
 
   return {
     id,
@@ -29,6 +38,7 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
     top: tokens.priced.slice(0, 3),
     tokens,
     worth: tokens.priced.reduce((worth, token) => worth + token.worth, 0),
+    program,
   };
 };
 

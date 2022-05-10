@@ -18,7 +18,7 @@ export function ForbesList({ wallets }: ForbesTableProps) {
             key={wallet.id}
             className="flex flex-col flex-1 rounded-xl max-w-6xl self-center m-4 relative shadow-xl bg-white p-10 gap-10"
           >
-            <Link href={`wallet/${wallet.id}`} passHref>
+            <Link href={`/wallet/${wallet.id}`} passHref>
               <div className="flex flex-1">
                 <WorthCard rank={i + 1} wallet={wallet} />
               </div>

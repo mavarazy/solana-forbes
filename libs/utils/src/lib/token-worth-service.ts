@@ -1,32 +1,66 @@
-import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { AccountLayout, RawAccount, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TokenListProvider } from '@solana/spl-token-registry';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { NFTService } from './nft-service';
-import { PriceService } from './price-service';
-import { TokenWorth, TokenWorthSummary } from './types';
+import { TokenInfoSummary, TokenWorth, TokenWorthSummary } from './types';
+import { USDPriceMap } from './usd-price-map';
 
-const asSolToken = (sol: bigint): TokenWorth => {
-  const amount = Number(sol) / Math.pow(10, 9);
-  return {
-    amount: amount,
-    mint: 'So11111111111111111111111111111111111111112',
-    info: {
-      name: 'Wrapped SOL',
-      logoURI:
-        'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png',
-    },
-    worth: amount * PriceService.getSolPrice(),
-    usd: PriceService.getSolPrice(),
-  };
+const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
+  (resolve) => {
+    new TokenListProvider().resolve().then((resolvedTokens) => {
+      const tokenMap = resolvedTokens.getList().reduce(
+        (agg, tokenInfo) =>
+          Object.assign(agg, {
+            [tokenInfo.address]: {
+              name: tokenInfo.name,
+              logoURI: tokenInfo.logoURI,
+            },
+          }),
+        {}
+      );
+
+      resolve(tokenMap);
+    });
+  }
+);
+
+const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
+  const mint = account.mint.toString();
+  const price = USDPriceMap[mint];
+  const info = (await tokenMap)[mint] ?? null;
+  if (price) {
+    const { decimals, usd, cap } = price;
+    const amount = Number(account.amount) / Math.pow(10, decimals);
+    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
+    const worth =
+      percent > 0
+        ? Math.min(
+            usd * amount,
+            (percent * Math.max(cap, usd * (price.supply / 10))) / 100
+          )
+        : usd * amount;
+    return {
+      mint,
+      amount,
+      worth,
+      info,
+      usd: price.usd,
+      percent,
+    };
+  } else {
+    return {
+      mint,
+      info,
+      amount: Number(account.amount),
+      worth: 0,
+    };
+  }
 };
 
 const getTokenBalance = async (
-  accountId: string,
-  sol: bigint
+  connection: Connection,
+  accountId: string
 ): Promise<TokenWorthSummary> => {
-  const solToken: TokenWorth = asSolToken(sol);
-
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-
   const tokenAccounts = await connection.getTokenAccountsByOwner(
     new PublicKey(accountId),
     {
@@ -37,7 +71,7 @@ const getTokenBalance = async (
   const tokens = await Promise.all(
     tokenAccounts.value.map(async (accountBuffer) => {
       const account = AccountLayout.decode(accountBuffer.account.data);
-      return PriceService.getTokenWorth(account);
+      return getTokenWorth(account);
     })
   );
 
@@ -57,9 +91,7 @@ const getTokenBalance = async (
       }
       return agg;
     },
-    {
-      [solToken.mint]: solToken,
-    }
+    {}
   );
 
   const sortedTokens: TokenWorth[] = Object.values(tokenMap).sort(
@@ -80,6 +112,7 @@ const getTokenBalance = async (
   );
 
   const nfts = await NFTService.loadNfts(
+    connection,
     sortedTokens.filter(
       (token) => (token.amount === 1 || token.amount === 0) && !token.usd
     )
@@ -104,5 +137,6 @@ const getTokenBalance = async (
 };
 
 export const TokenWorthService = {
+  getTokenWorth,
   getTokenBalance,
 };

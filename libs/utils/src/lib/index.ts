@@ -7,4 +7,4 @@ export * from './wallet-repository';
 export * from './wallet-service';
 export * from './types';
 export * from './usd-price-map';
-export * from './ui/number-utils';
+export * from './program-flag-service';

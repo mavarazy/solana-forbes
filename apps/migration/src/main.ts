@@ -1,5 +1,5 @@
 // import { updatePrices } from './app/update-prices';
 // updatePrices();
-import { updateWallets } from './app/update-wallets';
+import { updateProgramWalletFlag } from './app/update-wallet-program-flag';
 
-updateWallets();
+updateProgramWalletFlag();

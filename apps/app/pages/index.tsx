@@ -13,6 +13,7 @@ const GetLargestWalletsQuery = gql`
       summary
       top
       worth
+      program
     }
   }
 `;

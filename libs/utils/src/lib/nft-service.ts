@@ -1,11 +1,13 @@
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { NftWorth, TokenWorth } from './types';
 import { Nft } from '@metaplex-foundation/js-next';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Metaplex = require('@metaplex-foundation/js-next').Metaplex;
 
-const loadNfts = async (tokens: TokenWorth[]): Promise<NftWorth[]> => {
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+const loadNfts = async (
+  connection: Connection,
+  tokens: TokenWorth[]
+): Promise<NftWorth[]> => {
   const metaplex = new Metaplex(connection);
   const nfts: Array<Nft | null> = await metaplex
     .nfts()

@@ -1,6 +1,6 @@
-import { Mint, RawAccount } from '@solana/spl-token';
-import { TokenInfo, TokenListProvider } from '@solana/spl-token-registry';
-import { TokenInfoSummary, TokenPrice, TokenWorth } from './types';
+import { Mint } from '@solana/spl-token';
+import { TokenInfo } from '@solana/spl-token-registry';
+import { TokenPrice } from './types';
 import { USDPriceMap } from './usd-price-map';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { getMint } from '@solana/spl-token';
@@ -28,25 +28,6 @@ const getPrice = async (
 
   return null;
 };
-
-const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
-  (resolve) => {
-    new TokenListProvider().resolve().then((resolvedTokens) => {
-      const tokenMap = resolvedTokens.getList().reduce(
-        (agg, tokenInfo) =>
-          Object.assign(agg, {
-            [tokenInfo.address]: {
-              name: tokenInfo.name,
-              logoURI: tokenInfo.logoURI,
-            },
-          }),
-        {}
-      );
-
-      resolve(tokenMap);
-    });
-  }
-);
 
 const getTokenMint = async (address: string): Promise<Mint | null> => {
   try {
@@ -90,42 +71,8 @@ const loadTokenPrice = async (token: TokenInfo): Promise<TokenPrice | null> => {
 const getSolPrice = (): number =>
   USDPriceMap['So11111111111111111111111111111111111111112'].usd;
 
-const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
-  const mint = account.mint.toString();
-  const price = USDPriceMap[mint];
-  const info = (await tokenMap)[mint] ?? null;
-  if (price) {
-    const { decimals, usd, cap } = price;
-    const amount = Number(account.amount) / Math.pow(10, decimals);
-    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
-    const worth =
-      percent > 0
-        ? Math.min(
-            usd * amount,
-            (percent * Math.max(cap, usd * (price.supply / 10))) / 100
-          )
-        : usd * amount;
-    return {
-      mint,
-      amount,
-      worth,
-      info,
-      usd: price.usd,
-      percent,
-    };
-  } else {
-    return {
-      mint,
-      info,
-      amount: Number(account.amount),
-      worth: 0,
-    };
-  }
-};
-
 export const PriceService = {
   getPrice,
   getSolPrice,
-  getTokenWorth,
   loadTokenPrice,
 };

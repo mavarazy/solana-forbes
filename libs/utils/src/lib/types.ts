@@ -33,7 +33,7 @@ export type TokenWorthSummary = {
 
 export type TokenType = keyof TokenWorthSummary;
 
-export type TokenSummary = { [key in TokenType]: number };
+export type TokenSummary = Partial<{ [key in TokenType]: number }>;
 
 export interface WalletBallance {
   id: string;
@@ -42,6 +42,7 @@ export interface WalletBallance {
   top: TokenWorth[];
   summary: TokenSummary;
   tokens: TokenWorthSummary;
+  program: boolean;
 }
 
 export interface TokenPrice {
