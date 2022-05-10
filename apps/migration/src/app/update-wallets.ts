@@ -8,7 +8,7 @@ import {
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }, offset: 0) {
+    wallet(order_by: { worth: desc }, where: { summary: { _is_null: true } }) {
       id
     }
   }

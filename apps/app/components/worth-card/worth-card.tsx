@@ -15,7 +15,7 @@ export const WorthCard = ({
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-xl p-10 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
       {rank && (
-        <span className="absolute top-2 left-2 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+        <span className="absolute top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
           # {rank}
         </span>
       )}

@@ -14,7 +14,7 @@ import { NftPanel } from '../../components/nft-panel';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 10, order_by: { worth: desc }) {
+    wallet(limit: 50, order_by: { worth: desc }) {
       id
     }
   }
