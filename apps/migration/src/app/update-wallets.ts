@@ -5,10 +5,11 @@ import {
   WalletRepository,
   WalletService,
 } from '@forbex-nxr/utils';
+import delay = require('delay');
 
 const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }, offset: 24) {
+    wallet(order_by: { worth: desc }, offset: 494) {
       id
     }
   }
@@ -20,20 +21,28 @@ export const updateWallets = async () => {
   } = await hasuraClient.query({ query: GetAllWalletsQuery });
 
   const tasks = wallet.map(({ id }) => async () => {
-    try {
-      console.log('Updating: start ', id);
-      const wallet = await WalletService.getWalletBalance(id);
-      console.log('Updating: got balance ', id);
+    const doLoad = async (attempt = 0) => {
+      try {
+        console.log('Updating: start ', id);
+        const wallet = await WalletService.getWalletBalance(id);
+        console.log('Updating: got balance ', id);
 
-      await WalletRepository.updateWallet(wallet);
+        await WalletRepository.updateWallet(wallet);
 
-      console.log('Updating: done ', id);
-    } catch (err) {
-      console.log(err);
-    }
+        console.log('Updating: done ', id);
+      } catch (err) {
+        console.log(err);
+        if (attempt < 5) {
+          console.log('Trying again in 1 minute');
+          delay(60000);
+          doLoad(attempt + 1);
+        }
+      }
+    };
+    await doLoad();
   });
 
   console.log('Started');
-  await throttle(tasks, 500, 1);
+  await throttle(tasks, 1000, 1);
   console.log('Done');
 };
