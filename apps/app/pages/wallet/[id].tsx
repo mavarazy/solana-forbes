@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 import {
   hasuraClient,
-  PriceService,
   WalletBallance,
   WalletRepository,
   WalletService,
@@ -65,7 +64,7 @@ interface WalletProps {
   wallet: WalletBallance | null;
 }
 
-const Wallet: NextPage = (props: WalletProps) => {
+const Wallet: NextPage<WalletProps> = (props) => {
   const router = useRouter();
   const { id } = props;
   const [wallet, setWallet] = useState<WalletBallance>(props.wallet);
