@@ -7,7 +7,10 @@ export const updatePrices = async () => {
     .filterByClusterSlug('mainnet-beta')
     .getList()
     .filter((token) => token.extensions?.coingeckoId)
-    .map((token) => async () => PriceService.loadTokenPrice(token));
+    .map(
+      (token) => async () =>
+        PriceService.loadTokenPrice(token.extensions.coingeckoId, token.address)
+    );
 
   const prices = await throttle(tasks, 1000, 1);
 

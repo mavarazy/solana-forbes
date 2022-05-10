@@ -5,6 +5,7 @@ import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
 import { TokenWorthService } from './token-worth-service';
 import { ProgramFlagService } from './program-flag-service';
+import { PriceService } from './price-service';
 
 const getSolBalance = async (
   connection: Connection,
@@ -21,7 +22,7 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
 
   // TODO this can be executed in parallel
   const [sol, tokens, program] = await Promise.all([
-    getSolBalance(connection, id),
+    getSolBalance(connection, id).then((sol) => Number(sol) / Math.pow(10, 9)),
     TokenWorthService.getTokenBalance(connection, id),
     ProgramFlagService.isProgram(connection, id),
   ]);
@@ -34,10 +35,13 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
       dev: tokens.dev.length,
       priced: tokens.priced.length,
     },
-    sol: Number(sol) / Math.pow(10, 9),
+    sol,
     top: tokens.priced.slice(0, 3),
     tokens,
-    worth: tokens.priced.reduce((worth, token) => worth + token.worth, 0),
+    worth: tokens.priced.reduce(
+      (worth, token) => worth + token.worth,
+      sol * PriceService.getSolPrice()
+    ),
     program,
   };
 };

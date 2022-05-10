@@ -51,8 +51,14 @@ export interface TokenPrice {
   cap: number;
   decimals: number;
   supply: number;
+  coingeckoId: string;
 }
 
 export type PriceMap = {
-  [key in string]: { usd: number; cap: number; decimals: number };
+  [key in string]: {
+    usd: number;
+    cap: number;
+    decimals: number;
+    coingeckoId: string;
+  };
 };

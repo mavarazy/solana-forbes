@@ -1,13 +1,18 @@
 import { Mint } from '@solana/spl-token';
-import { TokenInfo } from '@solana/spl-token-registry';
-import { TokenPrice } from './types';
+import { TokenPrice, WalletBallance } from './types';
 import { USDPriceMap } from './usd-price-map';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { getMint } from '@solana/spl-token';
+import { WorthUtils } from './worth-utils';
+import { throttle } from './throttle';
 
-const getPrice = async (
-  coingeckoId: string
+const getCoingeckoPrice = async (
+  coingeckoId?: string
 ): Promise<{ usd: number; cap: number } | null> => {
+  if (!coingeckoId) {
+    return null;
+  }
+
   console.log('Getting price for ', coingeckoId);
 
   try {
@@ -42,37 +47,76 @@ const getTokenMint = async (address: string): Promise<Mint | null> => {
   }
 };
 
-const loadTokenPrice = async (token: TokenInfo): Promise<TokenPrice | null> => {
-  if (!token.extensions?.coingeckoId) {
-    console.log('No coingecko extension for ', token.name);
-    return null;
-  }
-
-  const price = await PriceService.getPrice(token.extensions.coingeckoId);
+const loadTokenPrice = async (
+  coingeckoId: string,
+  mint: string
+): Promise<TokenPrice | null> => {
+  const price = await getCoingeckoPrice(coingeckoId);
   if (!price) {
-    console.log('Price is missing for ', token.name);
+    console.log('Price is missing for ', coingeckoId);
     return null;
   }
 
-  console.log('Extracting mint: ', token.address);
-  const mint = await getTokenMint(token.address);
-  if (!mint) {
+  console.log('Extracting mint: ', mint);
+  const tokenMint = await getTokenMint(mint);
+  if (!tokenMint) {
     return null;
   }
 
   return {
-    mint: token.address,
+    mint,
     ...price,
-    decimals: mint.decimals,
-    supply: Number(mint.supply) / Math.pow(10, mint.decimals),
+    decimals: tokenMint.decimals,
+    coingeckoId,
+    supply: Number(tokenMint.supply) / Math.pow(10, tokenMint.decimals),
   };
 };
 
 const getSolPrice = (): number =>
   USDPriceMap['So11111111111111111111111111111111111111112'].usd;
 
+const refresh = async (balance: WalletBallance): Promise<WalletBallance> => {
+  const priced = await throttle(
+    balance.tokens.priced.map((token) => async () => {
+      const oldPrice = USDPriceMap[token.mint];
+      if (!oldPrice) {
+        return token;
+      }
+      const currentPrice = await loadTokenPrice(
+        USDPriceMap[token.mint].coingeckoId,
+        token.mint
+      );
+
+      if (currentPrice) {
+        return {
+          ...token,
+          usd: currentPrice.usd,
+          worth: WorthUtils.getTokenWorth(token.amount, currentPrice),
+        };
+      }
+      return token;
+    }),
+    1000,
+    5
+  );
+
+  const solPrice = await getCoingeckoPrice('solana');
+
+  return {
+    ...balance,
+    tokens: {
+      ...balance.tokens,
+      priced,
+    },
+    worth: priced.reduce(
+      (sum, { worth }) => sum + worth,
+      balance.sol * (solPrice?.usd ?? getSolPrice())
+    ),
+  };
+};
+
 export const PriceService = {
-  getPrice,
   getSolPrice,
   loadTokenPrice,
+  refresh,
 };

@@ -41,6 +41,6 @@ export const updateProgramWalletFlag = async () => {
   });
 
   console.log('Started');
-  await throttle(tasks, 1000, 3);
+  await throttle(tasks, 500, 1);
   console.log('Done');
 };

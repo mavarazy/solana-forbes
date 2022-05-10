@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 import {
   hasuraClient,
+  PriceService,
   WalletBallance,
   WalletRepository,
   WalletService,
