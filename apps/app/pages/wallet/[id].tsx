@@ -86,31 +86,31 @@ const Wallet: NextPage<WalletProps> = (props) => {
   }
 
   return (
-    <div className="p-10 bg-gray-200">
-      <div className="mb-20">
+    <div className="flex flex-1 flex-col m-2 sm:m-4">
+      <div className="max-w-5xl self-center">
         <AddressLink address={wallet.id}>
           <WorthCard wallet={wallet} />
         </AddressLink>
+        <NftPanel
+          name="Owned NFT's"
+          nfts={wallet.tokens.nfts.filter((nft) => nft.owns)}
+        />
+        <NftPanel
+          name="Previously owned NFT's"
+          nfts={wallet.tokens.nfts.filter((nft) => !nft.owns)}
+        />
+        <TokenPanel
+          type="priced"
+          name="Priced tokens"
+          tokens={wallet.tokens.priced}
+        />
+        <TokenPanel
+          type="general"
+          name="General tokens"
+          tokens={wallet.tokens.general}
+        />
+        <TokenPanel type="dev" name="Dev tokens" tokens={wallet.tokens.dev} />
       </div>
-      <NftPanel
-        name="Owned NFT's"
-        nfts={wallet.tokens.nfts.filter((nft) => nft.owns)}
-      />
-      <NftPanel
-        name="Previously owned NFT's"
-        nfts={wallet.tokens.nfts.filter((nft) => !nft.owns)}
-      />
-      <TokenPanel
-        type="priced"
-        name="Priced tokens"
-        tokens={wallet.tokens.priced}
-      />
-      <TokenPanel
-        type="general"
-        name="General tokens"
-        tokens={wallet.tokens.general}
-      />
-      <TokenPanel type="dev" name="Dev tokens" tokens={wallet.tokens.dev} />
     </div>
   );
 };

@@ -21,7 +21,7 @@ export const updateWallets = async () => {
   } = await hasuraClient.query({ query: GetAllWalletsQuery });
 
   const tasks = wallet.map(({ id }) => async () => {
-    const doLoad = async (attempt = 0) => {
+    const doLoad = async (attempt = 1) => {
       try {
         console.log('Updating: start ', id);
         const wallet = await WalletService.getWalletBalance(id);
@@ -34,7 +34,7 @@ export const updateWallets = async () => {
         console.log(err);
         if (attempt < 5) {
           console.log('Trying again in 1 minute');
-          delay(60000);
+          delay(attempt * 60000);
           doLoad(attempt + 1);
         }
       }

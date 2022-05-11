@@ -10,7 +10,7 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
   worth,
   percent,
 }) => (
-  <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-lg rounded-3xl bg-white">
+  <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-2xl rounded-3xl bg-white">
     <div className="flex flex-col justify-center text-center relative ">
       {worth > 0 && (
         <span className="text-xs mb-4 font-bold">
@@ -32,15 +32,9 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
             <span className="text-xs font-semibold">USD: {usd && usd}</span>
           </div>
         )}
-        {info?.name ? (
-          <span className="items-center font-semibold mt-2 text-xl truncate">
-            {info.name}
-          </span>
-        ) : (
-          <span className="items-center font-semibold mt-2 text-xs truncate">
-            {mint}
-          </span>
-        )}
+        <span className="items-center font-semibold mt-2 text-[8px] xl:text-[10px]">
+          {info?.name ? info.name : mint}
+        </span>
         <div className="flex justify-center">
           <span>{NumberUtils.asHuman(amount)}</span>
         </div>

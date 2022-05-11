@@ -58,7 +58,7 @@ const Home: NextPage<{
     }
   >;
 }> = ({ wallets }) => (
-  <main className="flex flex-1 flex-col bg-gray-200">
+  <main className="flex flex-1 flex-col">
     <ForbesList wallets={wallets} />
   </main>
 );

@@ -13,7 +13,8 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
     () =>
       nfts.reduce((agg: { [key in string]: NftWorth[] }, nft) => {
         const collection =
-          nft.collection?.family ?? nft.collection?.name ?? 'Non collectable';
+          (nft.collection?.family.trim() ?? nft.collection?.name.trim()) ||
+          'Non collectable';
 
         if (agg[collection]) {
           agg[collection].push(nft);
@@ -32,16 +33,19 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
 
   return (
     <>
-      <span className="flex text-4xl my-10">
-        <TokenTypeIcon type="nfts" className="m-4 h-16 w-16 flex" />
+      <span className="flex text-xl md:text-4xl my-2 md:my-10">
+        <TokenTypeIcon
+          type="nfts"
+          className="flex m-4 h-8 w-8 md:h-16 md:w-16"
+        />
         <span className="flex self-center">
           {name} ({nfts.length})
         </span>
       </span>
       {Object.entries(nftsByCollection).map(([collection, nfts]) => (
         <React.Fragment key={collection}>
-          <span className="flex self-center text-3xl my-10 font-bold">
-            {collection}
+          <span className="flex text-xl m-4 md:text-4xl my-2 md:my-10">
+            {collection || 'Collection'}
           </span>
           <div
             key={collection}

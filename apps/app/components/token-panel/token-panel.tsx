@@ -31,8 +31,11 @@ export const TokenPanel = ({ type, tokens, name }: TokenPanelProps) => {
 
   return (
     <>
-      <span className="flex text-4xl my-10">
-        <TokenTypeIcon type={type} className="m-4 h-16 w-16 flex" />
+      <span className="flex text-xl md:text-4xl my-10">
+        <TokenTypeIcon
+          type={type}
+          className="m-4 h-8 w-8 md:h-16 md:w-16 flex"
+        />
         <div className="flex flex-1 flex-col justify-center">
           <span className="flex self-start">
             {name} ({nonZeroTokens.length})

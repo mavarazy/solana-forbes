@@ -1,35 +1,23 @@
 import { WalletBallance } from '@forbex-nxr/utils';
-import { TokenInfo } from '@solana/spl-token-registry';
 import React from 'react';
-import { TokenWorthCard } from '../token-worth-card';
 import Link from 'next/link';
 import { WorthCard } from '../worth-card';
 
 interface ForbesTableProps {
-  wallets: Array<Omit<WalletBallance, 'tokens'> & { info: TokenInfo }>;
+  wallets: Array<Omit<WalletBallance, 'tokens' | 'top'>>;
 }
 
 export function ForbesList({ wallets }: ForbesTableProps) {
   return (
     <>
       {wallets.map((wallet, i) => (
-        <div className="flex flex-1 justify-center" key={wallet.id}>
-          <div
-            key={wallet.id}
-            className="flex flex-col flex-1 rounded-xl max-w-6xl self-center m-4 relative shadow-xl bg-white p-10 gap-10"
-          >
-            <Link href={`/wallet/${wallet.id}`} passHref>
-              <div className="flex flex-1">
-                <WorthCard rank={i + 1} wallet={wallet} />
-              </div>
-            </Link>
-            <div className="flex flex-1 items-center gap-4">
-              {wallet.top.map((token) => (
-                <TokenWorthCard key={token.mint} {...token} />
-              ))}
+        <Link href={`/wallet/${wallet.id}`} passHref key={wallet.id}>
+          <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
+            <div className="flex flex-1 max-w-3xl">
+              <WorthCard rank={i + 1} wallet={wallet} />
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );
