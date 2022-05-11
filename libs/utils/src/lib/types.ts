@@ -20,6 +20,7 @@ export interface NftWorth {
   collection?: {
     name: string | null;
     family: string | null;
+    symbol: string | null;
   };
   owns: boolean;
 }

@@ -86,8 +86,8 @@ const Wallet: NextPage<WalletProps> = (props) => {
   }
 
   return (
-    <div className="flex flex-1 flex-col m-2 sm:m-4">
-      <div className="max-w-5xl self-center">
+    <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
+      <div className="max-w-5xl flex flex-col flex-1">
         <AddressLink address={wallet.id}>
           <WorthCard wallet={wallet} />
         </AddressLink>

@@ -16,15 +16,13 @@ export const WorthCard = ({
 }: WorthCardProps) => (
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-2xl sm:py-6 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
-      {rank && (
-        <span className="absolute top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
-          <FontAwesomeIcon
-            icon={program ? faUserRobot : faUserSecret}
-            className="mr-2 h-4 w-4 md:h-6 md:w-6 text-white shadow-xl rounded-full"
-          />
-          # {rank}
-        </span>
-      )}
+      <span className="absolute text-xs top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+        <FontAwesomeIcon
+          icon={program ? faUserRobot : faUserSecret}
+          className="mr-2 h-3 w-3 text-white shadow-xl rounded-full"
+        />
+        # {rank}
+      </span>
       <span className="flex flex-1 flex-col text-xs absolute top-4 right-4 gap-1">
         <div className="flex self-end">
           <SolBadge sol={sol} />

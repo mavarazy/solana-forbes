@@ -14,7 +14,9 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
     () =>
       nfts.reduce((agg: { [key in string]: NftWorth[] }, nft) => {
         const collection =
-          (nft.collection?.family?.trim() ?? nft.collection?.name?.trim()) ||
+          (nft.collection?.family?.trim() ??
+            nft.collection?.name?.trim() ??
+            nft.collection?.symbol?.trim()) ||
           'Non collectable';
 
         if (agg[collection]) {

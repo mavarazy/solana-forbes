@@ -29,7 +29,8 @@ const loadNfts = async (
           },
           collection: {
             name: metadata.collection?.name ?? null,
-            family: metadata.collection?.family ?? metadata.symbol ?? null,
+            family: metadata.collection?.family ?? null,
+            symbol: metadata.symbol ?? null,
           },
           type,
           owns,
