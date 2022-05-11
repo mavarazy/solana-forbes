@@ -1,7 +1,8 @@
 import { NftWorth } from '@forbex-nxr/utils';
 import { NFTCard } from '../nft-card';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { TokenTypeIcon } from '../token-type-icon';
+import { NftCollectionSelector } from './nft-collection-selector';
 
 interface TokenPanelProps {
   name: string;
@@ -13,7 +14,7 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
     () =>
       nfts.reduce((agg: { [key in string]: NftWorth[] }, nft) => {
         const collection =
-          (nft.collection?.family.trim() ?? nft.collection?.name.trim()) ||
+          (nft.collection?.family?.trim() ?? nft.collection?.name?.trim()) ||
           'Non collectable';
 
         if (agg[collection]) {
@@ -26,6 +27,8 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
       }, {}),
     [nfts]
   );
+
+  const [selected, setSelected] = useState(Object.keys(nftsByCollection)[0]);
 
   if (nfts.length === 0) {
     return null;
@@ -42,22 +45,19 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
           {name} ({nfts.length})
         </span>
       </span>
-      {Object.entries(nftsByCollection).map(([collection, nfts]) => (
-        <React.Fragment key={collection}>
-          <span className="flex text-xl m-4 md:text-4xl my-2 md:my-10">
-            {collection || 'Collection'}
-          </span>
-          <div
-            key={collection}
-            role="list"
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {nfts.map((nft) => (
-              <NFTCard key={nft.mint} {...nft} />
-            ))}
-          </div>
-        </React.Fragment>
-      ))}
+      <NftCollectionSelector
+        collections={Object.entries(nftsByCollection)}
+        selected={selected}
+        onSelect={setSelected}
+      />
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {nftsByCollection[selected].map((nft) => (
+          <NFTCard key={nft.mint} {...nft} />
+        ))}
+      </div>
     </>
   );
 };
