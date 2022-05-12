@@ -1,4 +1,4 @@
-import { NftWorth } from '@forbex-nxr/utils';
+import { NftWorth } from '@forbex-nxr/types';
 import { NFTCard } from '../nft-card';
 import React, { useMemo, useState } from 'react';
 import { TokenTypeIcon } from '../token-type-icon';

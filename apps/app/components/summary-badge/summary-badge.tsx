@@ -1,4 +1,4 @@
-import { TokenSummary } from '@forbex-nxr/utils';
+import { TokenSummary } from '@forbex-nxr/types';
 import { TokenTypeIcon } from '../token-type-icon';
 
 export const SummaryBadge = ({ nfts, priced, general, dev }: TokenSummary) => (

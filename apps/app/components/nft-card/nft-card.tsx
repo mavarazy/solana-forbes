@@ -1,4 +1,4 @@
-import { NftWorth } from '@forbex-nxr/utils';
+import { NftWorth } from '@forbex-nxr/types';
 import { faFingerprint, faPrint } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';

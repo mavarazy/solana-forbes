@@ -1,4 +1,5 @@
-import { classNames, NftWorth } from '@forbex-nxr/utils';
+import { NftWorth } from '@forbex-nxr/types';
+import { classNames } from '../utils';
 
 interface NftCollectionSelectorProps {
   collections: Array<[string, NftWorth[]]>;

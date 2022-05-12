@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
+      "@forbex-nxr/types": ["libs/types/src/index.ts"],
       "@forbex-nxr/utils": ["libs/utils/src/index.ts"]
     }
   },

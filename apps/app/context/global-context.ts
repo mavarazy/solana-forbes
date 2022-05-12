@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import { TokenInfo } from '@solana/spl-token-registry';
-import { WalletBallance } from '@forbex-nxr/utils';
+import { WalletBallance } from '@forbex-nxr/types';
 
 export type PriceMap = { [key in string]: { usd: number; decimals: number } };
 

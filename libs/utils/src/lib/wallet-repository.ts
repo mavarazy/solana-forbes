@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { WalletBallance } from './types';
+import { WalletBallance } from '@forbex-nxr/types';
 import { hasuraClient } from './hasura-client';
 
 const GetWalletByIdQuery = gql`

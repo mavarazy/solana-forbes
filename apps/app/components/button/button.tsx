@@ -2,7 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faArrowRotateRight } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { classNames } from '@forbex-nxr/utils';
+import { classNames } from '../utils';
 
 interface ButtonProps {
   text?: string;

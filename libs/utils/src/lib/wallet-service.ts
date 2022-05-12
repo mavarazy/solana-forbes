@@ -1,6 +1,6 @@
 import { AccountLayout } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
-import { WalletBallance } from './types';
+import { WalletBallance } from '@forbex-nxr/types';
 import { throttle } from './throttle';
 import { WalletRepository } from './wallet-repository';
 import { TokenWorthService } from './token-worth-service';

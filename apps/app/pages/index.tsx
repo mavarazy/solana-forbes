@@ -2,7 +2,8 @@ import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesList } from '../components/forbes-table';
 import { gql } from '@apollo/client';
-import { hasuraClient, WalletBallance } from '@forbex-nxr/utils';
+import { hasuraClient } from '@forbex-nxr/utils';
+import { WalletBallance } from '@forbex-nxr/types';
 import { TokenInfo } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`

@@ -2,7 +2,11 @@ import { AccountLayout, RawAccount, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { TokenListProvider } from '@solana/spl-token-registry';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { NFTService } from './nft-service';
-import { TokenInfoSummary, TokenWorth, TokenWorthSummary } from './types';
+import {
+  TokenInfoSummary,
+  TokenWorth,
+  TokenWorthSummary,
+} from '@forbex-nxr/types';
 import { USDPriceMap } from './usd-price-map';
 
 const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(

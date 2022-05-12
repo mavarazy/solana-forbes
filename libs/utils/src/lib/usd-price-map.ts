@@ -1,4 +1,4 @@
-import { TokenPrice } from './types';
+import { TokenPrice } from '@forbex-nxr/types';
 
 export const USDPriceMap: { [key in string]: TokenPrice } = {
   CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1: {

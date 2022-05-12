@@ -1,4 +1,4 @@
-import { WalletBallance } from '@forbex-nxr/utils';
+import { WalletBallance } from '@forbex-nxr/types';
 import React from 'react';
 import Link from 'next/link';
 import { WorthCard } from '../worth-card';

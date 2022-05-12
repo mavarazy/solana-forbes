@@ -1,4 +1,4 @@
-import { TokenType, TokenWorth } from '@forbex-nxr/utils';
+import { TokenType, TokenWorth } from '@forbex-nxr/types';
 import { TokenWorthCard } from '../../components/token-worth-card';
 import { useMemo } from 'react';
 import { TokenToggle } from './token-toggle';

@@ -1,4 +1,4 @@
-import { TokenPrice } from './types';
+import { TokenPrice } from '@forbex-nxr/types';
 
 const getTokenWorth = (amount: number, price: TokenPrice) => {
   const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;

@@ -1,5 +1,5 @@
 import { Mint } from '@solana/spl-token';
-import { TokenPrice, WalletBallance } from './types';
+import { TokenPrice, WalletBallance } from '@forbex-nxr/types';
 import { USDPriceMap } from './usd-price-map';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { getMint } from '@solana/spl-token';

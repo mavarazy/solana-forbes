@@ -4,6 +4,7 @@
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
     "migration": "apps/migration",
+    "types": "libs/types",
     "utils": "libs/utils"
   }
 }

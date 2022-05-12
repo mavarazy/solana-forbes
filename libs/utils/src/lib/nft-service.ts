@@ -1,8 +1,6 @@
 import { Connection, PublicKey } from '@solana/web3.js';
-import { NftWorth, TokenWorth } from './types';
 import { Nft, Metaplex } from '@metaplex-foundation/js-next';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const Metaplex = require('@metaplex-foundation/js-next').Metaplex;
+import { TokenWorth, NftWorth } from '@forbex-nxr/types';
 
 const loadNfts = async (
   connection: Connection,

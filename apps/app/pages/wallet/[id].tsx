@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 import {
   hasuraClient,
-  WalletBallance,
   WalletRepository,
   WalletService,
 } from '@forbex-nxr/utils';
+import { WalletBallance } from '@forbex-nxr/types';
 import { NextPage } from 'next';
 import { AddressLink } from '../../components/address-link';
 import { useRouter } from 'next/router';
