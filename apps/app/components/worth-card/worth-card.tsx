@@ -4,6 +4,7 @@ import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserRobot, faUserSecret } from '@fortawesome/pro-light-svg-icons';
+import { NumberUtils } from '../utils';
 
 interface WorthCardProps {
   wallet: Omit<WalletBallance, 'tokens' | 'top'>;
@@ -16,10 +17,10 @@ export const WorthCard = ({
 }: WorthCardProps) => (
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-2xl sm:py-6 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
-      <span className="absolute text-xs top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+      <span className="absolute text-xl top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
         <FontAwesomeIcon
           icon={program ? faUserRobot : faUserSecret}
-          className="mr-2 h-3 w-3 text-white shadow-xl rounded-full"
+          className="mr-2 h-5 w-5 text-white shadow-xl rounded-full"
         />
         # {rank}
       </span>
@@ -35,7 +36,7 @@ export const WorthCard = ({
       </span>
       <div className="flex flex-col text-xl md:text-4xl self-center mt-2 font-bold px-2 justify-center items-center cursor-pointer">
         <span className="flex flex-1 justify-center">
-          <span>{Math.round(worth).toLocaleString()}</span>
+          <span className="uppercase">{NumberUtils.asHuman(worth)}</span>
         </span>
         <span className="flex text-[8px] sm:text-base md:text-xl font-bold truncate">
           {id}
