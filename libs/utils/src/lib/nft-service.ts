@@ -1,8 +1,8 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import { NftWorth, TokenWorth } from './types';
-import { Nft } from '@metaplex-foundation/js-next';
+import { Nft, Metaplex } from '@metaplex-foundation/js-next';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Metaplex = require('@metaplex-foundation/js-next').Metaplex;
+// const Metaplex = require('@metaplex-foundation/js-next').Metaplex;
 
 const loadNfts = async (
   connection: Connection,
@@ -11,7 +11,7 @@ const loadNfts = async (
   const metaplex = new Metaplex(connection);
   const nfts: Array<Nft | null> = await metaplex
     .nfts()
-    .findNftsByMintList(tokens.map((token) => new PublicKey(token.mint)));
+    .findAllByMintList(tokens.map((token) => new PublicKey(token.mint)));
 
   const nftWorth: Array<NftWorth | null> = await Promise.all(
     nfts.map(async (nft, i) => {

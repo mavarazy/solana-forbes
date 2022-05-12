@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 
 const GetLargestWalletIdsQuery = gql`
   query GetLargestWallets {
-    wallet(limit: 100, order_by: { worth: desc }) {
+    wallet(limit: 50, order_by: { worth: desc }) {
       id
     }
   }
