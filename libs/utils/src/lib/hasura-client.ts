@@ -7,7 +7,7 @@ const config = {
 
 export const hasuraClient = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://forbes.hasura.app/v1/graphql',
+    uri: process.env['NEXT_PUBLIC_HASURA_URL'],
     headers: {
       'x-hasura-admin-secret': config.hasuraAdminSecret,
     },
