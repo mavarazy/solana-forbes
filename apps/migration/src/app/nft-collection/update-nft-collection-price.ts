@@ -2,16 +2,26 @@ import { gql } from '@apollo/client';
 import { NftCollectionPrice } from '@forbex-nxr/types';
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
 import { getDigitalEyesCollections } from './digitaleye-collection';
+import { getExchagenArtCollections } from './exchange-art-collection';
 
 const InsertNftCollectionPriceQuery = gql`
   mutation InsertNftCollectionPrice(
     $id: String!
-    $name: String!
-    $website: String!
+    $name: String
+    $symbol: String
+    $source: String!
+    $website: String
     $price: numeric!
   ) {
     insert_nft_collection_price_one(
-      object: { id: $id, name: $name, price: $price, website: $website }
+      object: {
+        id: $id
+        name: $name
+        price: $price
+        website: $website
+        source: $source
+        symbol: $symbol
+      }
       on_conflict: {
         constraint: nft_collection_price_pkey
         update_columns: price
@@ -27,24 +37,27 @@ const InsertNftCollectionPriceQuery = gql`
 
 export const updateNftCollectionPrice = async () => {
   console.log('Getting collections');
-  const collections = await getDigitalEyesCollections();
-  console.log('Extracted ', collections.length);
+  const exchangeArtCollections = await getExchagenArtCollections();
+  const digitalEyesCollection = await getDigitalEyesCollections();
+  console.log('Extracted ', exchangeArtCollections.length);
 
   const nftCollections: Array<NftCollectionPrice | null> = await throttle(
-    collections.map((collection) => async () => {
-      try {
-        const {
-          data: { insert_nft_collection_price_one },
-        } = await hasuraClient.mutate({
-          mutation: InsertNftCollectionPriceQuery,
-          variables: collection,
-        });
-        return insert_nft_collection_price_one;
-      } catch (err) {
-        console.log(err);
-      }
-      return null;
-    }),
+    exchangeArtCollections
+      .concat(digitalEyesCollection)
+      .map((collection) => async () => {
+        try {
+          const {
+            data: { insert_nft_collection_price_one },
+          } = await hasuraClient.mutate({
+            mutation: InsertNftCollectionPriceQuery,
+            variables: collection,
+          });
+          return insert_nft_collection_price_one;
+        } catch (err) {
+          console.log(err);
+        }
+        return null;
+      }),
     1000,
     50
   );

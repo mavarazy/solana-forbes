@@ -77,6 +77,7 @@ export const getDigitalEyesCollections = async (): Promise<
             id: collection.collectionId,
             name: collection.name,
             website: collection.website,
+            source: 'digitaleyes',
             price,
           };
         }
