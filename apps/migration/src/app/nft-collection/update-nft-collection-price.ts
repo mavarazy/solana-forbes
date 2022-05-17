@@ -10,6 +10,7 @@ import {
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
 import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
+import { getFractalCollections } from './fractal-collection';
 
 const GetNftCollectionIdsQuery = gql`
   query GetNftCollectionIds {
@@ -83,13 +84,15 @@ export const updateNftCollectionPrice = async () => {
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
   console.log('Getting collections');
-  // const exchangeArtCollections = await getExchagenArtCollections();
+  const exchangeArtCollections = await getExchagenArtCollections();
   const digitalEyesCollection = await getDigitalEyesCollections();
-  console.log('Extracted ', digitalEyesCollection.length);
+  const fractalCollections = await getFractalCollections();
+  console.log('Extracted ', fractalCollections.length);
 
   const nftCollections: Array<NftCollectionPrice | null> = await throttle(
-    digitalEyesCollection
-      // .concat(digitalEyesCollection)
+    fractalCollections
+      .concat(exchangeArtCollections)
+      .concat(digitalEyesCollection)
       .map((collection) => async () => {
         if (existingIds.has(collection.id)) {
           const {

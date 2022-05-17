@@ -1,6 +1,7 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Nft, Metaplex } from '@metaplex-foundation/js-next';
 import { TokenWorth, NftWorth } from '@forbex-nxr/types';
+import { NftCollectionWorthService } from './nft-collection-worth-service';
 
 const loadNfts = async (
   connection: Connection,
@@ -18,8 +19,19 @@ const loadNfts = async (
       }
       const type = nft.isPrint() ? 'print' : 'original';
       const owns = tokens[i].amount === 1;
+
       try {
         const metadata = await nft.metadataTask.run();
+        const possibleNames = [
+          nft.name,
+          metadata.collection?.name,
+          metadata.collection?.family,
+        ].filter((str): str is string => !!str);
+
+        const floorPrice = await NftCollectionWorthService.getFloorPrice(
+          possibleNames
+        );
+
         return {
           info: {
             logoURI: metadata.image ?? 'https://via.placeholder.com/200',
@@ -33,6 +45,7 @@ const loadNfts = async (
           type,
           owns,
           mint: nft.mint.toString(),
+          floorPrice,
         };
       } catch (err) {
         return {

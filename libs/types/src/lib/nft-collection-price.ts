@@ -1,10 +1,10 @@
-export type NftCollectionSource = 'digitaleyes' | 'exchageart';
+export type NftCollectionSource = 'digitaleyes' | 'exchageart' | 'fractal';
 
 export interface NftCollectionPrice {
   id: string;
   source: NftCollectionSource;
   name: string;
   symbol?: string;
-  website: string;
+  website?: string;
   price: number;
 }
