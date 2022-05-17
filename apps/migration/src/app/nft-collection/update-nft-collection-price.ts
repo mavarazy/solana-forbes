@@ -1,6 +1,14 @@
 import { gql } from '@apollo/client';
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import {
+  GetNftCollectionIds,
+  InsertNftCollectionPrice,
+  InsertNftCollectionPriceVariables,
+  NftCollectionPrice,
+  UpdateNftCollectionPrice,
+  UpdateNftCollectionPriceVariables,
+} from '@forbex-nxr/types';
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
+import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
 
 const GetNftCollectionIdsQuery = gql`
@@ -59,6 +67,7 @@ const InsertNftCollectionPriceQuery = gql`
       id
       name
       price
+      source
       website
     }
   }
@@ -67,25 +76,28 @@ const InsertNftCollectionPriceQuery = gql`
 export const updateNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
-  } = await hasuraClient.query({
+  } = await hasuraClient.query<GetNftCollectionIds>({
     query: GetNftCollectionIdsQuery,
   });
 
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
   console.log('Getting collections');
-  const exchangeArtCollections = await getExchagenArtCollections();
-  // const digitalEyesCollection = await getDigitalEyesCollections();
-  console.log('Extracted ', exchangeArtCollections.length);
+  // const exchangeArtCollections = await getExchagenArtCollections();
+  const digitalEyesCollection = await getDigitalEyesCollections();
+  console.log('Extracted ', digitalEyesCollection.length);
 
   const nftCollections: Array<NftCollectionPrice | null> = await throttle(
-    exchangeArtCollections
+    digitalEyesCollection
       // .concat(digitalEyesCollection)
       .map((collection) => async () => {
         if (existingIds.has(collection.id)) {
           const {
             data: { update_nft_collection_price_by_pk },
-          } = await hasuraClient.mutate({
+          } = await hasuraClient.mutate<
+            UpdateNftCollectionPrice,
+            UpdateNftCollectionPriceVariables
+          >({
             mutation: UpdateNftCollectionPriceQuery,
             variables: collection,
           });
@@ -95,7 +107,10 @@ export const updateNftCollectionPrice = async () => {
           try {
             const {
               data: { insert_nft_collection_price_one },
-            } = await hasuraClient.mutate({
+            } = await hasuraClient.mutate<
+              InsertNftCollectionPrice,
+              InsertNftCollectionPriceVariables
+            >({
               mutation: InsertNftCollectionPriceQuery,
               variables: collection,
             });
@@ -107,7 +122,7 @@ export const updateNftCollectionPrice = async () => {
         return null;
       }),
     1000,
-    50
+    10
   );
 
   const savedNftCollections = nftCollections.filter(

@@ -6,6 +6,8 @@
 import { updateNftCollectionPrice } from './app/nft-collection/update-nft-collection-price';
 // import { updatePrices } from './app/update-prices';
 
-updateNftCollectionPrice();
+updateNftCollectionPrice().then(() => {
+  console.log('All done');
+});
 
 // updateSummary();

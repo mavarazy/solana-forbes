@@ -13,6 +13,7 @@ export interface InsertNftCollectionPrice_insert_nft_collection_price_one {
   id: string;
   name: string | null;
   price: general.numeric;
+  source: general.NftCollectionSource;
   website: string | null;
 }
 
@@ -27,7 +28,7 @@ export interface InsertNftCollectionPriceVariables {
   id: string;
   name?: string | null;
   symbol?: string | null;
-  source: string;
+  source: general.NftCollectionSource;
   website?: string | null;
   price: general.numeric;
 }

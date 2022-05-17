@@ -13,7 +13,7 @@ export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   id: string;
   name: string | null;
   price: general.numeric;
-  source: string | null;
+  source: general.NftCollectionSource;
   symbol: string | null;
   website: string | null;
 }

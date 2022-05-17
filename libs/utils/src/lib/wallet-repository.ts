@@ -1,5 +1,15 @@
 import { gql } from '@apollo/client';
-import { WalletBallance } from '@forbex-nxr/types';
+import {
+  GetWalletById,
+  GetWalletByIdVariables,
+  GetWallets,
+  GetWalletsVariables,
+  InsertWallet,
+  InsertWalletVariables,
+  UpdateWalletById,
+  UpdateWalletByIdVariables,
+  WalletBallance,
+} from '@forbex-nxr/types';
 import { hasuraClient } from './hasura-client';
 
 const GetWalletByIdQuery = gql`
@@ -52,6 +62,7 @@ const InsertWalletQuery = gql`
       worth
       sol
       summary
+      program
     }
   }
 `;
@@ -91,7 +102,7 @@ const UpdateWalletByIdQuery = gql`
 const fetchExistingWallets = async (
   wallets: string[]
 ): Promise<WalletBallance[]> => {
-  const { data } = await hasuraClient.query({
+  const { data } = await hasuraClient.query<GetWallets, GetWalletsVariables>({
     query: GetWalletsInQuery,
     variables: {
       wallets: wallets.map((wallet) => wallet.toString()),
@@ -101,14 +112,20 @@ const fetchExistingWallets = async (
   return data.wallet as WalletBallance[];
 };
 
-const createWallet = async (wallet: WalletBallance) => {
-  const {
-    data: { insert_wallet_one },
-  } = await hasuraClient.mutate({
+const createWallet = async (
+  wallet: WalletBallance
+): Promise<WalletBallance> => {
+  const { data } = await hasuraClient.mutate<
+    InsertWallet,
+    InsertWalletVariables
+  >({
     mutation: InsertWalletQuery,
     variables: wallet,
   });
-  return insert_wallet_one;
+  if (!data?.insert_wallet_one) {
+    throw new Error(`Failed to create ${wallet.id}`);
+  }
+  return data.insert_wallet_one;
 };
 
 const createWalletsInBatch = async (wallets: WalletBallance[]) =>
@@ -117,14 +134,15 @@ const createWalletsInBatch = async (wallets: WalletBallance[]) =>
 const updateWallet = async (
   wallet: WalletBallance
 ): Promise<WalletBallance> => {
-  const {
-    data: { update_wallet_by_pk },
-  } = await hasuraClient.mutate({
+  const { data } = await hasuraClient.mutate<
+    UpdateWalletById,
+    UpdateWalletByIdVariables
+  >({
     mutation: UpdateWalletByIdQuery,
     variables: wallet,
   });
-  if (update_wallet_by_pk) {
-    return update_wallet_by_pk as WalletBallance;
+  if (data?.update_wallet_by_pk) {
+    return data.update_wallet_by_pk;
   }
   return createWallet(wallet);
 };
@@ -132,7 +150,7 @@ const updateWallet = async (
 const getById = async (id: string) => {
   const {
     data: { wallet_by_pk: wallet },
-  } = await hasuraClient.query({
+  } = await hasuraClient.query<GetWalletById, GetWalletByIdVariables>({
     query: GetWalletByIdQuery,
     variables: { id },
   });

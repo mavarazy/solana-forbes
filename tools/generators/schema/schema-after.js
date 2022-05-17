@@ -18,7 +18,8 @@ fs.readdir(rootPath, 'utf-8', function (err, files) {
         .replace(/top: jsonb;/g, 'top: general.TokenWorth[];')
         .replace(/tokens: jsonb;/g, 'tokens: general.TokenWorthSummary;')
         .replace(/summary: jsonb;/g, 'summary: general.TokenSummary;')
-        .replace(/numeric/g, 'general.numeric');
+        .replace(/numeric/g, 'general.numeric')
+        .replace(/source: string;/g, 'source: general.NftCollectionSource;');
 
       fs.writeFile(filePath, result, 'utf8', function (err) {
         if (err) return console.log(err);

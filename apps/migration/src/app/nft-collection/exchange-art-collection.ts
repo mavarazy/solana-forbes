@@ -1,4 +1,5 @@
 import { NftCollectionPrice } from '@forbex-nxr/types';
+import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 interface ExchangeArtCollection {
@@ -35,6 +36,7 @@ const getAllExchangeArtStats = async (
 ): Promise<ExchangeArtStats[]> => {
   const collectionIds = ids.map((id) => `collectionIds=${id}`).join('&');
   const url = `https://api.exchange.art/v2/collections/sales/stats?period=30d&${collectionIds}`;
+  console.log(`${ids[0]}: Fetching`);
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -45,7 +47,7 @@ const getAllExchangeArtStats = async (
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
-    console.log('Error fetching ', err);
+    console.log(`${ids[0]}: Error fetching `, err);
   }
   return [];
 };
@@ -73,17 +75,20 @@ export const getExchagenArtCollections = async (): Promise<
 > => {
   console.log('Getting collections');
   const collections = await getAllExchangeArtCollections();
+  const ids = collections.map(({ id }) => id);
 
-  console.log('Processing ', collections.length);
+  console.log('Processing ', collections.filter((c) => c.id).length);
   const prices = (
-    await Promise.all(
-      Array(Math.round(collections.length / 100))
-        .fill(null)
-        .map((_, i) =>
-          getAllExchangeArtStats(
-            collections.map(({ id }) => id).slice(i * 100, 100)
-          )
-        )
+    await throttle(
+      ids.map((id) => async () => {
+        try {
+          return getAllExchangeArtStats([id]);
+        } catch (err) {
+          return [];
+        }
+      }),
+      1000,
+      10
     )
   ).reduce((agg, price) => agg.concat(price), []);
 

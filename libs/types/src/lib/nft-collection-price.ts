@@ -1,4 +1,4 @@
-type NftCollectionSource = 'digitaleyes' | 'exchageart';
+export type NftCollectionSource = 'digitaleyes' | 'exchageart';
 
 export interface NftCollectionPrice {
   id: string;

@@ -16,6 +16,7 @@ export interface InsertWallet_insert_wallet_one {
   worth: general.numeric;
   sol: general.numeric;
   summary: general.TokenSummary;
+  program: boolean;
 }
 
 export interface InsertWallet {
