@@ -10,17 +10,3 @@ export interface TokenWorth {
   percent?: number;
   usd?: number;
 }
-
-export type NftType = 'original' | 'print';
-
-export interface NftWorth {
-  type: NftType;
-  mint: string;
-  info: TokenInfoSummary;
-  collection?: {
-    name: string | null;
-    family: string | null;
-    symbol: string | null;
-  };
-  owns: boolean;
-}

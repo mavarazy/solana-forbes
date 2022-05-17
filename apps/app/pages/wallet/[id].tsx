@@ -13,8 +13,8 @@ import { TokenPanel } from '../../components/token-panel';
 import { NftPanel } from '../../components/nft-panel';
 import { useEffect, useState } from 'react';
 
-const GetLargestWalletIdsQuery = gql`
-  query GetLargestWallets {
+const GetTopLargestWalletIdsQuery = gql`
+  query GetTopLargestWallets {
     wallet(limit: 500, order_by: { worth: desc }) {
       id
     }
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   // Call an external API endpoint to get posts
   const {
     data: { wallet },
-  } = await hasuraClient.query({ query: GetLargestWalletIdsQuery });
+  } = await hasuraClient.query({ query: GetTopLargestWalletIdsQuery });
 
   // Get the paths we want to pre-render based on posts
   const paths = wallet.map((params) => ({

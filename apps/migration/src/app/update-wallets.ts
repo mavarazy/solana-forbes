@@ -7,7 +7,7 @@ import {
 } from '@forbex-nxr/utils';
 import delay = require('delay');
 
-const GetAllWalletsQuery = gql`
+export const GetAllWalletsQuery = gql`
   query GetAllWallets {
     wallet(order_by: { worth: desc }) {
       id

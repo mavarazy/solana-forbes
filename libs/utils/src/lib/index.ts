@@ -6,3 +6,4 @@ export * from './wallet-repository';
 export * from './wallet-service';
 export * from './usd-price-map';
 export * from './program-flag-service';
+export * from './nft-service';

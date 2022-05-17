@@ -1,4 +1,5 @@
-import { NftWorth, TokenWorth } from './token-worth';
+import { NftWorth } from './nft-worth';
+import { TokenWorth } from './token-worth';
 
 export type TokenWorthSummary = {
   priced: TokenWorth[];

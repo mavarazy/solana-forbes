@@ -1,4 +1,5 @@
 import { NftCollectionPrice } from '@forbex-nxr/types';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 interface ExchangeArtCollection {
   artists: string[];
@@ -95,7 +96,7 @@ export const getExchagenArtCollections = async (): Promise<
   const nftColl: NftCollectionPrice[] = collections.reduce(
     (agg: NftCollectionPrice[], collection) => {
       const price = priceToStats[collection.name];
-      if (!price) {
+      if (!price || !price.floorPrice || !price.highestSale) {
         return agg;
       }
 
@@ -103,7 +104,7 @@ export const getExchagenArtCollections = async (): Promise<
         id: collection.id,
         name: collection.name,
         website: collection.website,
-        price: price.floorPrice || price.highestSale,
+        price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
         symbol: price.symbol,
         source: 'exchageart',
       };
