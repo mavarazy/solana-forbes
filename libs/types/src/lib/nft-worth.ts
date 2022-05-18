@@ -6,7 +6,7 @@ export interface NftWorth {
   type: NftType;
   mint: string;
   info: TokenInfoSummary;
-  floorPrice?: number;
+  floorPrice?: number | null;
   collection?: {
     name: string | null;
     family: string | null;

@@ -4,9 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
 
-export const NFTCard: React.FC<NftWorth> = ({ info, mint, type }) => (
+export const NFTCard: React.FC<NftWorth> = ({
+  info,
+  mint,
+  type,
+  floorPrice,
+}) => (
   <div className="flex flex-1 flex-col p-4 self-center hover:text-indigo-500 rounded-3xl shadow-lg bg-white">
     <div className="flex flex-col justify-center text-center relative ">
+      {floorPrice > 0 && (
+        <span className="text-xs mb-4 font-bold">SOL {floorPrice}</span>
+      )}
       <FontAwesomeIcon
         icon={type === 'original' ? faFingerprint : faPrint}
         className="bg-gray-600 text-white h-6 w-6 absolute top-1 right-1 p-3 rounded-full"

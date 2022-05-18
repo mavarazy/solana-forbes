@@ -16,12 +16,12 @@ const GetNftCollectionWorthByNamesQuery = gql`
   }
 `;
 
-const getFloorPrice = async (names: string[]): Promise<number | undefined> => {
+const getFloorPrice = async (names: string[]): Promise<number | null> => {
   const {
     data: { nft_collection_price },
   } = await hasuraClient.query({
     query: GetNftCollectionWorthByNamesQuery,
-    variables: names,
+    variables: { names },
   });
 
   if (nft_collection_price.length > 1) {
@@ -30,7 +30,7 @@ const getFloorPrice = async (names: string[]): Promise<number | undefined> => {
 
   return nft_collection_price.length === 1
     ? nft_collection_price[0].price
-    : undefined;
+    : null;
 };
 
 export const NftCollectionWorthService = {
