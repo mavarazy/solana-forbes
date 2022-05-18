@@ -9,7 +9,7 @@ import delay = require('delay');
 
 export const GetAllWalletsQuery = gql`
   query GetAllWallets {
-    wallet(order_by: { worth: desc }) {
+    wallet(order_by: { worth: desc }, offset: 487) {
       id
     }
   }

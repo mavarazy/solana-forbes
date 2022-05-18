@@ -3,17 +3,15 @@ import { faFingerprint, faPrint } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
+import { NumberUtils } from '../utils';
 
-export const NFTCard: React.FC<NftWorth> = ({
-  info,
-  mint,
-  type,
-  floorPrice,
-}) => (
+export const NFTCard: React.FC<NftWorth> = ({ info, mint, type, worth }) => (
   <div className="flex flex-1 flex-col p-4 self-center hover:text-indigo-500 rounded-3xl shadow-lg bg-white">
     <div className="flex flex-col justify-center text-center relative ">
-      {floorPrice > 0 && (
-        <span className="text-xs mb-4 font-bold">SOL {floorPrice}</span>
+      {worth > 0 && (
+        <span className="font-bold absolute top-2 left-0 right-0 flex justify-center">
+          <span className="flex text-xs">$ {NumberUtils.asHuman(worth)}</span>
+        </span>
       )}
       <FontAwesomeIcon
         icon={type === 'original' ? faFingerprint : faPrint}
