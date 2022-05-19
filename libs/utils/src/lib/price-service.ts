@@ -1,7 +1,7 @@
 import { Mint } from '@solana/spl-token';
 import { TokenPrice, WalletBallance } from '@forbex-nxr/types';
 import { USDPriceMap } from './usd-price-map';
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { getMint } from '@solana/spl-token';
 import { WorthUtils } from './worth-utils';
 import { throttle } from './throttle';
@@ -34,12 +34,11 @@ const getCoingeckoPrice = async (
   return null;
 };
 
-const getTokenMint = async (address: string): Promise<Mint | null> => {
+const getTokenMint = async (
+  connection: Connection,
+  address: string
+): Promise<Mint | null> => {
   try {
-    const connection = new Connection(
-      clusterApiUrl('mainnet-beta'),
-      'confirmed'
-    );
     const mint = await getMint(connection, new PublicKey(address));
     return mint;
   } catch (err) {
@@ -48,6 +47,7 @@ const getTokenMint = async (address: string): Promise<Mint | null> => {
 };
 
 const loadTokenPrice = async (
+  connection: Connection,
   coingeckoId: string,
   mint: string
 ): Promise<TokenPrice | null> => {
@@ -58,7 +58,7 @@ const loadTokenPrice = async (
   }
 
   console.log('Extracting mint: ', mint);
-  const tokenMint = await getTokenMint(mint);
+  const tokenMint = await getTokenMint(connection, mint);
   if (!tokenMint) {
     return null;
   }
@@ -75,15 +75,20 @@ const loadTokenPrice = async (
 const getSolPrice = (): number =>
   USDPriceMap['So11111111111111111111111111111111111111112'].usd;
 
-const refresh = async (balance: WalletBallance): Promise<WalletBallance> => {
+const refresh = async (
+  connection: Connection,
+  balance: WalletBallance
+): Promise<WalletBallance> => {
   const priced = await throttle(
     balance.tokens.priced.map((token) => async () => {
-      const oldPrice = USDPriceMap[token.mint];
-      if (!oldPrice) {
+      const oldPrice: TokenPrice | undefined = USDPriceMap[token.mint];
+      if (!oldPrice && (oldPrice as TokenPrice).coingeckoId) {
         return token;
       }
+
       const currentPrice = await loadTokenPrice(
-        USDPriceMap[token.mint].coingeckoId,
+        connection,
+        (oldPrice as TokenPrice).coingeckoId!,
         token.mint
       );
 
@@ -118,5 +123,6 @@ const refresh = async (balance: WalletBallance): Promise<WalletBallance> => {
 export const PriceService = {
   getSolPrice,
   loadTokenPrice,
+  getTokenMint,
   refresh,
 };

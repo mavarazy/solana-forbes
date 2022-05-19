@@ -8,5 +8,7 @@ export * from './UpdateWalletById';
 export * from './UpdateWalletProgramFlagById';
 export * from './InsertWallet';
 export * from './GetWallets';
-export * from './GetNftCollectionPrices';
 export * from './GetNftCollectionWorthByNames';
+export * from './GetCoinIds';
+export * from './InsertCoin';
+export * from './UpdateCoin';

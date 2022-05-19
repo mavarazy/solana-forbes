@@ -6,16 +6,16 @@
 import * as general from '../lib';
 
 // ====================================================
-// GraphQL query operation: GetAllNfts
+// GraphQL query operation: GetCoinIds
 // ====================================================
 
-export interface GetAllNfts_wallet {
-  tokens: general.TokenWorthSummary;
+export interface GetCoinIds_coin {
+  mint: string;
 }
 
-export interface GetAllNfts {
+export interface GetCoinIds {
   /**
-   * fetch data from the table: "wallet"
+   * fetch data from the table: "coin"
    */
-  wallet: GetAllNfts_wallet[];
+  coin: GetCoinIds_coin[];
 }

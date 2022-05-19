@@ -28,7 +28,7 @@ export interface TokenPrice {
   cap: number;
   decimals: number;
   supply: number;
-  coingeckoId: string;
+  coingeckoId?: string;
 }
 
 export type PriceMap = {
