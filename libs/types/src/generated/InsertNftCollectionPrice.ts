@@ -11,7 +11,7 @@ import * as general from '../lib';
 
 export interface InsertNftCollectionPrice_insert_nft_collection_price_one {
   id: string;
-  name: string | null;
+  name: string;
   price: general.numeric;
   source: general.NftCollectionSource;
   website: string | null;

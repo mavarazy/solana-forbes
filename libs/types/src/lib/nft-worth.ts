@@ -7,6 +7,7 @@ export interface NftWorth {
   mint: string;
   info: TokenInfoSummary;
   floorPrice?: number | null;
+  marketplace?: string;
   collection?: {
     name: string | null;
     family: string | null;

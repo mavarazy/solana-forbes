@@ -11,7 +11,7 @@ import * as general from '../lib';
 
 export interface GetNftCollectionWorthByNames_nft_collection_price {
   id: string;
-  name: string | null;
+  name: string;
   price: general.numeric;
   source: general.NftCollectionSource;
   symbol: string | null;

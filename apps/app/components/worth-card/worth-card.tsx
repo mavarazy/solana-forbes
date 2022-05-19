@@ -7,7 +7,7 @@ import { faUserRobot, faUserSecret } from '@fortawesome/pro-light-svg-icons';
 import { NumberUtils } from '../utils';
 
 interface WorthCardProps {
-  wallet: Omit<WalletBallance, 'tokens' | 'top'>;
+  wallet: Pick<WalletBallance, 'id' | 'sol' | 'summary' | 'worth' | 'program'>;
   rank?: number;
 }
 

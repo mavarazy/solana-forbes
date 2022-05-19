@@ -1,94 +1,57 @@
-import { gql } from '@apollo/client';
-import {
-  hasuraClient,
-  WalletRepository,
-  WalletService,
-} from '@forbex-nxr/utils';
 import { WalletBallance } from '@forbex-nxr/types';
 import { NextPage } from 'next';
 import { AddressLink } from '../../components/address-link';
-import { useRouter } from 'next/router';
 import { WorthCard } from '../../components/worth-card';
 import { TokenPanel } from '../../components/token-panel';
 import { NftPanel } from '../../components/nft-panel';
+import { WalletService } from '@forbex-nxr/utils';
 import { useEffect, useState } from 'react';
-
-const GetTopLargestWalletIdsQuery = gql`
-  query GetTopLargestWallets {
-    wallet(limit: 500, order_by: { worth: desc }) {
-      id
-    }
-  }
-`;
+import { clusterApiUrl, Connection } from '@solana/web3.js';
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const {
-    data: { wallet },
-  } = await hasuraClient.query({ query: GetTopLargestWalletIdsQuery });
-
-  // Get the paths we want to pre-render based on posts
-  const paths = wallet.map((params) => ({
-    params: params,
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: true };
+  return { paths: [], fallback: true };
 }
-
-const loadWallet = async (id: string) => {
-  try {
-    const wallet = await WalletRepository.getById(id);
-    if (wallet) {
-      return wallet;
-    }
-  } catch (err) {
-    return null;
-  }
-  return WalletService.getWalletBalance(id);
-};
 
 // This also gets called at build time
 export async function getStaticProps({ params: { id } }) {
-  const wallet = await loadWallet(id);
-  if (wallet) {
-    return { props: { wallet } };
-  }
   return { props: { id } };
 }
 
 interface WalletProps {
-  id?: string;
-  wallet: WalletBallance | null;
+  id: string;
 }
 
-const Wallet: NextPage<WalletProps> = (props) => {
-  const router = useRouter();
-  const { id } = props;
-  const [wallet, setWallet] = useState<WalletBallance>(props.wallet);
+const Wallet: NextPage<WalletProps> = ({ id }) => {
+  const [wallet, setWallet] = useState<WalletBallance>({
+    id,
+    worth: 0,
+    sol: 0,
+    top: [],
+    summary: {},
+    tokens: {
+      priced: [],
+      general: [],
+      dev: [],
+      nfts: [],
+    },
+    program: true,
+  });
 
   useEffect(() => {
     if (id) {
-      WalletService.getWalletBalance(id).then((wallet) => {
-        setWallet(wallet);
-      });
+      const connection = new Connection(
+        clusterApiUrl('mainnet-beta'),
+        'confirmed'
+      );
+      WalletService.getWalletBalance(connection, id).then(setWallet);
     }
   }, [id]);
-
-  if (router.isFallback || !wallet) {
-    return (
-      <div className="flex flex-1 justify-center items-center">
-        <div className="text-4xl font-bold">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
       <div className="max-w-5xl flex flex-col flex-1">
-        <AddressLink address={wallet.id}>
+        <AddressLink address={id}>
           <WorthCard wallet={wallet} />
         </AddressLink>
         <NftPanel

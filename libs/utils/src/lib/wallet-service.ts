@@ -17,9 +17,10 @@ const getSolBalance = async (
   return BigInt(balance);
 };
 
-const getWalletBalance = async (id: string): Promise<WalletBallance> => {
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-
+const getWalletBalance = async (
+  connection: Connection,
+  id: string
+): Promise<WalletBallance> => {
   // TODO this can be executed in parallel
   const [sol, tokens, program] = await Promise.all([
     getSolBalance(connection, id).then((sol) => Number(sol) / Math.pow(10, 9)),
@@ -47,6 +48,7 @@ const getWalletBalance = async (id: string): Promise<WalletBallance> => {
 };
 
 const getAllWalletBalance = async (
+  connection: Connection,
   wallets: string[]
 ): Promise<WalletBallance[]> => {
   const existingWallets = await WalletRepository.fetchExistingWallets(wallets);
@@ -59,7 +61,7 @@ const getAllWalletBalance = async (
   const freshWallets = await throttle(
     newWallets.map((wallet, i) => async () => {
       console.log(`Extraxting ${i} wallet ${wallet}`);
-      return WalletService.getWalletBalance(wallet);
+      return WalletService.getWalletBalance(connection, wallet);
     }),
     1000,
     1
@@ -90,7 +92,7 @@ const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
     const topWallets = await throttle(extractOwnerAccountTask, 1000, 5);
     console.log('Extracted all owners');
 
-    return WalletService.getAllWalletBalance(topWallets);
+    return WalletService.getAllWalletBalance(connection, topWallets);
   } catch (err) {
     console.error(err);
     return [];
@@ -98,6 +100,7 @@ const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
 };
 
 export const WalletService = {
+  getSolBalance,
   getWalletBalance,
   getLargestWallets,
   getAllWalletBalance,

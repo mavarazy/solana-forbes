@@ -14,10 +14,10 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
     () =>
       nfts.reduce((agg: { [key in string]: NftWorth[] }, nft) => {
         const collection =
-          (nft.collection?.family?.trim() ??
-            nft.collection?.name?.trim() ??
-            nft.collection?.symbol?.trim()) ||
-          'Non collectable';
+          nft.collection?.family?.trim() ||
+          nft.collection?.name?.trim() ||
+          nft.collection?.symbol?.trim() ||
+          'General';
 
         if (agg[collection]) {
           agg[collection].push(nft);
@@ -56,9 +56,10 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
         role="list"
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {nftsByCollection[selected].map((nft) => (
-          <NFTCard key={nft.mint} {...nft} />
-        ))}
+        {selected &&
+          nftsByCollection[selected].map((nft) => (
+            <NFTCard key={nft.mint} {...nft} />
+          ))}
       </div>
     </>
   );

@@ -12,19 +12,6 @@ import {
 } from '@forbex-nxr/types';
 import { hasuraClient } from './hasura-client';
 
-const GetWalletByIdQuery = gql`
-  query GetWalletById($id: String!) {
-    wallet_by_pk(id: $id) {
-      id
-      sol
-      worth
-      tokens
-      summary
-      program
-    }
-  }
-`;
-
 const GetWalletsInQuery = gql`
   query GetWallets($wallets: [String!]) {
     wallet(where: { id: { _in: $wallets } }) {
@@ -147,19 +134,7 @@ const updateWallet = async (
   return createWallet(wallet);
 };
 
-const getById = async (id: string) => {
-  const {
-    data: { wallet_by_pk: wallet },
-  } = await hasuraClient.query<GetWalletById, GetWalletByIdVariables>({
-    query: GetWalletByIdQuery,
-    variables: { id },
-  });
-
-  return wallet ?? null;
-};
-
 export const WalletRepository = {
-  getById,
   fetchExistingWallets,
   createWallet,
   createWalletsInBatch,

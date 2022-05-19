@@ -11,7 +11,7 @@ import * as general from '../lib';
 
 export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   id: string;
-  name: string | null;
+  name: string;
   price: general.numeric;
   source: general.NftCollectionSource;
   symbol: string | null;

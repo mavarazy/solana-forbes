@@ -1,4 +1,5 @@
 import { NftWorth } from '@forbex-nxr/types';
+import { TokenTypeIcon } from '../token-type-icon';
 import { classNames } from '../utils';
 
 interface NftCollectionSelectorProps {
@@ -25,6 +26,11 @@ export const NftCollectionSelector: React.FC<NftCollectionSelectorProps> = ({
           )}
           onClick={() => onSelect(collection)}
         >
+          {nfts.some((nft) => nft.worth > 0) && (
+            <span className="flex items-center pr-2">
+              <TokenTypeIcon type="priced" />
+            </span>
+          )}
           <span className="flex items-center">
             {collection} | {nfts.length}
           </span>

@@ -33,11 +33,7 @@ const loadNfts = async (
           metadata.collection?.family,
         ].filter((str): str is string => !!str);
 
-        const floorPrice = await NftCollectionWorthService.getFloorPrice(
-          possibleNames
-        );
-
-        return {
+        const worth: NftWorth = {
           info: {
             logoURI: metadata.image ?? 'https://via.placeholder.com/200',
             name: nft.name ?? metadata.name ?? 'Unknown',
@@ -50,9 +46,21 @@ const loadNfts = async (
           type,
           owns,
           mint: nft.mint.toString(),
-          floorPrice,
-          worth: floorPrice ? floorPrice * PriceService.getSolPrice() : 0,
+          worth: 0,
         };
+
+        const nftPrice = await NftCollectionWorthService.getFloorPrice(
+          possibleNames
+        );
+
+        if (nftPrice) {
+          console.log('Found floor price for ', nftPrice.price, ' ', nft.name);
+          worth.floorPrice = nftPrice.price;
+          worth.marketplace = nftPrice.source;
+          worth.worth = nftPrice.price * PriceService.getSolPrice();
+        }
+
+        return worth;
       } catch (err) {
         console.log(`Failed on ${nft.mint}`);
         return {

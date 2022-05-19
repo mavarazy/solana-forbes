@@ -1,15 +1,26 @@
 import { NftWorth } from '@forbex-nxr/types';
-import { faFingerprint, faPrint } from '@fortawesome/pro-light-svg-icons';
+import {
+  faFingerprint,
+  faPrint,
+  faSun,
+} from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
 import { NumberUtils } from '../utils';
 
-export const NFTCard: React.FC<NftWorth> = ({ info, mint, type, worth }) => (
+export const NFTCard: React.FC<NftWorth> = ({
+  info,
+  mint,
+  type,
+  floorPrice,
+  marketplace,
+  worth,
+}) => (
   <div className="flex flex-1 flex-col p-4 self-center hover:text-indigo-500 rounded-3xl shadow-lg bg-white">
     <div className="flex flex-col justify-center text-center relative ">
       {worth > 0 && (
-        <span className="font-bold absolute top-2 left-0 right-0 flex justify-center">
+        <span className="font-bold flex justify-center">
           <span className="flex text-xs">$ {NumberUtils.asHuman(worth)}</span>
         </span>
       )}
@@ -27,6 +38,19 @@ export const NFTCard: React.FC<NftWorth> = ({ info, mint, type, worth }) => (
         <span className="font-semibold my-4 text-xl truncate flex justify-center">
           {info?.name.trim() ? info.name : '--/--'}
         </span>
+        {floorPrice && (
+          <div className="flex flex-col">
+            <div className="flex justify-center">
+              <FontAwesomeIcon icon={faSun} className="mr-2 self-center" />
+              <span className="flex justify-center font-bold">
+                {floorPrice}
+              </span>
+            </div>
+            <span className="text-[8px] font-bold uppercase">
+              {marketplace}
+            </span>
+          </div>
+        )}
       </AddressLink>
     </div>
   </div>

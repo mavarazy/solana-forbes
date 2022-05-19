@@ -4,7 +4,7 @@ export interface NftCollectionPrice {
   id: string;
   source: NftCollectionSource;
   name: string;
-  symbol?: string;
-  website?: string;
+  symbol: string | null;
+  website?: string | null;
   price: number;
 }

@@ -1,4 +1,8 @@
 import { gql } from '@apollo/client';
+import {
+  GetNftCollectionWorthByNames,
+  NftCollectionPrice,
+} from '@forbex-nxr/types';
 import { hasuraClient } from './hasura-client';
 
 const GetNftCollectionWorthByNamesQuery = gql`
@@ -16,10 +20,12 @@ const GetNftCollectionWorthByNamesQuery = gql`
   }
 `;
 
-const getFloorPrice = async (names: string[]): Promise<number | null> => {
+const getFloorPrice = async (
+  names: string[]
+): Promise<NftCollectionPrice | null> => {
   const {
     data: { nft_collection_price },
-  } = await hasuraClient.query({
+  } = await hasuraClient.query<GetNftCollectionWorthByNames>({
     query: GetNftCollectionWorthByNamesQuery,
     variables: { names },
   });
@@ -28,9 +34,7 @@ const getFloorPrice = async (names: string[]): Promise<number | null> => {
     console.log(`More than 1 nft matched to collection ${names.join(' | ')}`);
   }
 
-  return nft_collection_price.length === 1
-    ? nft_collection_price[0].price
-    : null;
+  return nft_collection_price.length > 0 ? nft_collection_price[0] : null;
 };
 
 export const NftCollectionWorthService = {
