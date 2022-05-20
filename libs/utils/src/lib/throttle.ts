@@ -9,15 +9,22 @@ export async function throttle<T>(
 ): Promise<T[]> {
   console.log('Processing ', start, ' of ', tasks.length);
 
-  const pending = Promise.all(
+  const pending: Array<T | null> = await Promise.all(
     Array(Math.min(num, tasks.length - start))
       .fill(null)
-      .map((_, i) => tasks[start + i]())
+      .map((_, i) => {
+        try {
+          return tasks[start + i]();
+        } catch (err) {
+          console.log('Task ', start + i, ' failed');
+          return null;
+        }
+      })
   );
 
   await delay(duration);
 
-  const completeTasks = await pending;
+  const completeTasks: T[] = pending.filter((res): res is T => res !== null);
   if (start + num >= tasks.length) {
     return agg.concat(completeTasks);
   }

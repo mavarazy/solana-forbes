@@ -1,6 +1,8 @@
 import { NftCollectionPrice } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import fetch from 'node-fetch';
+import { Metaplex } from '@metaplex-foundation/js-next';
+import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 
 interface SolanaArtCollection {
   id: number;
@@ -37,7 +39,7 @@ interface SolanaArtPrice {
   floorPrice: number;
 }
 
-interface SolanartPriceResponse {
+interface SolanaArtPriceResponse {
   api_version: string;
   result: {
     api_code: number;
@@ -45,6 +47,54 @@ interface SolanartPriceResponse {
     data: SolanaArtCollectionPrice[];
   };
 }
+
+interface SolanaArtListedItem {
+  id: number;
+  token_add: string;
+  price: number;
+  link_img: string;
+  for_sale: number;
+  name: string;
+  escrowAdd: string;
+  ah: number;
+  seller_address: string;
+  attributes: string;
+  rank: null | number;
+  type: string;
+  attrib_count: number;
+  buyerAdd: null | string;
+  bidder_address: null | string;
+  currentBid: null | number;
+  lastSoldPrice: null | number;
+}
+
+const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+const metaplex = new Metaplex(connection);
+
+const getCollectionSymbol = async (url: string): Promise<string | null> => {
+  const res = await fetch(
+    `https://api.solanart.io/get_nft?collection=${url}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
+  );
+  if (!res.ok) {
+    console.log('Failed to fetch data for ', url);
+    return null;
+  }
+
+  const items = (await res.json()).items as SolanaArtListedItem[];
+  if (items.length === 0) {
+    return null;
+  }
+
+  try {
+    const tokenAddr = items[0].token_add;
+    const nft = await metaplex.nfts().findByMint(new PublicKey(tokenAddr));
+
+    return nft.symbol;
+  } catch (err) {
+    console.log('Failed to fetch NFT info for ', items[0].token_add);
+  }
+  return null;
+};
 
 const getSolanaPrice = async (
   collection: SolanaArtCollection
@@ -78,7 +128,7 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
   return [];
 };
 
-const getAllSolanaArtPrices = async (): Promise<NftCollectionPrice[]> => {
+const getAllSolanaArtPrices = async (): Promise<SolanaArtCollectionPrice[]> => {
   try {
     console.log('Sending request');
     const res = await fetch('https://api.solanart.io/howrare/collections');
@@ -88,15 +138,9 @@ const getAllSolanaArtPrices = async (): Promise<NftCollectionPrice[]> => {
     }
     const {
       result: { data: prices },
-    } = (await res.json()) as SolanartPriceResponse;
+    } = (await res.json()) as SolanaArtPriceResponse;
     console.log('Fetched prices for ', prices.length);
-    return prices.map((price) => ({
-      id: price.url,
-      source: 'solana-art',
-      name: price.name,
-      symbol: price.url,
-      price: parseFloat(price.floor),
-    }));
+    return prices;
   } catch (err) {
     console.log(err);
   }
@@ -113,6 +157,7 @@ export const getSolanaArtCollections = async (): Promise<
   const collectionPriceTasks = collections.map(
     (collection) => async (): Promise<NftCollectionPrice | null> => {
       const price = await getSolanaPrice(collection);
+      const symbol = await getCollectionSymbol(collection.url);
       if (price) {
         return {
           id: collection.url,
@@ -120,15 +165,30 @@ export const getSolanaArtCollections = async (): Promise<
           name: collection.name,
           website: collection.website,
           price: price.floorPrice,
+          symbol,
         };
       }
       return null;
     }
   );
 
-  const collectionPrices = await throttle(collectionPriceTasks, 100, 1);
+  const collectionPrices = await throttle(collectionPriceTasks, 100, 5);
+  const pricesWithSymbol = await throttle(
+    prices.map((price) => async (): Promise<NftCollectionPrice> => {
+      const symbol = await getCollectionSymbol(price.url.substring(1));
+      return {
+        id: price.url,
+        source: 'solana-art',
+        name: price.name,
+        symbol,
+        price: parseFloat(price.floor),
+      };
+    }),
+    100,
+    5
+  );
 
-  const nftPrices: NftCollectionPrice[] = prices.concat(
+  const nftPrices: NftCollectionPrice[] = pricesWithSymbol.concat(
     collectionPrices.filter(
       (price): price is NftCollectionPrice => price !== null
     )
