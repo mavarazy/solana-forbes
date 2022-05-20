@@ -112,6 +112,7 @@ export const updateAllCoins = async () => {
   const tasks = resolvedTokens
     .filterByClusterSlug('mainnet-beta')
     .getList()
+    .filter((_, i) => i > 1350)
     .map((token) => async () => {
       const connection = new Connection(
         clusterApiUrl('mainnet-beta'),
@@ -155,7 +156,7 @@ export const updateAllCoins = async () => {
       return updateCoin(tokenPrice, mints.has(token.address));
     });
 
-  const prices = await throttle(tasks, 1000, 1);
+  const prices = await throttle(tasks, 250, 1);
 
   const priceMap = prices.reduce((agg, price) =>
     price === null ? agg : Object.assign(agg, { [price.mint]: price })

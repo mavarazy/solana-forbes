@@ -27,15 +27,20 @@ const loadNfts = async (
 
       try {
         const metadata = await nft.metadataTask.run();
+        if (!metadata.image) {
+          return null;
+        }
+
         const possibleNames = [
           nft.name,
           metadata.collection?.name,
           metadata.collection?.family,
+          nft.symbol,
         ].filter((str): str is string => !!str);
 
         const worth: NftWorth = {
           info: {
-            logoURI: metadata.image ?? 'https://via.placeholder.com/200',
+            logoURI: metadata.image,
             name: nft.name ?? metadata.name ?? 'Unknown',
           },
           collection: {
@@ -63,16 +68,7 @@ const loadNfts = async (
         return worth;
       } catch (err) {
         console.log(`Failed on ${nft.mint}`);
-        return {
-          info: {
-            logoURI: 'https://via.placeholder.com/200',
-            name: nft.name ?? 'Broken',
-          },
-          type,
-          owns,
-          mint: nft.mint.toString(),
-          worth: 0,
-        };
+        return null;
       }
     });
 

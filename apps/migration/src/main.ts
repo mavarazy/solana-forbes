@@ -1,6 +1,7 @@
 // import { updatePrices } from './app/update-prices';
 // import { updateSummary } from './app/update-summary';
-import { updateAllCoins } from './app/coin/update-coin';
+// import { updateAllCoins } from './app/coin/update-coin';
+import { updateNftCollectionPrice } from './app/nft-collection';
 
 // updateWallets();
 // import { matchNftCollections } from './app/nft-collection/match-nft-collection-price';
@@ -12,6 +13,8 @@ import { updateAllCoins } from './app/coin/update-coin';
 //   console.log('All done');
 // });
 
-updateAllCoins();
+// updateAllCoins();
+
+updateNftCollectionPrice();
 
 // updateSummary();

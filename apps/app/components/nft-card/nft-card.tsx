@@ -13,6 +13,7 @@ export const NFTCard: React.FC<NftWorth> = ({
   info,
   mint,
   type,
+  collection,
   floorPrice,
   marketplace,
   worth,
@@ -35,8 +36,15 @@ export const NFTCard: React.FC<NftWorth> = ({
             className="h-32 w-32 rounded-xl flex flex-1 items-center mx-auto object-cover my-4"
           />
         )}
-        <span className="font-semibold my-4 text-xl truncate flex justify-center">
-          {info?.name.trim() ? info.name : '--/--'}
+        <span className="flex flex-col my-4 ">
+          <span className="font-semibold text-xl truncate flex justify-center">
+            {info?.name.trim() ? info.name : '--/--'}
+          </span>
+          <span className="text-[9px] font-bold flex truncate justify-center">
+            {collection?.family || '--/--'}&nbsp;|&nbsp;
+            {collection?.name || '--/--'}&nbsp;|&nbsp;
+            {collection?.symbol || '--/--'}
+          </span>
         </span>
         {floorPrice && (
           <div className="flex flex-col">

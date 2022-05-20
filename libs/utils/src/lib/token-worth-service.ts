@@ -18,6 +18,7 @@ const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
             [tokenInfo.address]: {
               name: tokenInfo.name,
               logoURI: tokenInfo.logoURI,
+              decimals: tokenInfo.decimals,
             },
           }),
         {}
@@ -55,7 +56,7 @@ const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
     return {
       mint,
       info,
-      amount: Number(account.amount),
+      amount: Number(account.amount) / Math.pow(10, info?.decimals ?? 0),
       worth: 0,
     };
   }
@@ -118,7 +119,10 @@ const getTokenBalance = async (
   const nfts = await NFTService.loadNfts(
     connection,
     sortedTokens.filter(
-      (token) => (token.amount === 1 || token.amount === 0) && !token.usd
+      (token) =>
+        (token.amount === 1 || token.amount === 0) &&
+        !token.usd &&
+        !token.info?.name
     )
   );
   const ftTokens = sortedTokens.filter(

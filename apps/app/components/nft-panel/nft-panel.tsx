@@ -30,6 +30,26 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
     [nfts]
   );
 
+  const nftsByCollectionInfo = useMemo(
+    () =>
+      Object.entries(nftsByCollection)
+        .map(([name, nfts]) => ({
+          name,
+          length: nfts.length,
+          priced: nfts.some((nft) => nft.worth > 0),
+        }))
+        .sort((a, b) => {
+          if ((a.priced && b.priced) || (!a.priced && !b.priced)) {
+            return a.name.localeCompare(b.name);
+          } else if (a.priced) {
+            return -1;
+          } else if (b.priced) {
+            return 1;
+          }
+        }),
+    [nftsByCollection]
+  );
+
   const [selected, setSelected] = useState(Object.keys(nftsByCollection)[0]);
 
   if (nfts.length === 0) {
@@ -48,7 +68,7 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
         </span>
       </span>
       <NftCollectionSelector
-        collections={Object.entries(nftsByCollection)}
+        collections={nftsByCollectionInfo}
         selected={selected}
         onSelect={setSelected}
       />
