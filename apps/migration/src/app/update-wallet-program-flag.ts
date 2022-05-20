@@ -1,7 +1,11 @@
 import { gql } from '@apollo/client';
 import { hasuraClient, ProgramFlagService, throttle } from '@forbex-nxr/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
-import { GetAllWalletsQuery } from './update-wallets';
+import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';
+import {
+  GetAllWalletsUpdatedBefore,
+  GetAllWalletsUpdatedBeforeVariables,
+} from '@forbex-nxr/types';
 
 const UpdateWalletProgramFlagQuery = gql`
   mutation UpdateWalletProgramFlagById($id: String!, $program: Boolean!) {
@@ -14,7 +18,12 @@ const UpdateWalletProgramFlagQuery = gql`
 export const updateProgramWalletFlag = async () => {
   const {
     data: { wallet },
-  } = await hasuraClient.query({ query: GetAllWalletsQuery });
+  } = await hasuraClient.query<
+    GetAllWalletsUpdatedBefore,
+    GetAllWalletsUpdatedBeforeVariables
+  >({
+    query: GetAllWalletsUpdatedBeforeQuery,
+  });
 
   const tasks = wallet.map(({ id }) => async () => {
     const connection = new Connection(

@@ -62,7 +62,7 @@ const loadWallet = async (id: string) => {
 export async function getStaticProps({ params: { id } }) {
   const wallet = await loadWallet(id);
   if (wallet) {
-    return { props: { wallet } };
+    return { props: { wallet }, revalidate: 3600 };
   }
   return {
     redirect: {

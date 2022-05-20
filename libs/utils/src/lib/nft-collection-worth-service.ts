@@ -37,6 +37,26 @@ const getFloorPrice = async (
   return nft_collection_price.length > 0 ? nft_collection_price[0] : null;
 };
 
+const getFloorPriceMap = async (
+  names: string[]
+): Promise<Map<string, NftCollectionPrice>> => {
+  const {
+    data: { nft_collection_price },
+  } = await hasuraClient.query<GetNftCollectionWorthByNames>({
+    query: GetNftCollectionWorthByNamesQuery,
+    variables: { names },
+  });
+
+  return nft_collection_price.reduce((agg, price) => {
+    agg.set(price.name, price);
+    if (price.symbol) {
+      agg.set(price.symbol, price);
+    }
+    return agg;
+  }, new Map<string, NftCollectionPrice>());
+};
+
 export const NftCollectionWorthService = {
   getFloorPrice,
+  getFloorPriceMap,
 };

@@ -1,4 +1,4 @@
-export * from './GetAllWallets';
+export * from './GetAllWalletsUpdatedBefore';
 export * from './GetLargestWallets';
 export * from './GetNftCollectionIds';
 export * from './GetWalletById';

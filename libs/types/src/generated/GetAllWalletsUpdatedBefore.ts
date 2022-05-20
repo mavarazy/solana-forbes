@@ -6,16 +6,20 @@
 import * as general from '../lib';
 
 // ====================================================
-// GraphQL query operation: GetAllWallets
+// GraphQL query operation: GetAllWalletsUpdatedBefore
 // ====================================================
 
-export interface GetAllWallets_wallet {
+export interface GetAllWalletsUpdatedBefore_wallet {
   id: string;
 }
 
-export interface GetAllWallets {
+export interface GetAllWalletsUpdatedBefore {
   /**
    * fetch data from the table: "wallet"
    */
-  wallet: GetAllWallets_wallet[];
+  wallet: GetAllWalletsUpdatedBefore_wallet[];
+}
+
+export interface GetAllWalletsUpdatedBeforeVariables {
+  updatedBefore?: general.timestamptz | null;
 }

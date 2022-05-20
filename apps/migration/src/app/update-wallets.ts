@@ -1,5 +1,9 @@
 import { gql } from '@apollo/client';
 import {
+  GetAllWalletsUpdatedBefore,
+  GetAllWalletsUpdatedBeforeVariables,
+} from '@forbex-nxr/types';
+import {
   hasuraClient,
   throttle,
   WalletRepository,
@@ -8,18 +12,31 @@ import {
 import { clusterApiUrl, Connection } from '@solana/web3.js';
 import delay = require('delay');
 
-export const GetAllWalletsQuery = gql`
-  query GetAllWallets {
-    wallet(order_by: { worth: desc }) {
+export const GetAllWalletsUpdatedBeforeQuery = gql`
+  query GetAllWalletsUpdatedBefore($updatedBefore: timestamptz) {
+    wallet(
+      where: { updated_at: { _lt: $updatedBefore } }
+      order_by: { worth: desc }
+    ) {
       id
     }
   }
 `;
 
+const UpdateDelay = 5 * 3600 * 1000;
+
 export const updateWallets = async () => {
   const {
     data: { wallet },
-  } = await hasuraClient.query({ query: GetAllWalletsQuery });
+  } = await hasuraClient.query<
+    GetAllWalletsUpdatedBefore,
+    GetAllWalletsUpdatedBeforeVariables
+  >({
+    query: GetAllWalletsUpdatedBeforeQuery,
+    variables: {
+      updatedBefore: new Date(Date.now() - UpdateDelay).toISOString(),
+    },
+  });
 
   const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 

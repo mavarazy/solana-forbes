@@ -5,6 +5,41 @@ import { NftCollectionWorthService } from './nft-collection-worth-service';
 import { throttle } from './throttle';
 import { PriceService } from './price-service';
 
+const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
+  const allPossibleNames = nfts.reduce((names: Set<string>, nft: NftWorth) => {
+    names.add(nft.info.name);
+    if (nft.collection?.name) {
+      names.add(nft.collection.name);
+    }
+    if (nft.collection?.symbol) {
+      names.add(nft.collection.symbol);
+    }
+    if (nft.collection?.family) {
+      names.add(nft.collection.family);
+    }
+    return names;
+  }, new Set<string>());
+
+  const priceMap = await NftCollectionWorthService.getFloorPriceMap(
+    Array.from(allPossibleNames)
+  );
+
+  return nfts.map((nft) => {
+    const nftPrice =
+      priceMap.get(nft.info.name) ||
+      priceMap.get(nft.collection?.name || '') ||
+      priceMap.get(nft.collection?.family || '') ||
+      priceMap.get(nft.collection?.symbol || '');
+    if (nftPrice) {
+      console.log('Found floor price for ', nftPrice.price, ' ', nft.info.name);
+      nft.floorPrice = nftPrice.price;
+      nft.marketplace = nftPrice.source;
+      nft.worth = nftPrice.price * PriceService.getSolPrice();
+    }
+    return nft;
+  });
+};
+
 const loadNfts = async (
   connection: Connection,
   tokens: TokenWorth[]
@@ -31,13 +66,6 @@ const loadNfts = async (
           return null;
         }
 
-        const possibleNames = [
-          nft.name,
-          metadata.collection?.name,
-          metadata.collection?.family,
-          nft.symbol,
-        ].filter((str): str is string => !!str);
-
         const worth: NftWorth = {
           info: {
             logoURI: metadata.image,
@@ -54,17 +82,6 @@ const loadNfts = async (
           worth: 0,
         };
 
-        const nftPrice = await NftCollectionWorthService.getFloorPrice(
-          possibleNames
-        );
-
-        if (nftPrice) {
-          console.log('Found floor price for ', nftPrice.price, ' ', nft.name);
-          worth.floorPrice = nftPrice.price;
-          worth.marketplace = nftPrice.source;
-          worth.worth = nftPrice.price * PriceService.getSolPrice();
-        }
-
         return worth;
       } catch (err) {
         console.log(`Failed on ${nft.mint}`);
@@ -72,9 +89,11 @@ const loadNfts = async (
       }
     });
 
-  const nftWorth: Array<NftWorth | null> = await throttle(tasks, 500, 5);
+  const nftWorth: Array<NftWorth> = (await throttle(tasks, 500, 5)).filter(
+    (nft): nft is NftWorth => nft !== null
+  );
 
-  return await nftWorth.filter((nft): nft is NftWorth => nft !== null);
+  return estimateNftWorth(nftWorth);
 };
 
 export const NFTService = {

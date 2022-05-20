@@ -66,6 +66,7 @@ const getTokenBalance = async (
   connection: Connection,
   accountId: string
 ): Promise<TokenWorthSummary> => {
+  console.log(accountId, ' retrieving tokens');
   const tokenAccounts = await connection.getTokenAccountsByOwner(
     new PublicKey(accountId),
     {
@@ -73,6 +74,7 @@ const getTokenBalance = async (
     }
   );
 
+  console.log(accountId, ' got ', tokenAccounts.value.length, ' tokens');
   const tokens = await Promise.all(
     tokenAccounts.value.map(async (accountBuffer) => {
       const account = AccountLayout.decode(accountBuffer.account.data);

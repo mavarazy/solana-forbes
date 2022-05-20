@@ -27,6 +27,7 @@ export async function getStaticProps(context) {
     props: {
       wallets: wallet,
     },
+    revalidate: 3600,
   };
 }
 
