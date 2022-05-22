@@ -14,5 +14,4 @@ export interface NftWorth {
     symbol: string | null;
   };
   owns: boolean;
-  worth: number;
 }

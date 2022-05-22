@@ -3,7 +3,6 @@ import { Nft, Metaplex } from '@metaplex-foundation/js-next';
 import { TokenWorth, NftWorth } from '@forbex-nxr/types';
 import { NftCollectionWorthService } from './nft-collection-worth-service';
 import { throttle } from './throttle';
-import { PriceService } from './price-service';
 
 const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
   const allPossibleNames = nfts.reduce((names: Set<string>, nft: NftWorth) => {
@@ -24,8 +23,6 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
     Array.from(allPossibleNames)
   );
 
-  const solPrice = await PriceService.getSolPrice();
-
   return nfts.map((nft) => {
     const nftPrice =
       priceMap.get(nft.info.name) ||
@@ -34,9 +31,11 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
       priceMap.get(nft.collection?.symbol || '');
     if (nftPrice) {
       console.log('Found floor price for ', nftPrice.price, ' ', nft.info.name);
-      nft.floorPrice = nftPrice.price;
-      nft.marketplace = nftPrice.source;
-      nft.worth = nftPrice.price * solPrice;
+      return {
+        ...nft,
+        floorPrice: nftPrice.price,
+        marketplace: nftPrice.source,
+      };
     }
     return nft;
   });
@@ -81,7 +80,6 @@ const loadNfts = async (
           type,
           owns,
           mint: nft.mint.toString(),
-          worth: 0,
         };
 
         return worth;
@@ -100,4 +98,5 @@ const loadNfts = async (
 
 export const NFTService = {
   loadNfts,
+  estimateNftWorth,
 };

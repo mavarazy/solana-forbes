@@ -1,22 +1,4 @@
-// import { updatePrices } from './app/update-prices';
-// import { updateSummary } from './app/update-summary';
-// import { updateAllCoins } from './app/coin/update-coin';
-// import { updateNftCollectionPrice } from './app/nft-collection';
+import { updateNftCollectionPrice } from './app/nft-collection';
+import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
-// import { updateWallets } from './app/update-wallets';
-
-// updateAllCoins();
-// import { matchNftCollections } from './app/nft-collection/match-nft-collection-price';
-// import { updateNftCollectionPrice } from './app/nft-collection/update-nft-collection-price';
-// import { updateNftCollectionPrice } from './app/nft-collection/update-nft-collection-price';
-// import { updatePrices } from './app/update-prices';
-
-// updateNftCollectionPrice().then(() => {
-//   console.log('All done');
-// });
-
-// updateAllCoins();
-
-// updateNftCollectionPrice();
-
-// updateSummary();
+updateNftCollectionPrice().then(() => updateWalletEvaluation());

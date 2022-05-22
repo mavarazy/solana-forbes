@@ -26,6 +26,11 @@ const getWalletBalance = async (
     PriceService.getSolPrice(),
   ]);
 
+  const totalSols = tokens.nfts.reduce(
+    (sum, nft) => (nft.owns ? nft.floorPrice || 0 : 0) + sum,
+    sol
+  );
+
   return {
     id,
     summary: {
@@ -38,7 +43,7 @@ const getWalletBalance = async (
     tokens,
     worth: tokens.priced.reduce(
       (worth, token) => worth + token.worth,
-      sol * solPrice
+      totalSols * solPrice
     ),
     program,
   };

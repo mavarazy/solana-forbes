@@ -220,7 +220,11 @@ const getPriceMap = async (mints: string[]): Promise<TokenPriceMap> => {
   }, {});
 };
 
-const getSolPrice = async (): Promise<number> => Promise.resolve(44.18);
+const solPrice = loadCoingeckoPrices(['solana']).then(
+  ({ solana }) => solana.usd || 51.75
+);
+
+const getSolPrice = async (): Promise<number> => solPrice;
 
 export const PriceService = {
   getSolPrice,

@@ -1,6 +1,5 @@
 import { faSun } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TokenTypeIcon } from '../token-type-icon';
 import { classNames } from '../utils';
 
 interface NftCollectionSelectorProps {
@@ -8,7 +7,6 @@ interface NftCollectionSelectorProps {
     name: string;
     length: number;
     worth: number;
-    priced: boolean;
   }>;
   selected: string;
   onSelect(collection: string): void;
@@ -21,7 +19,7 @@ export const NftCollectionSelector: React.FC<NftCollectionSelectorProps> = ({
 }) => (
   <div className="flex justify-center my-4">
     <div className="flex flex-wrap justify-center max-w-4xl">
-      {collections.map(({ name, length, priced, worth }) => (
+      {collections.map(({ name, length, worth }) => (
         <span
           key={name}
           className={classNames(

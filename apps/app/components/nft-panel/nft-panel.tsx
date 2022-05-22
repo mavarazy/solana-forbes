@@ -36,15 +36,14 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
         .map(([name, nfts]) => ({
           name,
           length: nfts.length,
-          priced: nfts.some((nft) => nft.worth > 0),
           worth: nfts.reduce((sum, nft) => nft.floorPrice + sum, 0),
         }))
         .sort((a, b) => {
-          if ((a.priced && b.priced) || (!a.priced && !b.priced)) {
+          if ((a.worth && b.worth) || (!a.worth && !b.worth)) {
             return a.name.localeCompare(b.name);
-          } else if (a.priced) {
+          } else if (a.worth) {
             return -1;
-          } else if (b.priced) {
+          } else if (b.worth) {
             return 1;
           }
         }),

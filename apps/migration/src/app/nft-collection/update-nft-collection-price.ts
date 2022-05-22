@@ -85,15 +85,17 @@ export const updateNftCollectionPrice = async () => {
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
   console.log('Getting collections');
-  // const exchangeArtCollections = await getExchagenArtCollections();
-  // const digitalEyesCollection = await getDigitalEyesCollections();
-  // const fractalCollections = await getFractalCollections();
-  const solanaArtCollections = await getSolanaArtCollections();
+  const collections = await Promise.all([
+    getExchagenArtCollections(),
+    getDigitalEyesCollections(),
+    getFractalCollections(),
+    getSolanaArtCollections(),
+  ]);
 
-  const totalCollections = solanaArtCollections;
-  // .concat(fractalCollections)
-  // .concat(exchangeArtCollections)
-  // .concat(digitalEyesCollection);
+  const totalCollections = collections.reduce(
+    (agg, collections) => agg.concat(collections),
+    []
+  );
 
   console.log('Extracted ', totalCollections.length);
 

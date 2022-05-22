@@ -6,46 +6,12 @@ import { PriceService } from './price-service';
 
 type AccountMap = { [key in string]: Pick<TokenWorth, 'mint' | 'amount'> };
 
-const decodeTokens = (
-  accounts: AccountInfo<Buffer>[]
-): Pick<TokenWorth, 'mint' | 'amount'>[] => {
-  const tokens = accounts.reduce((agg: AccountMap, account) => {
-    const decodedAccount = AccountLayout.decode(account.data);
-    const mint = decodedAccount.mint.toString();
-    const amount = Number(decodedAccount.amount);
-    if (agg[mint]) {
-      agg[mint].amount += amount;
-    } else {
-      agg[mint] = { mint, amount };
-    }
-    return agg;
-  }, {});
-
-  return Object.values(tokens);
-};
-
-const getTokenBalance = async (
-  connection: Connection,
-  accountId: string
+const evaluateTokens = async (
+  partialTokenWorth: Array<Pick<TokenWorth, 'mint' | 'amount'>>
 ): Promise<TokenWorthSummary> => {
-  console.log(accountId, ' retrieving tokens');
-  const tokenAccounts = await connection.getTokenAccountsByOwner(
-    new PublicKey(accountId),
-    {
-      programId: TOKEN_PROGRAM_ID,
-    }
-  );
-
-  console.log(accountId, ' got ', tokenAccounts.value.length, ' tokens');
-  const partialTokenWorth: Pick<TokenWorth, 'mint' | 'amount'>[] = decodeTokens(
-    tokenAccounts.value.map(({ account }) => account)
-  );
-
   const priceMap = await PriceService.getPriceMap(
     partialTokenWorth.map(({ mint }) => mint)
   );
-
-  console.log(priceMap);
 
   const tokenWorth: TokenWorth[] = partialTokenWorth.map((token) => {
     const price = priceMap[token.mint];
@@ -90,34 +56,80 @@ const getTokenBalance = async (
     }
   );
 
+  const priced = sortedTokens.filter((token) => token.worth > 0);
+  const general = sortedTokens.filter(
+    (token) => token.worth === 0 && token.info && !token.usd
+  );
+
+  const dev = sortedTokens.filter((token) => token.worth === 0 && !token.info);
+
+  return {
+    priced,
+    general,
+    dev,
+    nfts: [],
+  };
+};
+
+const decodeTokens = (
+  accounts: AccountInfo<Buffer>[]
+): Pick<TokenWorth, 'mint' | 'amount'>[] => {
+  const tokens = accounts.reduce((agg: AccountMap, account) => {
+    const decodedAccount = AccountLayout.decode(account.data);
+    const mint = decodedAccount.mint.toString();
+    const amount = Number(decodedAccount.amount);
+    if (agg[mint]) {
+      agg[mint].amount += amount;
+    } else {
+      agg[mint] = { mint, amount };
+    }
+    return agg;
+  }, {});
+
+  return Object.values(tokens);
+};
+
+const getTokenBalance = async (
+  connection: Connection,
+  accountId: string
+): Promise<TokenWorthSummary> => {
+  console.log(accountId, ' retrieving tokens');
+  const tokenAccounts = await connection.getTokenAccountsByOwner(
+    new PublicKey(accountId),
+    {
+      programId: TOKEN_PROGRAM_ID,
+    }
+  );
+
+  console.log(accountId, ' got ', tokenAccounts.value.length, ' tokens');
+  const partialTokenWorth: Pick<TokenWorth, 'mint' | 'amount'>[] = decodeTokens(
+    tokenAccounts.value.map(({ account }) => account)
+  );
+
+  const tokenWorthSummary = await evaluateTokens(partialTokenWorth);
+
   const nfts = await NFTService.loadNfts(
     connection,
-    sortedTokens.filter(
+    tokenWorthSummary.dev.filter(
       (token) =>
         (token.amount === 1 || token.amount === 0) &&
         !token.usd &&
         !token.info?.name
     )
   );
-  const ftTokens = sortedTokens.filter(
+
+  const dev = tokenWorthSummary.dev.filter(
     (token) => !nfts.some((nft) => token.mint === nft.mint)
   );
 
-  const priced = ftTokens.filter((token) => token.worth > 0);
-  const general = ftTokens.filter(
-    (token) => token.worth === 0 && token.info && !token.usd
-  );
-
-  const dev = ftTokens.filter((token) => token.worth === 0 && !token.info);
-
   return {
-    priced,
-    general,
+    ...tokenWorthSummary,
     dev,
     nfts,
   };
 };
 
 export const TokenWorthService = {
+  evaluateTokens,
   getTokenBalance,
 };
