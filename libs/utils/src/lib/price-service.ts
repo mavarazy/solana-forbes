@@ -65,17 +65,46 @@ const loadDefaultTokens = async (): Promise<RaydiumToken[]> => {
   }));
 };
 
-const loadTokens = async (): Promise<RaydiumToken[]> => {
+const loadRaydiumTokens = async (): Promise<RaydiumToken[]> => {
   const res = await fetch(
     'https://api.raydium.io/v2/sdk/token/raydium.mainnet.json'
-  );
+  ).then((res) => (res.ok ? res.json() : []));
   if (!res.ok) {
-    return loadDefaultTokens();
+    return [];
   }
   const { official, unNamed, unOfficial } =
     (await res.json()) as RaydiumTokenResponse;
 
   return official.concat(unNamed).concat(unOfficial);
+};
+
+const loadTokens = async (): Promise<RaydiumToken[]> => {
+  const [solanaTokens, raydiumTokens] = await Promise.all([
+    loadRaydiumTokens(),
+    loadDefaultTokens(),
+  ]);
+
+  const raydiumTokenByMint: { [key in string]: RaydiumToken } =
+    raydiumTokens.reduce(
+      (agg, token) => Object.assign(agg, { [token.mint]: token }),
+      {}
+    );
+
+  const solanaTokenByMint: { [key in string]: RaydiumToken } =
+    solanaTokens.reduce(
+      (agg, token) => Object.assign(agg, { [token.mint]: token }),
+      {}
+    );
+
+  const allMints: string[] = Array.from(
+    new Set<string>(
+      Object.keys(raydiumTokenByMint).concat(Object.keys(solanaTokenByMint))
+    )
+  );
+
+  return allMints.map(
+    (mint) => raydiumTokenByMint[mint] || solanaTokenByMint[mint]
+  );
 };
 
 const loadRaydiumPaires = async (): Promise<{
@@ -90,7 +119,10 @@ const loadRaydiumPaires = async (): Promise<{
   return paires.reduce((agg: { [key in string]: { usd: number } }, pair) => {
     const [from, to] = pair.name.split('-');
     if (to === 'USDC' || to === 'USDT') {
-      agg[from] = { usd: pair.price };
+      // TODO There are some duplicate pairs, which I'm not sure how to distinguish
+      if (!agg[from] || !agg[from].usd || agg[from].usd > pair.price) {
+        agg[from] = { usd: pair.price };
+      }
     }
     return agg;
   }, {});
@@ -141,6 +173,7 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
           name: token.name,
           icon: token.icon,
           source: 'coingeckoId',
+          symbol: token.symbol,
         };
       }
       const raydiumPrice = token.symbol
@@ -155,6 +188,7 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
           name: token.name,
           icon: token.icon,
           source: 'raydium',
+          symbol: token.symbol,
         };
       }
 
@@ -164,6 +198,7 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
         decimals: token.decimals,
         name: token.name,
         icon: token.icon,
+        symbol: token.symbol,
       };
     });
 

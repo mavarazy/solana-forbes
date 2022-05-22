@@ -50,7 +50,7 @@ const getTokenBalance = async (
   const tokenWorth: TokenWorth[] = partialTokenWorth.map((token) => {
     const price = priceMap[token.mint];
     if (price) {
-      const { usd, icon, name, decimals, supply } = price;
+      const { usd, icon, name, decimals, supply, source, symbol } = price;
       const amount = token.amount / Math.pow(10, decimals);
       return {
         mint: token.mint,
@@ -62,6 +62,8 @@ const getTokenBalance = async (
         percent: supply && supply > 0 ? (100 * amount) / supply : 0,
         usd,
         worth: usd * amount,
+        source,
+        symbol,
       };
     } else {
       return {

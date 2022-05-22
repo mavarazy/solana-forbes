@@ -6,5 +6,6 @@ export interface TokenPrice {
   icon?: string;
   cap?: number;
   supply?: number;
+  symbol?: string;
   source?: 'coingeckoId' | 'raydium';
 }

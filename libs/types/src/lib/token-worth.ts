@@ -9,4 +9,6 @@ export interface TokenWorth {
   info?: TokenInfoSummary;
   percent?: number;
   usd?: number;
+  symbol?: string;
+  source?: 'coingeckoId' | 'raydium';
 }
