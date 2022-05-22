@@ -29,7 +29,6 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
     id,
     worth: 0,
     sol: 0,
-    top: [],
     summary: {},
     tokens: {
       priced: [],

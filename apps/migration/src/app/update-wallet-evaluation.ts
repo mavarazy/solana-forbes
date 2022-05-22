@@ -1,27 +1,13 @@
-import { gql } from '@apollo/client';
 import {
   GetAllWalletsUpdatedBefore,
   GetAllWalletsUpdatedBeforeVariables,
 } from '@forbex-nxr/types';
-import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
-import { clusterApiUrl, Connection } from '@solana/web3.js';
+import { hasuraClient, PriceService, throttle } from '@forbex-nxr/utils';
 import delay = require('delay');
+import { GetAllWalletsUpdatedBeforeQuery, UpdateDelay } from './update-wallets';
 import { WalletRepository } from './wallet-repository';
 
-export const GetAllWalletsUpdatedBeforeQuery = gql`
-  query GetAllWalletsUpdatedBefore($updatedBefore: timestamptz) {
-    wallet(
-      where: { updated_at: { _lt: $updatedBefore } }
-      order_by: { worth: desc }
-    ) {
-      id
-    }
-  }
-`;
-
-export const UpdateDelay = 24 * 3600 * 1000;
-
-export const updateWallets = async () => {
+export const updateWalletEvaluation = async () => {
   const {
     data: { wallet },
   } = await hasuraClient.query<
@@ -34,14 +20,14 @@ export const updateWallets = async () => {
     },
   });
 
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-
   const tasks = wallet.map(({ id }) => async () => {
     const doLoad = async (attempt = 1) => {
       try {
-        console.log('Updating: start ', id);
-        const wallet = await WalletService.getWalletBalance(connection, id);
-        console.log('Updating: got balance ', id);
+        const wallet = await WalletRepository.getById(id);
+
+        const tokens = wallet.tokens.priced
+          .concat(wallet.tokens.general)
+          .concat(wallet.tokens.dev);
 
         await WalletRepository.updateWallet(wallet);
 

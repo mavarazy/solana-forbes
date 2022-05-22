@@ -16,7 +16,6 @@ export interface WalletBallance {
   id: string;
   worth: number;
   sol: number;
-  top: TokenWorth[];
   summary: TokenSummary;
   tokens: TokenWorthSummary;
   program: boolean;

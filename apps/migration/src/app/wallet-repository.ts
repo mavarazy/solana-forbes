@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 import {
+  AdminGetWalletById,
+  AdminGetWalletByIdVariables,
   GetWallets,
   GetWalletsVariables,
   InsertWallet,
@@ -84,6 +86,19 @@ const UpdateWalletByIdQuery = gql`
   }
 `;
 
+const AdminGetWalletByIdQuery = gql`
+  query AdminGetWalletById($id: String!) {
+    wallet_by_pk(id: $id) {
+      id
+      sol
+      worth
+      tokens
+      summary
+      program
+    }
+  }
+`;
+
 const fetchExistingWallets = async (
   wallets: string[]
 ): Promise<WalletBallance[]> => {
@@ -132,7 +147,21 @@ const updateWallet = async (
   return createWallet(wallet);
 };
 
+const getById = async (id: string): Promise<WalletBallance> => {
+  const {
+    data: { wallet_by_pk: wallet },
+  } = await hasuraClient.query<AdminGetWalletById, AdminGetWalletByIdVariables>(
+    {
+      query: AdminGetWalletByIdQuery,
+      variables: { id },
+    }
+  );
+
+  return wallet;
+};
+
 export const WalletRepository = {
+  getById,
   fetchExistingWallets,
   createWallet,
   createWalletsInBatch,

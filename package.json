@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "format": "nx format:write"
+    "format": "nx format:write",
+    "schema": "apollo schema:download --endpoint https://hasura.snapihealth.com/v1/graphql --header \"X-Hasura-Admin-Secret: ${HASURA_ADMIN_SECRET}\" && apollo codegen:generate --target=typescript --tagName=gql --passthroughCustomScalars --no-addTypename --outputFlat libs/types/src/generated && node ./tools/generators/schema/schema-after && yarn format"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +26,6 @@
     "autoprefixer": "^10.4.7",
     "core-js": "^3.22.5",
     "delay": "^5.0.0",
-    "graphql": "^16.5.0",
     "next": "12.1.6",
     "postcss": "^8.4.13",
     "react": "18.1.0",
@@ -56,6 +56,7 @@
     "@types/react-dom": "18.0.3",
     "@typescript-eslint/eslint-plugin": "~5.23.0",
     "@typescript-eslint/parser": "~5.23.0",
+    "apollo": "^2.34.0",
     "babel-jest": "28.1.0",
     "cypress": "^9.6.1",
     "eslint": "~8.15.0",
@@ -73,5 +74,6 @@
     "ts-jest": "28.0.2",
     "ts-node": "10.7.0",
     "typescript": "~4.6.4"
-  }
+  },
+  "postinstall": "rm -r node_modules/apollo-language-server/node_modules/graphql"
 }

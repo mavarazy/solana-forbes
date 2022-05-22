@@ -35,7 +35,6 @@ const getWalletBalance = async (
       priced: tokens.priced.length,
     },
     sol,
-    top: tokens.priced.slice(0, 3),
     tokens,
     worth: tokens.priced.reduce(
       (worth, token) => worth + token.worth,
