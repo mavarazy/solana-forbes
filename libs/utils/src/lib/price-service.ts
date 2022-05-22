@@ -1,135 +1,172 @@
-import { Mint } from '@solana/spl-token';
-import { TokenPrice, WalletBallance } from '@forbex-nxr/types';
-import { USDPriceMap } from './usd-price-map';
-import { Connection, PublicKey } from '@solana/web3.js';
-import { getMint } from '@solana/spl-token';
-import { WorthUtils } from './worth-utils';
-import { throttle } from './throttle';
+import { TokenPriceMap } from '@forbex-nxr/types';
 
-const getCoingeckoPrice = async (
-  coingeckoId?: string
-): Promise<{ usd: number; cap: number } | null> => {
-  if (!coingeckoId) {
-    return null;
+interface RaydiumToken {
+  mint: string;
+  decimals: number;
+  extensions?: { coingeckoId?: string };
+  icon?: string;
+  name?: string;
+  symbol?: string;
+}
+
+interface RaydiumTokenResponse {
+  blacklist: string[];
+  name: string;
+  official: RaydiumToken[];
+  timestamp: string;
+  unNamed: RaydiumToken[];
+  unOfficial: RaydiumToken[];
+  version: { major: number; minor: number; patch: number };
+}
+
+interface RaydiumPair {
+  ammId: string;
+  apr7d: number;
+  apr24h: number;
+  apr30d: number;
+  fee7d: number;
+  fee7dQuote: number;
+  fee24h: number;
+  fee24hQuote: number;
+  fee30d: number;
+  fee30dQuote: number;
+  liquidity: number;
+  lpMint: string;
+  lpPrice: number;
+  market: string;
+  name: string;
+  price: number;
+  tokenAmountCoin: number;
+  tokenAmountLp: number;
+  tokenAmountPc: number;
+  volume7d: number;
+  volume7dQuote: number;
+  volume24h: number;
+  volume24hQuote: number;
+  volume30d: number;
+  volume30dQuote: number;
+}
+
+const loadTokens = async () => {
+  const res = await fetch(
+    'https://api.raydium.io/v2/sdk/token/raydium.mainnet.json'
+  );
+  if (!res.ok) {
+    return [];
   }
+  const { official, unNamed, unOfficial } =
+    (await res.json()) as RaydiumTokenResponse;
 
-  console.log('Getting price for ', coingeckoId);
-
-  try {
-    const res = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${coingeckoId}`
-    );
-    const {
-      market_data: {
-        current_price: { usd },
-        market_cap: { usd: cap },
-      },
-    } = await res.json();
-    console.log('Getting price for ', coingeckoId, 'usd: ', usd, ', cap:', cap);
-    return { usd, cap };
-  } catch (err) {
-    console.error(`Failed to fetch ${coingeckoId} ${err}`);
-  }
-
-  return null;
+  return official.concat(unNamed).concat(unOfficial);
 };
 
-const getTokenPrice = async (mint: string) => {
-  return USDPriceMap[mint];
-};
-
-const getTokenMint = async (
-  connection: Connection,
-  address: string
-): Promise<Mint | null> => {
-  try {
-    const mint = await getMint(connection, new PublicKey(address));
-    return mint;
-  } catch (err) {
-    return null;
-  }
-};
-
-const loadTokenPrice = async (
-  connection: Connection,
-  coingeckoId: string,
-  mint: string
-): Promise<TokenPrice | null> => {
-  const price = await getCoingeckoPrice(coingeckoId);
-  if (!price) {
-    console.log('Price is missing for ', coingeckoId);
-    return null;
+const loadRaydiumPaires = async (): Promise<{
+  [key in string]: { usd: number };
+}> => {
+  const res = await fetch('https://api.raydium.io/v2/main/pairs');
+  if (!res.ok) {
+    return {};
   }
 
-  console.log('Extracting mint: ', mint);
-  const tokenMint = await getTokenMint(connection, mint);
-  if (!tokenMint) {
-    return null;
-  }
-
-  return {
-    mint,
-    ...price,
-    decimals: tokenMint.decimals,
-    coingeckoId,
-    supply: Number(tokenMint.supply) / Math.pow(10, tokenMint.decimals),
-  };
+  const paires = (await res.json()) as RaydiumPair[];
+  return paires.reduce((agg: { [key in string]: { usd: number } }, pair) => {
+    const [from, to] = pair.name.split('-');
+    if (to === 'USDC' || to === 'USDT') {
+      agg[from] = { usd: pair.price };
+    }
+    return agg;
+  }, {});
 };
 
-const getSolPrice = async (): Promise<number> =>
-  USDPriceMap['So11111111111111111111111111111111111111112'].usd;
+const loadCoingeckoPrices = async (
+  ids: string[]
+): Promise<{ [key in string]: { usd?: number } }> => {
+  const joinedIds = ids.join(',');
+  const res = await fetch(
+    `https://api.coingecko.com/api/v3/simple/price?ids=${joinedIds}&vs_currencies=usd`
+  );
+  if (!res.ok) {
+    return {};
+  }
+  return await res.json();
+};
 
-const refresh = async (
-  connection: Connection,
-  balance: WalletBallance
-): Promise<WalletBallance> => {
-  const priced = await throttle(
-    balance.tokens.priced.map((token) => async () => {
-      const oldPrice: TokenPrice | undefined = USDPriceMap[token.mint];
-      if (!oldPrice && (oldPrice as TokenPrice).coingeckoId) {
-        return token;
+const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
+  async (tokens) => {
+    const coingeckoIds: string[] = tokens.reduce((agg: string[], token) => {
+      if (token.extensions?.coingeckoId) {
+        agg.push(token.extensions.coingeckoId);
       }
+      return agg;
+    }, []);
 
-      const currentPrice = await loadTokenPrice(
-        connection,
-        (oldPrice as TokenPrice).coingeckoId!,
-        token.mint
-      );
+    const [geckoPriceMap, raydiumPriceMap] = await Promise.all([
+      loadCoingeckoPrices(coingeckoIds),
+      loadRaydiumPaires(),
+    ]);
 
-      if (currentPrice) {
+    console.log(geckoPriceMap);
+    console.log(raydiumPriceMap);
+
+    const tokenPrices = tokens.map((token) => {
+      const geckoPrice = token.extensions?.coingeckoId
+        ? geckoPriceMap[token.extensions?.coingeckoId]
+        : undefined;
+      if (geckoPrice && geckoPrice.usd) {
         return {
-          ...token,
-          usd: currentPrice.usd,
-          worth: WorthUtils.getTokenWorth(token.amount, currentPrice),
+          mint: token.mint,
+          usd: geckoPrice.usd,
+          decimals: token.decimals,
+          name: token.name,
+          icon: token.icon,
+          source: 'coingeckoId',
         };
       }
-      return token;
-    }),
-    1000,
-    5
-  );
+      const raydiumPrice = token.symbol
+        ? raydiumPriceMap[token.symbol]
+        : undefined;
 
-  const solPrice = await getCoingeckoPrice('solana');
+      if (raydiumPrice) {
+        return {
+          mint: token.mint,
+          usd: raydiumPrice.usd,
+          decimals: token.decimals,
+          name: token.name,
+          icon: token.icon,
+          source: 'raydium',
+        };
+      }
 
-  return {
-    ...balance,
-    tokens: {
-      ...balance.tokens,
-      priced,
-    },
-    worth: priced.reduce(
-      (sum, { worth }) => sum + worth,
-      balance.sol *
-        (solPrice?.usd ??
-          USDPriceMap['So11111111111111111111111111111111111111112'].usd)
-    ),
-  };
+      return {
+        mint: token.mint,
+        usd: 0,
+        decimals: token.decimals,
+        name: token.name,
+        icon: token.icon,
+      };
+    });
+
+    return tokenPrices.reduce(
+      (agg: TokenPriceMap, price) =>
+        Object.assign(agg, { [price.mint]: price }),
+      {}
+    );
+  }
+);
+
+const getPriceMap = async (mints: string[]): Promise<TokenPriceMap> => {
+  const fullPriceMap = await fullTokenPriceMap;
+  return mints.reduce((agg: TokenPriceMap, mint) => {
+    if (fullPriceMap[mint]) {
+      agg[mint] = fullPriceMap[mint];
+    }
+    return agg;
+  }, {});
 };
+
+const getSolPrice = async (): Promise<number> => Promise.resolve(44.18);
 
 export const PriceService = {
   getSolPrice,
-  loadTokenPrice,
-  getTokenMint,
-  getTokenPrice,
-  refresh,
+  getPriceMap,
 };

@@ -57,7 +57,6 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
     }
   }, [id]);
 
-  console.log(isLoading);
   if (isLoading) {
     return (
       <div className="flex flex-1 justify-center items-center">

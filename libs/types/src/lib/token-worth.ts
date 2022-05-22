@@ -1,8 +1,6 @@
 import { TokenInfo } from '@solana/spl-token-registry';
 
-export type TokenInfoSummary = Pick<TokenInfo, 'logoURI' | 'name'> & {
-  decimals?: number;
-};
+export type TokenInfoSummary = Pick<TokenInfo, 'logoURI' | 'name'>;
 
 export interface TokenWorth {
   mint: string;

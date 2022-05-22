@@ -1,65 +1,27 @@
-import { AccountLayout, RawAccount, TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { TokenListProvider } from '@solana/spl-token-registry';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
 import { NFTService } from './nft-service';
-import {
-  TokenInfoSummary,
-  TokenWorth,
-  TokenWorthSummary,
-} from '@forbex-nxr/types';
+import { TokenWorth, TokenWorthSummary } from '@forbex-nxr/types';
 import { PriceService } from './price-service';
 
-const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
-  (resolve) => {
-    new TokenListProvider().resolve().then((resolvedTokens) => {
-      const tokenMap = resolvedTokens.getList().reduce(
-        (agg, tokenInfo) =>
-          Object.assign(agg, {
-            [tokenInfo.address]: {
-              name: tokenInfo.name,
-              logoURI: tokenInfo.logoURI,
-              decimals: tokenInfo.decimals,
-            },
-          }),
-        {}
-      );
+type AccountMap = { [key in string]: Pick<TokenWorth, 'mint' | 'amount'> };
 
-      resolve(tokenMap);
-    });
-  }
-);
+const decodeTokens = (
+  accounts: AccountInfo<Buffer>[]
+): Pick<TokenWorth, 'mint' | 'amount'>[] => {
+  const tokens = accounts.reduce((agg: AccountMap, account) => {
+    const decodedAccount = AccountLayout.decode(account.data);
+    const mint = decodedAccount.mint.toString();
+    const amount = Number(decodedAccount.amount);
+    if (agg[mint]) {
+      agg[mint].amount += amount;
+    } else {
+      agg[mint] = { mint, amount };
+    }
+    return agg;
+  }, {});
 
-const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
-  const mint = account.mint.toString();
-  const price = await PriceService.getTokenPrice(mint);
-  const info = (await tokenMap)[mint] ?? null;
-  if (price) {
-    const { decimals, usd, cap } = price;
-    const amount = Number(account.amount) / Math.pow(10, decimals);
-    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
-    const worth =
-      percent > 0
-        ? Math.min(
-            usd * amount,
-            (percent * Math.max(cap, usd * (price.supply / 10))) / 100
-          )
-        : usd * amount;
-    return {
-      mint,
-      amount,
-      worth,
-      info,
-      usd: price.usd,
-      percent,
-    };
-  } else {
-    return {
-      mint,
-      info,
-      amount: Number(account.amount) / Math.pow(10, info?.decimals ?? 0),
-      worth: 0,
-    };
-  }
+  return Object.values(tokens);
 };
 
 const getTokenBalance = async (
@@ -75,33 +37,41 @@ const getTokenBalance = async (
   );
 
   console.log(accountId, ' got ', tokenAccounts.value.length, ' tokens');
-  const tokens = await Promise.all(
-    tokenAccounts.value.map(async (accountBuffer) => {
-      const account = AccountLayout.decode(accountBuffer.account.data);
-      return getTokenWorth(account);
-    })
+  const partialTokenWorth: Pick<TokenWorth, 'mint' | 'amount'>[] = decodeTokens(
+    tokenAccounts.value.map(({ account }) => account)
   );
 
-  // There might be more than one account for the same token
-  const tokenMap = tokens.reduce(
-    (agg: { [key in string]: TokenWorth }, token) => {
-      if (agg[token.mint]) {
-        agg[token.mint].amount += token.amount;
-        if (agg[token.mint].percent) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          agg[token.mint].percent += token.percent;
-        }
-        agg[token.mint].worth += token.worth;
-      } else {
-        agg[token.mint] = token;
-      }
-      return agg;
-    },
-    {}
+  const priceMap = await PriceService.getPriceMap(
+    partialTokenWorth.map(({ mint }) => mint)
   );
 
-  const sortedTokens: TokenWorth[] = Object.values(tokenMap).sort(
+  console.log(priceMap);
+
+  const tokenWorth: TokenWorth[] = partialTokenWorth.map((token) => {
+    const price = priceMap[token.mint];
+    if (price) {
+      const { usd, icon, name, decimals, supply } = price;
+      const amount = token.amount / Math.pow(10, decimals);
+      return {
+        mint: token.mint,
+        amount,
+        info: {
+          name: name || token.mint,
+          logoURI: icon,
+        },
+        percent: supply && supply > 0 ? (100 * amount) / supply : 0,
+        usd,
+        worth: usd * amount,
+      };
+    } else {
+      return {
+        ...token,
+        worth: 0,
+      };
+    }
+  });
+
+  const sortedTokens: TokenWorth[] = tokenWorth.sort(
     (a: TokenWorth, b: TokenWorth) => {
       if (a.worth === b.worth) {
         if (b.info && a.info) {
@@ -147,6 +117,5 @@ const getTokenBalance = async (
 };
 
 export const TokenWorthService = {
-  getTokenWorth,
   getTokenBalance,
 };

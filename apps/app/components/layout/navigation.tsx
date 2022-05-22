@@ -1,11 +1,6 @@
-import {
-  faSearch,
-  faSpinner,
-  faWallet,
-} from '@fortawesome/pro-light-svg-icons';
+import { faSpinner, faWallet } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PublicKey } from '@solana/web3.js';
-import { useGlobalState } from '../../context';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -37,13 +32,15 @@ export function Navigation() {
           <div className="flex px-2 lg:px-0">
             <div className="flex-shrink-0 flex items-center cursor-pointer">
               <Link href="/" passHref>
-                <Image
-                  className="block h-8 w-auto"
-                  src={LogoImg}
-                  alt="Workflow"
-                  width={48}
-                  height={48}
-                />
+                <a>
+                  <Image
+                    className="block h-8 w-auto"
+                    src={LogoImg}
+                    alt="Workflow"
+                    width={48}
+                    height={48}
+                  />
+                </a>
               </Link>
             </div>
             <div className="hidden lg:ml-6 lg:flex lg:space-x-8"></div>
