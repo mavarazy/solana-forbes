@@ -11,7 +11,6 @@ import * as general from '../lib';
 
 export interface InsertWallet_insert_wallet_one {
   id: string;
-  top: general.TokenWorth[];
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
   sol: general.numeric;
@@ -30,7 +29,6 @@ export interface InsertWalletVariables {
   id: string;
   sol: general.numeric;
   summary: general.TokenSummary;
-  top: general.TokenWorth[];
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
   program: boolean;

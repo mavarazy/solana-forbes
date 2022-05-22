@@ -11,7 +11,6 @@ import * as general from '../lib';
 
 export interface UpdateWalletById_update_wallet_by_pk {
   id: string;
-  top: general.TokenWorth[];
   tokens: general.TokenWorthSummary;
   program: boolean;
   worth: general.numeric;
@@ -30,7 +29,6 @@ export interface UpdateWalletByIdVariables {
   id: string;
   sol: general.numeric;
   summary: general.TokenSummary;
-  top: general.TokenWorth[];
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
   program: boolean;

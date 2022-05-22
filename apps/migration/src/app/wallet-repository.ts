@@ -26,7 +26,6 @@ const InsertWalletQuery = gql`
     $id: String!
     $sol: numeric!
     $summary: jsonb!
-    $top: jsonb!
     $tokens: jsonb!
     $worth: numeric!
     $program: Boolean!
@@ -36,7 +35,6 @@ const InsertWalletQuery = gql`
         id: $id
         sol: $sol
         summary: $summary
-        top: $top
         tokens: $tokens
         worth: $worth
         program: $program
@@ -44,7 +42,6 @@ const InsertWalletQuery = gql`
       on_conflict: { constraint: wallets_pkey, update_columns: worth }
     ) {
       id
-      top
       tokens
       worth
       sol
@@ -59,7 +56,6 @@ const UpdateWalletByIdQuery = gql`
     $id: String!
     $sol: numeric!
     $summary: jsonb!
-    $top: jsonb!
     $tokens: jsonb!
     $worth: numeric!
     $program: Boolean!
@@ -67,7 +63,6 @@ const UpdateWalletByIdQuery = gql`
     update_wallet_by_pk(
       pk_columns: { id: $id }
       _set: {
-        top: $top
         tokens: $tokens
         worth: $worth
         sol: $sol
@@ -76,7 +71,6 @@ const UpdateWalletByIdQuery = gql`
       }
     ) {
       id
-      top
       tokens
       program
       worth

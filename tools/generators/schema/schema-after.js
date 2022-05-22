@@ -15,7 +15,6 @@ fs.readdir(rootPath, 'utf-8', function (err, files) {
           /\/\/ This file was automatically generated and should not be edited./,
           '// This file was automatically generated and should not be edited.\n\nimport * as general from "../lib";'
         )
-        .replace(/top: jsonb;/g, 'top: general.TokenWorth[];')
         .replace(/tokens: jsonb;/g, 'tokens: general.TokenWorthSummary;')
         .replace(/summary: jsonb;/g, 'summary: general.TokenSummary;')
         .replace(/numeric/g, 'general.numeric')
