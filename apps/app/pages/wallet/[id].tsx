@@ -7,6 +7,8 @@ import { NftPanel } from '../../components/nft-panel';
 import { WalletService } from '@forbex-nxr/utils';
 import { useEffect, useState } from 'react';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/pro-light-svg-icons';
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -37,16 +39,36 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
     },
     program: true,
   });
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
+      setLoading(true);
+
       const connection = new Connection(
         clusterApiUrl('mainnet-beta'),
         'confirmed'
       );
-      WalletService.getWalletBalance(connection, id).then(setWallet);
+      WalletService.getWalletBalance(connection, id)
+        .then(setWallet)
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }, [id]);
+
+  console.log(isLoading);
+  if (isLoading) {
+    return (
+      <div className="flex flex-1 justify-center items-center">
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="h-24 w-24 text-[#fcbc1c]"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">

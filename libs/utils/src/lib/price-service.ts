@@ -34,6 +34,10 @@ const getCoingeckoPrice = async (
   return null;
 };
 
+const getTokenPrice = async (mint: string) => {
+  return USDPriceMap[mint];
+};
+
 const getTokenMint = async (
   connection: Connection,
   address: string
@@ -72,7 +76,7 @@ const loadTokenPrice = async (
   };
 };
 
-const getSolPrice = (): number =>
+const getSolPrice = async (): Promise<number> =>
   USDPriceMap['So11111111111111111111111111111111111111112'].usd;
 
 const refresh = async (
@@ -115,7 +119,9 @@ const refresh = async (
     },
     worth: priced.reduce(
       (sum, { worth }) => sum + worth,
-      balance.sol * (solPrice?.usd ?? getSolPrice())
+      balance.sol *
+        (solPrice?.usd ??
+          USDPriceMap['So11111111111111111111111111111111111111112'].usd)
     ),
   };
 };
@@ -124,5 +130,6 @@ export const PriceService = {
   getSolPrice,
   loadTokenPrice,
   getTokenMint,
+  getTokenPrice,
   refresh,
 };

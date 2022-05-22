@@ -17,12 +17,12 @@ export const WorthCard = ({
 }: WorthCardProps) => (
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-2xl sm:py-6 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
-      <span className="absolute text-xl top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+      <span className="absolute lg:text-xl text-sm top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
         <FontAwesomeIcon
           icon={program ? faUserRobot : faUserSecret}
-          className="mr-2 h-5 w-5 text-white shadow-xl rounded-full"
+          className="h-5 w-5 text-white shadow-xl rounded-full"
         />
-        # {rank}
+        {rank && <span className="ml-2"># {rank}</span>}
       </span>
       <span className="flex flex-1 flex-col text-xs absolute top-4 right-4 gap-1">
         <div className="flex self-end">

@@ -1,8 +1,15 @@
+import { faSun } from '@fortawesome/pro-light-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenTypeIcon } from '../token-type-icon';
 import { classNames } from '../utils';
 
 interface NftCollectionSelectorProps {
-  collections: Array<{ name: string; length: number; priced: boolean }>;
+  collections: Array<{
+    name: string;
+    length: number;
+    worth: number;
+    priced: boolean;
+  }>;
   selected: string;
   onSelect(collection: string): void;
 }
@@ -14,7 +21,7 @@ export const NftCollectionSelector: React.FC<NftCollectionSelectorProps> = ({
 }) => (
   <div className="flex justify-center my-4">
     <div className="flex flex-wrap justify-center max-w-4xl">
-      {collections.map(({ name, length, priced }) => (
+      {collections.map(({ name, length, priced, worth }) => (
         <span
           key={name}
           className={classNames(
@@ -25,9 +32,10 @@ export const NftCollectionSelector: React.FC<NftCollectionSelectorProps> = ({
           )}
           onClick={() => onSelect(name)}
         >
-          {priced && (
+          {worth > 0 && (
             <span className="flex items-center pr-2">
-              <TokenTypeIcon type="priced" />
+              <FontAwesomeIcon icon={faSun} className="mr-2 self-center" />
+              {worth.toFixed(2)} |
             </span>
           )}
           <span className="flex items-center">

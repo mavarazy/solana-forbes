@@ -5,21 +5,21 @@ import {
   Fragment,
   useImperativeHandle,
   useState,
-} from "react";
-import { Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/solid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle } from "@fortawesome/pro-light-svg-icons";
+} from 'react';
+import { Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationCircle } from '@fortawesome/pro-light-svg-icons';
 
 const errorToMessage = (error: unknown) => {
   if (error instanceof Error) {
-    if (error.message.includes("429")) {
-      return "Try again later! Network is busy";
+    if (error.message.includes('429')) {
+      return 'Try again later! Network is busy';
     } else {
       return error.message;
     }
   }
-  return "Captian Obvious: Something went wrong";
+  return 'Captian Obvious: Something went wrong';
 };
 
 export interface NotificationProps {
@@ -29,10 +29,11 @@ export interface NotificationProps {
 export const Notification = forwardRef(
   (_: any, ref: ForwardedRef<NotificationProps>) => {
     const [show, setShow] = useState(false);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
 
     useImperativeHandle(ref, () => ({
       error: (error: unknown) => {
+        setMessage('');
         setMessage(errorToMessage(error));
         setShow(true);
       },
@@ -93,4 +94,4 @@ export const Notification = forwardRef(
   }
 );
 
-Notification.displayName = "Notification";
+Notification.displayName = 'Notification';

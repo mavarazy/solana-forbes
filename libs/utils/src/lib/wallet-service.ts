@@ -22,10 +22,11 @@ const getWalletBalance = async (
   id: string
 ): Promise<WalletBallance> => {
   // TODO this can be executed in parallel
-  const [sol, tokens, program] = await Promise.all([
+  const [sol, tokens, program, solPrice] = await Promise.all([
     getSolBalance(connection, id).then((sol) => Number(sol) / Math.pow(10, 9)),
     TokenWorthService.getTokenBalance(connection, id),
     ProgramFlagService.isProgram(connection, id),
+    PriceService.getSolPrice(),
   ]);
 
   return {
@@ -41,7 +42,7 @@ const getWalletBalance = async (
     tokens,
     worth: tokens.priced.reduce(
       (worth, token) => worth + token.worth,
-      sol * PriceService.getSolPrice()
+      sol * solPrice
     ),
     program,
   };

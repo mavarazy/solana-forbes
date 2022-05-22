@@ -10,7 +10,10 @@ const asHuman = (amount: number): string => {
   } else if (amount > 10_000) {
     return `${Math.round(amount).toLocaleString()}`;
   }
-  return `${amount.toPrecision(4)}`;
+  if (Math.round(amount) > 0) {
+    return `${Math.round(amount).toLocaleString()}`;
+  }
+  return amount.toPrecision(4);
 };
 
 export const NumberUtils = {

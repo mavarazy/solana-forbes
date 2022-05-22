@@ -37,6 +37,7 @@ export const NftPanel = ({ nfts, name }: TokenPanelProps) => {
           name,
           length: nfts.length,
           priced: nfts.some((nft) => nft.worth > 0),
+          worth: nfts.reduce((sum, nft) => nft.floorPrice + sum, 0),
         }))
         .sort((a, b) => {
           if ((a.priced && b.priced) || (!a.priced && !b.priced)) {

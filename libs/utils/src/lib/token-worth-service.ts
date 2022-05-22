@@ -7,7 +7,7 @@ import {
   TokenWorth,
   TokenWorthSummary,
 } from '@forbex-nxr/types';
-import { USDPriceMap } from './usd-price-map';
+import { PriceService } from './price-service';
 
 const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
   (resolve) => {
@@ -31,7 +31,7 @@ const tokenMap: Promise<{ [key in string]: TokenInfoSummary }> = new Promise(
 
 const getTokenWorth = async (account: RawAccount): Promise<TokenWorth> => {
   const mint = account.mint.toString();
-  const price = USDPriceMap[mint];
+  const price = await PriceService.getTokenPrice(mint);
   const info = (await tokenMap)[mint] ?? null;
   if (price) {
     const { decimals, usd, cap } = price;

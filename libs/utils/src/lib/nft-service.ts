@@ -24,6 +24,8 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
     Array.from(allPossibleNames)
   );
 
+  const solPrice = await PriceService.getSolPrice();
+
   return nfts.map((nft) => {
     const nftPrice =
       priceMap.get(nft.info.name) ||
@@ -34,7 +36,7 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
       console.log('Found floor price for ', nftPrice.price, ' ', nft.info.name);
       nft.floorPrice = nftPrice.price;
       nft.marketplace = nftPrice.source;
-      nft.worth = nftPrice.price * PriceService.getSolPrice();
+      nft.worth = nftPrice.price * solPrice;
     }
     return nft;
   });
