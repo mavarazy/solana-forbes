@@ -36,7 +36,7 @@ export const updateWalletEvaluation = async () => {
 
   const tasks = wallet.map(({ id }) => async () => {
     const wallet = await WalletRepository.getById(id);
-    const sol = Number(await WalletService.getSolBalance(connection, id));
+    const sol = await WalletService.getSolBalance(connection, id);
 
     const allTokens = wallet.tokens.priced
       .concat(wallet.tokens.general)

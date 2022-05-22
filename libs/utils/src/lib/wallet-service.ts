@@ -7,11 +7,11 @@ import { PriceService } from './price-service';
 const getSolBalance = async (
   connection: Connection,
   accountId: string
-): Promise<bigint> => {
+): Promise<number> => {
   const publicKey = new PublicKey(accountId);
   const balance = await connection.getBalance(publicKey);
 
-  return BigInt(balance);
+  return balance / Math.pow(10, 9);
 };
 
 const getWalletBalance = async (
@@ -20,7 +20,7 @@ const getWalletBalance = async (
 ): Promise<WalletBallance> => {
   // TODO this can be executed in parallel
   const [sol, tokens, program, solPrice] = await Promise.all([
-    getSolBalance(connection, id).then((sol) => Number(sol) / Math.pow(10, 9)),
+    getSolBalance(connection, id),
     TokenWorthService.getTokenBalance(connection, id),
     ProgramFlagService.isProgram(connection, id),
     PriceService.getSolPrice(),

@@ -17,23 +17,25 @@ const evaluateTokens = async (
     const price = priceMap[token.mint];
     if (price) {
       const { usd, icon, name, decimals, supply, source, symbol } = price;
-      const amount = token.amount / Math.pow(10, decimals);
+      const adjustedAmount = Number(token.amount) / Math.pow(10, decimals);
       return {
         mint: token.mint,
-        amount,
+        amount: token.amount,
+        decimals,
         info: {
           name: name || token.mint,
           logoURI: icon,
         },
-        percent: supply && supply > 0 ? (100 * amount) / supply : 0,
+        percent: supply && supply > 0 ? (100 * adjustedAmount) / supply : 0,
         usd,
-        worth: usd * amount,
+        worth: usd * adjustedAmount,
         source,
         symbol,
       };
     } else {
       return {
         ...token,
+        decimals: 0,
         worth: 0,
       };
     }

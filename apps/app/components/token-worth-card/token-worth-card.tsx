@@ -5,6 +5,7 @@ import { TokenLogo } from '../token-logo';
 
 export const TokenWorthCard: React.FC<TokenWorth> = ({
   amount,
+  decimals,
   usd,
   info,
   mint,
@@ -41,7 +42,7 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
           </div>
         )}
         <div className="flex justify-center">
-          <span>{NumberUtils.asHuman(amount)}</span>
+          <span>{NumberUtils.asHuman(amount / Math.pow(10, decimals))}</span>
           <span className="text-xs font-light self-center pl-2">{symbol}</span>
         </div>
         <span className="flex justify-center text-[8px] font-bold uppercase">

@@ -19,7 +19,7 @@ export const GetAllWalletsUpdatedBeforeQuery = gql`
   }
 `;
 
-export const UpdateDelay = 24 * 3600 * 1000;
+export const UpdateDelay = 3600 * 1000;
 
 export const updateWallets = async () => {
   const {
