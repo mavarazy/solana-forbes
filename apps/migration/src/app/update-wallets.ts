@@ -3,14 +3,10 @@ import {
   GetAllWalletsUpdatedBefore,
   GetAllWalletsUpdatedBeforeVariables,
 } from '@forbex-nxr/types';
-import {
-  hasuraClient,
-  throttle,
-  WalletRepository,
-  WalletService,
-} from '@forbex-nxr/utils';
+import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
 import delay = require('delay');
+import { WalletRepository } from './wallet-repository';
 
 export const GetAllWalletsUpdatedBeforeQuery = gql`
   query GetAllWalletsUpdatedBefore($updatedBefore: timestamptz) {

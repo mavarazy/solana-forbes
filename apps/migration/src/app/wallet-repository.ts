@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client';
 import {
-  GetWalletById,
-  GetWalletByIdVariables,
   GetWallets,
   GetWalletsVariables,
   InsertWallet,
@@ -10,7 +8,7 @@ import {
   UpdateWalletByIdVariables,
   WalletBallance,
 } from '@forbex-nxr/types';
-import { hasuraClient } from './hasura-client';
+import { hasuraClient } from '@forbex-nxr/utils';
 
 const GetWalletsInQuery = gql`
   query GetWallets($wallets: [String!]) {

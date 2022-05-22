@@ -1,4 +1,5 @@
 import { TokenPriceMap } from '@forbex-nxr/types';
+import { TokenListProvider } from '@solana/spl-token-registry';
 
 interface RaydiumToken {
   mint: string;
@@ -47,12 +48,29 @@ interface RaydiumPair {
   volume30dQuote: number;
 }
 
-const loadTokens = async () => {
+const loadDefaultTokens = async (): Promise<RaydiumToken[]> => {
+  const allTokens = await new TokenListProvider().resolve();
+  const productionTokens = allTokens.filterByChainId(101).getList();
+
+  return productionTokens.map<RaydiumToken>((token) => ({
+    mint: token.address,
+    decimals: token.decimals,
+    icon: token.logoURI,
+    name: token.name,
+    symbol: token.symbol,
+    extensions:
+      token.extensions && token.extensions.coingeckoId
+        ? { coingeckoId: token.extensions.coingeckoId }
+        : {},
+  }));
+};
+
+const loadTokens = async (): Promise<RaydiumToken[]> => {
   const res = await fetch(
     'https://api.raydium.io/v2/sdk/token/raydium.mainnet.json'
   );
   if (!res.ok) {
-    return [];
+    return loadDefaultTokens();
   }
   const { official, unNamed, unOfficial } =
     (await res.json()) as RaydiumTokenResponse;
@@ -82,13 +100,19 @@ const loadCoingeckoPrices = async (
   ids: string[]
 ): Promise<{ [key in string]: { usd?: number } }> => {
   const joinedIds = ids.join(',');
-  const res = await fetch(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${joinedIds}&vs_currencies=usd`
-  );
-  if (!res.ok) {
-    return {};
+  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${joinedIds}&vs_currencies=usd&include_market_cap=true`;
+  if (url.length > 4096) {
+    const middle = Math.round(ids.length / 2);
+    const firstHalf = await loadCoingeckoPrices(ids.slice(0, middle));
+    const secondHalf = await loadCoingeckoPrices(ids.slice(middle));
+    return Object.assign(firstHalf, secondHalf);
+  } else {
+    const res = await fetch(url);
+    if (!res.ok) {
+      return {};
+    }
+    return await res.json();
   }
-  return await res.json();
 };
 
 const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
@@ -101,12 +125,9 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
     }, []);
 
     const [geckoPriceMap, raydiumPriceMap] = await Promise.all([
-      loadCoingeckoPrices(coingeckoIds),
+      loadCoingeckoPrices(Array.from(new Set(coingeckoIds))),
       loadRaydiumPaires(),
     ]);
-
-    console.log(geckoPriceMap);
-    console.log(raydiumPriceMap);
 
     const tokenPrices = tokens.map((token) => {
       const geckoPrice = token.extensions?.coingeckoId
