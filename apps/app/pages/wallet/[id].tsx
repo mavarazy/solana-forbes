@@ -64,7 +64,7 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
         <FontAwesomeIcon
           icon={faSpinner}
           spin
-          className="h-24 w-24 text-[#fcbc1c]"
+          className="h-24 w-24 text-brand"
         />
       </div>
     );

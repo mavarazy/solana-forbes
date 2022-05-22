@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        brand: '#fcbc1c',
+      },
       fontFamily: {
         mono: 'Press Start\\ 2P',
       },

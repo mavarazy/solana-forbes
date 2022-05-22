@@ -1,4 +1,8 @@
-import { faSearch, faSpinner } from '@fortawesome/pro-light-svg-icons';
+import {
+  faSearch,
+  faSpinner,
+  faWallet,
+} from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PublicKey } from '@solana/web3.js';
 import { useGlobalState } from '../../context';
@@ -13,11 +17,11 @@ interface SearchForm {
 }
 
 export function Navigation() {
-  const { onError } = useGlobalState();
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm<SearchForm>();
 
   const router = useRouter();
@@ -27,7 +31,7 @@ export function Navigation() {
   };
 
   return (
-    <nav className="bg-[#fcbc1c] shadow">
+    <nav className="bg-brand shadow">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex px-2 lg:px-0">
@@ -52,7 +56,7 @@ export function Navigation() {
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FontAwesomeIcon
-                    icon={isSubmitting ? faSpinner : faSearch}
+                    icon={isSubmitting ? faSpinner : faWallet}
                     spin={isSubmitting}
                     className="h-5 w-5 text-gray-400"
                     aria-hidden="true"
@@ -63,6 +67,7 @@ export function Navigation() {
                     className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     placeholder="Search for account's worth"
                     type="search"
+                    onReset={() => reset()}
                     {...register('search', {
                       required: true,
                       validate: {
@@ -71,13 +76,17 @@ export function Navigation() {
                             new PublicKey(key);
                             return true;
                           } catch (err) {
-                            onError(err);
                             return false;
                           }
                         },
                       },
                     })}
                   />
+                  {errors && errors.search && (
+                    <div className="absolute bg-red-500 m-1 shadow-md flex z-20 rounded-full text-white text-xs">
+                      <span className="px-4 py-1 font-bold">Invalid key</span>
+                    </div>
+                  )}
                 </form>
               </div>
             </div>
