@@ -11,7 +11,7 @@ import {
   WalletService,
 } from '@forbex-nxr/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
-import { GetAllWalletsUpdatedBeforeQuery, UpdateDelay } from './update-wallets';
+import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';
 import { WalletRepository } from './wallet-repository';
 
 export const updateWalletEvaluation = async () => {
@@ -23,7 +23,7 @@ export const updateWalletEvaluation = async () => {
   >({
     query: GetAllWalletsUpdatedBeforeQuery,
     variables: {
-      updatedBefore: new Date(Date.now() - UpdateDelay).toISOString(),
+      updatedBefore: new Date().toISOString(),
     },
   });
 
@@ -36,6 +36,7 @@ export const updateWalletEvaluation = async () => {
 
   const tasks = wallet.map(({ id }) => async () => {
     const wallet = await WalletRepository.getById(id);
+
     const sol = await WalletService.getSolBalance(connection, id);
 
     const allTokens = wallet.tokens.priced
@@ -54,10 +55,10 @@ export const updateWalletEvaluation = async () => {
     };
 
     const summary = {
-      general: tokens.general.length,
-      nfts: tokens.nfts.length,
-      dev: tokens.dev.length,
       priced: tokens.priced.length,
+      general: tokens.general.length,
+      dev: tokens.dev.length,
+      nfts: tokens.nfts.length,
     };
 
     const totalSols = tokens.nfts.reduce(

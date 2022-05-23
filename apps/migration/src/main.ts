@@ -1,3 +1,3 @@
-import { updateWallets } from './app/update-wallets';
+import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
-updateWallets();
+updateWalletEvaluation();

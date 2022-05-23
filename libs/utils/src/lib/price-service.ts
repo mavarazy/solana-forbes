@@ -48,7 +48,7 @@ interface RaydiumPair {
   volume30dQuote: number;
 }
 
-const loadDefaultTokens = async (): Promise<RaydiumToken[]> => {
+const loadSolanaTokens = async (): Promise<RaydiumToken[]> => {
   const allTokens = await new TokenListProvider().resolve();
   const productionTokens = allTokens.filterByChainId(101).getList();
 
@@ -68,7 +68,7 @@ const loadDefaultTokens = async (): Promise<RaydiumToken[]> => {
 const loadRaydiumTokens = async (): Promise<RaydiumToken[]> => {
   const res = await fetch(
     'https://api.raydium.io/v2/sdk/token/raydium.mainnet.json'
-  ).then((res) => (res.ok ? res.json() : []));
+  );
   if (!res.ok) {
     return [];
   }
@@ -80,8 +80,8 @@ const loadRaydiumTokens = async (): Promise<RaydiumToken[]> => {
 
 const loadTokens = async (): Promise<RaydiumToken[]> => {
   const [solanaTokens, raydiumTokens] = await Promise.all([
+    loadSolanaTokens(),
     loadRaydiumTokens(),
-    loadDefaultTokens(),
   ]);
 
   const raydiumTokenByMint: { [key in string]: RaydiumToken } =
@@ -108,7 +108,7 @@ const loadTokens = async (): Promise<RaydiumToken[]> => {
 };
 
 const loadRaydiumPaires = async (): Promise<{
-  [key in string]: { usd: number };
+  [key in string]: { usd: number; supply: number };
 }> => {
   const res = await fetch('https://api.raydium.io/v2/main/pairs');
   if (!res.ok) {
@@ -116,21 +116,24 @@ const loadRaydiumPaires = async (): Promise<{
   }
 
   const paires = (await res.json()) as RaydiumPair[];
-  return paires.reduce((agg: { [key in string]: { usd: number } }, pair) => {
-    const [from, to] = pair.name.split('-');
-    if (to === 'USDC' || to === 'USDT') {
-      // TODO There are some duplicate pairs, which I'm not sure how to distinguish
-      if (!agg[from] || !agg[from].usd || agg[from].usd > pair.price) {
-        agg[from] = { usd: pair.price };
+  return paires.reduce(
+    (agg: { [key in string]: { usd: number; supply: number } }, pair) => {
+      const [from, to] = pair.name.split('-');
+      if (to === 'USDC' || to === 'USDT') {
+        // TODO There are some duplicate pairs, which I'm not sure how to distinguish
+        if (!agg[from] || !agg[from].usd || agg[from].usd > pair.price) {
+          agg[from] = { usd: pair.price, supply: pair.tokenAmountCoin };
+        }
       }
-    }
-    return agg;
-  }, {});
+      return agg;
+    },
+    {}
+  );
 };
 
 const loadCoingeckoPrices = async (
   ids: string[]
-): Promise<{ [key in string]: { usd?: number } }> => {
+): Promise<{ [key in string]: { usd?: number; usd_market_cap?: number } }> => {
   const joinedIds = ids.join(',');
   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${joinedIds}&vs_currencies=usd&include_market_cap=true`;
   if (url.length > 4096) {
@@ -172,6 +175,7 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
           decimals: token.decimals,
           name: token.name,
           icon: token.icon,
+          cap: geckoPrice.usd_market_cap,
           source: 'coingeckoId',
           symbol: token.symbol,
         };
@@ -187,6 +191,7 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
           decimals: token.decimals,
           name: token.name,
           icon: token.icon,
+          cap: raydiumPrice.supply * raydiumPrice.usd,
           source: 'raydium',
           symbol: token.symbol,
         };
