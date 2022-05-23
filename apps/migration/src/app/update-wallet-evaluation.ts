@@ -4,7 +4,7 @@ import {
 } from '@forbex-nxr/types';
 import {
   hasuraClient,
-  NFTService,
+  NFTWorthService,
   PriceService,
   throttle,
   TokenWorthService,
@@ -47,7 +47,7 @@ export const updateWalletEvaluation = async () => {
       allTokens
     );
 
-    const nfts = await NFTService.estimateNftWorth(wallet.tokens.nfts);
+    const nfts = await NFTWorthService.estimateNftWorth(wallet.tokens.nfts);
 
     const tokens = {
       ...summaryWithoutNfts,

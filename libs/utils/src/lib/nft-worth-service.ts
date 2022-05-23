@@ -41,7 +41,7 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
   });
 };
 
-const loadNfts = async (
+const getPossibleNfts = async (
   connection: Connection,
   tokens: TokenWorth[]
 ): Promise<NftWorth[]> => {
@@ -96,7 +96,7 @@ const loadNfts = async (
   return estimateNftWorth(nftWorth);
 };
 
-export const NFTService = {
-  loadNfts,
+export const NFTWorthService = {
+  getPossibleNfts,
   estimateNftWorth,
 };

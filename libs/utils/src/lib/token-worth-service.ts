@@ -1,6 +1,5 @@
 import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
-import { NFTService } from './nft-service';
 import { TokenWorth, TokenWorthSummary } from '@forbex-nxr/types';
 import { PriceService } from './price-service';
 
@@ -104,31 +103,11 @@ const getTokenBalance = async (
   );
 
   console.log(accountId, ' got ', tokenAccounts.value.length, ' tokens');
-  const partialTokenWorth: Pick<TokenWorth, 'mint' | 'amount'>[] = decodeTokens(
+  const tokens: Pick<TokenWorth, 'mint' | 'amount'>[] = decodeTokens(
     tokenAccounts.value.map(({ account }) => account)
   );
 
-  const tokenWorthSummary = await evaluateTokens(partialTokenWorth);
-
-  const nfts = await NFTService.loadNfts(
-    connection,
-    tokenWorthSummary.dev.filter(
-      (token) =>
-        (token.amount === 1 || token.amount === 0) &&
-        !token.usd &&
-        !token.info?.name
-    )
-  );
-
-  const dev = tokenWorthSummary.dev.filter(
-    (token) => !nfts.some((nft) => token.mint === nft.mint)
-  );
-
-  return {
-    ...tokenWorthSummary,
-    dev,
-    nfts,
-  };
+  return await evaluateTokens(tokens);
 };
 
 export const TokenWorthService = {
