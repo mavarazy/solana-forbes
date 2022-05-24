@@ -17,7 +17,7 @@ export const updateWalletEvaluation = async () => {
   >({
     query: GetAllWalletsUpdatedBeforeQuery,
     variables: {
-      updatedBefore: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
+      updatedBefore: new Date(Date.now()).toISOString(),
     },
   });
 

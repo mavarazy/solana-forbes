@@ -1,17 +1,17 @@
 import { TokenPrice } from '@forbex-nxr/types';
 
 const getTokenWorth = (amount: number, price: TokenPrice) => {
-  if (price.supply && price.cap) {
-    const percent = price.supply > 0 ? (100 * amount) / price.supply : 0;
-    return percent > 0
-      ? Math.min(
-          price.usd * amount,
-          (percent * Math.max(price.cap, price.usd * (price.supply / 10))) / 100
-        )
-      : price.usd * amount;
-  } else {
-    return amount * price.usd;
+  const baseWorth = amount * price.usd;
+  if (price.cap === 0) {
+    return Math.min(baseWorth, 100000);
   }
+
+  if (price.supply && price.cap) {
+    const percentCap = price.cap * (amount / price.supply);
+    return Math.min(percentCap, baseWorth);
+  }
+
+  return amount * price.usd;
 };
 
 export const WorthUtils = {

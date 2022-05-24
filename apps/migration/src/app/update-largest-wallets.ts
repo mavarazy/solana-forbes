@@ -1,5 +1,5 @@
 import { WalletBallance } from '@forbex-nxr/types';
-import { throttle, WalletService } from '@forbex-nxr/utils';
+import { PriceService, throttle, WalletService } from '@forbex-nxr/utils';
 import { AccountLayout } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { WalletRepository } from './wallet-repository';
@@ -54,4 +54,14 @@ const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
     console.error(err);
     return [];
   }
+};
+
+export const updateLargestWallets = async () => {
+  const priceMap = await PriceService.getFullPriceMap();
+  const tokens = Object.values(priceMap).filter((price) => price.usd > 0);
+  const tasks = tokens.map((token) => async () => {
+    getLargestWallets(token.mint);
+  });
+
+  throttle(tasks, 1000, 1);
 };

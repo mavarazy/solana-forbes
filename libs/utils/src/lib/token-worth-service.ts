@@ -2,6 +2,7 @@ import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
 import { TokenWorth, TokenWorthSummary } from '@forbex-nxr/types';
 import { PriceService } from './price-service';
+import { WorthUtils } from './worth-utils';
 
 type AccountMap = { [key in string]: Pick<TokenWorth, 'mint' | 'amount'> };
 
@@ -17,6 +18,7 @@ const evaluateTokens = async (
     if (price) {
       const { usd, icon, name, decimals, supply, source, symbol } = price;
       const adjustedAmount = Number(token.amount) / Math.pow(10, decimals);
+      const worth = WorthUtils.getTokenWorth(adjustedAmount, price);
       return {
         mint: token.mint,
         amount: token.amount,
@@ -27,7 +29,7 @@ const evaluateTokens = async (
         },
         percent: supply && supply > 0 ? (100 * adjustedAmount) / supply : 0,
         usd,
-        worth: usd * adjustedAmount,
+        worth,
         source,
         symbol,
       };
