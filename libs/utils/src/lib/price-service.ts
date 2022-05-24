@@ -1,5 +1,6 @@
-import { TokenPriceMap } from '@forbex-nxr/types';
+import { TokenPrice, TokenPriceMap } from '@forbex-nxr/types';
 import { TokenListProvider } from '@solana/spl-token-registry';
+import { TokenToSupply } from './token-to-supply';
 
 interface RaydiumToken {
   mint: string;
@@ -78,7 +79,9 @@ const loadRaydiumTokens = async (): Promise<RaydiumToken[]> => {
   return official.concat(unNamed).concat(unOfficial);
 };
 
-const loadTokens = async (): Promise<RaydiumToken[]> => {
+const loadTokens = async (): Promise<
+  Array<RaydiumToken & { supply?: number }>
+> => {
   const [solanaTokens, raydiumTokens] = await Promise.all([
     loadSolanaTokens(),
     loadRaydiumTokens(),
@@ -102,9 +105,10 @@ const loadTokens = async (): Promise<RaydiumToken[]> => {
     )
   );
 
-  return allMints.map(
-    (mint) => raydiumTokenByMint[mint] || solanaTokenByMint[mint]
-  );
+  return allMints.map((mint) => ({
+    ...(raydiumTokenByMint[mint] || solanaTokenByMint[mint]),
+    ...TokenToSupply[mint],
+  }));
 };
 
 const loadRaydiumPaires = async (): Promise<{
@@ -165,46 +169,32 @@ const fullTokenPriceMap: Promise<TokenPriceMap> = loadTokens().then(
     ]);
 
     const tokenPrices = tokens.map((token) => {
-      const geckoPrice = token.extensions?.coingeckoId
-        ? geckoPriceMap[token.extensions?.coingeckoId]
-        : undefined;
-      if (geckoPrice && geckoPrice.usd) {
-        return {
-          mint: token.mint,
-          usd: geckoPrice.usd,
-          decimals: token.decimals,
-          name: token.name,
-          icon: token.icon,
-          cap: geckoPrice.usd_market_cap,
-          source: 'coingeckoId',
-          symbol: token.symbol,
-        };
-      }
-      const raydiumPrice = token.symbol
-        ? raydiumPriceMap[token.symbol]
-        : undefined;
-
-      if (raydiumPrice) {
-        return {
-          mint: token.mint,
-          usd: raydiumPrice.usd,
-          decimals: token.decimals,
-          name: token.name,
-          icon: token.icon,
-          cap: raydiumPrice.supply * raydiumPrice.usd,
-          source: 'raydium',
-          symbol: token.symbol,
-        };
-      }
-
-      return {
+      const price: TokenPrice = {
         mint: token.mint,
-        usd: 0,
         decimals: token.decimals,
+        supply: token.supply,
         name: token.name,
         icon: token.icon,
         symbol: token.symbol,
+        usd: 0,
       };
+
+      const geckoPrice = token.extensions?.coingeckoId
+        ? geckoPriceMap[token.extensions?.coingeckoId]
+        : undefined;
+
+      if (geckoPrice && geckoPrice.usd) {
+        price.usd = geckoPrice.usd;
+        price.source = 'coin-gecko';
+        price.cap = geckoPrice.usd_market_cap;
+      } else if (token.symbol && raydiumPriceMap[token.symbol]) {
+        const raydiumPrice = raydiumPriceMap[token.symbol];
+        price.usd = raydiumPrice.usd;
+        price.cap = raydiumPrice.supply * raydiumPrice.usd;
+        price.source = 'raydium';
+      }
+
+      return price;
     });
 
     return tokenPrices.reduce(
@@ -229,9 +219,12 @@ const solPrice = loadCoingeckoPrices(['solana']).then(
   ({ solana }) => solana.usd || 51.75
 );
 
+const getFullPriceMap = () => fullTokenPriceMap;
+
 const getSolPrice = async (): Promise<number> => solPrice;
 
 export const PriceService = {
   getSolPrice,
   getPriceMap,
+  getFullPriceMap,
 };

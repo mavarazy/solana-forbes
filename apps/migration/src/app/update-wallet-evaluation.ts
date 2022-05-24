@@ -2,15 +2,9 @@ import {
   GetAllWalletsUpdatedBefore,
   GetAllWalletsUpdatedBeforeVariables,
 } from '@forbex-nxr/types';
-import {
-  hasuraClient,
-  NFTWorthService,
-  PriceService,
-  throttle,
-  TokenWorthService,
-  WalletService,
-} from '@forbex-nxr/utils';
+import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
+import delay from 'delay';
 import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';
 import { WalletRepository } from './wallet-repository';
 
@@ -23,11 +17,9 @@ export const updateWalletEvaluation = async () => {
   >({
     query: GetAllWalletsUpdatedBeforeQuery,
     variables: {
-      updatedBefore: new Date().toISOString(),
+      updatedBefore: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
     },
   });
-
-  const solPrice = await PriceService.getSolPrice();
 
   const connection: Connection = new Connection(
     clusterApiUrl('mainnet-beta'),
@@ -35,52 +27,29 @@ export const updateWalletEvaluation = async () => {
   );
 
   const tasks = wallet.map(({ id }) => async () => {
-    const wallet = await WalletRepository.getById(id);
+    const doLoad = async (attempt = 1) => {
+      try {
+        const wallet = await WalletRepository.getById(id);
 
-    const sol = await WalletService.getSolBalance(connection, id);
+        const updatedWallet = await WalletService.updateWalletBalance(
+          connection,
+          wallet
+        );
 
-    const allTokens = wallet.tokens.priced
-      .concat(wallet.tokens.general)
-      .concat(wallet.tokens.dev);
+        await WalletRepository.updateWallet(updatedWallet);
 
-    const summaryWithoutNfts = await TokenWorthService.evaluateTokens(
-      allTokens
-    );
-
-    const nfts = await NFTWorthService.estimateNftWorth(wallet.tokens.nfts);
-
-    const tokens = {
-      ...summaryWithoutNfts,
-      nfts,
+        console.log('Updating: done for ', id);
+        return updatedWallet;
+      } catch (err) {
+        console.log(err);
+        if (attempt < 20) {
+          console.log(`Trying again in ${attempt} minute`);
+          await delay(attempt * 60000);
+          doLoad(attempt + 1);
+        }
+      }
     };
-
-    const summary = {
-      priced: tokens.priced.length,
-      general: tokens.general.length,
-      dev: tokens.dev.length,
-      nfts: tokens.nfts.length,
-    };
-
-    const totalSols = tokens.nfts.reduce(
-      (sum, nft) => (nft.owns ? nft.floorPrice || 0 : 0) + sum,
-      sol
-    );
-
-    const worth = tokens.priced.reduce(
-      (worth, token) => worth + token.worth,
-      totalSols * solPrice
-    );
-
-    const updatedWallet = await WalletRepository.updateWallet({
-      ...wallet,
-      sol,
-      summary,
-      tokens,
-      worth,
-    });
-
-    console.log('Updating: done ', id);
-    return updatedWallet;
+    await doLoad();
   });
 
   console.log('Started');

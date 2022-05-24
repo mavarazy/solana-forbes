@@ -1,3 +1,5 @@
+export type TokenPriceSource = 'coin-gecko' | 'raydium';
+
 export interface TokenPrice {
   mint: string;
   usd: number;
@@ -7,5 +9,5 @@ export interface TokenPrice {
   cap?: number;
   supply?: number;
   symbol?: string;
-  source?: 'coingeckoId' | 'raydium';
+  source?: 'coin-gecko' | 'raydium';
 }
