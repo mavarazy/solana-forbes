@@ -41,3 +41,5 @@ Thumbs.db
 *.local
 .envrc
 schema.json
+
+assets

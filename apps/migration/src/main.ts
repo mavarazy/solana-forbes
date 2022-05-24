@@ -1,8 +1,11 @@
 // import { updateTokenToSupply } from './app/price/update-token-to-supply';
-import { updateWalletEvaluation } from './app/update-wallet-evaluation';
+import { loadImages } from './app/load-images';
+// import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
 // import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 // updateWalletEvaluation();
 
 // updateTokenToSupply();
-updateWalletEvaluation();
+// updateWalletEvaluation();
+
+loadImages().then(() => console.log('Done'));

@@ -100,11 +100,10 @@ const updateWalletBalance = async (
   );
   console.log(wallet.id, ' out of which potentially new ', possibleNfts.length);
 
-  const newNfts: NftWorth[] = [];
-  // await NFTWorthService.getPossibleNfts(
-  //   connection,
-  //   possibleNfts
-  // );
+  const newNfts: NftWorth[] = await NFTWorthService.getPossibleNfts(
+    connection,
+    possibleNfts
+  );
 
   const nfts = await NFTWorthService.estimateNftWorth(
     wallet.tokens.nfts.concat(newNfts)
