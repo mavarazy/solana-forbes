@@ -42,4 +42,4 @@ Thumbs.db
 .envrc
 schema.json
 
-assets
+**/assets

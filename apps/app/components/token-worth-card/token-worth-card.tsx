@@ -22,10 +22,15 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
         </span>
       )}
       <AddressLink address={mint}>
-        <TokenLogo
-          logoURI={info?.logoURI ?? 'https://via.placeholder.com/200'}
-          className="h-14 w-14 rounded-full flex flex-1 items-center mx-auto p-1 bg-white shadow-lg"
-        />
+        <span className="h-14 w-14 rounded-full flex flex-1 items-center mx-auto p-1 bg-white shadow-lg">
+          <TokenLogo
+            mint={mint}
+            image={info?.logoURI}
+            width={56}
+            height={56}
+            className="rounded-full"
+          />
+        </span>
         {percent > 1 && (
           <span className="absolute top-0 right-0 text-xs font-bold bg-green-500 px-2 py-0.5 rounded-full text-white shadow-lg">
             {percent.toFixed(1)} %

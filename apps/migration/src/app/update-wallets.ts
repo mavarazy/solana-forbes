@@ -13,6 +13,7 @@ export const GetAllWalletsUpdatedBeforeQuery = gql`
     wallet(
       where: { updated_at: { _lt: $updatedBefore } }
       order_by: { worth: desc }
+      limit: 500
     ) {
       id
     }

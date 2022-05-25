@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
+import Image from 'next/image';
 
 export const NFTCard: React.FC<NftWorth> = ({
   info,
@@ -23,12 +24,13 @@ export const NFTCard: React.FC<NftWorth> = ({
         className="bg-gray-600 text-white h-6 w-6 absolute top-1 right-1 p-3 rounded-full"
       />
       <AddressLink address={mint}>
-        {info?.logoURI && (
-          <TokenLogo
-            logoURI={info.logoURI}
-            className="h-32 w-32 rounded-xl flex flex-1 items-center mx-auto object-cover my-4"
-          />
-        )}
+        <TokenLogo
+          mint={mint}
+          image={info.logoURI}
+          width={128}
+          height={128}
+          className="h-32 w-32 rounded-xl flex flex-1 items-center mx-auto object-cover my-4"
+        />
         <span className="flex flex-col my-4 ">
           <span className="font-semibold text-xl truncate flex justify-center">
             {info?.name.trim() ? info.name : '--/--'}
