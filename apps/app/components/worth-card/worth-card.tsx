@@ -36,7 +36,9 @@ export const WorthCard = ({
       </span>
       <div className="flex flex-col text-xl md:text-4xl self-center mt-2 font-bold px-2 justify-center items-center cursor-pointer">
         <span className="flex flex-1 justify-center">
-          <span className="uppercase">{NumberUtils.asHuman(worth)}</span>
+          <span className="uppercase">
+            {Math.round(worth).toLocaleString()}
+          </span>
         </span>
         <span className="flex text-[8px] sm:text-base md:text-xl font-bold truncate">
           {id}

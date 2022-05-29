@@ -8,7 +8,7 @@ import { TokenInfo } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(order_by: { worth: desc }, limit: 500) {
+    wallet(order_by: { worth: desc }, limit: 250) {
       id
       sol
       summary
