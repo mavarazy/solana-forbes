@@ -7,7 +7,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
-import Image from 'next/image';
 
 export const NFTCard: React.FC<NftWorth> = ({
   info,
