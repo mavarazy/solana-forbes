@@ -1,4 +1,4 @@
-import { WalletBallance } from '@forbex-nxr/types';
+import { WalletBalance } from '@forbex-nxr/types';
 import { PriceService, throttle, WalletService } from '@forbex-nxr/utils';
 import { AccountLayout } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
@@ -7,7 +7,7 @@ import { WalletRepository } from './wallet-repository';
 const getAllWalletBalance = async (
   connection: Connection,
   wallets: string[]
-): Promise<WalletBallance[]> => {
+): Promise<WalletBalance[]> => {
   const existingWallets = await WalletRepository.fetchExistingWallets(wallets);
 
   const newWallets = wallets.filter(
@@ -29,7 +29,7 @@ const getAllWalletBalance = async (
   return existingWallets.concat(freshWallets);
 };
 
-const getLargestWallets = async (mint: string): Promise<WalletBallance[]> => {
+const getLargestWallets = async (mint: string): Promise<WalletBalance[]> => {
   try {
     const connection = new Connection(
       clusterApiUrl('mainnet-beta'),

@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { ForbesList } from '../components/forbes-table';
 import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { WalletBallance } from '@forbex-nxr/types';
+import { WalletBalance } from '@forbex-nxr/types';
 import { TokenInfo } from '@solana/spl-token-registry';
 
 const GetLargestWalletsQuery = gql`
@@ -33,7 +33,7 @@ export async function getStaticProps(context) {
 
 const Home: NextPage<{
   wallets: Array<
-    Omit<WalletBallance, 'tokens'> & {
+    Omit<WalletBalance, 'tokens'> & {
       info: TokenInfo;
     }
   >;

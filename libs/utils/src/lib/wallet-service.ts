@@ -1,9 +1,10 @@
 import { Connection, PublicKey } from '@solana/web3.js';
-import { NftWorth, TokenWorthSummary, WalletBallance } from '@forbex-nxr/types';
+import { NftWorth, TokenWorthSummary, WalletBalance } from '@forbex-nxr/types';
 import { TokenWorthService } from './token-worth-service';
 import { ProgramFlagService } from './program-flag-service';
-import { PriceService } from './price-service';
 import { NFTWorthService } from './nft-worth-service';
+import { WorthUtils } from './worth-utils';
+import { PriceService } from './price-service';
 
 const getSolBalance = async (
   connection: Connection,
@@ -23,7 +24,6 @@ const toWalletBalance = async (
   program: boolean
 ) => {
   const solPrice = await PriceService.getSolPrice();
-
   const nftMints = new Set<string>(nfts.map((nft) => nft.mint));
   const tokens = {
     ...tokensWithoutNfts,
@@ -31,25 +31,21 @@ const toWalletBalance = async (
     nfts,
   };
 
-  const totalSols = tokens.nfts.reduce(
-    (sum, nft) => (nft.owns ? nft.floorPrice || 0 : 0) + sum,
-    sol
-  );
+  const summary = {
+    general: tokens.general.length,
+    nfts: tokens.nfts.length,
+    dev: tokens.dev.length,
+    priced: tokens.priced.length,
+  };
+
+  const worth = await WorthUtils.getWalletWorth(solPrice, sol, tokens);
 
   return {
     id,
-    summary: {
-      general: tokens.general.length,
-      nfts: tokens.nfts.length,
-      dev: tokens.dev.length,
-      priced: tokens.priced.length,
-    },
+    summary,
     sol,
     tokens,
-    worth: tokens.priced.reduce(
-      (worth, token) => worth + token.worth,
-      totalSols * solPrice
-    ),
+    worth,
     program,
   };
 };
@@ -57,7 +53,7 @@ const toWalletBalance = async (
 const getWalletBalance = async (
   connection: Connection,
   id: string
-): Promise<WalletBallance> => {
+): Promise<WalletBalance> => {
   const [sol, tokensWithoutNfts, program] = await Promise.all([
     getSolBalance(connection, id),
     TokenWorthService.getTokenBalance(connection, id),
@@ -74,8 +70,8 @@ const getWalletBalance = async (
 
 const updateWalletBalance = async (
   connection: Connection,
-  wallet: WalletBallance
-): Promise<WalletBallance> => {
+  wallet: WalletBalance
+): Promise<WalletBalance> => {
   const sol = await WalletService.getSolBalance(connection, wallet.id);
   const tokensWithoutNfts = await TokenWorthService.getTokenBalance(
     connection,

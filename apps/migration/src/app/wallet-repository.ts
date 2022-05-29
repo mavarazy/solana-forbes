@@ -8,7 +8,7 @@ import {
   InsertWalletVariables,
   UpdateWalletById,
   UpdateWalletByIdVariables,
-  WalletBallance,
+  WalletBalance,
 } from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
 
@@ -95,7 +95,7 @@ const AdminGetWalletByIdQuery = gql`
 
 const fetchExistingWallets = async (
   wallets: string[]
-): Promise<WalletBallance[]> => {
+): Promise<WalletBalance[]> => {
   const { data } = await hasuraClient.query<GetWallets, GetWalletsVariables>({
     query: GetWalletsInQuery,
     variables: {
@@ -103,12 +103,10 @@ const fetchExistingWallets = async (
     },
   });
 
-  return data.wallet as WalletBallance[];
+  return data.wallet as WalletBalance[];
 };
 
-const createWallet = async (
-  wallet: WalletBallance
-): Promise<WalletBallance> => {
+const createWallet = async (wallet: WalletBalance): Promise<WalletBalance> => {
   const { data } = await hasuraClient.mutate<
     InsertWallet,
     InsertWalletVariables
@@ -122,12 +120,10 @@ const createWallet = async (
   return data.insert_wallet_one;
 };
 
-const createWalletsInBatch = async (wallets: WalletBallance[]) =>
+const createWalletsInBatch = async (wallets: WalletBalance[]) =>
   Promise.all(wallets.map(createWallet));
 
-const updateWallet = async (
-  wallet: WalletBallance
-): Promise<WalletBallance> => {
+const updateWallet = async (wallet: WalletBalance): Promise<WalletBalance> => {
   const { data } = await hasuraClient.mutate<
     UpdateWalletById,
     UpdateWalletByIdVariables
@@ -141,7 +137,7 @@ const updateWallet = async (
   return createWallet(wallet);
 };
 
-const getById = async (id: string): Promise<WalletBallance> => {
+const getById = async (id: string): Promise<WalletBalance> => {
   const {
     data: { wallet_by_pk: wallet },
   } = await hasuraClient.query<AdminGetWalletById, AdminGetWalletByIdVariables>(

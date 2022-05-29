@@ -12,7 +12,7 @@ export type TokenType = keyof TokenWorthSummary;
 
 export type TokenSummary = Partial<{ [key in TokenType]: number }>;
 
-export interface WalletBallance {
+export interface WalletBalance {
   id: string;
   worth: number;
   sol: number;

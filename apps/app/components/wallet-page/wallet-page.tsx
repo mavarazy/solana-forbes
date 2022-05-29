@@ -1,10 +1,10 @@
-import { WalletBallance } from '@forbex-nxr/types';
+import { WalletBalance } from '@forbex-nxr/types';
 import { AddressLink } from '../address-link';
 import { NftPanel } from '../nft-panel';
 import { TokenPanel } from '../token-panel';
 import { WorthCard } from '../worth-card';
 
-export const WalletPage = (wallet: WalletBallance) => (
+export const WalletPage = (wallet: WalletBalance) => (
   <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
     <div className="max-w-5xl flex flex-col flex-1">
       <AddressLink address={wallet.id}>

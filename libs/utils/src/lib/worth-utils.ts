@@ -1,4 +1,5 @@
-import { TokenPrice } from '@forbex-nxr/types';
+import { TokenPrice, TokenWorthSummary } from '@forbex-nxr/types';
+import { PriceService } from './price-service';
 
 const getTokenWorth = (amount: number, price: TokenPrice) => {
   const baseWorth = amount * price.usd;
@@ -14,6 +15,23 @@ const getTokenWorth = (amount: number, price: TokenPrice) => {
   return amount * price.usd;
 };
 
+const getWalletWorth = (
+  solPrice: number,
+  sol: number,
+  tokens: TokenWorthSummary
+): number => {
+  const totalSols = tokens.nfts.reduce(
+    (sum, nft) => (nft.owns ? nft.floorPrice || 0 : 0) + sum,
+    sol
+  );
+
+  return tokens.priced.reduce(
+    (worth, token) => worth + token.worth,
+    totalSols * solPrice
+  );
+};
+
 export const WorthUtils = {
+  getWalletWorth,
   getTokenWorth,
 };

@@ -1,4 +1,4 @@
-import { WalletBallance } from '@forbex-nxr/types';
+import { WalletBalance } from '@forbex-nxr/types';
 import React from 'react';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
@@ -7,7 +7,7 @@ import { faUserRobot, faUserSecret } from '@fortawesome/pro-light-svg-icons';
 import { NumberUtils } from '../utils';
 
 interface WorthCardProps {
-  wallet: Pick<WalletBallance, 'id' | 'sol' | 'summary' | 'worth' | 'program'>;
+  wallet: Pick<WalletBalance, 'id' | 'sol' | 'summary' | 'worth' | 'program'>;
   rank?: number;
 }
 

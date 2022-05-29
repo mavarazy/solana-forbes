@@ -1,10 +1,10 @@
-import { WalletBallance } from '@forbex-nxr/types';
+import { WalletBalance } from '@forbex-nxr/types';
 import React from 'react';
 import Link from 'next/link';
 import { WorthCard } from '../worth-card';
 
 interface ForbesTableProps {
-  wallets: Array<Omit<WalletBallance, 'tokens' | 'top'>>;
+  wallets: Array<Omit<WalletBalance, 'tokens' | 'top'>>;
 }
 
 export function ForbesList({ wallets }: ForbesTableProps) {
