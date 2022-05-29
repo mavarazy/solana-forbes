@@ -13,6 +13,7 @@ import { clusterApiUrl, Connection } from '@solana/web3.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/pro-light-svg-icons';
 import { WalletPage } from '../../components/wallet-page';
+import { useGlobalState } from '../../context';
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -173,6 +174,8 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
     solPrice: 45,
   });
 
+  const { onError } = useGlobalState();
+
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -205,9 +208,11 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
         ProgramFlagService.isProgram(connection, id).then((isProgram) => {
           dispatch({ type: 'SET_PROGRAM', payload: isProgram });
         }),
-      ]).then(() => {
-        setLoading(false);
-      });
+      ])
+        .catch((err) => {
+          onError(err);
+        })
+        .finally(() => setLoading(false));
     }
   }, [id]);
 
