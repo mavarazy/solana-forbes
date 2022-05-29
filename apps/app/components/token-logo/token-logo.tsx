@@ -21,11 +21,12 @@ export const TokenLogo = ({
   height,
   className,
 }: TokenLogoProps) => {
-  const [url, setUrl] = useState(`${ImagePath}${image}`);
+  const [url, setUrl] = useState(
+    image ? `${ImagePath}/api/image?url=${image}` : FallbackImage
+  );
 
   const handleError = () => {
     if (url !== image) {
-      console.log(image);
       setUrl(image || FallbackImage);
     } else if (url === image) {
       setUrl(FallbackImage);
