@@ -11,7 +11,7 @@ const nextConfig = {
     svgr: false,
   },
   images: {
-    domains: ['solana-forbes.s3.us-east-1.amazonaws.com'],
+    domains: ['localhost', 'www.clemble.com', 'clemble.com'],
   },
 };
 
