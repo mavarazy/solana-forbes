@@ -10,6 +10,9 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  images: {
+    domains: ['solana-forbes.s3.us-east-1.amazonaws.com'],
+  },
 };
 
 module.exports = withNx(nextConfig);
