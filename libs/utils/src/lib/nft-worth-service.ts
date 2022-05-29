@@ -1,7 +1,7 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Nft, Metaplex } from '@metaplex-foundation/js-next';
 import { TokenWorth, NftWorth } from '@forbex-nxr/types';
-import { NftCollectionWorthService } from './nft-collection-worth-service';
+import { NftCollectionWorthService } from './nft-collection-price-service';
 import { throttle } from './throttle';
 
 const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
@@ -25,10 +25,10 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
 
   return nfts.map((nft) => {
     const nftPrice =
-      priceMap.get(nft.info.name) ||
-      priceMap.get(nft.collection?.name || '') ||
-      priceMap.get(nft.collection?.family || '') ||
-      priceMap.get(nft.collection?.symbol || '');
+      priceMap.get(nft.info.name.trim().toLowerCase()) ||
+      priceMap.get((nft.collection?.name || '').trim().toLowerCase()) ||
+      priceMap.get((nft.collection?.family || '').trim().toLowerCase()) ||
+      priceMap.get((nft.collection?.symbol || '').trim().toLowerCase());
     if (nftPrice) {
       console.log('Found floor price for ', nftPrice.price, ' ', nft.info.name);
       return {

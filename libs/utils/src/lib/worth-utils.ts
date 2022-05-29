@@ -1,5 +1,4 @@
 import { TokenPrice, TokenWorthSummary } from '@forbex-nxr/types';
-import { PriceService } from './price-service';
 
 const getTokenWorth = (amount: number, price: TokenPrice) => {
   const baseWorth = amount * price.usd;

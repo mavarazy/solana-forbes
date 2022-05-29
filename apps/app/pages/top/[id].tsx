@@ -7,7 +7,7 @@ import { WalletPage } from '../../components/wallet-page';
 
 const GetTopLargestWalletIdsQuery = gql`
   query GetTopLargestWallets {
-    wallet(limit: 500, order_by: { worth: desc }) {
+    wallet(limit: 250, order_by: { worth: desc }) {
       id
     }
   }
