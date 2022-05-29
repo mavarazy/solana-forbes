@@ -43,8 +43,14 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
 
 const getPossibleNfts = async (
   connection: Connection,
-  tokens: TokenWorth[]
+  possibleNfts: TokenWorth[]
 ): Promise<NftWorth[]> => {
+  const tokens = possibleNfts.filter(
+    (token) =>
+      (token.amount === 1 || token.amount === 0) &&
+      !token.usd &&
+      !token.info?.name
+  );
   const metaplex = new Metaplex(connection);
   const nfts: Array<Nft | null> = await metaplex
     .nfts()

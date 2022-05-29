@@ -2,11 +2,8 @@ import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
 import { WalletBallance } from '@forbex-nxr/types';
 import { NextPage } from 'next';
-import { AddressLink } from '../../components/address-link';
 import { useRouter } from 'next/router';
-import { WorthCard } from '../../components/worth-card';
-import { TokenPanel } from '../../components/token-panel';
-import { NftPanel } from '../../components/nft-panel';
+import { WalletPage } from '../../components/wallet-page';
 
 const GetTopLargestWalletIdsQuery = gql`
   query GetTopLargestWallets {
@@ -87,34 +84,7 @@ const Top: NextPage<TopProps> = ({ wallet }) => {
     );
   }
 
-  return (
-    <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
-      <div className="max-w-5xl flex flex-col flex-1">
-        <AddressLink address={wallet.id}>
-          <WorthCard wallet={wallet} />
-        </AddressLink>
-        <NftPanel
-          name="Owned NFT's"
-          nfts={wallet.tokens.nfts.filter((nft) => nft.owns)}
-        />
-        <NftPanel
-          name="Previously owned NFT's"
-          nfts={wallet.tokens.nfts.filter((nft) => !nft.owns)}
-        />
-        <TokenPanel
-          type="priced"
-          name="Priced tokens"
-          tokens={wallet.tokens.priced}
-        />
-        <TokenPanel
-          type="general"
-          name="General tokens"
-          tokens={wallet.tokens.general}
-        />
-        <TokenPanel type="dev" name="Dev tokens" tokens={wallet.tokens.dev} />
-      </div>
-    </div>
-  );
+  return <WalletPage {...wallet} />;
 };
 
 export default Top;

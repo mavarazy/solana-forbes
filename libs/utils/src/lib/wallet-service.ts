@@ -64,14 +64,10 @@ const getWalletBalance = async (
     ProgramFlagService.isProgram(connection, id),
   ]);
 
-  const possibleNfts = tokensWithoutNfts.dev.filter(
-    (token) =>
-      (token.amount === 1 || token.amount === 0) &&
-      !token.usd &&
-      !token.info?.name
+  const nfts = await NFTWorthService.getPossibleNfts(
+    connection,
+    tokensWithoutNfts.dev
   );
-
-  const nfts = await NFTWorthService.getPossibleNfts(connection, possibleNfts);
 
   return toWalletBalance(id, sol, nfts, tokensWithoutNfts, program);
 };
@@ -93,11 +89,11 @@ const updateWalletBalance = async (
       !token.usd &&
       !token.info?.name
   );
-
-  console.log(wallet.id, ' found all possible NFT ', allPossibleNfts.length);
   const possibleNfts = allPossibleNfts.filter(
     (nft) => !resolvedNfts.has(nft.mint)
   );
+
+  console.log(wallet.id, ' found all possible NFT ', allPossibleNfts.length);
   console.log(wallet.id, ' out of which potentially new ', possibleNfts.length);
 
   const newNfts: NftWorth[] = await NFTWorthService.getPossibleNfts(
