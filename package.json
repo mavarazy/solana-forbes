@@ -15,6 +15,7 @@
     "@coingecko/cg-api-ts": "^0.0.51",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/pro-light-svg-icons": "^6.1.1",
+    "@fortawesome/pro-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",

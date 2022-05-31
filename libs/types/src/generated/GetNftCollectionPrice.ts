@@ -6,25 +6,20 @@
 import * as general from '../lib';
 
 // ====================================================
-// GraphQL query operation: GetNftCollectionWorthByNames
+// GraphQL query operation: GetNftCollectionPrice
 // ====================================================
 
-export interface GetNftCollectionWorthByNames_nft_collection_price {
+export interface GetNftCollectionPrice_nft_collection_price {
   id: string;
   name: string;
   price: general.numeric;
   source: general.NftCollectionSource;
   symbol: string | null;
-  website: string | null;
 }
 
-export interface GetNftCollectionWorthByNames {
+export interface GetNftCollectionPrice {
   /**
    * fetch data from the table: "nft_collection_price"
    */
-  nft_collection_price: GetNftCollectionWorthByNames_nft_collection_price[];
-}
-
-export interface GetNftCollectionWorthByNamesVariables {
-  names?: string[] | null;
+  nft_collection_price: GetNftCollectionPrice_nft_collection_price[];
 }

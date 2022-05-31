@@ -5,7 +5,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { ProgramIcon } from '../program-icon';
+import { TokenTypeIcon } from '../token-type-icon';
+import { classNames } from '../utils';
 import LogoImg from './images/logo.png';
+
+const NavigationLink = ({
+  href,
+  active,
+  children,
+}: {
+  active: boolean;
+  href: string;
+  children;
+}) => (
+  <Link href={href} passHref>
+    <a
+      className={classNames(
+        active ? 'border-white  border-b-2 font-bold' : 'font-base',
+        'text-white inline-flex items-center px-1 pt-1 text-sm'
+      )}
+      aria-current="page"
+    >
+      {children}
+    </a>
+  </Link>
+);
 
 interface SearchForm {
   search: string;
@@ -42,6 +67,43 @@ export function Navigation() {
                   />
                 </a>
               </Link>
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="flex space-x-4">
+                <NavigationLink href="/" active={router.asPath === '/'}>
+                  Top
+                </NavigationLink>
+                <NavigationLink
+                  href="/top/person"
+                  active={router.asPath === '/top/person'}
+                >
+                  <>
+                    <ProgramIcon program={false} />
+                    <span className="ml-2">Person</span>
+                  </>
+                </NavigationLink>
+                <NavigationLink
+                  href="/top/machine"
+                  active={router.asPath === '/top/machine'}
+                >
+                  <>
+                    <ProgramIcon program />
+                    <span className="ml-2">Machine</span>
+                  </>
+                </NavigationLink>
+                <NavigationLink
+                  href="/top/token"
+                  active={router.asPath === '/top/token'}
+                >
+                  <>
+                    <TokenTypeIcon
+                      type="priced"
+                      className="h-5 w-5 text-white shadow-xl rounded-full"
+                    />
+                    <span className="ml-2">Tokens</span>
+                  </>
+                </NavigationLink>
+              </div>
             </div>
             <div className="hidden lg:ml-6 lg:flex lg:space-x-8"></div>
           </div>
