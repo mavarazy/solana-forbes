@@ -20,7 +20,7 @@ const getAllWalletBalance = async (
       console.log(`Extraxting ${i} wallet ${wallet}`);
       return WalletService.getWalletBalance(connection, wallet);
     }),
-    1000,
+    2000,
     1
   );
 
@@ -46,7 +46,7 @@ const getLargestWallets = async (mint: string): Promise<WalletBalance[]> => {
       return owner.toString();
     });
 
-    const topWallets = await throttle(extractOwnerAccountTask, 1000, 5);
+    const topWallets = await throttle(extractOwnerAccountTask, 2000, 1);
     console.log('Extracted all owners');
 
     return getAllWalletBalance(connection, topWallets);
@@ -63,5 +63,5 @@ export const updateLargestWallets = async () => {
     getLargestWallets(token.mint);
   });
 
-  throttle(tasks, 1000, 1);
+  throttle(tasks, 2000, 1);
 };

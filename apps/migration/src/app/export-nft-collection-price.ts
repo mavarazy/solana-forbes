@@ -15,7 +15,7 @@ const GetNftCollectionPriceQuery = gql`
   }
 `;
 
-export const loadNftCollectionPrice = async () => {
+export const exportNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
   } = await hasuraClient.query({

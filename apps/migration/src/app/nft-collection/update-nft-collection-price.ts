@@ -86,16 +86,15 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    getExchagenArtCollections(),
-    getDigitalEyesCollections(),
-    getFractalCollections(),
+    // getExchagenArtCollections(),
+    // getDigitalEyesCollections(),
+    // getFractalCollections(),
     getSolanaArtCollections(),
   ]);
 
-  const totalCollections = collections.reduce(
-    (agg, collections) => agg.concat(collections),
-    []
-  );
+  const totalCollections = collections
+    .reduce((agg, collections) => agg.concat(collections), [])
+    .filter((nftPrice) => nftPrice.id && nftPrice.price);
 
   console.log('Extracted ', totalCollections.length);
 

@@ -2,11 +2,18 @@
 // import { loadImages } from './app/load-images';
 // import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 // import { updateNftCollectionPrice } from './app/nft-collection';
-import { updateWalletEvaluation } from './app/update-wallet-evaluation';
+// import { exportNftCollectionPrice } from './app/load-nft-collection-price';
+// import { updateNftCollectionPrice } from './app/nft-collection';
+import { updateLargestWallets } from './app/update-largest-wallets';
+// import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
-// updateWalletEvaluation();
+// updateNftCollectionPrice();
+
+// exportNftCollectionPrice();
+
+updateLargestWallets();
 // updateTokenToSupply();
-updateWalletEvaluation();
+// updateWalletEvaluation();
 // loadImages().then(() => console.log('Done'));
 
 // updateNftCollectionPrice().then(() => console.log('Done'));

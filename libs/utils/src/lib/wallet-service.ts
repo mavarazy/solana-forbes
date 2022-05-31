@@ -78,7 +78,11 @@ const updateWalletBalance = async (
     wallet.id
   );
 
-  const resolvedNfts = new Set(wallet.tokens.nfts.map(({ mint }) => mint));
+  const resolvedNfts = new Set(
+    wallet.tokens.nfts
+      .map(({ mint }) => mint)
+      .concat(wallet.tokens.dev.map(({ mint }) => mint))
+  );
   const allPossibleNfts = tokensWithoutNfts.dev.filter(
     (token) =>
       (token.amount === 1 || token.amount === 0) &&
