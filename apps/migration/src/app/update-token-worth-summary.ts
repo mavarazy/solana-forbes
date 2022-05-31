@@ -42,8 +42,8 @@ export const updateTokenWorthSummary = async () => {
   const topTokens = Object.values(tokenMap).sort((a, b) => b.worth - a.worth);
 
   await writeFile(
-    './top-tokens.ts',
+    './apps/app/utils/top-tokens.ts',
     'export const TopTokens = ' +
-      JSON.stringify(topTokens.slice(0, 100), null, 2)
+      JSON.stringify(topTokens.slice(0, 120), null, 2)
   );
 };

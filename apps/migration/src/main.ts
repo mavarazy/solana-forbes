@@ -12,7 +12,7 @@ import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 
 // exportNftCollectionPrice();
 
-updateTokenWorthSummary().then(() => console.log('DOne'));
+updateTokenWorthSummary().then(() => console.log('Done'));
 // updateTokenToSupply();
 // updateWalletEvaluation();
 // loadImages().then(() => console.log('Done'));
