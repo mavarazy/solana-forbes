@@ -1,5 +1,7 @@
 import { faSpinner, faWallet } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Disclosure } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import { PublicKey } from '@solana/web3.js';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,16 +15,22 @@ import LogoImg from './images/logo.png';
 const NavigationLink = ({
   href,
   active,
+  mobile = false,
   children,
 }: {
   active: boolean;
   href: string;
+  mobile?: boolean;
   children;
 }) => (
   <Link href={href} passHref>
     <a
       className={classNames(
-        active ? 'border-white  border-b-2 font-bold' : 'font-base',
+        active
+          ? mobile
+            ? 'border-white border-l-4 font-bold'
+            : 'border-white  border-b-4 font-bold'
+          : 'font-base',
         'text-white inline-flex items-center px-1 pt-1 text-sm'
       )}
       aria-current="page"
@@ -53,22 +61,9 @@ export function Navigation() {
   return (
     <nav className="bg-brand shadow">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between sm:h-16 h-32 flex-col-reverse sm:flex-row">
           <div className="flex px-2 lg:px-0">
-            <div className="flex-shrink-0 flex items-center cursor-pointer">
-              <Link href="/" passHref>
-                <a>
-                  <Image
-                    className="block h-8 w-auto"
-                    src={LogoImg}
-                    alt="Workflow"
-                    width={48}
-                    height={48}
-                  />
-                </a>
-              </Link>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <div className="flex h-16 sm:ml-6 sm:space-x-8">
               <div className="flex space-x-4">
                 <NavigationLink href="/" active={router.asPath === '/'}>
                   Top
@@ -100,7 +95,7 @@ export function Navigation() {
                       type="priced"
                       className="h-5 w-5 text-white shadow-xl rounded-full"
                     />
-                    <span className="ml-2">Tokens</span>
+                    <span className="ml-2 hidden sm:visible">Tokens</span>
                   </>
                 </NavigationLink>
               </div>
