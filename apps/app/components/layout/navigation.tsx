@@ -1,4 +1,9 @@
-import { faSpinner, faWallet } from '@fortawesome/pro-light-svg-icons';
+import {
+  faInfo,
+  faInfoCircle,
+  faSpinner,
+  faWallet,
+} from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Disclosure } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
@@ -74,7 +79,7 @@ export function Navigation() {
                 >
                   <>
                     <ProgramIcon program={false} />
-                    <span className="ml-2">Person</span>
+                    <span className="ml-2 hidden sm:block">Person</span>
                   </>
                 </NavigationLink>
                 <NavigationLink
@@ -83,7 +88,7 @@ export function Navigation() {
                 >
                   <>
                     <ProgramIcon program />
-                    <span className="ml-2">Machine</span>
+                    <span className="ml-2 hidden sm:block">Machine</span>
                   </>
                 </NavigationLink>
                 <NavigationLink
@@ -95,7 +100,19 @@ export function Navigation() {
                       type="priced"
                       className="h-5 w-5 text-white shadow-xl rounded-full"
                     />
-                    <span className="ml-2 hidden sm:visible">Tokens</span>
+                    <span className="ml-2 hidden sm:block">Tokens</span>
+                  </>
+                </NavigationLink>
+                <NavigationLink
+                  href="/about"
+                  active={router.asPath === '/about'}
+                >
+                  <>
+                    <FontAwesomeIcon
+                      icon={faInfoCircle}
+                      className="h-5 w-5 text-white shadow-xl rounded-full"
+                    />
+                    <span className="ml-2 hidden sm:block">About</span>
                   </>
                 </NavigationLink>
               </div>
