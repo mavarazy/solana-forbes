@@ -8,13 +8,22 @@
 import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 // import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
+const execute = async () => {
+  try {
+    await updateTokenWorthSummary();
+  } catch (err) {
+    console.error(err);
+  }
+  console.log('Done');
+};
+
+execute();
 // updateNftCollectionPrice();
 
 // exportNftCollectionPrice();
 
-updateTokenWorthSummary().then(() => console.log('Done'));
+// updateTokenWorthSummary().then(() => console.log('Done'));
 // updateTokenToSupply();
 // updateWalletEvaluation();
-// loadImages().then(() => console.log('Done'));
 
 // updateNftCollectionPrice().then(() => console.log('Done'));
