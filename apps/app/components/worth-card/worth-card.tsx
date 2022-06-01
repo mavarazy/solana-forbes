@@ -3,22 +3,42 @@ import React from 'react';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
 import { ProgramIcon } from '../program-icon';
+import { classNames, NumberUtils } from '../utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/pro-solid-svg-icons';
 
 interface WorthCardProps {
-  wallet: Pick<WalletBalance, 'id' | 'sol' | 'summary' | 'worth' | 'program'>;
+  wallet: Pick<
+    WalletBalance,
+    'id' | 'sol' | 'summary' | 'worth' | 'program' | 'change'
+  >;
   rank?: number;
 }
 
 export const WorthCard = ({
   rank,
-  wallet: { id, sol, summary, worth, program },
+  wallet: { id, sol, summary, worth, program, change },
 }: WorthCardProps) => (
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-2xl sm:py-6 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
-      <span className="absolute lg:text-xl text-sm top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+      <span className="absolute lg:text-xl sm:text-sm text-xs top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
         <ProgramIcon program={program} />
         {rank && <span className="ml-2"># {rank}</span>}
       </span>
+      {change !== 0 && (
+        <span
+          className={classNames(
+            change > 0 ? 'bg-green-600' : 'bg-red-600',
+            'absolute sm:text-sm text-[8px] bottom-1 sm:bottom-4 left-1 sm:left-4 font-bold px-2 py-0.5 rounded-full shadow-lg text-white'
+          )}
+        >
+          <FontAwesomeIcon
+            icon={change > 0 ? faPlus : faMinus}
+            className="mr-1"
+          />
+          {Math.round(Math.abs(change)).toLocaleString()}
+        </span>
+      )}
       <span className="flex flex-1 flex-col text-xs absolute top-4 right-4 gap-1">
         <div className="flex self-end">
           <SolBadge sol={sol} />

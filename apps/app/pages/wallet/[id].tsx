@@ -170,6 +170,7 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
         nfts: [],
       },
       program: true,
+      change: 0,
     },
     solPrice: 45,
   });

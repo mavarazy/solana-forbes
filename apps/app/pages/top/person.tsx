@@ -1,31 +1,22 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesList } from '../../components/forbes-table';
-import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { WalletBalance } from '@forbex-nxr/types';
+import {
+  GetLargestWalletWithFlag,
+  GetLargestWalletWithFlagVariables,
+  WalletBalance,
+} from '@forbex-nxr/types';
 import { TokenInfo } from '@solana/spl-token-registry';
-
-const GetLargestWalletsQuery = gql`
-  query GetHumanLargestWallets {
-    wallet(
-      where: { program: { _eq: false } }
-      order_by: { worth: desc }
-      limit: 250
-    ) {
-      id
-      sol
-      summary
-      worth
-      program
-    }
-  }
-`;
+import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet';
 
 export async function getStaticProps(context) {
   const {
     data: { wallet },
-  } = await hasuraClient.query({ query: GetLargestWalletsQuery });
+  } = await hasuraClient.query<
+    GetLargestWalletWithFlag,
+    GetLargestWalletWithFlagVariables
+  >({ query: GetLargestWalletWithFlagQuery, variables: { program: false } });
 
   return {
     props: {

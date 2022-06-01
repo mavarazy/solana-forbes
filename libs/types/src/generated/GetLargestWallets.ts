@@ -15,6 +15,7 @@ export interface GetLargestWallets_wallet {
   summary: general.TokenSummary;
   worth: general.numeric;
   program: boolean;
+  change: general.numeric;
 }
 
 export interface GetLargestWallets {

@@ -13,6 +13,7 @@ export interface InsertWallet_insert_wallet_one {
   id: string;
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
+  change: general.numeric;
   sol: general.numeric;
   summary: general.TokenSummary;
   program: boolean;
@@ -31,5 +32,6 @@ export interface InsertWalletVariables {
   summary: general.TokenSummary;
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
+  change: general.numeric;
   program: boolean;
 }

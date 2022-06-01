@@ -21,7 +21,8 @@ const toWalletBalance = async (
   sol: number,
   nfts: NftWorth[],
   tokensWithoutNfts: TokenWorthSummary,
-  program: boolean
+  program: boolean,
+  original?: WalletBalance
 ) => {
   const solPrice = await PriceService.getSolPrice();
   const nftMints = new Set<string>(nfts.map((nft) => nft.mint));
@@ -47,6 +48,7 @@ const toWalletBalance = async (
     tokens,
     worth,
     program,
+    change: original ? worth - original.worth : 0,
   };
 };
 
@@ -110,7 +112,8 @@ const updateWalletBalance = async (
     sol,
     nfts,
     tokensWithoutNfts,
-    wallet.program
+    wallet.program,
+    wallet
   );
 };
 

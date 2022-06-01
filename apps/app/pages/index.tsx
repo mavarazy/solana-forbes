@@ -14,6 +14,7 @@ const GetLargestWalletsQuery = gql`
       summary
       worth
       program
+      change
     }
   }
 `;

@@ -1,17 +1,14 @@
 import { gql } from '@apollo/client';
-import { WalletBalance } from '@forbex-nxr/types';
+import {
+  GetLargestWalletWithFlag,
+  GetLargestWalletWithFlagVariables,
+  WalletBalance,
+} from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
+import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { WalletPage } from '../../components/wallet-page';
-
-const GetTopLargestWalletIdsQuery = gql`
-  query GetTopLargestWallets {
-    wallet(limit: 250, order_by: { worth: desc }) {
-      id
-    }
-  }
-`;
 
 const GetWalletByIdQuery = gql`
   query GetWalletById($id: String!) {
@@ -22,21 +19,29 @@ const GetWalletByIdQuery = gql`
       tokens
       summary
       program
+      change
     }
   }
 `;
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const {
-    data: { wallet },
-  } = await hasuraClient.query({ query: GetTopLargestWalletIdsQuery });
+  const machineWallets = await hasuraClient.query<
+    GetLargestWalletWithFlag,
+    GetLargestWalletWithFlagVariables
+  >({ query: GetLargestWalletWithFlagQuery, variables: { program: true } });
+
+  const personWallets = await hasuraClient.query<
+    GetLargestWalletWithFlag,
+    GetLargestWalletWithFlagVariables
+  >({ query: GetLargestWalletWithFlagQuery, variables: { program: false } });
 
   // Get the paths we want to pre-render based on posts
-  const paths = wallet.map((params) => ({
-    params: params,
-  }));
+  const paths = machineWallets.data.wallet
+    .concat(personWallets.data.wallet)
+    .map((params) => ({
+      params: params,
+    }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.

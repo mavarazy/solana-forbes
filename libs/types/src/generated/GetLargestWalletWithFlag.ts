@@ -6,20 +6,25 @@
 import * as general from '../lib';
 
 // ====================================================
-// GraphQL query operation: GetMachineLargestWallets
+// GraphQL query operation: GetLargestWalletWithFlag
 // ====================================================
 
-export interface GetMachineLargestWallets_wallet {
+export interface GetLargestWalletWithFlag_wallet {
   id: string;
   sol: general.numeric;
   summary: general.TokenSummary;
   worth: general.numeric;
   program: boolean;
+  change: general.numeric;
 }
 
-export interface GetMachineLargestWallets {
+export interface GetLargestWalletWithFlag {
   /**
    * fetch data from the table: "wallet"
    */
-  wallet: GetMachineLargestWallets_wallet[];
+  wallet: GetLargestWalletWithFlag_wallet[];
+}
+
+export interface GetLargestWalletWithFlagVariables {
+  program?: boolean | null;
 }

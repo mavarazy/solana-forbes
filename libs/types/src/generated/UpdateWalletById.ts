@@ -16,6 +16,7 @@ export interface UpdateWalletById_update_wallet_by_pk {
   worth: general.numeric;
   sol: general.numeric;
   summary: general.TokenSummary;
+  change: general.numeric;
 }
 
 export interface UpdateWalletById {
@@ -31,5 +32,6 @@ export interface UpdateWalletByIdVariables {
   summary: general.TokenSummary;
   tokens: general.TokenWorthSummary;
   worth: general.numeric;
+  change: general.numeric;
   program: boolean;
 }

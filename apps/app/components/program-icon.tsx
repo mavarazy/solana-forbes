@@ -7,6 +7,6 @@ library.add(faUserRobot, faUserSecret);
 export const ProgramIcon = ({ program }: { program: boolean }) => (
   <FontAwesomeIcon
     icon={program ? faUserRobot : faUserSecret}
-    className="h-5 w-5 text-white shadow-xl rounded-full"
+    className="text-white"
   />
 );

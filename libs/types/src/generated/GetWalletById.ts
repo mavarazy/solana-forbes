@@ -16,6 +16,7 @@ export interface GetWalletById_wallet_by_pk {
   tokens: general.TokenWorthSummary;
   summary: general.TokenSummary;
   program: boolean;
+  change: general.numeric;
 }
 
 export interface GetWalletById {

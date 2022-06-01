@@ -19,4 +19,5 @@ export interface WalletBalance {
   summary: TokenSummary;
   tokens: TokenWorthSummary;
   program: boolean;
+  change: number;
 }
