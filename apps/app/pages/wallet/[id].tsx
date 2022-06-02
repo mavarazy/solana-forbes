@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/pro-light-svg-icons';
 import { WalletPage } from '../../components/wallet-page';
 import { useGlobalState } from '../../context';
+import Head from 'next/head';
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -219,6 +220,9 @@ const Wallet: NextPage<WalletProps> = ({ id }) => {
 
   return (
     <>
+      <Head>
+        <title>Estimated value of {id}</title>
+      </Head>
       {isLoading && (
         <FontAwesomeIcon
           icon={faCircleNotch}

@@ -9,6 +9,7 @@ import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { WalletPage } from '../../components/wallet-page';
+import Head from 'next/head';
 
 const GetWalletByIdQuery = gql`
   query GetWalletById($id: String!) {
@@ -83,13 +84,25 @@ const Top: NextPage<TopProps> = ({ wallet }) => {
 
   if (router.isFallback || !wallet) {
     return (
-      <div className="flex flex-1 justify-center items-center">
-        <div className="text-4xl font-bold">Loading...</div>
-      </div>
+      <>
+        <Head>
+          <title>{wallet.id}</title>
+        </Head>
+        <div className="flex flex-1 justify-center items-center">
+          <div className="text-4xl font-bold">Loading...</div>
+        </div>
+      </>
     );
   }
 
-  return <WalletPage {...wallet} />;
+  return (
+    <>
+      <Head>
+        <title>{wallet.id}</title>
+      </Head>
+      <WalletPage {...wallet} />;
+    </>
+  );
 };
 
 export default Top;
