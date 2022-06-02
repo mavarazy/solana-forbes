@@ -39,16 +39,16 @@ export const WorthCard = ({
           {Math.round(Math.abs(change)).toLocaleString()}
         </span>
       )}
-      <span className="flex flex-1 flex-col text-[8px] sm:text-xs absolute top-4 right-4 gap-1">
-        <div className="flex self-end">
+      <div className="flex flex-1 flex-col text-[8px] sm:text-xs absolute top-4 right-4 gap-1">
+        <span className="flex self-end">
           <SolBadge sol={sol} />
-        </div>
-      </span>
-      <span className="flex flex-1 flex-col text-xs absolute bottom-4 right-4 gap-1">
-        <div className="flex self-end">
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col text-xs absolute bottom-4 right-4 gap-1">
+        <span className="flex self-end">
           <SummaryBadge {...summary} />
-        </div>
-      </span>
+        </span>
+      </div>
       <div className="flex flex-col text-xl md:text-4xl self-center mt-2 font-bold px-2 justify-center items-center cursor-pointer">
         <span className="flex flex-1 justify-center">
           <span className="uppercase">
