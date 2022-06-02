@@ -3,7 +3,7 @@ import React from 'react';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
 import { ProgramIcon } from '../program-icon';
-import { classNames, NumberUtils } from '../utils';
+import { classNames } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/pro-solid-svg-icons';
 
