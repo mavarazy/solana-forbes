@@ -20,9 +20,9 @@ export const Prices = [
     name: 'kam1',
   },
   {
-    price: 0.5,
+    price: 4,
     source: 'digitaleyes',
-    name: 'wicked robots',
+    name: 'jelly beasts',
   },
   {
     price: 1.1,
@@ -35,9 +35,9 @@ export const Prices = [
     name: 'noise baztardz',
   },
   {
-    price: 0.5,
-    source: 'exchageart',
-    name: 'bugs gang',
+    price: 1.4,
+    source: 'digitaleyes',
+    name: 'compendi-pigs',
   },
   {
     price: 100,
@@ -147,9 +147,9 @@ export const Prices = [
     name: 'teddy trex',
   },
   {
-    price: 250,
-    source: 'exchageart',
-    name: 'the first collection',
+    price: 1,
+    source: 'digitaleyes',
+    name: 'alp beauty',
   },
   {
     price: 0.07,
@@ -332,6 +332,16 @@ export const Prices = [
     symbol: 'akn',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'cryptogleeclub',
+  },
+  {
+    price: 20,
+    source: 'digitaleyes',
+    name: 'catpunk og pass',
+  },
+  {
     price: 15,
     source: 'exchageart',
     name: 'lucid screens',
@@ -342,34 +352,29 @@ export const Prices = [
     name: 'lysergic skulls',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'cryptogleeclub',
-  },
-  {
     price: 0.5,
     source: 'exchageart',
     name: 'freedom in belonging',
   },
   {
+    price: 250,
+    source: 'exchageart',
+    name: 'the first collection',
+  },
+  {
     price: 1,
-    source: 'digitaleyes',
-    name: 'alp beauty',
+    source: 'exchageart',
+    name: 'glitcherz',
   },
   {
-    price: 20,
-    source: 'digitaleyes',
-    name: 'catpunk og pass',
+    price: 0.5,
+    source: 'exchageart',
+    name: 'bugs gang',
   },
   {
-    price: 1.4,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'compendi-pigs',
-  },
-  {
-    price: 4,
-    source: 'digitaleyes',
-    name: 'jelly beasts',
+    name: 'wicked robots',
   },
   {
     price: 0.2,
@@ -385,11 +390,6 @@ export const Prices = [
     price: 0.02,
     source: 'solana-art',
     name: 'kyra',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'glitcherz',
   },
   {
     price: 0.07,
@@ -408,9 +408,9 @@ export const Prices = [
     name: 'deadgg',
   },
   {
-    price: 16.989999999,
-    source: 'exchageart',
-    name: 'clayscapes',
+    price: 1.8,
+    source: 'digitaleyes',
+    name: 'superchad',
   },
   {
     price: 10,
@@ -423,9 +423,9 @@ export const Prices = [
     name: 'deadheadz',
   },
   {
-    price: 0.08,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'solana monkeys',
+    name: 'wolves on wallstreet',
   },
   {
     price: 1,
@@ -443,36 +443,6 @@ export const Prices = [
     name: 'clean poems',
   },
   {
-    price: 10,
-    source: 'digitaleyes',
-    name: 'solkappa',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'groovy soltones',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'spooky souls',
-  },
-  {
-    price: 1.8,
-    source: 'digitaleyes',
-    name: 'superchad',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'wolves on wallstreet',
-  },
-  {
-    price: 2.5,
-    source: 'digitaleyes',
-    name: 'cryptoasts',
-  },
-  {
     price: 0.8,
     source: 'digitaleyes',
     name: 'not for sale',
@@ -483,14 +453,14 @@ export const Prices = [
     name: 'moon monkies club',
   },
   {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: '3d star punks',
-  },
-  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'hood noot gang business',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: '3d star punks',
   },
   {
     price: 2,
@@ -531,6 +501,11 @@ export const Prices = [
     price: 0.5,
     source: 'digitaleyes',
     name: 'tima bored ape club',
+  },
+  {
+    price: 0.12,
+    source: 'digitaleyes',
+    name: 'tropic tickets by tropic legends clothing co.',
   },
   {
     price: 13,
@@ -593,9 +568,14 @@ export const Prices = [
     name: 'banana solana',
   },
   {
-    price: 0.4,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'crypto martians club',
+    name: 'chihuahuasol',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'chickenz',
   },
   {
     price: 2,
@@ -611,11 +591,6 @@ export const Prices = [
     price: 0.045,
     source: 'digitaleyes',
     name: 'happy pups',
-  },
-  {
-    price: 1.5,
-    source: 'digitaleyes',
-    name: 'justin wood circus',
   },
   {
     price: 8,
@@ -643,7 +618,7 @@ export const Prices = [
     name: 'solmates gen1',
   },
   {
-    price: 0.09,
+    price: 0.08,
     source: 'digitaleyes',
     name: 'solpenguins',
   },
@@ -653,14 +628,19 @@ export const Prices = [
     name: 'sol stamps',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solalone society',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'solana penguins',
+  },
+  {
+    price: 0.39,
+    source: 'digitaleyes',
+    name: 'solbulls',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solalone society',
   },
   {
     price: 0.25,
@@ -668,14 +648,14 @@ export const Prices = [
     name: 'solloween',
   },
   {
-    price: 55,
-    source: 'digitaleyes',
-    name: 'solsteads surreal estate',
-  },
-  {
     price: 5,
     source: 'digitaleyes',
     name: '08 splash ink art nft',
+  },
+  {
+    price: 16.989999999,
+    source: 'exchageart',
+    name: 'clayscapes',
   },
   {
     price: 10,
@@ -688,9 +668,29 @@ export const Prices = [
     name: 'sol monkies club',
   },
   {
-    price: 0.12,
+    price: 10,
     source: 'digitaleyes',
-    name: 'tropic tickets by tropic legends clothing co.',
+    name: 'solkappa',
+  },
+  {
+    price: 0.08,
+    source: 'digitaleyes',
+    name: 'solana monkeys',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'groovy soltones',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'spooky souls',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'justin wood circus',
   },
   {
     price: 3,
@@ -698,9 +698,9 @@ export const Prices = [
     name: 'lucid drakes',
   },
   {
-    price: 0.5,
+    price: 55,
     source: 'digitaleyes',
-    name: 'chihuahuasol',
+    name: 'solsteads surreal estate',
   },
   {
     price: 1.35,
@@ -718,14 +718,14 @@ export const Prices = [
     name: 'escapex',
   },
   {
-    price: 0.15,
+    price: 2.5,
     source: 'digitaleyes',
-    name: 'chickenz',
+    name: 'cryptoasts',
   },
   {
-    price: 0.39,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'solbulls',
+    name: 'crypto martians club',
   },
   {
     price: 40,
@@ -733,34 +733,9 @@ export const Prices = [
     name: 'aurory',
   },
   {
-    price: 3.3,
-    source: 'digitaleyes',
-    name: 'hot bunnies nft',
-  },
-  {
-    price: 0.62,
-    source: 'digitaleyes',
-    name: 'pharaoh king',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solpresidents',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'solana robot business',
-  },
-  {
-    price: 0.27,
-    source: 'digitaleyes',
-    name: 'wipemyass',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'pineapple apple pen nft',
   },
   {
     price: 1.25,
@@ -783,9 +758,9 @@ export const Prices = [
     name: 'atlos - legends of sol',
   },
   {
-    price: 0.1,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'soldice',
+    name: 'picked pickles',
   },
   {
     price: 4.5,
@@ -803,24 +778,14 @@ export const Prices = [
     name: 'solana fan the game of squid',
   },
   {
-    price: 1.1,
-    source: 'digitaleyes',
-    name: "joylina's cantina : special  editions trading cards",
-  },
-  {
-    price: 1.6,
-    source: 'digitaleyes',
-    name: 'neonexus property tokens',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'check meta',
   },
   {
-    price: 0.7,
+    price: 1.6,
     source: 'digitaleyes',
-    name: 'the infamous thugbirdz derivative',
+    name: 'neonexus property tokens',
   },
   {
     price: 0.8,
@@ -833,19 +798,9 @@ export const Prices = [
     name: 'alpha puppies',
   },
   {
-    price: 0.15,
-    source: 'digitaleyes',
-    name: 'cyber cow society',
-  },
-  {
     price: 0.11,
     source: 'digitaleyes',
     name: 'solteeth',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'magical land creatures nft',
   },
   {
     price: 0.1,
@@ -858,14 +813,14 @@ export const Prices = [
     name: 'dragons watch heroes',
   },
   {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'magical land creatures nft',
+  },
+  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'rug toadz',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'solana baby ape club',
   },
   {
     price: 5,
@@ -928,24 +883,24 @@ export const Prices = [
     name: 'epoch labs',
   },
   {
-    price: 0.29,
-    source: 'digitaleyes',
-    name: 'flamingo crew',
-  },
-  {
     price: 1.5,
     source: 'digitaleyes',
     name: 'soldalas',
   },
   {
-    price: 1.5,
+    price: 0.29,
     source: 'digitaleyes',
-    name: 'fractalverse',
+    name: 'flamingo crew',
   },
   {
     price: 0.34,
     source: 'digitaleyes',
     name: 'hoodratsnft',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'fractalverse',
   },
   {
     price: 0.55,
@@ -958,19 +913,14 @@ export const Prices = [
     name: 'nois3',
   },
   {
-    price: 20,
-    source: 'digitaleyes',
-    name: 'one eye child nft',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'encoded origin',
-  },
-  {
     price: 0.6,
     source: 'digitaleyes',
     name: 'orc racing club',
+  },
+  {
+    price: 20,
+    source: 'digitaleyes',
+    name: 'one eye child nft',
   },
   {
     price: 0.09,
@@ -1013,10 +963,9 @@ export const Prices = [
     name: 'sollyfish',
   },
   {
-    price: 0.14,
-    source: 'solana-art',
-    name: 'sigh ducks',
-    symbol: 'sighducks',
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'encoded origin',
   },
   {
     price: 69,
@@ -1029,11 +978,6 @@ export const Prices = [
     name: 'solarnauts: mission bravo',
   },
   {
-    price: 13,
-    source: 'exchageart',
-    name: "don't forget to go outside",
-  },
-  {
     price: 1,
     source: 'digitaleyes',
     name: 'mums',
@@ -1044,9 +988,60 @@ export const Prices = [
     name: 'mafia vs police',
   },
   {
-    price: 0.4,
+    price: 3.3,
     source: 'digitaleyes',
-    name: 'picked pickles',
+    name: 'hot bunnies nft',
+  },
+  {
+    price: 0.62,
+    source: 'digitaleyes',
+    name: 'pharaoh king',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solpresidents',
+  },
+  {
+    price: 0.14,
+    source: 'solana-art',
+    name: 'sigh ducks',
+    symbol: 'sighducks',
+  },
+  {
+    price: 0.27,
+    source: 'digitaleyes',
+    name: 'wipemyass',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'pineapple apple pen nft',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'soldice',
+  },
+  {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'solana baby ape club',
+  },
+  {
+    price: 13,
+    source: 'exchageart',
+    name: "don't forget to go outside",
+  },
+  {
+    price: 0.7,
+    source: 'digitaleyes',
+    name: 'the infamous thugbirdz derivative',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'cyber cow society',
   },
   {
     price: 0.3,
@@ -1074,9 +1069,9 @@ export const Prices = [
     name: 'genopets cracked eggs',
   },
   {
-    price: 0.08,
+    price: 0.9,
     source: 'digitaleyes',
-    name: 'sol ninjas',
+    name: 'anubis 1st edition',
   },
   {
     price: 1,
@@ -1104,31 +1099,6 @@ export const Prices = [
     name: 'vibrant street art',
   },
   {
-    price: 0.02,
-    source: 'digitaleyes',
-    name: 'posh dolphs',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'cercuri',
-  },
-  {
-    price: 1.5,
-    source: 'digitaleyes',
-    name: 'flippies',
-  },
-  {
-    price: 0.9,
-    source: 'digitaleyes',
-    name: 'anubis 1st edition',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'solypoly squad',
-  },
-  {
     price: 2.6,
     source: 'digitaleyes',
     name: 'corporats lab',
@@ -1152,6 +1122,26 @@ export const Prices = [
     price: 0.1,
     source: 'digitaleyes',
     name: 'anyloot',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'pixel dudes',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'socean collectible series: pathfinder',
+  },
+  {
+    price: 0.08,
+    source: 'digitaleyes',
+    name: 'sol ninjas',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'dmt apes',
   },
   {
     price: 0.08,
@@ -1255,14 +1245,14 @@ export const Prices = [
     symbol: 'akrg2',
   },
   {
-    price: 0.25,
-    source: 'exchageart',
-    name: 'pixel dudes',
-  },
-  {
     price: 1,
     source: 'digitaleyes',
-    name: 'socean collectible series: pathfinder',
+    name: 'cercuri',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'flippies',
   },
   {
     price: 0.45,
@@ -1392,6 +1382,11 @@ export const Prices = [
     symbol: 'juice',
   },
   {
+    price: 0.02,
+    source: 'digitaleyes',
+    name: 'posh dolphs',
+  },
+  {
     price: 40,
     source: 'exchageart',
     name: 'odd art',
@@ -1412,9 +1407,9 @@ export const Prices = [
     name: 'before i die',
   },
   {
-    price: 0.25,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'dmt apes',
+    name: 'solypoly squad',
   },
   {
     price: 0.02,
@@ -1452,39 +1447,9 @@ export const Prices = [
     name: 'happy quokkas',
   },
   {
-    price: 0.2,
+    price: 0.24,
     source: 'digitaleyes',
-    name: 'mechanic wolf',
-  },
-  {
-    price: 2.342,
-    source: 'digitaleyes',
-    name: 'solanio',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'naked pixel punks solana girls',
-  },
-  {
-    price: 0.99,
-    source: 'digitaleyes',
-    name: 'shiba lady',
-  },
-  {
-    price: 1.1,
-    source: 'digitaleyes',
-    name: 'solpaint.club',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'adorable dinos',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'pirates of sol bay - treasures',
+    name: 'hedgie hogs',
   },
   {
     price: 0.155,
@@ -1492,24 +1457,9 @@ export const Prices = [
     name: 'bastard reptilians',
   },
   {
-    price: 1,
+    price: 0.2,
     source: 'digitaleyes',
-    name: 'clewless wurms',
-  },
-  {
-    price: 177,
-    source: 'exchageart',
-    name: 'hot heads',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'summoner',
-  },
-  {
-    price: 4.5,
-    source: 'exchageart',
-    name: 'jawdrop',
+    name: 'pirates of sol bay - treasures',
   },
   {
     price: 0.3,
@@ -1517,9 +1467,9 @@ export const Prices = [
     name: 'solana cash ape club',
   },
   {
-    price: 100,
-    source: 'exchageart',
-    name: 'asphyxia',
+    price: 1,
+    source: 'digitaleyes',
+    name: 'clewless wurms',
   },
   {
     price: 0.6,
@@ -1527,9 +1477,9 @@ export const Prices = [
     name: 'autonomous scoop shop',
   },
   {
-    price: 1.5,
+    price: 0.09,
     source: 'digitaleyes',
-    name: 'solnouns',
+    name: 'hallow birds',
   },
   {
     price: 0.5,
@@ -1537,19 +1487,34 @@ export const Prices = [
     name: 'gorecats',
   },
   {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'hallow birds',
-  },
-  {
     price: 0.75,
     source: 'digitaleyes',
     name: 'faces of solana money business',
   },
   {
+    price: 177,
+    source: 'exchageart',
+    name: 'hot heads',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'naked pixel punks solana girls',
+  },
+  {
+    price: 4.5,
+    source: 'exchageart',
+    name: 'jawdrop',
+  },
+  {
     price: 2,
     source: 'digitaleyes',
     name: 'doll society',
+  },
+  {
+    price: 100,
+    source: 'exchageart',
+    name: 'asphyxia',
   },
   {
     price: 1,
@@ -1627,24 +1592,14 @@ export const Prices = [
     name: 'decadent thinking',
   },
   {
-    price: 32,
-    source: 'digitaleyes',
-    name: 'guild verse',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'hallowbits',
   },
   {
-    price: 1.88,
+    price: 32,
     source: 'digitaleyes',
-    name: 'kaiju cards',
-  },
-  {
-    price: 7.5,
-    source: 'digitaleyes',
-    name: 'kreechures',
+    name: 'guild verse',
   },
   {
     price: 8,
@@ -1652,9 +1607,9 @@ export const Prices = [
     name: 'megalodon rogue shark teeth',
   },
   {
-    price: 1.2,
+    price: 1.88,
     source: 'digitaleyes',
-    name: 'last 4rtist',
+    name: 'kaiju cards',
   },
   {
     price: 0.65,
@@ -1687,20 +1642,60 @@ export const Prices = [
     name: 'solslimes',
   },
   {
+    price: 1,
+    source: 'exchageart',
+    name: 'london brutalism',
+  },
+  {
+    price: 3,
+    source: 'exchageart',
+    name: 'acidhat abstracts',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'summoner',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'just blocks',
+  },
+  {
+    price: 0.11,
+    source: 'digitaleyes',
+    name: 'fbayc',
+  },
+  {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'emobox',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'mechanic wolf',
+  },
+  {
     price: 0.27,
     source: 'solana-art',
     name: 'saiba gang',
     symbol: 'sbagng',
   },
   {
-    price: 1,
-    source: 'exchageart',
-    name: 'london brutalism',
+    price: 2.342,
+    source: 'digitaleyes',
+    name: 'solanio',
   },
   {
-    price: 2,
-    source: 'exchageart',
-    name: 'acidhat abstracts',
+    price: 0.99,
+    source: 'digitaleyes',
+    name: 'shiba lady',
+  },
+  {
+    price: 1.1,
+    source: 'digitaleyes',
+    name: 'solpaint.club',
   },
   {
     price: 0.77,
@@ -1748,9 +1743,9 @@ export const Prices = [
     name: 'captains',
   },
   {
-    price: 0.19,
+    price: 0.3,
     source: 'digitaleyes',
-    name: 'just blocks',
+    name: 'adorable dinos',
   },
   {
     price: 2.75,
@@ -1758,9 +1753,9 @@ export const Prices = [
     name: 'psychedelic hybrids',
   },
   {
-    price: 0.11,
+    price: 1.5,
     source: 'digitaleyes',
-    name: 'fbayc',
+    name: 'solnouns',
   },
   {
     price: 0.777,
@@ -1778,19 +1773,14 @@ export const Prices = [
     name: 'foresights',
   },
   {
-    price: 0.05,
+    price: 7.5,
     source: 'digitaleyes',
-    name: 'emobox',
+    name: 'kreechures',
   },
   {
-    price: 0.24,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'hedgie hogs',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'baby demon gang',
+    name: 'squareheadz',
   },
   {
     price: 7,
@@ -1808,9 +1798,9 @@ export const Prices = [
     name: 'galaxy fight',
   },
   {
-    price: 0.044,
+    price: 0.06,
     source: 'digitaleyes',
-    name: 'draginz',
+    name: 'sawbunny',
   },
   {
     price: 1,
@@ -1838,31 +1828,6 @@ export const Prices = [
     name: 'missing pieces painted heads',
   },
   {
-    price: 0.075,
-    source: 'digitaleyes',
-    name: "cute li'l phant",
-  },
-  {
-    price: 1.3,
-    source: 'digitaleyes',
-    name: 'night racers',
-  },
-  {
-    price: 0.49,
-    source: 'digitaleyes',
-    name: 'kongo kingz',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'squareheadz',
-  },
-  {
-    price: 0.06,
-    source: 'digitaleyes',
-    name: 'sawbunny',
-  },
-  {
     price: 2.5,
     source: 'digitaleyes',
     name: 'solamids',
@@ -1878,19 +1843,14 @@ export const Prices = [
     name: 'angry citizens',
   },
   {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'pixelworms',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: 'tombstoned high society',
-  },
-  {
     price: 1,
     source: 'digitaleyes',
     name: 'perilous penguins',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'pixelworms',
   },
   {
     price: 0.44,
@@ -1911,11 +1871,6 @@ export const Prices = [
     price: 0.05,
     source: 'digitaleyes',
     name: 'solana wild vampires',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'ghostly sols',
   },
   {
     price: 2,
@@ -1958,11 +1913,6 @@ export const Prices = [
     name: 'boss babes',
   },
   {
-    price: 8,
-    source: 'digitaleyes',
-    name: 'coollamas',
-  },
-  {
     price: 0.08,
     source: 'digitaleyes',
     name: 'cowdy cactus',
@@ -1973,6 +1923,11 @@ export const Prices = [
     name: 'cyber samurai',
   },
   {
+    price: 3,
+    source: 'digitaleyes',
+    name: 'evity art',
+  },
+  {
     price: 0.13,
     source: 'digitaleyes',
     name: 'freaky fox family gen0',
@@ -1981,11 +1936,6 @@ export const Prices = [
     price: 0.3,
     source: 'digitaleyes',
     name: '012funksaicy',
-  },
-  {
-    price: 3,
-    source: 'digitaleyes',
-    name: 'evity art',
   },
   {
     price: 1.1,
@@ -2018,14 +1968,9 @@ export const Prices = [
     name: 'snailana',
   },
   {
-    price: 1.48,
-    source: 'fractal',
-    name: 'botborgs',
-  },
-  {
-    price: 1.1,
+    price: 0.65,
     source: 'digitaleyes',
-    name: 'solana puppy',
+    name: 'sol magic mask',
   },
   {
     price: 0.1,
@@ -2033,14 +1978,14 @@ export const Prices = [
     name: 'soldoges nft',
   },
   {
+    price: 1.1,
+    source: 'digitaleyes',
+    name: 'solana puppy',
+  },
+  {
     price: 3,
     source: 'digitaleyes',
     name: 'solitairenft',
-  },
-  {
-    price: 3.5,
-    source: 'digitaleyes',
-    name: 'spared padres',
   },
   {
     price: 1,
@@ -2058,6 +2003,56 @@ export const Prices = [
     name: 'solmon',
   },
   {
+    price: 1.48,
+    source: 'fractal',
+    name: 'botborgs',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solgoddessses',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'baby demon gang',
+  },
+  {
+    price: 0.044,
+    source: 'digitaleyes',
+    name: 'draginz',
+  },
+  {
+    price: 0.075,
+    source: 'digitaleyes',
+    name: "cute li'l phant",
+  },
+  {
+    price: 1.3,
+    source: 'digitaleyes',
+    name: 'night racers',
+  },
+  {
+    price: 0.49,
+    source: 'digitaleyes',
+    name: 'kongo kingz',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'nfty stars',
+  },
+  {
+    price: 5,
+    source: 'digitaleyes',
+    name: 'tombstoned high society',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'ghostly sols',
+  },
+  {
     price: 0.5,
     source: 'exchageart',
     name: 'wild women',
@@ -2068,9 +2063,9 @@ export const Prices = [
     name: 'courage to be myself',
   },
   {
-    price: 1,
+    price: 8,
     source: 'digitaleyes',
-    name: 'solgoddessses',
+    name: 'coollamas',
   },
   {
     price: 4.64,
@@ -2093,19 +2088,14 @@ export const Prices = [
     name: 'bichis world',
   },
   {
-    price: 0.15,
+    price: 3.5,
     source: 'digitaleyes',
-    name: 'nfty stars',
+    name: 'spared padres',
   },
   {
-    price: 0.65,
+    price: 2.5,
     source: 'digitaleyes',
-    name: 'sol magic mask',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'asgardian apple collection',
+    name: 'sol teen apez',
   },
   {
     price: 10,
@@ -2113,14 +2103,14 @@ export const Prices = [
     name: 'cyberpunk project',
   },
   {
-    price: 2.5,
-    source: 'exchageart',
-    name: 'cool puppet',
-  },
-  {
     price: 0.023,
     source: 'digitaleyes',
     name: 'pixel titz',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'dippy dragons nft',
   },
   {
     price: 12,
@@ -2133,14 +2123,14 @@ export const Prices = [
     name: 'strange geographies',
   },
   {
-    price: 0.5,
+    price: 0.3,
     source: 'digitaleyes',
-    name: '250 sketch punks',
+    name: 'sol cyberkongz',
   },
   {
-    price: 2,
+    price: 120,
     source: 'digitaleyes',
-    name: 'blood lords',
+    name: 'ghost machine',
   },
   {
     price: 10,
@@ -2156,36 +2146,6 @@ export const Prices = [
     price: 0.3,
     source: 'exchageart',
     name: 'ancient adventures collection',
-  },
-  {
-    price: 0.048,
-    source: 'digitaleyes',
-    name: 'feisty fish',
-  },
-  {
-    price: 2.5,
-    source: 'digitaleyes',
-    name: 'sol teen apez',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'dippy dragons nft',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'sol cyberkongz',
-  },
-  {
-    price: 1.85,
-    source: 'digitaleyes',
-    name: 'a bit of a shadow',
-  },
-  {
-    price: 120,
-    source: 'digitaleyes',
-    name: 'ghost machine',
   },
   {
     price: 5,
@@ -2218,6 +2178,11 @@ export const Prices = [
     name: 'solana faction cards',
   },
   {
+    price: 0.13,
+    source: 'digitaleyes',
+    name: 'solama',
+  },
+  {
     price: 0.05,
     source: 'digitaleyes',
     name: 'crocogang',
@@ -2243,11 +2208,6 @@ export const Prices = [
     name: 'surfer dao',
   },
   {
-    price: 0.139,
-    source: 'digitaleyes',
-    name: 'rugsten',
-  },
-  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'solana feline business',
@@ -2268,11 +2228,6 @@ export const Prices = [
     name: 'apexducks',
   },
   {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'deadass',
-  },
-  {
     price: 0.7,
     source: 'digitaleyes',
     name: 'cassets',
@@ -2281,11 +2236,6 @@ export const Prices = [
     price: 0.1,
     source: 'digitaleyes',
     name: 'gumdroptree nft',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'dirtypanda banners',
   },
   {
     price: 0.75,
@@ -2383,6 +2333,46 @@ export const Prices = [
     name: 'toughies',
   },
   {
+    price: 0.7,
+    source: 'exchageart',
+    name: 'line continuous',
+  },
+  {
+    price: 2.5,
+    source: 'exchageart',
+    name: 'cool puppet',
+  },
+  {
+    price: 0.02,
+    source: 'digitaleyes',
+    name: 'paperflights',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'thugbabez',
+  },
+  {
+    price: 0.07,
+    source: 'digitaleyes',
+    name: 'pudgy pigeons',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'asgardian apple collection',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: '250 sketch punks',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'blood lords',
+  },
+  {
     price: 3,
     source: 'exchageart',
     name: 'yomi',
@@ -2398,9 +2388,14 @@ export const Prices = [
     name: 'catchking items',
   },
   {
-    price: 0.07,
+    price: 1.85,
     source: 'digitaleyes',
-    name: 'pudgy pigeons',
+    name: 'a bit of a shadow',
+  },
+  {
+    price: 0.048,
+    source: 'digitaleyes',
+    name: 'feisty fish',
   },
   {
     price: 1.5,
@@ -2408,24 +2403,19 @@ export const Prices = [
     name: 'suprematic suns',
   },
   {
-    price: 0.7,
-    source: 'exchageart',
-    name: 'line continuous',
+    price: 0.139,
+    source: 'digitaleyes',
+    name: 'rugsten',
   },
   {
-    price: 0.02,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'paperflights',
+    name: 'deadass',
   },
   {
-    price: 0.1,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'thugbabez',
-  },
-  {
-    price: 0.13,
-    source: 'digitaleyes',
-    name: 'solama',
+    name: 'dirtypanda banners',
   },
   {
     price: 0.2,
@@ -2473,9 +2463,9 @@ export const Prices = [
     name: 'unheil',
   },
   {
-    price: 0.33,
-    source: 'exchageart',
-    name: 'life between two sides',
+    price: 50,
+    source: 'digitaleyes',
+    name: "the panther's club",
   },
   {
     price: 0.35,
@@ -2483,24 +2473,14 @@ export const Prices = [
     name: 'unknown place',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'hallowienies',
+    price: 3,
+    source: 'exchageart',
+    name: 'essjayne - earthpainting',
   },
   {
-    price: 0.39,
-    source: 'digitaleyes',
-    name: 'boat boys',
-  },
-  {
-    price: 0.029,
-    source: 'digitaleyes',
-    name: 'sol turtle',
-  },
-  {
-    price: 50,
-    source: 'digitaleyes',
-    name: "the panther's club",
+    price: 0.33,
+    source: 'exchageart',
+    name: 'life between two sides',
   },
   {
     price: 0.8,
@@ -2508,9 +2488,14 @@ export const Prices = [
     name: '1000 voxel kingdom',
   },
   {
-    price: 0.24,
+    price: 1,
+    source: 'exchageart',
+    name: 'vox headz',
+  },
+  {
+    price: 0.11,
     source: 'digitaleyes',
-    name: 'groovy afterlife',
+    name: 'rugsten bannurs',
   },
   {
     price: 0.07,
@@ -2610,9 +2595,9 @@ export const Prices = [
     symbol: 'mpa',
   },
   {
-    price: 1,
-    source: 'exchageart',
-    name: 'vox headz',
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'hallowienies',
   },
   {
     price: 0.5,
@@ -2768,14 +2753,29 @@ export const Prices = [
     symbol: 'orcs',
   },
   {
-    price: 0.11,
+    price: 0.115,
     source: 'digitaleyes',
-    name: 'rugsten bannurs',
+    name: 'solanasquids',
   },
   {
     price: 0.2,
     source: 'digitaleyes',
     name: 'meow meow',
+  },
+  {
+    price: 0.029,
+    source: 'digitaleyes',
+    name: 'sol turtle',
+  },
+  {
+    price: 0.39,
+    source: 'digitaleyes',
+    name: 'boat boys',
+  },
+  {
+    price: 0.24,
+    source: 'digitaleyes',
+    name: 'groovy afterlife',
   },
   {
     price: 0.3,
@@ -2800,22 +2800,12 @@ export const Prices = [
   {
     price: 3,
     source: 'exchageart',
-    name: 'essjayne - earthpainting',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
     name: 'video paintings',
   },
   {
     price: 1.5,
     source: 'exchageart',
     name: 'deadlands',
-  },
-  {
-    price: 0.115,
-    source: 'digitaleyes',
-    name: 'solanasquids',
   },
   {
     price: 0.23,
@@ -2876,9 +2866,9 @@ export const Prices = [
     name: "ducky's dream life",
   },
   {
-    price: 1.5,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'grand sport auto',
+    name: 'sol tshirt',
   },
   {
     price: 0.18,
@@ -3022,9 +3012,9 @@ export const Prices = [
     symbol: 'slmn',
   },
   {
-    price: 0.55,
-    source: 'digitaleyes',
-    name: 'gangsta gators',
+    price: 2,
+    source: 'exchageart',
+    name: 'iconic ghouls',
   },
   {
     price: 0.07,
@@ -3199,6 +3189,11 @@ export const Prices = [
     symbol: 'bbc',
   },
   {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'grand sport auto',
+  },
+  {
     price: 23.1,
     source: 'exchageart',
     name: 'the anons',
@@ -3209,9 +3204,9 @@ export const Prices = [
     name: 'bbpoison',
   },
   {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'iconic ghouls',
+    price: 0.55,
+    source: 'digitaleyes',
+    name: 'gangsta gators',
   },
   {
     price: 0.1,
@@ -3224,9 +3219,9 @@ export const Prices = [
     name: 'canvas',
   },
   {
-    price: 0.1,
+    price: 1.15,
     source: 'digitaleyes',
-    name: 'sol tshirt',
+    name: 'mutantmonkeybusiness',
   },
   {
     price: 0.2,
@@ -3250,11 +3245,6 @@ export const Prices = [
     name: 'ahi phoenix',
   },
   {
-    price: 1.15,
-    source: 'digitaleyes',
-    name: 'mutantmonkeybusiness',
-  },
-  {
     price: 0.01,
     source: 'solana-art',
     name: 'civilians',
@@ -3276,24 +3266,24 @@ export const Prices = [
     symbol: 'bbn',
   },
   {
-    price: 0.2,
+    price: 0.04,
     source: 'digitaleyes',
-    name: 'abnormal rabbit club',
+    name: 'subway skaters',
   },
   {
-    price: 0.5,
+    price: 1,
     source: 'digitaleyes',
-    name: 'cardboard box coalition',
+    name: 'hexahero',
   },
   {
-    price: 0.2,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'bored of ape social club',
+    name: 'orange men',
   },
   {
     price: 0.1,
     source: 'digitaleyes',
-    name: 'solana eagle',
+    name: 'the penguins',
   },
   {
     price: 0.3,
@@ -3311,26 +3301,6 @@ export const Prices = [
     name: 'anime art',
   },
   {
-    price: 4,
-    source: 'digitaleyes',
-    name: 'solpass',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'orange men',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'solana carrom club',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'the penguins',
-  },
-  {
     price: 0.49,
     source: 'digitaleyes',
     name: 'deeps',
@@ -3341,24 +3311,9 @@ export const Prices = [
     name: 'sol pixel dogs',
   },
   {
-    price: 1,
+    price: 0.6,
     source: 'digitaleyes',
-    name: 'hexahero',
-  },
-  {
-    price: 0.13,
-    source: 'digitaleyes',
-    name: 'foxy fennecs gang',
-  },
-  {
-    price: 0.24,
-    source: 'digitaleyes',
-    name: 'monke babies',
-  },
-  {
-    price: 0.42,
-    source: 'digitaleyes',
-    name: 'the original sol',
+    name: 'color shards',
   },
   {
     price: 0.5,
@@ -3366,9 +3321,9 @@ export const Prices = [
     name: 'human monstera',
   },
   {
-    price: 0.6,
+    price: 0.24,
     source: 'digitaleyes',
-    name: 'color shards',
+    name: 'monke babies',
   },
   {
     price: 1.5,
@@ -3379,6 +3334,11 @@ export const Prices = [
     price: 1,
     source: 'digitaleyes',
     name: 'biggiedsart',
+  },
+  {
+    price: 0.42,
+    source: 'digitaleyes',
+    name: 'the original sol',
   },
   {
     price: 0.1,
@@ -3406,29 +3366,24 @@ export const Prices = [
     name: 'the bull herd',
   },
   {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'city punks',
-  },
-  {
-    price: 0.38,
-    source: 'digitaleyes',
-    name: 'solpixies',
-  },
-  {
-    price: 2.5,
-    source: 'digitaleyes',
-    name: 'beach bum billionaires',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: "joylina's cantina",
   },
   {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'city punks',
+  },
+  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'solez',
+  },
+  {
+    price: 100000,
+    source: 'digitaleyes',
+    name: 'solgods',
   },
   {
     price: 0.1,
@@ -3486,11 +3441,6 @@ export const Prices = [
     name: 'buddy bullies',
   },
   {
-    price: 0.16,
-    source: 'digitaleyes',
-    name: 'colorfieldblack',
-  },
-  {
     price: 0.3,
     source: 'digitaleyes',
     name: 'cybertrolls',
@@ -3498,17 +3448,12 @@ export const Prices = [
   {
     price: 0.16,
     source: 'digitaleyes',
+    name: 'colorfieldblack',
+  },
+  {
+    price: 0.16,
+    source: 'digitaleyes',
     name: 'earthian ladies',
-  },
-  {
-    price: 0.18,
-    source: 'fractal',
-    name: 'gator squad',
-  },
-  {
-    price: 0.8,
-    source: 'fractal',
-    name: 'defi land gen-0 nfts',
   },
   {
     price: 85,
@@ -3519,11 +3464,6 @@ export const Prices = [
     price: 0.5,
     source: 'digitaleyes',
     name: 'fractures',
-  },
-  {
-    price: 999,
-    source: 'digitaleyes',
-    name: 'golf sol',
   },
   {
     price: 0.06,
@@ -3551,6 +3491,16 @@ export const Prices = [
     name: 'sol tigers',
   },
   {
+    price: 0.18,
+    source: 'fractal',
+    name: 'gator squad',
+  },
+  {
+    price: 0.8,
+    source: 'fractal',
+    name: 'defi land gen-0 nfts',
+  },
+  {
     price: 0.053,
     source: 'digitaleyes',
     name: 'synthetify banner 1',
@@ -3571,6 +3521,46 @@ export const Prices = [
     name: 'isolated celebrity cats',
   },
   {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'bored of ape social club',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'abnormal rabbit club',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'cardboard box coalition',
+  },
+  {
+    price: 4,
+    source: 'digitaleyes',
+    name: 'solpass',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'solana carrom club',
+  },
+  {
+    price: 0.38,
+    source: 'digitaleyes',
+    name: 'solpixies',
+  },
+  {
+    price: 2.5,
+    source: 'digitaleyes',
+    name: 'beach bum billionaires',
+  },
+  {
+    price: 999,
+    source: 'digitaleyes',
+    name: 'golf sol',
+  },
+  {
     price: 8.55,
     source: 'exchageart',
     name: 'evolution 1',
@@ -3581,19 +3571,19 @@ export const Prices = [
     name: 'genesis genopets habitats',
   },
   {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'solana eagle',
+  },
+  {
     price: 10,
     source: 'exchageart',
     name: 'lava boys',
   },
   {
-    price: 0.04,
+    price: 0.13,
     source: 'digitaleyes',
-    name: 'subway skaters',
-  },
-  {
-    price: 100000,
-    source: 'digitaleyes',
-    name: 'solgods',
+    name: 'foxy fennecs gang',
   },
   {
     price: 0.1489,
@@ -3636,34 +3626,29 @@ export const Prices = [
     name: 'living nightmares',
   },
   {
-    price: 0.069,
+    price: 666,
     source: 'digitaleyes',
-    name: 'balloonlabz collection 1 dogz',
+    name: 'solana monkey business',
   },
   {
-    price: 5.23,
+    price: 0.12,
     source: 'digitaleyes',
-    name: 'crazypirate',
+    name: 'solardust | elvensquad',
   },
   {
-    price: 0.99,
+    price: 10,
     source: 'digitaleyes',
-    name: 'duckyverse gen0',
-  },
-  {
-    price: 0.085,
-    source: 'digitaleyes',
-    name: 'hood chad',
+    name: 'solariumnft',
   },
   {
     price: 0.04,
     source: 'digitaleyes',
-    name: 'horsy fellas',
+    name: 'solafinger',
   },
   {
-    price: 666,
+    price: 0.28,
     source: 'digitaleyes',
-    name: 'solana monkey business',
+    name: 'stoned punkz',
   },
   {
     price: 0.4,
@@ -3671,9 +3656,9 @@ export const Prices = [
     name: 'animated richiest',
   },
   {
-    price: 0.12,
+    price: 0.35,
     source: 'digitaleyes',
-    name: 'solardust | elvensquad',
+    name: 'billionaire bulls club',
   },
   {
     price: 0.49,
@@ -3841,14 +3826,14 @@ export const Prices = [
     symbol: 'zv',
   },
   {
-    price: 0.04,
+    price: 0.99,
     source: 'digitaleyes',
-    name: 'solafinger',
+    name: 'duckyverse gen0',
   },
   {
-    price: 0.28,
+    price: 0.085,
     source: 'digitaleyes',
-    name: 'stoned punkz',
+    name: 'hood chad',
   },
   {
     price: 0.048888,
@@ -3947,14 +3932,14 @@ export const Prices = [
     symbol: 'egsc',
   },
   {
-    price: 0.35,
+    price: 0.04,
     source: 'digitaleyes',
-    name: 'billionaire bulls club',
+    name: 'horsy fellas',
   },
   {
-    price: 10,
+    price: 0.069,
     source: 'digitaleyes',
-    name: 'solariumnft',
+    name: 'balloonlabz collection 1 dogz',
   },
   {
     price: 0.69,
@@ -3979,6 +3964,11 @@ export const Prices = [
     source: 'solana-art',
     name: 'megaballz',
     symbol: 'mb',
+  },
+  {
+    price: 5.23,
+    source: 'digitaleyes',
+    name: 'crazypirate',
   },
   {
     price: 0.25,
@@ -4073,9 +4063,9 @@ export const Prices = [
     name: 'photographic abstractions',
   },
   {
-    price: 2.22,
+    price: 0.1,
     source: 'digitaleyes',
-    name: "joeian's collection",
+    name: 'epoch labs x bauer',
   },
   {
     price: 0.02,
@@ -4227,11 +4217,6 @@ export const Prices = [
     name: 'scratch-off nft 4th ed',
   },
   {
-    price: 1.666,
-    source: 'digitaleyes',
-    name: 'verse of death',
-  },
-  {
     price: 0.26,
     source: 'solana-art',
     name: 'the gimmicks',
@@ -4285,14 +4270,14 @@ export const Prices = [
     name: 'taco cat life',
   },
   {
+    price: 1.666,
+    source: 'digitaleyes',
+    name: 'verse of death',
+  },
+  {
     price: 0.15,
     source: 'digitaleyes',
     name: 'sol dog beach club',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'epoch labs x bauer',
   },
   {
     price: 0.04,
@@ -4421,6 +4406,11 @@ export const Prices = [
     symbol: 'ddc',
   },
   {
+    price: 2.22,
+    source: 'digitaleyes',
+    name: "joeian's collection",
+  },
+  {
     price: 0.5,
     source: 'solana-art',
     name: 'solamids',
@@ -4493,19 +4483,14 @@ export const Prices = [
     name: 'pets generation 1',
   },
   {
-    price: 4.5,
+    price: 29,
     source: 'digitaleyes',
-    name: 'doge capital',
+    name: 'frames nft',
   },
   {
-    price: 0.25,
+    price: 1,
     source: 'digitaleyes',
-    name: 'jpegs.r.e.a.m.',
-  },
-  {
-    price: 1.6,
-    source: 'digitaleyes',
-    name: 'random faces',
+    name: 'brobots',
   },
   {
     price: 0.08,
@@ -4657,9 +4642,9 @@ export const Prices = [
     symbol: 'cct',
   },
   {
-    price: 29,
+    price: 1.6,
     source: 'digitaleyes',
-    name: 'frames nft',
+    name: 'random faces',
   },
   {
     price: 0.009,
@@ -4668,9 +4653,9 @@ export const Prices = [
     symbol: 'panda',
   },
   {
-    price: 1,
+    price: 100,
     source: 'digitaleyes',
-    name: 'brobots',
+    name: 'rib_bits',
   },
   {
     price: 4.1,
@@ -4726,14 +4711,14 @@ export const Prices = [
     symbol: 'sg',
   },
   {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: '0 w n spirals',
+    price: 69,
+    source: 'exchageart',
+    name: 'time thief',
   },
   {
-    price: 100,
+    price: 4.5,
     source: 'digitaleyes',
-    name: 'rib_bits',
+    name: 'doge capital',
   },
   {
     price: 0.01,
@@ -4855,9 +4840,14 @@ export const Prices = [
     symbol: 'hdm',
   },
   {
-    price: 8,
-    source: 'exchageart',
-    name: 'time thief',
+    price: 0.6,
+    source: 'digitaleyes',
+    name: '0 w n spirals',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'jpegs.r.e.a.m.',
   },
   {
     price: 0.11,
@@ -4892,44 +4882,9 @@ export const Prices = [
     symbol: 'spp',
   },
   {
-    price: 0.749,
-    source: 'digitaleyes',
-    name: 'sweet panda',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'element art nft 2d',
-  },
-  {
-    price: 0.45,
-    source: 'digitaleyes',
-    name: 'snek gang',
-  },
-  {
-    price: 0.69,
-    source: 'digitaleyes',
-    name: 'sixty nine williams',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'wydquestionmark',
-  },
-  {
-    price: 0.06,
-    source: 'digitaleyes',
-    name: 'solsquid game nft club',
-  },
-  {
     price: 0.39,
     source: 'digitaleyes',
     name: 'solpirates',
-  },
-  {
-    price: 0.17,
-    source: 'digitaleyes',
-    name: 'hapesolgang',
   },
   {
     price: 10,
@@ -4937,14 +4892,19 @@ export const Prices = [
     name: 'picasso ape club',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'wydquestionmark',
+  },
+  {
+    price: 0.17,
+    source: 'digitaleyes',
+    name: 'hapesolgang',
+  },
+  {
     price: 0.3,
     source: 'digitaleyes',
     name: 'alien ape club',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'crypto car society',
   },
   {
     price: 2,
@@ -4957,14 +4917,39 @@ export const Prices = [
     name: 'metropolisgan',
   },
   {
+    price: 0.9,
+    source: 'digitaleyes',
+    name: 'moments',
+  },
+  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'non-fungible "bees"',
   },
   {
-    price: 0.9,
+    price: 1,
     source: 'digitaleyes',
-    name: 'moments',
+    name: 'human axie club',
+  },
+  {
+    price: 0.95,
+    source: 'digitaleyes',
+    name: 'solana kongz',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'solchan pets',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'anime solana apes',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solhippocampus',
   },
   {
     price: 0.12,
@@ -4982,41 +4967,6 @@ export const Prices = [
     name: 'zen0verse unearthed',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solhippocampus',
-  },
-  {
-    price: 0.49,
-    source: 'digitaleyes',
-    name: 'nekos',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'sol swat nft',
-  },
-  {
-    price: 0.75,
-    source: 'digitaleyes',
-    name: 'floor',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'block buddies',
-  },
-  {
-    price: 0.1788,
-    source: 'digitaleyes',
-    name: 'swampy gators',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: 'soleagle',
-  },
-  {
     price: 0.095,
     source: 'digitaleyes',
     name: 'sol grand apez',
@@ -5027,9 +4977,19 @@ export const Prices = [
     name: 'solnauts',
   },
   {
-    price: 0.4,
+    price: 0.1788,
     source: 'digitaleyes',
-    name: 'stinky poo',
+    name: 'swampy gators',
+  },
+  {
+    price: 10000,
+    source: 'digitaleyes',
+    name: 'ghost boys',
+  },
+  {
+    price: 0.749,
+    source: 'digitaleyes',
+    name: 'sweet panda',
   },
   {
     price: 5,
@@ -5037,9 +4997,29 @@ export const Prices = [
     name: 'solsphere: sol gems',
   },
   {
-    price: 1.5,
+    price: 0.45,
     source: 'digitaleyes',
-    name: 'monke rejects',
+    name: 'snek gang',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'element art nft 2d',
+  },
+  {
+    price: 0.06,
+    source: 'digitaleyes',
+    name: 'solsquid game nft club',
+  },
+  {
+    price: 0.17,
+    source: 'digitaleyes',
+    name: 'thugchicks',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'crypto car society',
   },
   {
     price: 1.5,
@@ -5147,14 +5127,14 @@ export const Prices = [
     symbol: 'azs',
   },
   {
-    price: 1,
+    price: 0.25,
     source: 'digitaleyes',
-    name: 'human axie club',
+    name: 'sol swat nft',
   },
   {
-    price: 0.95,
+    price: 5,
     source: 'digitaleyes',
-    name: 'solana kongz',
+    name: 'soleagle',
   },
   {
     price: 0.29,
@@ -5229,24 +5209,34 @@ export const Prices = [
     symbol: 'ubcs',
   },
   {
-    price: 0.1,
+    price: 0.75,
     source: 'digitaleyes',
-    name: 'solchan pets',
+    name: 'floor',
   },
   {
-    price: 0.5,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'anime solana apes',
+    name: 'stinky poo',
   },
   {
-    price: 10000,
+    price: 0.69,
     source: 'digitaleyes',
-    name: 'ghost boys',
+    name: 'sixty nine williams',
   },
   {
-    price: 0.17,
+    price: 0.49,
     source: 'digitaleyes',
-    name: 'thugchicks',
+    name: 'nekos',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'block buddies',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'monke rejects',
   },
   {
     price: 0.03,
@@ -5271,59 +5261,9 @@ export const Prices = [
     symbol: 'sm',
   },
   {
-    price: 0.8,
-    source: 'digitaleyes',
-    name: 'pixel marvels',
-  },
-  {
-    price: 0.07,
-    source: 'digitaleyes',
-    name: 'idle planets - autumn 2021 moon',
-  },
-  {
     price: 0.18,
     source: 'digitaleyes',
     name: 'shiba solgang',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'tima ape girl family',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'punch buggy',
-  },
-  {
-    price: 0.8,
-    source: 'digitaleyes',
-    name: 'solemoji',
-  },
-  {
-    price: 0.7,
-    source: 'digitaleyes',
-    name: 'solex',
-  },
-  {
-    price: 9,
-    source: 'exchageart',
-    name: 'pixels',
-  },
-  {
-    price: 0.55,
-    source: 'digitaleyes',
-    name: 'solboxers',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'solbabe',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: "women's rights nft",
   },
   {
     price: 0.0399,
@@ -5336,6 +5276,11 @@ export const Prices = [
     name: 'crappy christmas cards',
   },
   {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: "women's rights nft",
+  },
+  {
     price: 2,
     source: 'digitaleyes',
     name: 'floofers',
@@ -5346,14 +5291,39 @@ export const Prices = [
     name: 'baby blobs',
   },
   {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'punch buggy',
+  },
+  {
+    price: 9,
+    source: 'exchageart',
+    name: 'pixels',
+  },
+  {
+    price: 0.07,
+    source: 'digitaleyes',
+    name: 'idle planets - autumn 2021 moon',
+  },
+  {
+    price: 0.8,
+    source: 'digitaleyes',
+    name: 'solemoji',
+  },
+  {
     price: 0.22,
     source: 'digitaleyes',
     name: 'savage dray by squeak brigade',
   },
   {
-    price: 0.2,
+    price: 6.9,
     source: 'digitaleyes',
-    name: 'synesthesia, by labyrinth',
+    name: 'battle drones',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'aape social club',
   },
   {
     price: 0.8,
@@ -5374,11 +5344,6 @@ export const Prices = [
     price: 0.019,
     source: 'digitaleyes',
     name: 'psychobats',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'zero pigs given',
   },
   {
     price: 5,
@@ -5456,14 +5421,14 @@ export const Prices = [
     name: 'paul g-mart',
   },
   {
+    price: 0.9,
+    source: 'digitaleyes',
+    name: 'peeps',
+  },
+  {
     price: 1.5,
     source: 'digitaleyes',
     name: 'pixel penguins',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'potato',
   },
   {
     price: 0.75,
@@ -5471,26 +5436,19 @@ export const Prices = [
     name: 'shatteredmarble',
   },
   {
-    price: 0.2,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'solana mees',
+    name: 'potato',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'sol wolves',
   },
   {
     price: 0.15,
     source: 'digitaleyes',
     name: 'star stamps',
-  },
-  {
-    price: 0.43,
-    source: 'solana-art',
-    name: 'kaizen corps',
-    symbol: 'kai',
-  },
-  {
-    price: 0.03,
-    source: 'solana-art',
-    name: 'raredon',
-    symbol: 'rdon',
   },
   {
     price: 20,
@@ -5506,6 +5464,38 @@ export const Prices = [
     price: 0.1,
     source: 'digitaleyes',
     name: 'woof - gen art series',
+  },
+  {
+    price: 0.42,
+    source: 'digitaleyes',
+    name: '420dubesnft',
+  },
+  {
+    price: 0.43,
+    source: 'solana-art',
+    name: 'kaizen corps',
+    symbol: 'kai',
+  },
+  {
+    price: 0.03,
+    source: 'solana-art',
+    name: 'raredon',
+    symbol: 'rdon',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'bored bears club',
+  },
+  {
+    price: 0.75,
+    source: 'digitaleyes',
+    name: 'trotting turkeys',
+  },
+  {
+    price: 0.55,
+    source: 'digitaleyes',
+    name: 'solboxers',
   },
   {
     price: 0.2,
@@ -5560,14 +5550,14 @@ export const Prices = [
     symbol: 'grc',
   },
   {
-    price: 0.42,
+    price: 0.8,
     source: 'digitaleyes',
-    name: '420dubesnft',
+    name: 'pixel marvels',
   },
   {
-    price: 2,
+    price: 0.7,
     source: 'digitaleyes',
-    name: 'bored bears club',
+    name: 'solex',
   },
   {
     price: 2,
@@ -5575,29 +5565,19 @@ export const Prices = [
     name: 'brokensignalsociety',
   },
   {
-    price: 0.75,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'trotting turkeys',
+    name: 'solbabe',
   },
   {
-    price: 6.9,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'battle drones',
+    name: 'tima ape girl family',
   },
   {
-    price: 0.25,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'aape social club',
-  },
-  {
-    price: 0.9,
-    source: 'digitaleyes',
-    name: 'peeps',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'sol wolves',
+    name: 'zero pigs given',
   },
   {
     price: 10,
@@ -5605,44 +5585,29 @@ export const Prices = [
     name: 'solpoems',
   },
   {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'synesthesia, by labyrinth',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'solana mees',
+  },
+  {
     price: 0.05,
     source: 'solana-art',
     name: 'solcatcoin',
   },
   {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: '8ogs',
-  },
-  {
-    price: 0.189,
-    source: 'digitaleyes',
-    name: 'fast food thugbirdz',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'bossbets',
-  },
-  {
-    price: 3.3,
-    source: 'digitaleyes',
-    name: 'non friendly types',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'slimhoods solana',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'zombietor',
-  },
-  {
     price: 0.9,
     source: 'digitaleyes',
     name: 'soljav',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'hippo family',
   },
   {
     price: 25,
@@ -5700,36 +5665,6 @@ export const Prices = [
     name: 'a-tun nft',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'pumpkin gang',
-  },
-  {
-    price: 0.195,
-    source: 'digitaleyes',
-    name: 'solloons',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'cosmic condos',
-  },
-  {
-    price: 10,
-    source: 'digitaleyes',
-    name: 'beta hogs',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'the rat plague',
-  },
-  {
-    price: 1.5,
-    source: 'digitaleyes',
-    name: 'rich monkey island',
-  },
-  {
     price: 0.5,
     source: 'digitaleyes',
     name: 'bold butter',
@@ -5750,9 +5685,59 @@ export const Prices = [
     name: 'dragonsol',
   },
   {
+    price: 0.189,
+    source: 'digitaleyes',
+    name: 'fast food thugbirdz',
+  },
+  {
+    price: 0.012,
+    source: 'digitaleyes',
+    name: 'naked pixel punks solana boys',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'the rat plague',
+  },
+  {
+    price: 20,
+    source: 'digitaleyes',
+    name: 'solana stud club',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'bossbets',
+  },
+  {
+    price: 3.3,
+    source: 'digitaleyes',
+    name: 'non friendly types',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'slimhoods solana',
+  },
+  {
     price: 0.11,
     source: 'digitaleyes',
     name: 'pixsol bears',
+  },
+  {
+    price: 300,
+    source: 'exchageart',
+    name: 'arkangel',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'krazy lazy apes',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'pumpkin gang',
   },
   {
     price: 0.01,
@@ -5945,21 +5930,6 @@ export const Prices = [
     symbol: 'nftpro',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'krazy lazy apes',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'hippo family',
-  },
-  {
-    price: 0.35,
-    source: 'digitaleyes',
-    name: 'happy sacs',
-  },
-  {
     price: 2,
     source: 'digitaleyes',
     name: 'katzenmalen',
@@ -5970,29 +5940,39 @@ export const Prices = [
     name: 'smoker apes club nft',
   },
   {
-    price: 0.012,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'naked pixel punks solana boys',
+    name: 'cosmic condos',
   },
   {
-    price: 20,
+    price: 10,
     source: 'digitaleyes',
-    name: 'solana stud club',
+    name: 'beta hogs',
   },
   {
-    price: 300,
-    source: 'exchageart',
-    name: 'arkangel',
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'rich monkey island',
   },
   {
     price: 0.2,
     source: 'digitaleyes',
-    name: 'cool girls nft',
+    name: '8ogs',
   },
   {
-    price: 0.0287,
+    price: 1,
     source: 'digitaleyes',
-    name: 'solana reversed monkey business',
+    name: 'zombietor',
+  },
+  {
+    price: 0.35,
+    source: 'digitaleyes',
+    name: 'happy sacs',
+  },
+  {
+    price: 0.195,
+    source: 'digitaleyes',
+    name: 'solloons',
   },
   {
     price: 0.04,
@@ -6000,29 +5980,14 @@ export const Prices = [
     name: 'gapes on sol',
   },
   {
-    price: 1.25,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'five lions dance club',
+    name: 'solvaults',
   },
   {
     price: 1,
     source: 'digitaleyes',
     name: 'mcafee punks',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'professor nfts',
-  },
-  {
-    price: 0.32,
-    source: 'digitaleyes',
-    name: 'solrides',
-  },
-  {
-    price: 8.5,
-    source: 'digitaleyes',
-    name: 'ab x samz',
   },
   {
     price: 9.85,
@@ -6040,39 +6005,9 @@ export const Prices = [
     name: 'crypto owls',
   },
   {
-    price: 0.55,
+    price: 5,
     source: 'digitaleyes',
-    name: 'mutant solkid',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'lana frogs',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'squid society',
-  },
-  {
-    price: 0.65,
-    source: 'digitaleyes',
-    name: 'starbase',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'united aliens',
-  },
-  {
-    price: 0.01,
-    source: 'digitaleyes',
-    name: 'invisible friends sol',
-  },
-  {
-    price: 3.55,
-    source: 'digitaleyes',
-    name: 'cryptocubs mutants',
+    name: 'dubai (not for tourists)',
   },
   {
     price: 6.8,
@@ -6085,14 +6020,44 @@ export const Prices = [
     name: 'imaginativ art',
   },
   {
+    price: 0.04,
+    source: 'digitaleyes',
+    name: 'lazy hippos',
+  },
+  {
     price: 0.06,
     source: 'digitaleyes',
     name: 'krunk roach nft',
   },
   {
-    price: 0.04,
+    price: 0.65,
     source: 'digitaleyes',
-    name: 'lazy hippos',
+    name: 'starbase',
+  },
+  {
+    price: 0.0287,
+    source: 'digitaleyes',
+    name: 'solana reversed monkey business',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'cool girls nft',
+  },
+  {
+    price: 0.6,
+    source: 'digitaleyes',
+    name: 'solana runts club',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'women in ao dai vietnam',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'solato potato',
   },
   {
     price: 0.5,
@@ -6100,14 +6065,14 @@ export const Prices = [
     name: 'metaversal society',
   },
   {
-    price: 0.35,
-    source: 'digitaleyes',
-    name: 'oink club nft',
-  },
-  {
     price: 4.29,
     source: 'digitaleyes',
     name: 'piggy sol gang',
+  },
+  {
+    price: 0.35,
+    source: 'digitaleyes',
+    name: 'oink club nft',
   },
   {
     price: 100,
@@ -6135,11 +6100,6 @@ export const Prices = [
     name: 'solitude',
   },
   {
-    price: 4.99,
-    source: 'digitaleyes',
-    name: 'solshrooms',
-  },
-  {
     price: 2.5,
     source: 'digitaleyes',
     name: 'trippy derivate collection',
@@ -6148,6 +6108,26 @@ export const Prices = [
     price: 0.0485,
     source: 'digitaleyes',
     name: 'wealthy whales',
+  },
+  {
+    price: 13,
+    source: 'exchageart',
+    name: 'edith',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'headless chicken',
+  },
+  {
+    price: 0.55,
+    source: 'digitaleyes',
+    name: 'mutant solkid',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'joe bo lands',
   },
   {
     price: 2.75,
@@ -6162,9 +6142,9 @@ export const Prices = [
     symbol: 'da',
   },
   {
-    price: 3,
+    price: 1,
     source: 'digitaleyes',
-    name: 'wandering painter nft collection',
+    name: 'sparkshark',
   },
   {
     price: 3.5,
@@ -6197,9 +6177,9 @@ export const Prices = [
     name: 'ladybaes',
   },
   {
-    price: 13,
-    source: 'exchageart',
-    name: 'edith',
+    price: 1,
+    source: 'digitaleyes',
+    name: 'lana frogs',
   },
   {
     price: 0.01,
@@ -6267,24 +6247,19 @@ export const Prices = [
     name: 'floppylabs',
   },
   {
-    price: 0.19,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'headless chicken',
+    name: 'squid society',
   },
   {
-    price: 0.1,
+    price: 0.3,
     source: 'digitaleyes',
-    name: 'joe bo lands',
+    name: 'united aliens',
   },
   {
-    price: 1,
+    price: 0.01,
     source: 'digitaleyes',
-    name: 'sparkshark',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'skullphunkz onix edition',
+    name: 'invisible friends sol',
   },
   {
     price: 0.5,
@@ -6292,34 +6267,44 @@ export const Prices = [
     name: 'dragon eggs nft',
   },
   {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: 'solana runts club',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'women in ao dai vietnam',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'solvaults',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'solato potato',
-  },
-  {
     price: 0.9,
     source: 'digitaleyes',
     name: 'metabunnies',
   },
   {
-    price: 5,
+    price: 1.25,
     source: 'digitaleyes',
-    name: 'dubai (not for tourists)',
+    name: 'five lions dance club',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'professor nfts',
+  },
+  {
+    price: 0.32,
+    source: 'digitaleyes',
+    name: 'solrides',
+  },
+  {
+    price: 8.5,
+    source: 'digitaleyes',
+    name: 'ab x samz',
+  },
+  {
+    price: 3.55,
+    source: 'digitaleyes',
+    name: 'cryptocubs mutants',
+  },
+  {
+    price: 4.99,
+    source: 'digitaleyes',
+    name: 'solshrooms',
+  },
+  {
+    price: 3,
+    source: 'digitaleyes',
+    name: 'wandering painter nft collection',
   },
   {
     price: 0.32,
@@ -6338,9 +6323,9 @@ export const Prices = [
     symbol: 'mteg',
   },
   {
-    price: 0.49,
+    price: 12,
     source: 'digitaleyes',
-    name: 'solana pogs',
+    name: 'pizzlybears',
   },
   {
     price: 0.2,
@@ -6348,49 +6333,14 @@ export const Prices = [
     name: 'rovers',
   },
   {
-    price: 0.07,
-    source: 'digitaleyes',
-    name: 'pixelflapjacks',
-  },
-  {
-    price: 6.9,
-    source: 'digitaleyes',
-    name: 'abstract academy',
-  },
-  {
-    price: 0.35,
-    source: 'digitaleyes',
-    name: 'animals',
-  },
-  {
     price: 0.19,
     source: 'digitaleyes',
     name: 'cheems',
   },
   {
-    price: 1.4,
-    source: 'digitaleyes',
-    name: 'cryptocannft',
-  },
-  {
-    price: 12,
-    source: 'digitaleyes',
-    name: 'pizzlybears',
-  },
-  {
     price: 5.8,
     source: 'digitaleyes',
     name: 'ram nft',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'heathcliff poems',
-  },
-  {
-    price: 0.13,
-    source: 'fractal',
-    name: 'solantasy',
   },
   {
     price: 0.75,
@@ -6408,49 +6358,24 @@ export const Prices = [
     name: 'shroomz',
   },
   {
+    price: 0.06,
+    source: 'digitaleyes',
+    name: 'solana keys',
+  },
+  {
     price: 3,
     source: 'digitaleyes',
     name: 'soldreams',
   },
   {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'solottery',
-  },
-  {
-    price: 0.22,
-    source: 'digitaleyes',
-    name: 'doodlekoalas',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
-    name: 'pixel turtle',
+    name: 'heathcliff poems',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solinions',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'solnana',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'toy factory',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'solcalaveras',
-  },
-  {
-    price: 150,
-    source: 'digitaleyes',
-    name: 'degenerate ape academy',
+    price: 0.13,
+    source: 'fractal',
+    name: 'solantasy',
   },
   {
     price: 5,
@@ -6468,14 +6393,69 @@ export const Prices = [
     name: 'toposcapes',
   },
   {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: '0',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solinions',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'flunk donkeys',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'degen kart club',
+  },
+  {
+    price: 0.07,
+    source: 'digitaleyes',
+    name: 'pixelflapjacks',
+  },
+  {
+    price: 0.49,
+    source: 'digitaleyes',
+    name: 'solana pogs',
+  },
+  {
+    price: 1.4,
+    source: 'digitaleyes',
+    name: 'cryptocannft',
+  },
+  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'wold wolves bone yard',
   },
   {
-    price: 0.2,
+    price: 20,
+    source: 'exchageart',
+    name: 'the holiest trinity',
+  },
+  {
+    price: 0.89,
     source: 'digitaleyes',
-    name: '0',
+    name: 'gamekidz',
+  },
+  {
+    price: 0.22,
+    source: 'digitaleyes',
+    name: 'doodlekoalas',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'warlordz',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'solbees gen 1 cards',
   },
   {
     price: 0.38,
@@ -6631,9 +6611,9 @@ export const Prices = [
     symbol: 'fm',
   },
   {
-    price: 20,
-    source: 'exchageart',
-    name: 'the holiest trinity',
+    price: 1.25,
+    source: 'digitaleyes',
+    name: 'kiki bouba',
   },
   {
     price: 0.2,
@@ -6677,24 +6657,14 @@ export const Prices = [
     symbol: 'pv',
   },
   {
-    price: 0.89,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'gamekidz',
+    name: 'pixel turtle',
   },
   {
-    price: 1,
+    price: 0.25,
     source: 'digitaleyes',
-    name: 'warlordz',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'solbees gen 1 cards',
-  },
-  {
-    price: 1.25,
-    source: 'digitaleyes',
-    name: 'kiki bouba',
+    name: 'solnana',
   },
   {
     price: 0.5,
@@ -6702,19 +6672,34 @@ export const Prices = [
     name: 'samurai neko',
   },
   {
-    price: 1,
+    price: 0.2,
     source: 'digitaleyes',
-    name: 'flunk donkeys',
+    name: 'toy factory',
   },
   {
-    price: 0.5,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'degen kart club',
+    name: 'solcalaveras',
   },
   {
-    price: 0.06,
+    price: 0.02,
     source: 'digitaleyes',
-    name: 'solana keys',
+    name: 'pixel knights',
+  },
+  {
+    price: 6.9,
+    source: 'digitaleyes',
+    name: 'abstract academy',
+  },
+  {
+    price: 0.35,
+    source: 'digitaleyes',
+    name: 'animals',
+  },
+  {
+    price: 150,
+    source: 'digitaleyes',
+    name: 'degenerate ape academy',
   },
   {
     price: 1.68,
@@ -6728,24 +6713,9 @@ export const Prices = [
     symbol: 'rmc',
   },
   {
-    price: 0.02,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'pixel knights',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: '08 splash ink art nft',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'horny dragons',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'poker neko',
+    name: 'solottery',
   },
   {
     price: 0.13,
@@ -6753,39 +6723,9 @@ export const Prices = [
     name: 'crypto mafia vip',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'gallery77',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'puerto',
-  },
-  {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'rare animals tigers',
-  },
-  {
-    price: 0.06,
-    source: 'digitaleyes',
-    name: 'floppy disk nft',
-  },
-  {
     price: 1.35,
     source: 'digitaleyes',
     name: 'gigi wanderlust nft',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'boneworld airdrops',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'neonoots',
   },
   {
     price: 3,
@@ -6793,19 +6733,9 @@ export const Prices = [
     name: '144pixels',
   },
   {
-    price: 0.7,
+    price: 5.69,
     source: 'digitaleyes',
-    name: '8 bit graffiti mansions',
-  },
-  {
-    price: 0.056,
-    source: 'digitaleyes',
-    name: 'dimez',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'ethereans',
+    name: 'flutter',
   },
   {
     price: 9,
@@ -6813,14 +6743,24 @@ export const Prices = [
     name: 'sol millionaire club',
   },
   {
-    price: 0.02,
-    source: 'digitaleyes',
-    name: 'sol diamond hands',
+    price: 1,
+    source: 'exchageart',
+    name: 'puerto',
   },
   {
-    price: 3.5,
+    price: 1,
     source: 'digitaleyes',
-    name: 'soldog nft',
+    name: 'poker neko',
+  },
+  {
+    price: 18.5,
+    source: 'digitaleyes',
+    name: 'bulldog billionaires',
+  },
+  {
+    price: 0.7,
+    source: 'digitaleyes',
+    name: '8 bit graffiti mansions',
   },
   {
     price: 2.24,
@@ -6828,9 +6768,9 @@ export const Prices = [
     name: 'solicon art',
   },
   {
-    price: 0.01,
+    price: 0.02,
     source: 'digitaleyes',
-    name: 'a toast life',
+    name: 'sol diamond hands',
   },
   {
     price: 29,
@@ -6846,6 +6786,11 @@ export const Prices = [
     price: 1.5,
     source: 'digitaleyes',
     name: 'circle',
+  },
+  {
+    price: 3.5,
+    source: 'digitaleyes',
+    name: 'soldog nft',
   },
   {
     price: 0.69,
@@ -6873,11 +6818,6 @@ export const Prices = [
     name: 'inksolum',
   },
   {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'mayhem on multiverse',
-  },
-  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'metaspheres',
@@ -6886,6 +6826,11 @@ export const Prices = [
     price: 0.2,
     source: 'digitaleyes',
     name: 'moon bees',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'mayhem on multiverse',
   },
   {
     price: 2,
@@ -6898,14 +6843,14 @@ export const Prices = [
     name: 'origin-x',
   },
   {
-    price: 29,
-    source: 'digitaleyes',
-    name: 'palette',
-  },
-  {
     price: 0.01,
     source: 'digitaleyes',
     name: 'psychedelic camels',
+  },
+  {
+    price: 0.4269,
+    source: 'digitaleyes',
+    name: 'rox',
   },
   {
     price: 0.64,
@@ -6916,11 +6861,6 @@ export const Prices = [
     price: 0.9,
     source: 'digitaleyes',
     name: 'sol sloths',
-  },
-  {
-    price: 0.4269,
-    source: 'digitaleyes',
-    name: 'rox',
   },
   {
     price: 0.14,
@@ -6943,14 +6883,19 @@ export const Prices = [
     name: 'solrock nft',
   },
   {
-    price: 10,
+    price: 2.5,
     source: 'digitaleyes',
-    name: 'soulofox',
+    name: 'solweedpunk',
   },
   {
     price: 0.2,
     source: 'digitaleyes',
     name: 'spirits of solana',
+  },
+  {
+    price: 10,
+    source: 'digitaleyes',
+    name: 'soulofox',
   },
   {
     price: 5,
@@ -6966,6 +6911,36 @@ export const Prices = [
     price: 0.19,
     source: 'digitaleyes',
     name: "wild west mama's nfts",
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: "jetski - pixeland nft's",
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'fmayc',
+  },
+  {
+    price: 2.2,
+    source: 'digitaleyes',
+    name: 'soladies',
+  },
+  {
+    price: 0.149,
+    source: 'digitaleyes',
+    name: 'solana cosmic ducks',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'rare animals tigers',
+  },
+  {
+    price: 0.06,
+    source: 'digitaleyes',
+    name: 'floppy disk nft',
   },
   {
     price: 48.5,
@@ -7026,24 +7001,14 @@ export const Prices = [
     name: 'generous robots dao',
   },
   {
-    price: 1,
+    price: 0.2,
     source: 'digitaleyes',
-    name: "jetski - pixeland nft's",
+    name: 'horny dragons',
   },
   {
-    price: 0.25,
+    price: 5,
     source: 'digitaleyes',
-    name: 'fmayc',
-  },
-  {
-    price: 2.2,
-    source: 'digitaleyes',
-    name: 'soladies',
-  },
-  {
-    price: 0.149,
-    source: 'digitaleyes',
-    name: 'solana cosmic ducks',
+    name: '08 splash ink art nft',
   },
   {
     price: 0.6,
@@ -7056,44 +7021,59 @@ export const Prices = [
     name: 'meta turtle',
   },
   {
-    price: 2.5,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'solweedpunk',
+    name: 'gallery77',
   },
   {
-    price: 18.5,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'bulldog billionaires',
+    name: 'boneworld airdrops',
   },
   {
-    price: 5.69,
+    price: 0.01,
     source: 'digitaleyes',
-    name: 'flutter',
+    name: 'a toast life',
   },
   {
-    price: 0.65,
+    price: 29,
     source: 'digitaleyes',
-    name: 'jungle jams - audius edition',
+    name: 'palette',
   },
   {
-    price: 0.088,
+    price: 0.056,
     source: 'digitaleyes',
-    name: 'lucky lemurs',
+    name: 'dimez',
   },
   {
-    price: 1.99,
+    price: 1,
     source: 'digitaleyes',
-    name: 'ngmipandas',
+    name: 'ethereans',
   },
   {
-    price: 1.6,
+    price: 2.2,
     source: 'digitaleyes',
-    name: 'pilgrim society',
+    name: 'skeleton crew skulls',
   },
   {
-    price: 5.85,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'neonexus residential',
+    name: 'solbots',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'solanaliens',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'solgangsta',
+  },
+  {
+    price: 0.35,
+    source: 'digitaleyes',
+    name: 'solana furries',
   },
   {
     price: 1,
@@ -7101,34 +7081,9 @@ export const Prices = [
     name: 'hearties',
   },
   {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'sol creatures',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solana dino park',
-  },
-  {
-    price: 0.08,
-    source: 'digitaleyes',
-    name: 'goofy cats',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'spicy chicken club',
-  },
-  {
     price: 0.13,
     source: 'digitaleyes',
     name: 'sparks',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'crypto solbots gen 1',
   },
   {
     price: 2,
@@ -7181,29 +7136,29 @@ export const Prices = [
     name: 'el salvador - pix world nft',
   },
   {
-    price: 1,
+    price: 0.65,
     source: 'digitaleyes',
-    name: 'gardenians',
+    name: 'jungle jams - audius edition',
   },
   {
-    price: 0.1,
+    price: 0.088,
     source: 'digitaleyes',
-    name: 'solbots',
+    name: 'lucky lemurs',
   },
   {
-    price: 2.2,
+    price: 5.85,
     source: 'digitaleyes',
-    name: 'skeleton crew skulls',
+    name: 'neonexus residential',
   },
   {
-    price: 0.35,
+    price: 1.99,
     source: 'digitaleyes',
-    name: 'solana furries',
+    name: 'ngmipandas',
   },
   {
-    price: 0.15,
+    price: 1.6,
     source: 'digitaleyes',
-    name: 'solanaliens',
+    name: 'pilgrim society',
   },
   {
     price: 0.95,
@@ -7211,19 +7166,9 @@ export const Prices = [
     name: 'soldroids',
   },
   {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'solgangsta',
-  },
-  {
     price: 2,
     source: 'digitaleyes',
     name: 'stereo',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'taqueria solana',
   },
   {
     price: 0.08,
@@ -7231,14 +7176,39 @@ export const Prices = [
     name: 'sol pixel rocks',
   },
   {
-    price: 0.15,
+    price: 0.25,
     source: 'digitaleyes',
-    name: 'turtle traders nft',
+    name: 'taqueria solana',
   },
   {
     price: 1.5,
     source: 'digitaleyes',
     name: 'wolfmoons',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'goose gang',
+  },
+  {
+    price: 0.12,
+    source: 'digitaleyes',
+    name: 'dreamverse',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'giatwo doll',
+  },
+  {
+    price: 70,
+    source: 'digitaleyes',
+    name: '007 techno punks',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'sol creatures',
   },
   {
     price: 41,
@@ -7426,32 +7396,37 @@ export const Prices = [
   {
     price: 0.1,
     source: 'digitaleyes',
-    name: 'goose gang',
+    name: 'solgamescreen',
   },
   {
-    price: 0.12,
+    price: 1,
     source: 'digitaleyes',
-    name: 'dreamverse',
+    name: 'solana dino park',
   },
   {
-    price: 0.2,
+    price: 0.08,
     source: 'digitaleyes',
-    name: 'giatwo doll',
+    name: 'goofy cats',
   },
   {
-    price: 70,
+    price: 1,
     source: 'digitaleyes',
-    name: '007 techno punks',
+    name: 'spicy chicken club',
   },
   {
     price: 0.1,
     source: 'digitaleyes',
-    name: 'solgamescreen',
+    name: 'crypto solbots gen 1',
   },
   {
-    price: 0.05,
+    price: 1,
     source: 'digitaleyes',
-    name: 'stash',
+    name: 'gardenians',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'turtle traders nft',
   },
   {
     price: 0.01,
@@ -7470,44 +7445,9 @@ export const Prices = [
     symbol: 'flunk',
   },
   {
-    price: 2,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'koral klvb',
-  },
-  {
-    price: 0.08,
-    source: 'digitaleyes',
-    name: 'dashing dogs',
-  },
-  {
-    price: 8,
-    source: 'exchageart',
-    name: 'another realm',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: 'solana goat business',
-  },
-  {
-    price: 0.039,
-    source: 'digitaleyes',
-    name: 'thugbirdettes',
-  },
-  {
-    price: 0.75,
-    source: 'digitaleyes',
-    name: 'kitty kat society',
-  },
-  {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'chicky town',
-  },
-  {
-    price: 0.49,
-    source: 'digitaleyes',
-    name: 'gaul society',
+    name: 'stash',
   },
   {
     price: 0.4,
@@ -7520,24 +7460,29 @@ export const Prices = [
     name: 'art cove',
   },
   {
+    price: 8,
+    source: 'exchageart',
+    name: 'another realm',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'koral klvb',
+  },
+  {
+    price: 0.08,
+    source: 'digitaleyes',
+    name: 'dashing dogs',
+  },
+  {
+    price: 8.99,
+    source: 'digitaleyes',
+    name: 'majorpunk',
+  },
+  {
     price: 0.49,
     source: 'digitaleyes',
     name: 'audius x thugbirdz',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'babypunks',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'boobuddies',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'continuum',
   },
   {
     price: 1,
@@ -7545,9 +7490,9 @@ export const Prices = [
     name: 'axgans',
   },
   {
-    price: 0.4,
+    price: 1,
     source: 'digitaleyes',
-    name: 'crypto lizzy',
+    name: 'continuum',
   },
   {
     price: 2,
@@ -7565,11 +7510,6 @@ export const Prices = [
     name: 'doodoodlenft',
   },
   {
-    price: 0.75,
-    source: 'digitaleyes',
-    name: 'emillion',
-  },
-  {
     price: 4,
     source: 'digitaleyes',
     name: 'gnarly gnomies',
@@ -7578,6 +7518,11 @@ export const Prices = [
     price: 0.6,
     source: 'digitaleyes',
     name: 'innermind',
+  },
+  {
+    price: 0.75,
+    source: 'digitaleyes',
+    name: 'emillion',
   },
   {
     price: 12.7,
@@ -7595,19 +7540,14 @@ export const Prices = [
     name: 'oneline.family',
   },
   {
-    price: 3.5,
-    source: 'digitaleyes',
-    name: '0xbanana',
-  },
-  {
     price: 0.089,
     source: 'digitaleyes',
     name: 'pix world nft',
   },
   {
-    price: 2,
+    price: 0.69,
     source: 'digitaleyes',
-    name: 'shadowy super art',
+    name: 'shifted figures',
   },
   {
     price: 0.28,
@@ -7630,11 +7570,6 @@ export const Prices = [
     name: 'sol moondogs',
   },
   {
-    price: 0.05555,
-    source: 'digitaleyes',
-    name: 'solgen',
-  },
-  {
     price: 0.09,
     source: 'digitaleyes',
     name: 'sol sodas',
@@ -7650,6 +7585,11 @@ export const Prices = [
     name: 'solana leaders',
   },
   {
+    price: 0.94,
+    source: 'digitaleyes',
+    name: 'solands',
+  },
+  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'solpugs',
@@ -7660,104 +7600,24 @@ export const Prices = [
     name: 'sounds of pi',
   },
   {
-    price: 4,
-    source: 'digitaleyes',
-    name: 'the enigma of nazca',
-  },
-  {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: 'the slow patrol',
-  },
-  {
-    price: 13,
-    source: 'digitaleyes',
-    name: 'trippy bunny tribe',
-  },
-  {
-    price: 0.15,
-    source: 'solana-art',
-    name: 'panda street',
-  },
-  {
-    price: 4.4,
-    source: 'solana-art',
-    name: 'turtles',
-  },
-  {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'the solbitizens',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'kangaroo fight club',
-  },
-  {
-    price: 1.25,
-    source: 'digitaleyes',
-    name: '2bitblots',
-  },
-  {
-    price: 0.01,
-    source: 'digitaleyes',
-    name: 'musclepunks',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'agronomistnft',
-  },
-  {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'degeneggs - gen 2',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: 'mutant dogs club dao',
-  },
-  {
-    price: 2.8,
-    source: 'digitaleyes',
-    name: 'cryptoveras',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'sharing sharks',
-  },
-  {
-    price: 8.99,
-    source: 'digitaleyes',
-    name: 'majorpunk',
-  },
-  {
-    price: 65,
-    source: 'digitaleyes',
-    name: 'aurory',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'solamanders',
-  },
-  {
-    price: 0.94,
-    source: 'digitaleyes',
-    name: 'solands',
-  },
-  {
     price: 0.15,
     source: 'digitaleyes',
     name: 'superballz',
   },
   {
+    price: 4,
+    source: 'digitaleyes',
+    name: 'the enigma of nazca',
+  },
+  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'tigerlabs',
+  },
+  {
+    price: 13,
+    source: 'digitaleyes',
+    name: 'trippy bunny tribe',
   },
   {
     price: 0.12,
@@ -7770,29 +7630,139 @@ export const Prices = [
     name: 'whalesols',
   },
   {
-    price: 0.24,
-    source: 'solana-art',
-    name: 'solsnatchers',
-  },
-  {
     price: 0.25,
     source: 'digitaleyes',
     name: 'sol poopies',
   },
   {
-    price: 0.69,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'shifted figures',
+    name: 'kangaroo fight club',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'halloween party nft',
+    price: 0.15,
+    source: 'solana-art',
+    name: 'panda street',
   },
   {
-    price: 0.1,
+    price: 0.01,
     source: 'digitaleyes',
-    name: 'zwickies',
+    name: 'musclepunks',
+  },
+  {
+    price: 4.4,
+    source: 'solana-art',
+    name: 'turtles',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'degeneggs - gen 2',
+  },
+  {
+    price: 5,
+    source: 'digitaleyes',
+    name: 'mutant dogs club dao',
+  },
+  {
+    price: 5,
+    source: 'digitaleyes',
+    name: 'solana goat business',
+  },
+  {
+    price: 0.75,
+    source: 'digitaleyes',
+    name: 'kitty kat society',
+  },
+  {
+    price: 2.8,
+    source: 'digitaleyes',
+    name: 'cryptoveras',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'sharing sharks',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'chicky town',
+  },
+  {
+    price: 0.49,
+    source: 'digitaleyes',
+    name: 'gaul society',
+  },
+  {
+    price: 65,
+    source: 'digitaleyes',
+    name: 'aurory',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'boobuddies',
+  },
+  {
+    price: 3.5,
+    source: 'digitaleyes',
+    name: '0xbanana',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'the solbitizens',
+  },
+  {
+    price: 1.25,
+    source: 'digitaleyes',
+    name: '2bitblots',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'agronomistnft',
+  },
+  {
+    price: 0.039,
+    source: 'digitaleyes',
+    name: 'thugbirdettes',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'babypunks',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'crypto lizzy',
+  },
+  {
+    price: 0.24,
+    source: 'solana-art',
+    name: 'solsnatchers',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'shadowy super art',
+  },
+  {
+    price: 0.05555,
+    source: 'digitaleyes',
+    name: 'solgen',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'solamanders',
+  },
+  {
+    price: 0.6,
+    source: 'digitaleyes',
+    name: 'the slow patrol',
   },
   {
     price: 3.69,
@@ -7800,9 +7770,14 @@ export const Prices = [
     name: 'soulmates',
   },
   {
-    price: 0.5,
+    price: 5.5,
+    source: 'exchageart',
+    name: '⎑ the first travellers ⎑',
+  },
+  {
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'sol kitties',
+    name: 'halloween party nft',
   },
   {
     price: 0.1,
@@ -7943,14 +7918,14 @@ export const Prices = [
     symbol: 'plushies',
   },
   {
-    price: 5.5,
-    source: 'exchageart',
-    name: '⎑ the first travellers ⎑',
+    price: 69,
+    source: 'digitaleyes',
+    name: 'cum socks',
   },
   {
-    price: 0.59,
+    price: 0.19,
     source: 'digitaleyes',
-    name: 'shiba man',
+    name: 'hollywood punkz',
   },
   {
     price: 0.05,
@@ -8000,14 +7975,14 @@ export const Prices = [
     symbol: 'midh',
   },
   {
-    price: 0.58,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'solrats',
+    name: 'zwickies',
   },
   {
-    price: 2.5,
+    price: 1,
     source: 'digitaleyes',
-    name: 'the mintoons',
+    name: 'rgb colors collection',
   },
   {
     price: 0.08999,
@@ -8156,24 +8131,29 @@ export const Prices = [
     symbol: 'lc',
   },
   {
-    price: 69,
+    price: 2.5,
     source: 'digitaleyes',
-    name: 'cum socks',
-  },
-  {
-    price: 0.19,
-    source: 'digitaleyes',
-    name: 'hollywood punkz',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'rgb colors collection',
+    name: 'the mintoons',
   },
   {
     price: 7,
     source: 'digitaleyes',
     name: 'konpeito shinobi club',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'sol kitties',
+  },
+  {
+    price: 0.59,
+    source: 'digitaleyes',
+    name: 'shiba man',
+  },
+  {
+    price: 0.58,
+    source: 'digitaleyes',
+    name: 'solrats',
   },
   {
     price: 0.27,
@@ -8202,44 +8182,14 @@ export const Prices = [
     symbol: 'blgs',
   },
   {
-    price: 0.14,
+    price: 0.65,
     source: 'digitaleyes',
-    name: 'the retriever party',
+    name: 'angry bunny club',
   },
   {
     price: 0.44,
     source: 'digitaleyes',
     name: 'classic girls',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: '00 cosplay pigs 00',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'bitbytebin',
-  },
-  {
-    price: 0.19,
-    source: 'digitaleyes',
-    name: 'metabaes',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'psychobots',
-  },
-  {
-    price: 0.54,
-    source: 'digitaleyes',
-    name: 'vox punks club',
-  },
-  {
-    price: 0.65,
-    source: 'digitaleyes',
-    name: 'angry bunny club',
   },
   {
     price: 0.79,
@@ -8255,6 +8205,11 @@ export const Prices = [
     price: 5,
     source: 'digitaleyes',
     name: 'deepgen',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'solbabes',
   },
   {
     price: 0.12,
@@ -8287,6 +8242,11 @@ export const Prices = [
     name: 'pizzsol',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'psychobots',
+  },
+  {
     price: 0.7,
     source: 'digitaleyes',
     name: 'sausagepunks',
@@ -8297,29 +8257,9 @@ export const Prices = [
     name: 'secret duck society',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'inverted apes club',
-  },
-  {
-    price: 0.81,
-    source: 'digitaleyes',
-    name: 'race skull',
-  },
-  {
-    price: 0.333,
-    source: 'digitaleyes',
-    name: 'the priestchain',
-  },
-  {
     price: 0.11,
     source: 'digitaleyes',
     name: 'sinful souls nft',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'solbabes',
   },
   {
     price: 0.2,
@@ -8327,9 +8267,9 @@ export const Prices = [
     name: 'solcrocos',
   },
   {
-    price: 0.04,
-    source: 'solana-art',
-    name: 'tales from the attic',
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'solagon',
   },
   {
     price: 0.15,
@@ -8337,9 +8277,19 @@ export const Prices = [
     name: 'sol lions',
   },
   {
-    price: 0.5,
+    price: 0.14,
     source: 'digitaleyes',
-    name: 'solstreets',
+    name: 'the retriever party',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: '00 cosplay pigs 00',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'bitbytebin',
   },
   {
     price: 0.14,
@@ -8347,19 +8297,24 @@ export const Prices = [
     name: 'a collection of soltones',
   },
   {
-    price: 0.2,
+    price: 0.37,
     source: 'digitaleyes',
-    name: 'solagon',
-  },
-  {
-    price: 9,
-    source: 'digitaleyes',
-    name: 'solchicks',
+    name: 'solrex (solana rex)',
   },
   {
     price: 0.11,
     source: 'digitaleyes',
     name: 'the nasty boys',
+  },
+  {
+    price: 0.04,
+    source: 'solana-art',
+    name: 'tales from the attic',
+  },
+  {
+    price: 9,
+    source: 'digitaleyes',
+    name: 'solchicks',
   },
   {
     price: 0.09,
@@ -8370,6 +8325,26 @@ export const Prices = [
     price: 0.37,
     source: 'digitaleyes',
     name: 'wicked penguin bone club',
+  },
+  {
+    price: 0.11,
+    source: 'digitaleyes',
+    name: 'taco cats collabs airdrops and more',
+  },
+  {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'sol hunter cats',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'inverted apes club',
+  },
+  {
+    price: 0.81,
+    source: 'digitaleyes',
+    name: 'race skull',
   },
   {
     price: 0.48,
@@ -8443,9 +8418,9 @@ export const Prices = [
     symbol: 'lmcfp',
   },
   {
-    price: 0.11,
+    price: 0.67,
     source: 'digitaleyes',
-    name: 'taco cats collabs airdrops and more',
+    name: 'skellies',
   },
   {
     price: 0.2,
@@ -8520,9 +8495,29 @@ export const Prices = [
     symbol: 'sartoka',
   },
   {
-    price: 0.05,
+    price: 0.333,
     source: 'digitaleyes',
-    name: 'sol hunter cats',
+    name: 'the priestchain',
+  },
+  {
+    price: 2.98,
+    source: 'digitaleyes',
+    name: 'goblin laboratory',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'metabaes',
+  },
+  {
+    price: 0.54,
+    source: 'digitaleyes',
+    name: 'vox punks club',
+  },
+  {
+    price: 9,
+    source: 'exchageart',
+    name: 'truth',
   },
   {
     price: 0.1,
@@ -8535,59 +8530,14 @@ export const Prices = [
     name: 'thugette birdz',
   },
   {
-    price: 9,
-    source: 'exchageart',
-    name: 'truth',
-  },
-  {
-    price: 0.67,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'skellies',
-  },
-  {
-    price: 0.37,
-    source: 'digitaleyes',
-    name: 'solrex (solana rex)',
-  },
-  {
-    price: 2.26,
-    source: 'digitaleyes',
-    name: 'sollamas',
-  },
-  {
-    price: 2.98,
-    source: 'digitaleyes',
-    name: 'goblin laboratory',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'bosiartai',
-  },
-  {
-    price: 0.13,
-    source: 'digitaleyes',
-    name: 'solana giraffes',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'ruled by randomness: the genesis',
+    name: 'solstreets',
   },
   {
     price: 0.2,
     source: 'digitaleyes',
     name: 'flukies',
-  },
-  {
-    price: 7.9,
-    source: 'digitaleyes',
-    name: '419 acid monkees',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'dorkyducks',
   },
   {
     price: 0.7,
@@ -8628,11 +8578,6 @@ export const Prices = [
     price: 0.4,
     source: 'digitaleyes',
     name: 'coolboy nft',
-  },
-  {
-    price: 6,
-    source: 'digitaleyes',
-    name: 'blondies',
   },
   {
     price: 0.9,
@@ -8720,16 +8665,6 @@ export const Prices = [
     name: 'solfood',
   },
   {
-    price: 0.19,
-    source: 'digitaleyes',
-    name: 'solmushies',
-  },
-  {
-    price: 0.15,
-    source: 'digitaleyes',
-    name: 'soul dragons',
-  },
-  {
     price: 0.3,
     source: 'digitaleyes',
     name: 'abd stingbikes',
@@ -8740,14 +8675,44 @@ export const Prices = [
     name: 'the sneks',
   },
   {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'xperiment',
+  },
+  {
     price: 0.3,
     source: 'digitaleyes',
     name: 'solana souls',
   },
   {
-    price: 0.05,
+    price: 3,
     source: 'digitaleyes',
-    name: 'xperiment',
+    name: 'solstones',
+  },
+  {
+    price: 11,
+    source: 'digitaleyes',
+    name: 'woolly guys',
+  },
+  {
+    price: 2.75,
+    source: 'digitaleyes',
+    name: 'familysol nudes nft',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'bosiartai',
+  },
+  {
+    price: 0.57,
+    source: 'digitaleyes',
+    name: 'helium miner art',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'divine birds',
   },
   {
     price: 0.1,
@@ -8887,34 +8852,44 @@ export const Prices = [
     symbol: '$jamb',
   },
   {
-    price: 3,
+    price: 0.13,
     source: 'digitaleyes',
-    name: 'solstones',
+    name: 'solana giraffes',
   },
   {
-    price: 11,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'woolly guys',
+    name: 'ruled by randomness: the genesis',
   },
   {
-    price: 3,
+    price: 7.9,
     source: 'digitaleyes',
-    name: 'familysol nudes nft',
-  },
-  {
-    price: 0.57,
-    source: 'digitaleyes',
-    name: 'helium miner art',
+    name: '419 acid monkees',
   },
   {
     price: 0.3,
     source: 'digitaleyes',
-    name: 'divine birds',
+    name: 'dorkyducks',
+  },
+  {
+    price: 6,
+    source: 'digitaleyes',
+    name: 'blondies',
   },
   {
     price: 0.2,
     source: 'digitaleyes',
     name: 'soldog',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'solmushies',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'soul dragons',
   },
   {
     price: 2.4,
@@ -8946,34 +8921,9 @@ export const Prices = [
     symbol: 'ffrenchies',
   },
   {
-    price: 3,
-    source: 'digitaleyes',
-    name: 'solana toros',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'elon reimagined',
-  },
-  {
-    price: 1.8,
-    source: 'digitaleyes',
-    name: 'fancy frenchies',
-  },
-  {
-    price: 0.15,
-    source: 'digitaleyes',
-    name: 'farmlands',
-  },
-  {
     price: 0.75,
     source: 'digitaleyes',
     name: 'endangered peruvian wildlife',
-  },
-  {
-    price: 11,
-    source: 'digitaleyes',
-    name: 'grim syndicate',
   },
   {
     price: 0.09,
@@ -8981,9 +8931,9 @@ export const Prices = [
     name: 'inverse bear market',
   },
   {
-    price: 12,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'matrica labs: pixels',
+    name: 'pepeverse',
   },
   {
     price: 0.04,
@@ -8991,9 +8941,9 @@ export const Prices = [
     name: 'mystical spirits',
   },
   {
-    price: 0.5,
+    price: 12,
     source: 'digitaleyes',
-    name: 'pepeverse',
+    name: 'matrica labs: pixels',
   },
   {
     price: 0.0977,
@@ -9016,9 +8966,19 @@ export const Prices = [
     name: 'solanadogenfts',
   },
   {
-    price: 0.7,
+    price: 0.55,
     source: 'digitaleyes',
-    name: 'soliens',
+    name: 'solanimals',
+  },
+  {
+    price: 0.6,
+    source: 'digitaleyes',
+    name: '00ga studios: solarnauts',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'sol doggos',
   },
   {
     price: 0.13,
@@ -9031,19 +8991,34 @@ export const Prices = [
     name: 'test guys item outpost',
   },
   {
-    price: 1.8,
-    source: 'digitaleyes',
-    name: 'top hat chicks',
-  },
-  {
     price: 25,
     source: 'digitaleyes',
     name: 'zeolityst',
   },
   {
-    price: 9.5,
+    price: 4,
+    source: 'exchageart',
+    name: 'chain walkers',
+  },
+  {
+    price: 0.11,
     source: 'digitaleyes',
-    name: 'stylish studs',
+    name: 'solninja-go',
+  },
+  {
+    price: 3,
+    source: 'digitaleyes',
+    name: 'solana toros',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'cryptofabulas',
+  },
+  {
+    price: 0.12,
+    source: 'digitaleyes',
+    name: 'shell racers',
   },
   {
     price: 0.91,
@@ -9198,14 +9173,14 @@ export const Prices = [
     symbol: 'canna',
   },
   {
-    price: 4,
-    source: 'exchageart',
-    name: 'chain walkers',
+    price: 0.02,
+    source: 'digitaleyes',
+    name: 'the bean team',
   },
   {
-    price: 0.11,
+    price: 0.079,
     source: 'digitaleyes',
-    name: 'solninja-go',
+    name: 'stratosnft',
   },
   {
     price: 0.666,
@@ -9262,9 +9237,34 @@ export const Prices = [
     symbol: 'bh',
   },
   {
-    price: 0.25,
+    price: 0.15,
     source: 'digitaleyes',
-    name: 'cryptofabulas',
+    name: 'farmlands',
+  },
+  {
+    price: 1.8,
+    source: 'digitaleyes',
+    name: 'fancy frenchies',
+  },
+  {
+    price: 11,
+    source: 'digitaleyes',
+    name: 'grim syndicate',
+  },
+  {
+    price: 0.09,
+    source: 'digitaleyes',
+    name: 'solryx',
+  },
+  {
+    price: 9.5,
+    source: 'digitaleyes',
+    name: 'stylish studs',
+  },
+  {
+    price: 1.8,
+    source: 'digitaleyes',
+    name: 'top hat chicks',
   },
   {
     price: 1.1,
@@ -9272,49 +9272,14 @@ export const Prices = [
     name: 'unlock defi golden tickets',
   },
   {
-    price: 0.12,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'shell racers',
-  },
-  {
-    price: 0.079,
-    source: 'digitaleyes',
-    name: 'stratosnft',
-  },
-  {
-    price: 0.02,
-    source: 'digitaleyes',
-    name: 'the bean team',
+    name: 'elon reimagined',
   },
   {
     price: 1.25,
     source: 'digitaleyes',
     name: 'solana astro club',
-  },
-  {
-    price: 0.55,
-    source: 'digitaleyes',
-    name: 'solanimals',
-  },
-  {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: '00ga studios: solarnauts',
-  },
-  {
-    price: 0.019,
-    source: 'digitaleyes',
-    name: 'soldroids nft',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'sol doggos',
-  },
-  {
-    price: 0.09,
-    source: 'digitaleyes',
-    name: 'solryx',
   },
   {
     price: 0.23,
@@ -9332,39 +9297,9 @@ export const Prices = [
     name: 'dea puppies',
   },
   {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'badboys',
-  },
-  {
     price: 1.3,
     source: 'digitaleyes',
     name: 'project mirror',
-  },
-  {
-    price: 0.11,
-    source: 'digitaleyes',
-    name: 'sealana nfts',
-  },
-  {
-    price: 5.71,
-    source: 'digitaleyes',
-    name: 'shoebill coin',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'solanime',
-  },
-  {
-    price: 2.3,
-    source: 'digitaleyes',
-    name: 'solsnails',
-  },
-  {
-    price: 0.75,
-    source: 'digitaleyes',
-    name: 'solaknights',
   },
   {
     price: 1,
@@ -9390,6 +9325,31 @@ export const Prices = [
     price: 1.98,
     source: 'digitaleyes',
     name: 'surging bulls',
+  },
+  {
+    price: 5.5,
+    source: 'exchageart',
+    name: 'through the smoke',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'baby frogs',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'badboys',
+  },
+  {
+    price: 10,
+    source: 'digitaleyes',
+    name: 'alien universe',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'ghoulie gang',
   },
   {
     price: 980,
@@ -9561,9 +9521,9 @@ export const Prices = [
     symbol: 'ro',
   },
   {
-    price: 5.5,
-    source: 'exchageart',
-    name: 'through the smoke',
+    price: 0.3,
+    source: 'digitaleyes',
+    name: 'hemp',
   },
   {
     price: 0.42,
@@ -9712,29 +9672,34 @@ export const Prices = [
     symbol: 'martians',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'baby frogs',
-  },
-  {
-    price: 10,
-    source: 'digitaleyes',
-    name: 'alien universe',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'ghoulie gang',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'hemp',
-  },
-  {
     price: 7,
     source: 'digitaleyes',
     name: 'lostfaces',
+  },
+  {
+    price: 0.11,
+    source: 'digitaleyes',
+    name: 'sealana nfts',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'solanime',
+  },
+  {
+    price: 2.3,
+    source: 'digitaleyes',
+    name: 'solsnails',
+  },
+  {
+    price: 0.75,
+    source: 'digitaleyes',
+    name: 'solaknights',
+  },
+  {
+    price: 5.71,
+    source: 'digitaleyes',
+    name: 'shoebill coin',
   },
   {
     price: 0.14,
@@ -9742,19 +9707,19 @@ export const Prices = [
     name: 'cool beans',
   },
   {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'krypto kronic evolutionz budz',
-  },
-  {
     price: 3,
     source: 'digitaleyes',
     name: 'solreaper',
   },
   {
-    price: 0.5,
+    price: 0.2,
     source: 'digitaleyes',
-    name: 'sol rays',
+    name: 'krypto kronic evolutionz budz',
+  },
+  {
+    price: 0.125,
+    source: 'digitaleyes',
+    name: 'order 817',
   },
   {
     price: 0.09,
@@ -9877,9 +9842,9 @@ export const Prices = [
     symbol: 'none',
   },
   {
-    price: 20,
-    source: 'exchageart',
-    name: 'i see spirits',
+    price: 0.058,
+    source: 'digitaleyes',
+    name: 'solfighters',
   },
   {
     price: 0.148,
@@ -9953,14 +9918,14 @@ export const Prices = [
     symbol: 'ncc1',
   },
   {
-    price: 0.125,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'order 817',
+    name: 'sol rays',
   },
   {
-    price: 0.59,
+    price: 7,
     source: 'digitaleyes',
-    name: 'mighty pangolins nft',
+    name: 'variants',
   },
   {
     price: 0.25,
@@ -10111,24 +10076,19 @@ export const Prices = [
     name: 'phantom',
   },
   {
+    price: 20,
+    source: 'exchageart',
+    name: 'i see spirits',
+  },
+  {
+    price: 0.59,
+    source: 'digitaleyes',
+    name: 'mighty pangolins nft',
+  },
+  {
     price: 0.42,
     source: 'digitaleyes',
     name: 'solebs art',
-  },
-  {
-    price: 0.058,
-    source: 'digitaleyes',
-    name: 'solfighters',
-  },
-  {
-    price: 1.5,
-    source: 'digitaleyes',
-    name: 'solidary headz',
-  },
-  {
-    price: 7,
-    source: 'digitaleyes',
-    name: 'variants',
   },
   {
     price: 1.7,
@@ -10155,36 +10115,6 @@ export const Prices = [
     symbol: 'ggb',
   },
   {
-    price: 0.074,
-    source: 'digitaleyes',
-    name: 'mogulwars',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'billionaire whale club',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'platinum polar club',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'bannurs',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'toshi world',
-  },
-  {
-    price: 0.015,
-    source: 'digitaleyes',
-    name: 'ape squad',
-  },
-  {
     price: 0.0499,
     source: 'digitaleyes',
     name: 'solmusic by cryptocannft',
@@ -10200,34 +10130,19 @@ export const Prices = [
     name: 'asssols',
   },
   {
-    price: 25,
-    source: 'exchageart',
-    name: 'chaos portrait collection',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: 'grospifs',
-  },
-  {
-    price: 1.1,
-    source: 'digitaleyes',
-    name: 'dirtypanda',
-  },
-  {
-    price: 0.15,
-    source: 'digitaleyes',
-    name: 'endangered animals nft',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'baby nothing nft',
-  },
-  {
     price: 4.2,
     source: 'digitaleyes',
     name: 'degen dicks',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'toshi world',
+  },
+  {
+    price: 0.12,
+    source: 'digitaleyes',
+    name: 'solspectres',
   },
   {
     price: 0.4,
@@ -10245,9 +10160,29 @@ export const Prices = [
     name: 'sol samurais',
   },
   {
-    price: 0.19,
+    price: 25,
+    source: 'exchageart',
+    name: 'chaos portrait collection',
+  },
+  {
+    price: 0.3,
     source: 'digitaleyes',
-    name: 'thirsty cactus garden party',
+    name: 'grospifs',
+  },
+  {
+    price: 0.8,
+    source: 'digitaleyes',
+    name: 'nobu ninjas',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'endangered animals nft',
+  },
+  {
+    price: 0.015,
+    source: 'digitaleyes',
+    name: 'ape squad',
   },
   {
     price: 0.09,
@@ -10257,7 +10192,7 @@ export const Prices = [
   {
     price: 0.1,
     source: 'digitaleyes',
-    name: 'fashion baby',
+    name: 'wukongsol',
   },
   {
     price: 0.035,
@@ -10270,11 +10205,6 @@ export const Prices = [
     name: 'bongos',
   },
   {
-    price: 0.27,
-    source: 'digitaleyes',
-    name: 'pixtapes',
-  },
-  {
     price: 0.39,
     source: 'digitaleyes',
     name: 'frenchie thugs club reversed',
@@ -10285,14 +10215,14 @@ export const Prices = [
     name: 'soltreez',
   },
   {
-    price: 6.49,
-    source: 'digitaleyes',
-    name: 'abstratica',
-  },
-  {
     price: 0.242069,
     source: 'digitaleyes',
     name: 'temporal',
+  },
+  {
+    price: 6.49,
+    source: 'digitaleyes',
+    name: 'abstratica',
   },
   {
     price: 0.2,
@@ -10300,29 +10230,34 @@ export const Prices = [
     name: 'all colour icons',
   },
   {
+    price: 0.27,
+    source: 'digitaleyes',
+    name: 'pixtapes',
+  },
+  {
+    price: 0.69,
+    source: 'digitaleyes',
+    name: 'bionic thugbirdz',
+  },
+  {
+    price: 1.1,
+    source: 'digitaleyes',
+    name: 'dirtypanda',
+  },
+  {
     price: 0.5,
     source: 'digitaleyes',
     name: 'frankey_nft',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'fine lines',
+  },
+  {
     price: 0.018,
     source: 'digitaleyes',
     name: 'gemsigns',
-  },
-  {
-    price: 0.8,
-    source: 'digitaleyes',
-    name: 'nobu ninjas',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'pixchameleons',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'mnkc',
   },
   {
     price: 4,
@@ -10335,11 +10270,6 @@ export const Prices = [
     name: 'solrannft',
   },
   {
-    price: 0.19,
-    source: 'digitaleyes',
-    name: 'solsharks',
-  },
-  {
     price: 0.1,
     source: 'digitaleyes',
     name: 'solameleon',
@@ -10350,14 +10280,19 @@ export const Prices = [
     name: 'solbear',
   },
   {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'solsharks',
+  },
+  {
     price: 0.02,
     source: 'digitaleyes',
     name: 'sollicious',
   },
   {
-    price: 0.17,
+    price: 0.5,
     source: 'digitaleyes',
-    name: 'solsheep',
+    name: 'sol(s) of solana',
   },
   {
     price: 1.9,
@@ -10365,14 +10300,14 @@ export const Prices = [
     name: 'synapses',
   },
   {
+    price: 0.35,
+    source: 'digitaleyes',
+    name: 'taco cats club',
+  },
+  {
     price: 0.0344,
     source: 'digitaleyes',
     name: 'the steve´s',
-  },
-  {
-    price: 0.54,
-    source: 'digitaleyes',
-    name: 'viyk',
   },
   {
     price: 20,
@@ -10380,14 +10315,39 @@ export const Prices = [
     name: "wgmi nft collector's club",
   },
   {
+    price: 0.0969,
+    source: 'digitaleyes',
+    name: 'wool capital group',
+  },
+  {
     price: 0.39,
     source: 'digitaleyes',
     name: 'wieners club',
   },
   {
-    price: 0.0969,
+    price: 0.22,
     source: 'digitaleyes',
-    name: 'wool capital group',
+    name: 'pandapalssol',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'baby nothing nft',
+  },
+  {
+    price: 0.074,
+    source: 'digitaleyes',
+    name: 'mogulwars',
+  },
+  {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'billionaire whale club',
+  },
+  {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'platinum polar club',
   },
   {
     price: 0.09,
@@ -10405,6 +10365,11 @@ export const Prices = [
     name: 'lit jesus',
   },
   {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'bannurs',
+  },
+  {
     price: 0.05,
     source: 'solana-art',
     name: 'solcats',
@@ -10415,9 +10380,9 @@ export const Prices = [
     name: 'glitch relics',
   },
   {
-    price: 6,
-    source: 'exchageart',
-    name: 'goxrilla',
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'fashion baby',
   },
   {
     price: 3.59,
@@ -10425,9 +10390,9 @@ export const Prices = [
     name: 'masker',
   },
   {
-    price: 0.22,
+    price: 0.19,
     source: 'digitaleyes',
-    name: 'pandapalssol',
+    name: 'thirsty cactus garden party',
   },
   {
     price: 3,
@@ -10435,44 +10400,34 @@ export const Prices = [
     name: "trenscen'dance genesis",
   },
   {
-    price: 0.12,
-    source: 'digitaleyes',
-    name: 'solspectres',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'wukongsol',
-  },
-  {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'buzzclubnft',
-  },
-  {
     price: 2.2,
     source: 'digitaleyes',
     name: 'nftrees solana',
   },
   {
-    price: 0.69,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'bionic thugbirdz',
+    name: 'mnkc',
   },
   {
     price: 1,
     source: 'digitaleyes',
-    name: 'fine lines',
+    name: 'pixchameleons',
   },
   {
-    price: 0.5,
+    price: 0.17,
     source: 'digitaleyes',
-    name: 'sol(s) of solana',
+    name: 'solsheep',
   },
   {
-    price: 0.35,
+    price: 6,
+    source: 'exchageart',
+    name: 'goxrilla',
+  },
+  {
+    price: 0.54,
     source: 'digitaleyes',
-    name: 'taco cats club',
+    name: 'viyk',
   },
   {
     price: 0.25,
@@ -10480,9 +10435,9 @@ export const Prices = [
     name: 'solana valley',
   },
   {
-    price: 9,
+    price: 0.1,
     source: 'digitaleyes',
-    name: 'crypto tradiez',
+    name: 'buzzclubnft',
   },
   {
     price: 0.5,
@@ -10490,9 +10445,9 @@ export const Prices = [
     name: 'ali industry',
   },
   {
-    price: 0.02,
+    price: 0.34,
     source: 'digitaleyes',
-    name: 'soltoadz',
+    name: 'bakedgods',
   },
   {
     price: 0.13,
@@ -10549,9 +10504,9 @@ export const Prices = [
     symbol: 'as',
   },
   {
-    price: 0.34,
+    price: 0.035,
     source: 'digitaleyes',
-    name: 'bakedgods',
+    name: 'thedragonclub',
   },
   {
     price: 3.3,
@@ -10836,10 +10791,20 @@ export const Prices = [
     symbol: 'bf',
   },
   {
+    price: 0.7,
+    source: 'digitaleyes',
+    name: 'stonksbears',
+  },
+  {
     price: 0.009,
     source: 'solana-art',
     name: 'cthulhu club nft',
     symbol: 'cthulhu',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'tomodachi',
   },
   {
     price: 0.5,
@@ -10847,19 +10812,19 @@ export const Prices = [
     name: 'demonic skulls dao',
   },
   {
-    price: 0.7,
+    price: 10,
     source: 'digitaleyes',
-    name: 'stonksbears',
+    name: 'josephtaylor.art: crystal beams',
   },
   {
-    price: 0.035,
+    price: 9,
     source: 'digitaleyes',
-    name: 'thedragonclub',
+    name: 'crypto tradiez',
   },
   {
-    price: 1,
+    price: 0.02,
     source: 'digitaleyes',
-    name: 'tomodachi',
+    name: 'soltoadz',
   },
   {
     price: 0.01,
@@ -10875,11 +10840,6 @@ export const Prices = [
     price: 0.9,
     source: 'exchageart',
     name: 'cubo blob',
-  },
-  {
-    price: 10,
-    source: 'digitaleyes',
-    name: 'josephtaylor.art: crystal beams',
   },
   {
     price: 0.1,
@@ -10898,34 +10858,9 @@ export const Prices = [
     name: 'the many mimes',
   },
   {
-    price: 0.55,
-    source: 'digitaleyes',
-    name: 'animation influential',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: '100 sensory octopuses',
-  },
-  {
-    price: 0.11,
-    source: 'digitaleyes',
-    name: 'project medusa',
-  },
-  {
-    price: 0.02,
-    source: 'digitaleyes',
-    name: 'pixel slime',
-  },
-  {
     price: 1,
     source: 'digitaleyes',
     name: 'crypto boars',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'mad circus club',
   },
   {
     price: 2,
@@ -10943,14 +10878,14 @@ export const Prices = [
     name: 'sol street',
   },
   {
-    price: 0.8,
-    source: 'digitaleyes',
-    name: 'quokka qommunity',
-  },
-  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'pixel pigs',
+  },
+  {
+    price: 0.8,
+    source: 'digitaleyes',
+    name: 'quokka qommunity',
   },
   {
     price: 1,
@@ -10973,9 +10908,29 @@ export const Prices = [
     name: 'jesus monkey weed wizard',
   },
   {
+    price: 0.08,
+    source: 'digitaleyes',
+    name: 'socksonsolana',
+  },
+  {
     price: 100,
     source: 'digitaleyes',
     name: 's◎lana st◎nes',
+  },
+  {
+    price: 4.2,
+    source: 'digitaleyes',
+    name: 'the 888 nft',
+  },
+  {
+    price: 2.5,
+    source: 'digitaleyes',
+    name: '0artnft',
+  },
+  {
+    price: 0.49,
+    source: 'digitaleyes',
+    name: 'space rhinos',
   },
   {
     price: 0.14,
@@ -11061,14 +11016,14 @@ export const Prices = [
     symbol: 'sc',
   },
   {
-    price: 0.19,
+    price: 0.11,
     source: 'digitaleyes',
-    name: 'spaceballoons',
+    name: 'project medusa',
   },
   {
-    price: 0.49,
+    price: 0.02,
     source: 'digitaleyes',
-    name: 'space rhinos',
+    name: 'pixel slime',
   },
   {
     price: 0.3899,
@@ -11222,24 +11177,29 @@ export const Prices = [
     name: 'evil ape',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: '100 sensory octopuses',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'mad circus club',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'spaceballoons',
+  },
+  {
     price: 1.5,
     source: 'digitaleyes',
     name: 'diamond town heads',
   },
   {
-    price: 0.08,
+    price: 0.55,
     source: 'digitaleyes',
-    name: 'socksonsolana',
-  },
-  {
-    price: 4.2,
-    source: 'digitaleyes',
-    name: 'the 888 nft',
-  },
-  {
-    price: 2.5,
-    source: 'digitaleyes',
-    name: '0artnft',
+    name: 'animation influential',
   },
   {
     price: 0.1,
@@ -11287,11 +11247,6 @@ export const Prices = [
     price: 0.2,
     source: 'exchageart',
     name: 'the cygirls',
-  },
-  {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'human essence',
   },
   {
     price: 9.2,
@@ -11421,14 +11376,14 @@ export const Prices = [
     symbol: 'dbulls',
   },
   {
-    price: 0.5,
-    source: 'exchageart',
-    name: 'dead pixels',
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'dogs on the block',
   },
   {
-    price: 2.5,
-    source: 'exchageart',
-    name: 'garbage patch kids',
+    price: 0.66,
+    source: 'digitaleyes',
+    name: 'team terrasoldier',
   },
   {
     price: 0.02,
@@ -11458,19 +11413,9 @@ export const Prices = [
     name: 'berkin bags s1',
   },
   {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'elysia',
-  },
-  {
-    price: 0.06,
-    source: 'digitaleyes',
-    name: 'shapes',
-  },
-  {
-    price: 0.65,
-    source: 'digitaleyes',
-    name: 'all time greats (atg)',
+    price: 1.5,
+    source: 'exchageart',
+    name: 'human essence',
   },
   {
     price: 0.44,
@@ -11627,18 +11572,28 @@ export const Prices = [
   },
   {
     price: 1,
+    source: 'digitaleyes',
+    name: 'alphaheroes',
+  },
+  {
+    price: 2.5,
+    source: 'exchageart',
+    name: 'garbage patch kids',
+  },
+  {
+    price: 1,
     source: 'exchageart',
     name: 'elcollection',
   },
   {
-    price: 0.23,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'solcities',
+    name: 'elysia',
   },
   {
-    price: 1,
+    price: 0.06,
     source: 'digitaleyes',
-    name: 'alphaheroes',
+    name: 'shapes',
   },
   {
     price: 0.5,
@@ -11646,14 +11601,14 @@ export const Prices = [
     name: 'trippy laboratory',
   },
   {
-    price: 0.1,
+    price: 0.23,
     source: 'digitaleyes',
-    name: 'dogs on the block',
+    name: 'solcities',
   },
   {
-    price: 0.66,
+    price: 0.65,
     source: 'digitaleyes',
-    name: 'team terrasoldier',
+    name: 'all time greats (atg)',
   },
   {
     price: 1.69,
@@ -11690,19 +11645,24 @@ export const Prices = [
     name: 'solpunks',
   },
   {
+    price: 0.5,
+    source: 'exchageart',
+    name: 'dead pixels',
+  },
+  {
     price: 60,
     source: 'solana-art',
     name: 'cets on creck',
   },
   {
-    price: 0.099,
+    price: 5,
     source: 'digitaleyes',
-    name: 'soljunks',
+    name: 'baby turtles',
   },
   {
-    price: 9.98,
+    price: 0.4,
     source: 'digitaleyes',
-    name: 'solana monkette business',
+    name: 'dagon club',
   },
   {
     price: 1,
@@ -11730,54 +11690,24 @@ export const Prices = [
     name: 'rooted head',
   },
   {
-    price: 0.0185,
-    source: 'digitaleyes',
-    name: 'stickmen solana',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'balisarinft',
-  },
-  {
-    price: 0.06,
-    source: 'digitaleyes',
-    name: 'solana pickles',
-  },
-  {
-    price: 0.19,
-    source: 'digitaleyes',
-    name: 'cryptone™',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'solvival nft',
-  },
-  {
-    price: 5,
-    source: 'digitaleyes',
-    name: 'baby turtles',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'dagon club',
-  },
-  {
     price: 1,
     source: 'digitaleyes',
     name: 'sol slugs',
   },
   {
-    price: 3,
+    price: 0.45,
     source: 'digitaleyes',
-    name: 'grumpy grandpas',
+    name: 'gmoot poems',
   },
   {
     price: 0.4,
     source: 'digitaleyes',
     name: 'raccoon kingdom',
+  },
+  {
+    price: 3,
+    source: 'digitaleyes',
+    name: 'grumpy grandpas',
   },
   {
     price: 0.3,
@@ -11810,19 +11740,14 @@ export const Prices = [
     name: 'soltoads',
   },
   {
-    price: 0.69,
-    source: 'digitaleyes',
-    name: 'singlelinepunks',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'cryptogirlpuck',
-  },
-  {
     price: 0.11,
     source: 'digitaleyes',
     name: 'solkeys',
+  },
+  {
+    price: 0.69,
+    source: 'digitaleyes',
+    name: 'singlelinepunks',
   },
   {
     price: 4,
@@ -11830,14 +11755,14 @@ export const Prices = [
     name: 'soalien',
   },
   {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'mystic potion',
-  },
-  {
     price: 0.19,
     source: 'digitaleyes',
     name: 'solana havana cigar club',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'mystic potion',
   },
   {
     price: 0.25,
@@ -11870,19 +11795,14 @@ export const Prices = [
     name: 'bitboat: bitboats',
   },
   {
-    price: 3.5,
+    price: 1.19,
     source: 'digitaleyes',
-    name: '1 designs by futurist',
+    name: '557 oil painting nft',
   },
   {
     price: 0.05,
     source: 'digitaleyes',
     name: 'pimp my thug',
-  },
-  {
-    price: 1.19,
-    source: 'digitaleyes',
-    name: '557 oil painting nft',
   },
   {
     price: 0.035,
@@ -11905,6 +11825,16 @@ export const Prices = [
     name: 'birdzhouse mansion club',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'balisarinft',
+  },
+  {
+    price: 3.5,
+    source: 'digitaleyes',
+    name: '1 designs by futurist',
+  },
+  {
     price: 0.59,
     source: 'digitaleyes',
     name: 'crypto idolz',
@@ -11918,11 +11848,6 @@ export const Prices = [
     price: 4.5,
     source: 'digitaleyes',
     name: 'enigma expanses',
-  },
-  {
-    price: 0.45,
-    source: 'digitaleyes',
-    name: 'gmoot poems',
   },
   {
     price: 1,
@@ -11960,15 +11885,50 @@ export const Prices = [
     name: 'solana squirrels',
   },
   {
+    price: 0.7,
+    source: 'exchageart',
+    name: 'intersections',
+  },
+  {
+    price: 45,
+    source: 'exchageart',
+    name: 'ruggy bone',
+  },
+  {
+    price: 0.89,
+    source: 'digitaleyes',
+    name: 'solana piranhas',
+  },
+  {
+    price: 0.099,
+    source: 'digitaleyes',
+    name: 'soljunks',
+  },
+  {
+    price: 9.98,
+    source: 'digitaleyes',
+    name: 'solana monkette business',
+  },
+  {
+    price: 0.06,
+    source: 'digitaleyes',
+    name: 'solana pickles',
+  },
+  {
     price: 3.69,
     source: 'solana-art',
     name: 'soulofox',
     symbol: 'sfgen0',
   },
   {
-    price: 0.7,
-    source: 'exchageart',
-    name: 'intersections',
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'bud leaf gang',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'cryptone™',
   },
   {
     price: 10,
@@ -11996,14 +11956,9 @@ export const Prices = [
     name: 'jay',
   },
   {
-    price: 0.89,
+    price: 0.2,
     source: 'digitaleyes',
-    name: 'solana piranhas',
-  },
-  {
-    price: 45,
-    source: 'exchageart',
-    name: 'ruggy bone',
+    name: 'cryptogirlpuck',
   },
   {
     price: 2,
@@ -12011,39 +11966,19 @@ export const Prices = [
     name: 'uncollection',
   },
   {
-    price: 0.15,
+    price: 0.0185,
     source: 'digitaleyes',
-    name: 'bud leaf gang',
+    name: 'stickmen solana',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'solvival nft',
   },
   {
     price: 75,
     source: 'exchageart',
     name: 'the protagonist: the sun god of the death',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'project hanako',
-  },
-  {
-    price: 1.74,
-    source: 'digitaleyes',
-    name: 'allegories',
-  },
-  {
-    price: 0.0775,
-    source: 'digitaleyes',
-    name: 'metaverse bored sol apes v1',
-  },
-  {
-    price: 1.75,
-    source: 'digitaleyes',
-    name: 'bag heads',
-  },
-  {
-    price: 0.32,
-    source: 'digitaleyes',
-    name: 'snowblue',
   },
   {
     price: 0.17,
@@ -12056,14 +11991,14 @@ export const Prices = [
     name: 'undead sols',
   },
   {
-    price: 0.02,
-    source: 'digitaleyes',
-    name: 'flexfox',
-  },
-  {
     price: 0.4,
     source: 'digitaleyes',
     name: 'savage grandpas',
+  },
+  {
+    price: 0.02,
+    source: 'digitaleyes',
+    name: 'flexfox',
   },
   {
     price: 2.3,
@@ -12081,14 +12016,19 @@ export const Prices = [
     name: "sol o' house",
   },
   {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'voxel youtubepunks',
+  },
+  {
     price: 0.35,
     source: 'digitaleyes',
     name: 'solbox',
   },
   {
-    price: 0.05,
+    price: 0.029,
     source: 'digitaleyes',
-    name: 'guppies',
+    name: 'cryptzero - punks is undead',
   },
   {
     price: 0.22,
@@ -12106,24 +12046,9 @@ export const Prices = [
     name: 'koreanpunkz',
   },
   {
-    price: 0.029,
-    source: 'digitaleyes',
-    name: 'cryptzero - punks is undead',
-  },
-  {
-    price: 0.15,
-    source: 'digitaleyes',
-    name: 'solana invasion',
-  },
-  {
     price: 0.53,
     source: 'digitaleyes',
     name: 'such shibas',
-  },
-  {
-    price: 2.6,
-    source: 'digitaleyes',
-    name: 'dark-sol.art',
   },
   {
     price: 2,
@@ -12131,9 +12056,24 @@ export const Prices = [
     name: '0x hooded bros',
   },
   {
+    price: 2.6,
+    source: 'digitaleyes',
+    name: 'dark-sol.art',
+  },
+  {
     price: 0.08,
     source: 'digitaleyes',
     name: 'grumpy dragons',
+  },
+  {
+    price: 0.15,
+    source: 'digitaleyes',
+    name: 'solana invasion',
+  },
+  {
+    price: 0.8,
+    source: 'digitaleyes',
+    name: 'alice hand drawn nft',
   },
   {
     price: 0.49,
@@ -12141,9 +12081,9 @@ export const Prices = [
     name: 'soldeeppaintings',
   },
   {
-    price: 0.8,
+    price: 0.09,
     source: 'digitaleyes',
-    name: 'alice hand drawn nft',
+    name: 'find your wife',
   },
   {
     price: 0.25,
@@ -12171,14 +12111,9 @@ export const Prices = [
     name: 'lunaria',
   },
   {
-    price: 0.6,
+    price: 0.047,
     source: 'digitaleyes',
-    name: 'nogoalfaces',
-  },
-  {
-    price: 0.05,
-    source: 'digitaleyes',
-    name: 'sloot',
+    name: 'pixeldix',
   },
   {
     price: 7.77,
@@ -12189,11 +12124,6 @@ export const Prices = [
     price: 0.3,
     source: 'digitaleyes',
     name: 'solanavalley',
-  },
-  {
-    price: 2.5,
-    source: 'digitaleyes',
-    name: 'sol dumplings',
   },
   {
     price: 0.11,
@@ -12211,14 +12141,14 @@ export const Prices = [
     name: 'solturtle',
   },
   {
-    price: 15.5,
-    source: 'digitaleyes',
-    name: 'zero g labs: solanauts',
-  },
-  {
     price: 2.55,
     source: 'digitaleyes',
     name: 'test guys',
+  },
+  {
+    price: 22,
+    source: 'digitaleyes',
+    name: 'thugbirdz',
   },
   {
     price: 0.07,
@@ -12226,14 +12156,39 @@ export const Prices = [
     name: 'toastedbear',
   },
   {
+    price: 100,
+    source: 'exchageart',
+    name: 'legendary mythic creatures',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'mythic sols',
+  },
+  {
+    price: 15.5,
+    source: 'digitaleyes',
+    name: 'zero g labs: solanauts',
+  },
+  {
+    price: 10.9,
+    source: 'digitaleyes',
+    name: 'nechromatics',
+  },
+  {
+    price: 0.02,
+    source: 'digitaleyes',
+    name: 'something nft',
+  },
+  {
     price: 0.01,
     source: 'solana-art',
     name: 'the nasty boys',
   },
   {
-    price: 22,
+    price: 1,
     source: 'digitaleyes',
-    name: 'thugbirdz',
+    name: 'project hanako',
   },
   {
     price: 0.05,
@@ -12311,9 +12266,19 @@ export const Prices = [
     symbol: 'hom',
   },
   {
-    price: 100,
-    source: 'exchageart',
-    name: 'legendary mythic creatures',
+    price: 1.74,
+    source: 'digitaleyes',
+    name: 'allegories',
+  },
+  {
+    price: 0.0775,
+    source: 'digitaleyes',
+    name: 'metaverse bored sol apes v1',
+  },
+  {
+    price: 1.75,
+    source: 'digitaleyes',
+    name: 'bag heads',
   },
   {
     price: 7,
@@ -12326,24 +12291,24 @@ export const Prices = [
     name: 'misbehaving',
   },
   {
-    price: 0.02,
+    price: 0.32,
     source: 'digitaleyes',
-    name: 'something nft',
+    name: 'snowblue',
   },
   {
-    price: 0.5,
+    price: 0.6,
     source: 'digitaleyes',
-    name: 'voxel youtubepunks',
+    name: 'nogoalfaces',
   },
   {
-    price: 0.09,
+    price: 0.05,
     source: 'digitaleyes',
-    name: 'find your wife',
+    name: 'sloot',
   },
   {
-    price: 0.047,
+    price: 2.5,
     source: 'digitaleyes',
-    name: 'pixeldix',
+    name: 'sol dumplings',
   },
   {
     price: 0.6,
@@ -12352,24 +12317,14 @@ export const Prices = [
     symbol: 'nduck',
   },
   {
-    price: 0.1,
-    source: 'digitaleyes',
-    name: 'mythic sols',
-  },
-  {
-    price: 10.9,
-    source: 'digitaleyes',
-    name: 'nechromatics',
-  },
-  {
     price: 9.8,
     source: 'solana-art',
     name: 'rude demons',
   },
   {
-    price: 0.099,
+    price: 2,
     source: 'digitaleyes',
-    name: 'solana locks',
+    name: 'abstractrix',
   },
   {
     price: 2.5,
@@ -12765,24 +12720,24 @@ export const Prices = [
     symbol: 'aotg',
   },
   {
+    price: 0.25,
+    source: 'digitaleyes',
+    name: 'toadiefreak',
+  },
+  {
     price: 0.6,
     source: 'exchageart',
     name: 'pokemix',
   },
   {
-    price: 2,
+    price: 0.099,
     source: 'digitaleyes',
-    name: 'abstractrix',
+    name: 'solana locks',
   },
   {
     price: 1.9,
     source: 'digitaleyes',
     name: 'the degens',
-  },
-  {
-    price: 0.25,
-    source: 'digitaleyes',
-    name: 'toadiefreak',
   },
   {
     price: 22,
@@ -12823,9 +12778,9 @@ export const Prices = [
     name: 'soldough',
   },
   {
-    price: 0.16,
-    source: 'digitaleyes',
-    name: 'solvaders',
+    price: 1.75,
+    source: 'exchageart',
+    name: 'phantom figures collection',
   },
   {
     price: 0.6,
@@ -13037,14 +12992,14 @@ export const Prices = [
     symbol: 'eyes',
   },
   {
-    price: 5,
-    source: 'exchageart',
-    name: 'how to grow mountains',
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'alphabet originals',
   },
   {
-    price: 1.75,
-    source: 'exchageart',
-    name: 'phantom figures collection',
+    price: 1.1,
+    source: 'digitaleyes',
+    name: '0xdrip',
   },
   {
     price: 0.22,
@@ -13205,9 +13160,14 @@ export const Prices = [
     symbol: 'stbu',
   },
   {
-    price: 0.25,
+    price: 0.16,
     source: 'digitaleyes',
-    name: 'carnival of cocks',
+    name: 'solvaders',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'how to grow mountains',
   },
   {
     price: 0.9,
@@ -13215,14 +13175,9 @@ export const Prices = [
     name: 'paper sense',
   },
   {
-    price: 0.03,
+    price: 0.25,
     source: 'digitaleyes',
-    name: 'alphabet originals',
-  },
-  {
-    price: 1.1,
-    source: 'digitaleyes',
-    name: '0xdrip',
+    name: 'carnival of cocks',
   },
   {
     price: 0.02,
@@ -13257,71 +13212,6 @@ export const Prices = [
     symbol: 'duck',
   },
   {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: 'god particle',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: '8pxl apes',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'solmice',
-  },
-  {
-    price: 0.98,
-    source: 'digitaleyes',
-    name: 'soldoge strays',
-  },
-  {
-    price: 0.22,
-    source: 'digitaleyes',
-    name: 'junk mail',
-  },
-  {
-    price: 0.5,
-    source: 'digitaleyes',
-    name: 'zodiac tigers',
-  },
-  {
-    price: 1.4,
-    source: 'exchageart',
-    name: 'gate nu',
-  },
-  {
-    price: 2.5,
-    source: 'exchageart',
-    name: 'the stolen arts',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
-    name: 'simple monster party 2',
-  },
-  {
-    price: 1.5,
-    source: 'digitaleyes',
-    name: 'cybergothica gen 1',
-  },
-  {
-    price: 0.015,
-    source: 'digitaleyes',
-    name: 'sol dark',
-  },
-  {
-    price: 0.3,
-    source: 'digitaleyes',
-    name: '3d metaverse keys',
-  },
-  {
-    price: 0.55,
-    source: 'digitaleyes',
-    name: 'bothered otters golden tickets',
-  },
-  {
     price: 0.19,
     source: 'digitaleyes',
     name: 'crazy bunny club',
@@ -13342,14 +13232,54 @@ export const Prices = [
     name: 'lostland',
   },
   {
+    price: 0.98,
+    source: 'digitaleyes',
+    name: 'soldoge strays',
+  },
+  {
     price: 2.25,
     source: 'digitaleyes',
     name: 'pup filthy',
   },
   {
+    price: 1.4,
+    source: 'exchageart',
+    name: 'gate nu',
+  },
+  {
+    price: 2.5,
+    source: 'exchageart',
+    name: 'the stolen arts',
+  },
+  {
+    price: 3,
+    source: 'exchageart',
+    name: 'simple monster party 2',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'solmice',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'zodiac tigers',
+  },
+  {
     price: 0.42,
     source: 'digitaleyes',
     name: 'solcrocs',
+  },
+  {
+    price: 0.3,
+    source: 'digitaleyes',
+    name: '3d metaverse keys',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'metatun nft',
   },
   {
     price: 0.02,
@@ -13367,6 +13297,11 @@ export const Prices = [
     name: 'zombie frogs',
   },
   {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'radio lazy club',
+  },
+  {
     price: 0.08,
     source: 'digitaleyes',
     name: 'goldies',
@@ -13380,11 +13315,6 @@ export const Prices = [
     price: 2,
     source: 'digitaleyes',
     name: 'wurklo',
-  },
-  {
-    price: 1.25,
-    source: 'digitaleyes',
-    name: '111 loops by intima',
   },
   {
     price: 0.1,
@@ -13402,11 +13332,6 @@ export const Prices = [
     name: 'aeterna civitas',
   },
   {
-    price: 2,
-    source: 'digitaleyes',
-    name: '0x9 alien life exploration',
-  },
-  {
     price: 1.5,
     source: 'digitaleyes',
     name: 'amongthebutts',
@@ -13420,6 +13345,11 @@ export const Prices = [
     price: 0.9,
     source: 'digitaleyes',
     name: 'artsthetic',
+  },
+  {
+    price: 1.7,
+    source: 'digitaleyes',
+    name: 'babyapes',
   },
   {
     price: 6,
@@ -13467,14 +13397,29 @@ export const Prices = [
     name: 'solgl0bes',
   },
   {
-    price: 0.21,
-    source: 'digitaleyes',
-    name: 'soulless',
+    price: 250,
+    source: 'exchageart',
+    name: 'fragmented expressions',
   },
   {
-    price: 0.19,
+    price: 3,
     source: 'digitaleyes',
-    name: 'space bums',
+    name: 'solbabies',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'misfit mermaids',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'jack in the blocks',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'cybergothica gen 1',
   },
   {
     price: 0.03,
@@ -13529,9 +13474,14 @@ export const Prices = [
     symbol: 'gp',
   },
   {
-    price: 160,
-    source: 'exchageart',
-    name: 'fragmented expressions',
+    price: 0.015,
+    source: 'digitaleyes',
+    name: 'sol dark',
+  },
+  {
+    price: 0.22,
+    source: 'digitaleyes',
+    name: 'junk mail',
   },
   {
     price: 2,
@@ -13549,9 +13499,9 @@ export const Prices = [
     name: 'fvck flores',
   },
   {
-    price: 3,
+    price: 0.55,
     source: 'digitaleyes',
-    name: 'solbabies',
+    name: 'bothered otters golden tickets',
   },
   {
     price: 1,
@@ -13559,24 +13509,24 @@ export const Prices = [
     name: 'voodoo dolls',
   },
   {
-    price: 0.1,
+    price: 0.2,
     source: 'digitaleyes',
-    name: 'misfit mermaids',
+    name: '8pxl apes',
   },
   {
-    price: 0.5,
+    price: 1.25,
     source: 'digitaleyes',
-    name: 'jack in the blocks',
+    name: '111 loops by intima',
   },
   {
-    price: 0.5,
+    price: 2,
     source: 'digitaleyes',
-    name: 'metatun nft',
+    name: '0x9 alien life exploration',
   },
   {
-    price: 1.7,
+    price: 0.6,
     source: 'digitaleyes',
-    name: 'babyapes',
+    name: 'god particle',
   },
   {
     price: 1.11,
@@ -13590,9 +13540,14 @@ export const Prices = [
     name: 'duck royal club',
   },
   {
-    price: 1,
+    price: 0.21,
     source: 'digitaleyes',
-    name: 'radio lazy club',
+    name: 'soulless',
+  },
+  {
+    price: 0.19,
+    source: 'digitaleyes',
+    name: 'space bums',
   },
   {
     price: 1.5,
@@ -13690,9 +13645,9 @@ export const Prices = [
     symbol: 'pp',
   },
   {
-    price: 5.69,
-    source: 'exchageart',
-    name: 'toys that bite',
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'pengos',
   },
   {
     price: 0.7,
@@ -13771,9 +13726,9 @@ export const Prices = [
     name: 'robot and cyborg',
   },
   {
-    price: 0.1,
+    price: 9.6,
     source: 'digitaleyes',
-    name: 'pengos',
+    name: 'ai photos - world cities',
   },
   {
     price: 1,
@@ -13948,9 +13903,9 @@ export const Prices = [
     symbol: 'zk',
   },
   {
-    price: 9.6,
-    source: 'digitaleyes',
-    name: 'ai photos - world cities',
+    price: 5.69,
+    source: 'exchageart',
+    name: 'toys that bite',
   },
   {
     price: 0.66,
@@ -14105,9 +14060,9 @@ export const Prices = [
     name: '-philia',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'greedy rats gang',
+    price: 60,
+    source: 'exchageart',
+    name: 'exogenesis',
   },
   {
     price: 0.22,
@@ -14126,9 +14081,9 @@ export const Prices = [
     symbol: 'izumi',
   },
   {
-    price: 0.36,
-    source: 'digitaleyes',
-    name: 'rnftz',
+    price: 15,
+    source: 'exchageart',
+    name: 'crayon crusader',
   },
   {
     price: 52.98,
@@ -14218,14 +14173,69 @@ export const Prices = [
     symbol: 'oni',
   },
   {
-    price: 60,
+    price: 3,
     source: 'exchageart',
-    name: 'exogenesis',
+    name: 'architecture',
   },
   {
-    price: 15,
+    price: 3.5,
     source: 'exchageart',
-    name: 'incident 2x47',
+    name: 'liminal cartography',
+  },
+  {
+    price: 60,
+    source: 'exchageart',
+    name: '“pure abstract”',
+  },
+  {
+    price: 14.5,
+    source: 'exchageart',
+    name: 'lights of solana beach',
+  },
+  {
+    price: 0.4,
+    source: 'exchageart',
+    name: "jrob's adventures - editions",
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'l.e. figures',
+  },
+  {
+    price: 2,
+    source: 'exchageart',
+    name: 'bad seeds',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'compositions',
+  },
+  {
+    price: 0.25,
+    source: 'exchageart',
+    name: 'slumboy',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'solfishjel octopus',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'greedy rats gang',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'meanwhile',
+  },
+  {
+    price: 0.36,
+    source: 'digitaleyes',
+    name: 'rnftz',
   },
   {
     price: 13,
@@ -14243,69 +14253,9 @@ export const Prices = [
     name: 'monos',
   },
   {
-    price: 4,
-    source: 'exchageart',
-    name: 'armagedon studio : interstellar',
-  },
-  {
-    price: 3.33,
-    source: 'exchageart',
-    name: 'mind map',
-  },
-  {
     price: 15,
     source: 'exchageart',
-    name: 'crayon crusader',
-  },
-  {
-    price: 7,
-    source: 'exchageart',
-    name: 'lights of solana beach',
-  },
-  {
-    price: 3.5,
-    source: 'exchageart',
-    name: 'liminal cartography',
-  },
-  {
-    price: 2,
-    source: 'exchageart',
-    name: "the 1 x 1's",
-  },
-  {
-    price: 5,
-    source: 'exchageart',
-    name: 'meanwhile',
-  },
-  {
-    price: 0.6,
-    source: 'exchageart',
-    name: 'anime cyber space',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
-    name: 'architecture',
-  },
-  {
-    price: 60,
-    source: 'exchageart',
-    name: '“pure abstract”',
-  },
-  {
-    price: 0.4,
-    source: 'exchageart',
-    name: "jrob's adventures - editions",
-  },
-  {
-    price: 5,
-    source: 'exchageart',
-    name: 'l.e. figures',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'compositions',
+    name: 'incident 2x47',
   },
   {
     price: 3,
@@ -14313,19 +14263,19 @@ export const Prices = [
     name: 'contiguity',
   },
   {
+    price: 3.33,
+    source: 'exchageart',
+    name: 'mind map',
+  },
+  {
+    price: 4,
+    source: 'exchageart',
+    name: 'armagedon studio : interstellar',
+  },
+  {
     price: 2,
     source: 'exchageart',
-    name: 'bad seeds',
-  },
-  {
-    price: 0.25,
-    source: 'exchageart',
-    name: 'slumboy',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'solfishjel octopus',
+    name: "the 1 x 1's",
   },
   {
     price: 0.09,
@@ -14373,6 +14323,11 @@ export const Prices = [
     source: 'solana-art',
     name: 'danger valley',
     symbol: 'dvd',
+  },
+  {
+    price: 0.6,
+    source: 'exchageart',
+    name: 'anime cyber space',
   },
   {
     price: 0.025,
@@ -16053,6 +16008,11 @@ export const Prices = [
     name: 'solpunks',
   },
   {
+    price: 9.69,
+    source: 'exchageart',
+    name: 'demonic society',
+  },
+  {
     price: 2,
     source: 'exchageart',
     name: 'bangerz',
@@ -16133,11 +16093,6 @@ export const Prices = [
     source: 'solana-art',
     name: 'broken robot burger bar',
     symbol: 'brbb',
-  },
-  {
-    price: 9.69,
-    source: 'exchageart',
-    name: 'demonic society',
   },
   {
     price: 17,
@@ -17771,6 +17726,11 @@ export const Prices = [
     name: 'trippy bunny tribe',
   },
   {
+    price: 3,
+    source: 'exchageart',
+    name: '百花缭乱 - tangled flowers',
+  },
+  {
     price: 12.5,
     source: 'exchageart',
     name: 'users forever',
@@ -17848,11 +17808,6 @@ export const Prices = [
     source: 'solana-art',
     name: 'weed lab v2',
     symbol: 'wlv2',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
-    name: '百花缭乱 - tangled flowers',
   },
   {
     price: 2.4,
@@ -18639,14 +18594,14 @@ export const Prices = [
     symbol: 'synapses',
   },
   {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'sense of the city',
-  },
-  {
     price: 5,
     source: 'exchageart',
     name: 'glitched',
+  },
+  {
+    price: 1.5,
+    source: 'exchageart',
+    name: 'sense of the city',
   },
   {
     price: 0.025,
@@ -19380,6 +19335,16 @@ export const Prices = [
     symbol: 'spxssb',
   },
   {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'slime pets',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'the hellions',
+  },
+  {
     price: 3,
     source: 'exchageart',
     name: 'glimpse of letting go',
@@ -19411,11 +19376,6 @@ export const Prices = [
     name: 'cerfified apes',
   },
   {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'slime pets',
-  },
-  {
     price: 0.25,
     source: 'solana-art',
     name: 'solarmy 3d',
@@ -19443,11 +19403,6 @@ export const Prices = [
     source: 'solana-art',
     name: 'scratch-off nft 2nd ed.',
     symbol: 'sc',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'the hellions',
   },
   {
     price: 0.02,
@@ -19650,6 +19605,11 @@ export const Prices = [
     symbol: 'auror',
   },
   {
+    price: 2,
+    source: 'exchageart',
+    name: 'lyrical abstraction',
+  },
+  {
     price: 7,
     source: 'exchageart',
     name: 'images of literature',
@@ -19723,11 +19683,6 @@ export const Prices = [
     price: 0.11,
     source: 'solana-art',
     name: 'metafrog business club',
-  },
-  {
-    price: 2,
-    source: 'exchageart',
-    name: 'lyrical abstraction',
   },
   {
     price: 2,
@@ -20120,6 +20075,11 @@ export const Prices = [
     symbol: 'rox',
   },
   {
+    price: 0.55,
+    source: 'digitaleyes',
+    name: 'solmachines',
+  },
+  {
     price: 2,
     source: 'exchageart',
     name: 'ruou means wine',
@@ -20154,11 +20114,6 @@ export const Prices = [
     source: 'solana-art',
     name: 'konpeito shinobi club',
     symbol: 'sck',
-  },
-  {
-    price: 0.282118067,
-    source: 'digitaleyes',
-    name: 'solmachines',
   },
   {
     price: 0.05,
@@ -20488,6 +20443,16 @@ export const Prices = [
     name: 'solanimals',
   },
   {
+    price: 0.6,
+    source: 'digitaleyes',
+    name: 'cool crocs club',
+  },
+  {
+    price: 2.1,
+    source: 'digitaleyes',
+    name: 'eggetton head',
+  },
+  {
     price: 5,
     source: 'exchageart',
     name: 'southside nova',
@@ -20518,11 +20483,6 @@ export const Prices = [
     name: 'evil ape empire',
   },
   {
-    price: 2.1,
-    source: 'digitaleyes',
-    name: 'eggetton head',
-  },
-  {
     price: 0.5,
     source: 'digitaleyes',
     name: 'shadow girls',
@@ -20542,11 +20502,6 @@ export const Prices = [
     source: 'solana-art',
     name: 'crypto bulls',
     symbol: 'cbls',
-  },
-  {
-    price: 0.6,
-    source: 'digitaleyes',
-    name: 'cool crocs club',
   },
   {
     price: 0.5,
@@ -20837,6 +20792,16 @@ export const Prices = [
     symbol: 'kaiju',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'i-robo nft',
+  },
+  {
+    price: 10,
+    source: 'digitaleyes',
+    name: 'pesky penguins',
+  },
+  {
     price: 7,
     source: 'exchageart',
     name: 'poetry of motion',
@@ -20862,11 +20827,6 @@ export const Prices = [
     name: 'little noots',
   },
   {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'i-robo nft',
-  },
-  {
     price: 0.033,
     source: 'solana-art',
     name: 'solanamoonbirds',
@@ -20876,11 +20836,6 @@ export const Prices = [
     price: 1,
     source: 'digitaleyes',
     name: 'baby zombies',
-  },
-  {
-    price: 10,
-    source: 'digitaleyes',
-    name: 'pesky penguins',
   },
   {
     price: 1.25,
@@ -21443,10 +21398,25 @@ export const Prices = [
     name: 'turtles',
   },
   {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'turtle punks',
+  },
+  {
     price: 0.099,
     source: 'solana-art',
     name: 'degen lizzy',
     symbol: 'lizzy',
+  },
+  {
+    price: 0.5,
+    source: 'exchageart',
+    name: "vulture's views",
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'pirates of sol bay - bottles',
   },
   {
     price: 1.5,
@@ -21530,24 +21500,9 @@ export const Prices = [
     symbol: 'dppd',
   },
   {
-    price: 0.5,
-    source: 'exchageart',
-    name: "vulture's views",
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'pirates of sol bay - bottles',
-  },
-  {
     price: 2.69,
     source: 'digitaleyes',
     name: 'crypto idolz - faces',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'turtle punks',
   },
   {
     price: 9.99,
@@ -21958,6 +21913,11 @@ export const Prices = [
     symbol: 'dape',
   },
   {
+    price: 3,
+    source: 'exchageart',
+    name: 'loch salamonie',
+  },
+  {
     price: 73.99,
     source: 'exchageart',
     name: 'the founders',
@@ -22001,11 +21961,6 @@ export const Prices = [
     price: 0.5,
     source: 'exchageart',
     name: 'daft club',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
-    name: 'loch salamonie',
   },
   {
     price: 5.05,
@@ -22129,9 +22084,14 @@ export const Prices = [
     name: 'outkast gen 1',
   },
   {
-    price: 0.048,
-    source: 'digitaleyes',
-    name: 'ohkay dojo',
+    price: 10,
+    source: 'exchageart',
+    name: 'rainbows n fireflies',
+  },
+  {
+    price: 3.5,
+    source: 'exchageart',
+    name: 'paradigm shift',
   },
   {
     price: 0.35,
@@ -22139,14 +22099,9 @@ export const Prices = [
     name: 'poodles',
   },
   {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'naked meerkats beach club',
-  },
-  {
-    price: 2,
-    source: 'digitaleyes',
-    name: 'latents',
+    price: 8,
+    source: 'exchageart',
+    name: 'domestic',
   },
   {
     price: 2.47,
@@ -22230,24 +22185,9 @@ export const Prices = [
     symbol: 'skls',
   },
   {
-    price: 17,
-    source: 'exchageart',
-    name: 'reach out',
-  },
-  {
-    price: 16.989999999,
-    source: 'exchageart',
-    name: 'masked warriors',
-  },
-  {
     price: 15,
     source: 'exchageart',
     name: 'nippies',
-  },
-  {
-    price: 3.5,
-    source: 'exchageart',
-    name: 'paradigm shift',
   },
   {
     price: 6,
@@ -22255,14 +22195,9 @@ export const Prices = [
     name: 'space cadet',
   },
   {
-    price: 10,
+    price: 3,
     source: 'exchageart',
-    name: 'rainbows n fireflies',
-  },
-  {
-    price: 8,
-    source: 'exchageart',
-    name: 'domestic',
+    name: 'parallels',
   },
   {
     price: 2,
@@ -22270,14 +22205,9 @@ export const Prices = [
     name: 'floating',
   },
   {
-    price: 6,
+    price: 5,
     source: 'exchageart',
-    name: 'studio footwear',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'byking王 buildings',
+    name: 'illuminated mind',
   },
   {
     price: 6,
@@ -22290,9 +22220,14 @@ export const Prices = [
     name: 'alter ego',
   },
   {
-    price: 2,
+    price: 2.5,
     source: 'exchageart',
-    name: 'glyphs',
+    name: 'paint - animated art',
+  },
+  {
+    price: 6,
+    source: 'exchageart',
+    name: 'studio footwear',
   },
   {
     price: 0.5,
@@ -22300,19 +22235,9 @@ export const Prices = [
     name: 'okitew portraits',
   },
   {
-    price: 3.5,
+    price: 2,
     source: 'exchageart',
-    name: 'field',
-  },
-  {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'fashion survivor',
-  },
-  {
-    price: 3,
-    source: 'exchageart',
-    name: 'parallels',
+    name: 'world building - pixels',
   },
   {
     price: 0.2,
@@ -22320,9 +22245,14 @@ export const Prices = [
     name: 'year 4119',
   },
   {
-    price: 5,
+    price: 11.11,
     source: 'exchageart',
-    name: 'illuminated mind',
+    name: 'imag:nation',
+  },
+  {
+    price: 0.1,
+    source: 'digitaleyes',
+    name: 'ohkay dojo',
   },
   {
     price: 0.75,
@@ -22330,34 +22260,49 @@ export const Prices = [
     name: 'electro squad',
   },
   {
-    price: 2,
+    price: 1.5,
     source: 'exchageart',
-    name: 'atmospheric conditions',
-  },
-  {
-    price: 2,
-    source: 'exchageart',
-    name: 'world building - pixels',
-  },
-  {
-    price: 11.11,
-    source: 'exchageart',
-    name: 'imag:nation',
-  },
-  {
-    price: 2.5,
-    source: 'exchageart',
-    name: 'paint - animated art',
-  },
-  {
-    price: 18,
-    source: 'exchageart',
-    name: 'ancient tech',
+    name: 'fashion survivor',
   },
   {
     price: 0.05,
     source: 'digitaleyes',
     name: 'coollama gang',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'naked meerkats beach club',
+  },
+  {
+    price: 2,
+    source: 'digitaleyes',
+    name: 'latents',
+  },
+  {
+    price: 2,
+    source: 'exchageart',
+    name: 'atmospheric conditions',
+  },
+  {
+    price: 17,
+    source: 'exchageart',
+    name: 'reach out',
+  },
+  {
+    price: 18,
+    source: 'exchageart',
+    name: 'masked warriors',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'byking王 buildings',
+  },
+  {
+    price: 2,
+    source: 'exchageart',
+    name: 'glyphs',
   },
   {
     price: 0.1,
@@ -22408,9 +22353,14 @@ export const Prices = [
     symbol: 'bape',
   },
   {
-    price: 0.25,
+    price: 18,
     source: 'exchageart',
-    name: 'icons folder',
+    name: 'ancient tech',
+  },
+  {
+    price: 3.5,
+    source: 'exchageart',
+    name: 'field',
   },
   {
     price: 1.5,
@@ -22418,9 +22368,9 @@ export const Prices = [
     name: 'undefined',
   },
   {
-    price: 1.45,
+    price: 0.25,
     source: 'exchageart',
-    name: 'dreamy sea sisters',
+    name: 'icons folder',
   },
   {
     price: 1.4,
@@ -22428,9 +22378,9 @@ export const Prices = [
     name: 'painted',
   },
   {
-    price: 0.8,
+    price: 1.45,
     source: 'exchageart',
-    name: 'etchings and prints',
+    name: 'dreamy sea sisters',
   },
   {
     price: 1,
@@ -22441,6 +22391,11 @@ export const Prices = [
     price: 5,
     source: 'exchageart',
     name: 'x-machines',
+  },
+  {
+    price: 0.8,
+    source: 'exchageart',
+    name: 'etchings and prints',
   },
   {
     price: 0.3,
@@ -22468,26 +22423,6 @@ export const Prices = [
     name: 'lollygaggers',
   },
   {
-    price: 0.3,
-    source: 'exchageart',
-    name: 'project bright',
-  },
-  {
-    price: 0.3,
-    source: 'exchageart',
-    name: 'faces',
-  },
-  {
-    price: 1,
-    source: 'exchageart',
-    name: 'loops and lines',
-  },
-  {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'sand of skull',
-  },
-  {
     price: 0.6,
     source: 'digitaleyes',
     name: 'inumbritio - white on black',
@@ -22498,19 +22433,39 @@ export const Prices = [
     name: 'studies',
   },
   {
-    price: 1.5,
-    source: 'exchageart',
-    name: 'screensavers to the past',
-  },
-  {
     price: 1,
     source: 'exchageart',
     name: 'amica',
   },
   {
-    price: 1,
+    price: 0.24,
+    source: 'digitaleyes',
+    name: 'blockchain billies',
+  },
+  {
+    price: 0.27,
+    source: 'digitaleyes',
+    name: 'rocket ape club',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'omnichain bayc',
+  },
+  {
+    price: 1.5,
     source: 'exchageart',
-    name: 'lines and figures',
+    name: 'screensavers to the past',
+  },
+  {
+    price: 3,
+    source: 'digitaleyes',
+    name: 'kingdom of dwarves: whitelist tokens',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'survivor apes',
   },
   {
     price: 1.1,
@@ -22523,49 +22478,9 @@ export const Prices = [
     name: 'themeless: mixed media',
   },
   {
-    price: 0.39,
-    source: 'digitaleyes',
-    name: 'mapsol art',
-  },
-  {
-    price: 0.4,
-    source: 'digitaleyes',
-    name: 'survivor apes',
-  },
-  {
-    price: 0.025,
-    source: 'digitaleyes',
-    name: 'neonexus airdrops',
-  },
-  {
-    price: 0.24,
-    source: 'digitaleyes',
-    name: 'blockchain billies',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'omnichain bayc',
-  },
-  {
-    price: 3,
-    source: 'digitaleyes',
-    name: 'kingdom of dwarves: whitelist tokens',
-  },
-  {
     price: 0.5,
     source: 'digitaleyes',
     name: 'stubborn bulls club',
-  },
-  {
-    price: 0.2,
-    source: 'digitaleyes',
-    name: 'calvary monkes',
-  },
-  {
-    price: 0.27,
-    source: 'digitaleyes',
-    name: 'rocket ape club',
   },
   {
     price: 0.07,
@@ -22573,7 +22488,7 @@ export const Prices = [
     name: 'monki incorporation',
   },
   {
-    price: 0.964583356,
+    price: 0.8,
     source: 'digitaleyes',
     name: '1st digital art edition',
   },
@@ -22581,6 +22496,36 @@ export const Prices = [
     price: 0.69,
     source: 'digitaleyes',
     name: 'alien chill',
+  },
+  {
+    price: 0.3,
+    source: 'exchageart',
+    name: 'project bright',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'lines and figures',
+  },
+  {
+    price: 0.2,
+    source: 'digitaleyes',
+    name: 'calvary monkes',
+  },
+  {
+    price: 0.39,
+    source: 'digitaleyes',
+    name: 'mapsol art',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'loops and lines',
+  },
+  {
+    price: 0.35,
+    source: 'exchageart',
+    name: 'faces',
   },
   {
     price: 3.65,
@@ -22853,6 +22798,11 @@ export const Prices = [
     source: 'solana-art',
     name: 'diamond town residence',
     symbol: 'drk',
+  },
+  {
+    price: 1.5,
+    source: 'exchageart',
+    name: 'sand of skull',
   },
   {
     price: 0.39,
@@ -23518,39 +23468,9 @@ export const Prices = [
     symbol: 'okayapes',
   },
   {
-    price: 26,
-    source: 'exchageart',
-    name: 'watching the world burn',
-  },
-  {
-    price: 2,
-    source: 'exchageart',
-    name: 'typewriter poems',
-  },
-  {
     price: 8,
     source: 'exchageart',
     name: 'myspaceship - unborn',
-  },
-  {
-    price: 2,
-    source: 'exchageart',
-    name: 'dreams of emptiness',
-  },
-  {
-    price: 0.03,
-    source: 'digitaleyes',
-    name: 'the ollivander',
-  },
-  {
-    price: 1,
-    source: 'digitaleyes',
-    name: 'galaxxia',
-  },
-  {
-    price: 2.1,
-    source: 'digitaleyes',
-    name: 'sunks',
   },
   {
     price: 0.43,
@@ -23850,9 +23770,209 @@ export const Prices = [
     symbol: 'rdon',
   },
   {
+    price: 26,
+    source: 'exchageart',
+    name: 'watching the world burn',
+  },
+  {
+    price: 2,
+    source: 'exchageart',
+    name: 'typewriter poems',
+  },
+  {
+    price: 2,
+    source: 'exchageart',
+    name: 'dreams of emptiness',
+  },
+  {
+    price: 0.03,
+    source: 'digitaleyes',
+    name: 'the ollivander',
+  },
+  {
+    price: 1,
+    source: 'digitaleyes',
+    name: 'galaxxia',
+  },
+  {
+    price: 2.1,
+    source: 'digitaleyes',
+    name: 'sunks',
+  },
+  {
     price: 14.44,
     source: 'solana-art',
     name: 'solana money boys',
     symbol: 'yc',
+  },
+  {
+    price: 3,
+    source: 'exchageart',
+    name: 'phantom faces collection',
+  },
+  {
+    price: 1.5,
+    source: 'exchageart',
+    name: 'wither and bloom',
+  },
+  {
+    price: 3,
+    source: 'exchageart',
+    name: 'bday genesis collection',
+  },
+  {
+    price: 2.25,
+    source: 'exchageart',
+    name: "'cut333 devil shackles'",
+  },
+  {
+    price: 0.8,
+    source: 'exchageart',
+    name: 'static places',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'liquid dreams',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'step by step',
+  },
+  {
+    price: 10,
+    source: 'exchageart',
+    name: 'borrowed styles',
+  },
+  {
+    price: 0.8,
+    source: 'exchageart',
+    name: 'neon coffee shop',
+  },
+  {
+    price: 100,
+    source: 'exchageart',
+    name: 'mecha mask',
+  },
+  {
+    price: 0.95,
+    source: 'exchageart',
+    name: 'pinkskullqueen skeleton crew airdrops',
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'aurora borealis',
+  },
+  {
+    price: 1.2,
+    source: 'digitaleyes',
+    name: 'last 4rtist',
+  },
+  {
+    price: 0.019,
+    source: 'digitaleyes',
+    name: 'soldroids nft',
+  },
+  {
+    price: 0.7,
+    source: 'digitaleyes',
+    name: 'soliens',
+  },
+  {
+    price: 1.5,
+    source: 'digitaleyes',
+    name: 'solidary headz',
+  },
+  {
+    price: 2.26,
+    source: 'digitaleyes',
+    name: 'sollamas',
+  },
+  {
+    price: 0.025,
+    source: 'digitaleyes',
+    name: 'neonexus airdrops',
+  },
+  {
+    price: 10,
+    source: 'digitaleyes',
+    name: 'eternity',
+  },
+  {
+    price: 1.1,
+    source: 'digitaleyes',
+    name: "joylina's cantina : special  editions trading cards",
+  },
+  {
+    price: 0.5,
+    source: 'digitaleyes',
+    name: 'skullphunkz onix edition',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'city reading',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'emotional intelligence',
+  },
+  {
+    price: 1,
+    source: 'exchageart',
+    name: 'sad machines: fracture',
+  },
+  {
+    price: 5,
+    source: 'exchageart',
+    name: 'rich water',
+  },
+  {
+    price: 1.2,
+    source: 'exchageart',
+    name: 'strange neighborhood',
+  },
+  {
+    price: 3.25,
+    source: 'exchageart',
+    name: 'destination dubrovnik',
+  },
+  {
+    price: 3,
+    source: 'exchageart',
+    name: 'dead',
+  },
+  {
+    price: 3.5,
+    source: 'exchageart',
+    name: 'explorations',
+  },
+  {
+    price: 0.05,
+    source: 'digitaleyes',
+    name: 'guppies',
+  },
+  {
+    price: 1.5,
+    source: 'exchageart',
+    name: 'signals',
+  },
+  {
+    price: 1.5,
+    source: 'exchageart',
+    name: 'essjayne the beginnings',
+  },
+  {
+    price: 2.2,
+    source: 'exchageart',
+    name: 'land and sea',
+  },
+  {
+    price: 0.4,
+    source: 'digitaleyes',
+    name: 'neonoots',
   },
 ];

@@ -21,15 +21,15 @@ export const WorthCard = ({
 }: WorthCardProps) => (
   <div className="flex flex-1 flex-col rounded-xl self-center relative shadow-2xl sm:py-6 bg-white hover:bg-indigo-500 hover:text-white cursor-pointer">
     <div className="flex flex-1 flex-col my-8">
-      <span className="absolute lg:text-xl sm:text-sm text-xs top-4 left-4 bg-green-600 font-bold px-4 py-0.5 rounded-full shadow-lg text-white">
+      <span className="absolute lg:text-xl sm:text-sm text-[8px] top-4 left-4 bg-green-600 font-bold px-2 sm:px-4 py-0.5 rounded-full shadow-lg text-white">
         <ProgramIcon program={program} />
-        {rank && <span className="ml-2"># {rank}</span>}
+        {rank && <span className="ml-1 sm:ml-2"># {rank}</span>}
       </span>
       {change !== 0 && (
         <span
           className={classNames(
             change > 0 ? 'bg-green-600' : 'bg-red-600',
-            'absolute sm:text-sm text-[8px] bottom-1 sm:bottom-4 left-1 sm:left-4 font-bold px-2 py-0.5 rounded-full shadow-lg text-white'
+            'absolute sm:text-sm text-[8px] bottom-4 left-4 font-bold px-2 py-0.5 rounded-full shadow-lg text-white'
           )}
         >
           <FontAwesomeIcon
@@ -39,7 +39,7 @@ export const WorthCard = ({
           {Math.round(Math.abs(change)).toLocaleString()}
         </span>
       )}
-      <span className="flex flex-1 flex-col text-xs absolute top-4 right-4 gap-1">
+      <span className="flex flex-1 flex-col text-[8px] sm:text-xs absolute top-4 right-4 gap-1">
         <div className="flex self-end">
           <SolBadge sol={sol} />
         </div>

@@ -86,9 +86,9 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    // getExchagenArtCollections(),
-    // getDigitalEyesCollections(),
-    // getFractalCollections(),
+    getExchagenArtCollections(),
+    getDigitalEyesCollections(),
+    getFractalCollections(),
     getSolanaArtCollections(),
   ]);
 
