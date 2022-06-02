@@ -86,7 +86,7 @@ const Top: NextPage<TopProps> = ({ wallet }) => {
     return (
       <>
         <Head>
-          <title>{wallet.id}</title>
+          <title>Wallet worth</title>
         </Head>
         <div className="flex flex-1 justify-center items-center">
           <div className="text-4xl font-bold">Loading...</div>
