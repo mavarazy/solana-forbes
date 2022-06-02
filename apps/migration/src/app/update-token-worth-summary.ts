@@ -1,12 +1,28 @@
 import { gql } from '@apollo/client';
 import { GetAllPricedTokens, TokenWorth } from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { writeFile } from 'fs/promises';
 
-export const GetAllPricedTokensQuery = gql`
+const GetAllPricedTokensQuery = gql`
   query GetAllPricedTokens {
     wallet(limit: 500, order_by: { worth: desc }) {
       tokens(path: "priced")
+    }
+  }
+`;
+
+const UpdateTokenWorthSummaryQuery = gql`
+  mutation UpdateTokenWorthSummary(
+    $objects: [token_worth_summary_insert_input!]!
+  ) {
+    delete_token_worth_summary(where: {}) {
+      returning {
+        mint
+      }
+    }
+    insert_token_worth_summary(objects: $objects) {
+      returning {
+        mint
+      }
     }
   }
 `;
@@ -41,9 +57,8 @@ export const updateTokenWorthSummary = async () => {
 
   const topTokens = Object.values(tokenMap).sort((a, b) => b.worth - a.worth);
 
-  await writeFile(
-    './apps/app/utils/top-tokens.ts',
-    'export const TopTokens = ' +
-      JSON.stringify(topTokens.slice(0, 120), null, 2)
-  );
+  await hasuraClient.mutate({
+    mutation: UpdateTokenWorthSummaryQuery,
+    variables: { objects: topTokens },
+  });
 };

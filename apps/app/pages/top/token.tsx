@@ -2,14 +2,38 @@ import React from 'react';
 import type { NextPage } from 'next';
 import { TokenWorth } from '@forbex-nxr/types';
 import { TokenWorthCard } from '../../components/token-worth-card';
-import { TopTokens } from '../../utils/top-tokens';
 import { faWallet } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { gql } from '@apollo/client';
+import { hasuraClient } from '@forbex-nxr/utils';
 
-export async function getStaticProps(context) {
+export const GetLargestTokensQuery = gql`
+  query GetLargestTokens {
+    token_worth_summary(order_by: { worth: desc }, limit: 150) {
+      amount
+      count
+      decimals
+      info
+      mint
+      percent
+      source
+      symbol
+      usd
+      worth
+    }
+  }
+`;
+
+export async function getStaticProps(_context) {
+  const {
+    data: { token_worth_summary: tokens },
+  } = await hasuraClient.query({
+    query: GetLargestTokensQuery,
+  });
+
   return {
     props: {
-      tokens: TopTokens,
+      tokens,
     },
     revalidate: 3600,
   };
