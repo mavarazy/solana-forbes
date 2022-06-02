@@ -9,6 +9,5 @@ export * from './UpdateWalletProgramFlagById';
 export * from './InsertWallet';
 export * from './GetWallets';
 export * from './GetAllPricedTokens';
-export * from './GetMachineLargestWallets';
 export * from './AdminGetWalletById';
 export * from './GetLargestWalletWithFlag';
