@@ -100,7 +100,7 @@ const Top: NextPage<TopProps> = ({ wallet }) => {
       <Head>
         <title>{wallet.id}</title>
       </Head>
-      <WalletPage {...wallet} />;
+      <WalletPage {...wallet} />
     </>
   );
 };

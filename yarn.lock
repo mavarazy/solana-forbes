@@ -2468,6 +2468,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.1.1"
 
+"@fortawesome/free-brands-svg-icons@^6.1.1":
+  version "6.1.1"
+  resolved "https://npm.fontawesome.com/@fortawesome/free-brands-svg-icons/-/6.1.1/free-brands-svg-icons-6.1.1.tgz#3580961d4f42bd51dc171842402f23a18a5480b1"
+  integrity sha512-mFbI/czjBZ+paUtw5NPr2IXjun5KAC8eFqh1hnxowjA4mMZxWz4GCIksq6j9ZSa6Uxj9JhjjDVEd77p2LN2Blg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
+
 "@fortawesome/pro-light-svg-icons@^6.1.1":
   version "6.1.1"
   resolved "https://npm.fontawesome.com/@fortawesome/pro-light-svg-icons/-/6.1.1/pro-light-svg-icons-6.1.1.tgz#7ceced1f401633613ae71a76c8043791028274e3"

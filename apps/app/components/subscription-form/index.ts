@@ -1,1 +1,1 @@
-export * from './subscription-form';
+export * from '../layout/subscription-form';
