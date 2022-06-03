@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGlobalState } from '../../context';
 import { useForm } from 'react-hook-form';
 
-interface SubscriptionForm {
+interface ISubscriptionForm {
   email: string;
 }
 
@@ -14,9 +14,9 @@ export const SubscriptionForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<SubscriptionForm>();
+  } = useForm<ISubscriptionForm>();
 
-  const handleSubscibe = async (form: SubscriptionForm) => {
+  const handleSubscibe = async (form: ISubscriptionForm) => {
     const res = await fetch('/api/subscribe', {
       method: 'POST',
       body: JSON.stringify(form),
