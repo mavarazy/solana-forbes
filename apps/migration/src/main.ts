@@ -11,7 +11,7 @@ const execute = async () => {
   try {
     // await updateNftCollectionPrice();
     // await exportNftCollectionPrice();
-    // await updateWalletEvaluation();
+    await updateWalletEvaluation();
     await updateTokenWorthSummary();
   } catch (err) {
     console.error(err);
