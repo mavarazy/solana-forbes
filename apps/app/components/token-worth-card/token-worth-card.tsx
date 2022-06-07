@@ -24,7 +24,6 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
       <AddressLink address={mint}>
         <span className="h-14 w-14 rounded-full flex flex-1 items-center mx-auto p-1 bg-white shadow-lg">
           <TokenLogo
-            mint={mint}
             image={info?.logoURI}
             width={56}
             height={56}

@@ -110,6 +110,9 @@ export const getExchagenArtCollections = async (): Promise<
         name: collection.name,
         website: collection.website,
         price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
+        thumbnail: collection.thumbnailPath
+          ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`
+          : null,
         symbol: price.symbol,
         source: NftMarketplace.exchageart,
       };

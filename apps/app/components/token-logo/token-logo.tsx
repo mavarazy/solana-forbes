@@ -7,7 +7,6 @@ const FallbackImage =
 const ImagePath = process.env.NEXT_PUBLIC_IMAGE_PREFIX;
 
 interface TokenLogoProps {
-  mint: string;
   image?: string;
   className: string;
   width: number;
@@ -15,7 +14,6 @@ interface TokenLogoProps {
 }
 
 export const TokenLogo = ({
-  mint,
   image,
   width,
   height,

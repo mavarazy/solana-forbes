@@ -4,11 +4,12 @@ import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
 import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
 import Head from 'next/head';
-import { NFTCard } from '../components/nft-card';
+import { NFTCollectionCard } from '../../components/nft-collection-card';
+import { NFTCard } from '../../components/nft-panel/nft-card';
 
 const GetNftCollectionPricesQuery = gql`
   query GetNftCollectionPrices {
-    nft_collection_price(order_by: { price: desc }, limit: 150) {
+    nft_collection_price(order_by: { price: desc }, limit: 30) {
       id
       name
       price
@@ -35,7 +36,7 @@ export async function getStaticProps(context) {
   };
 }
 
-const Home: NextPage<{
+const TopNft: NextPage<{
   nfts: NftCollectionPrice[];
 }> = ({ nfts }) => (
   <>
@@ -61,14 +62,9 @@ const Home: NextPage<{
             className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {nfts.map((nft) => (
-              <NFTCard
+              <NFTCollectionCard
                 key={nft.id}
-                mint={nft.id}
-                info={{ name: nft.name, logoURI: nft.thumbnail }}
-                owns={false}
-                floorPrice={nft.price}
-                marketplace={nft.source}
-                type="original"
+                {...nft}
               />
             ))}
           </div>
@@ -78,4 +74,4 @@ const Home: NextPage<{
   </>
 );
 
-export default Home;
+export default TopNft;

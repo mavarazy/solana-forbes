@@ -5,8 +5,8 @@ import {
   faSun,
 } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AddressLink } from '../address-link';
-import { TokenLogo } from '../token-logo';
+import { AddressLink } from '../../address-link';
+import { TokenLogo } from '../../token-logo';
 
 export const NFTCard: React.FC<NftWorth> = ({
   info,
@@ -24,7 +24,6 @@ export const NFTCard: React.FC<NftWorth> = ({
       />
       <AddressLink address={mint}>
         <TokenLogo
-          mint={mint}
           image={info.logoURI}
           width={128}
           height={128}

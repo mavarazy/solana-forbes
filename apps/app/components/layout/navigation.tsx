@@ -99,7 +99,10 @@ export function Navigation() {
                     <span className="ml-2 hidden sm:block">Tokens</span>
                   </>
                 </NavigationLink>
-                <NavigationLink href="/nft" active={router.asPath === '/nft'}>
+                <NavigationLink
+                  href="/nft/top"
+                  active={router.asPath.startsWith('/nft')}
+                >
                   <>
                     <FontAwesomeIcon
                       icon={faHexagonVerticalNftSlanted}
