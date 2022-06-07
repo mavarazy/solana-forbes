@@ -2,6 +2,9 @@ import { faArrowRotateRight, faAt } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGlobalState } from '../../context';
 import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+
+const LocalStorageKey = 'clemble:subscribed';
 
 interface ISubscriptionForm {
   email: string;
@@ -9,6 +12,7 @@ interface ISubscriptionForm {
 
 export const SubscriptionForm = () => {
   const { onError } = useGlobalState();
+  const [subscribed, setSubscribed] = useState(false);
   const {
     register,
     handleSubmit,
@@ -16,17 +20,27 @@ export const SubscriptionForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<ISubscriptionForm>();
 
+  useEffect(() => {
+    setSubscribed(localStorage.getItem(LocalStorageKey) !== null);
+  }, []);
+
   const handleSubscibe = async (form: ISubscriptionForm) => {
     const res = await fetch('/api/subscribe', {
       method: 'POST',
       body: JSON.stringify(form),
     });
     if (res.ok) {
+      setSubscribed(true);
+      localStorage.setItem(LocalStorageKey, form.email);
       reset();
       return;
     }
     onError('Failed to submit request');
   };
+
+  if (subscribed) {
+    return null;
+  }
 
   return (
     <footer className="bg-white">
