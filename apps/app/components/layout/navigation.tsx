@@ -1,4 +1,5 @@
 import {
+  faHexagonVerticalNftSlanted,
   faInfoCircle,
   faSpinner,
   faWallet,
@@ -96,6 +97,15 @@ export function Navigation() {
                       className="h-5 w-5 text-white shadow-xl rounded-full"
                     />
                     <span className="ml-2 hidden sm:block">Tokens</span>
+                  </>
+                </NavigationLink>
+                <NavigationLink href="/nft" active={router.asPath === '/nft'}>
+                  <>
+                    <FontAwesomeIcon
+                      icon={faHexagonVerticalNftSlanted}
+                      className="h-5 w-5 text-white shadow-xl rounded-full"
+                    />
+                    <span className="ml-2 hidden sm:block">NFT</span>
                   </>
                 </NavigationLink>
                 <NavigationLink

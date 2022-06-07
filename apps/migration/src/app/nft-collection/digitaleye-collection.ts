@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
@@ -61,6 +61,16 @@ const getCollections = async (): Promise<DigitalEyeCollection[]> => {
   return [];
 };
 
+const parseThumbnail = (thumbnail?: string) => {
+  if (!thumbnail) {
+    return null;
+  }
+  if (thumbnail.startsWith('thumbnail')) {
+    return `https://ik.imagekit.io/srjnqnjbpn9/${thumbnail}?ik-sdk-version=react-1.0.11`;
+  }
+  return thumbnail;
+};
+
 export const getDigitalEyesCollections = async (): Promise<
   NftCollectionPrice[]
 > => {
@@ -77,7 +87,8 @@ export const getDigitalEyesCollections = async (): Promise<
             id: collection.collectionId,
             name: collection.name,
             website: collection.website,
-            source: 'digitaleyes',
+            source: NftMarketplace.digitaleyes,
+            thumbnail: parseThumbnail(collection.thumbnail),
             price,
           };
         }

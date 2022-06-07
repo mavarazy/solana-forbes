@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
@@ -111,7 +111,7 @@ export const getExchagenArtCollections = async (): Promise<
         website: collection.website,
         price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
         symbol: price.symbol,
-        source: 'exchageart',
+        source: NftMarketplace.exchageart,
       };
       agg.push(nft);
 

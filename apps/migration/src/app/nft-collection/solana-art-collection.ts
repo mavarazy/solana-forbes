@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import fetch from 'node-fetch';
 import { Metaplex } from '@metaplex-foundation/js-next';
@@ -161,7 +161,7 @@ export const getSolanaArtCollections = async (): Promise<
       if (price) {
         return {
           id: collection.url,
-          source: 'solana-art',
+          source: NftMarketplace.solana_art,
           name: collection.name,
           website: collection.website,
           price: price.floorPrice,
@@ -178,7 +178,7 @@ export const getSolanaArtCollections = async (): Promise<
       const symbol = await getCollectionSymbol(price.url.substring(1));
       return {
         id: price.url,
-        source: 'solana-art',
+        source: NftMarketplace.solana_art,
         name: price.name,
         symbol,
         price: parseFloat(price.floor),

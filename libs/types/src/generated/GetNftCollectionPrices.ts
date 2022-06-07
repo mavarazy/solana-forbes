@@ -8,20 +8,21 @@ import * as general from '../lib';
 import { NftMarketplace } from './globalTypes';
 
 // ====================================================
-// GraphQL query operation: GetNftCollectionPrice
+// GraphQL query operation: GetNftCollectionPrices
 // ====================================================
 
-export interface GetNftCollectionPrice_nft_collection_price {
+export interface GetNftCollectionPrices_nft_collection_price {
   id: string;
   name: string;
   price: general.numeric;
   source: NftMarketplace;
+  website: string | null;
   symbol: string | null;
 }
 
-export interface GetNftCollectionPrice {
+export interface GetNftCollectionPrices {
   /**
    * fetch data from the table: "nft_collection_price"
    */
-  nft_collection_price: GetNftCollectionPrice_nft_collection_price[];
+  nft_collection_price: GetNftCollectionPrices_nft_collection_price[];
 }

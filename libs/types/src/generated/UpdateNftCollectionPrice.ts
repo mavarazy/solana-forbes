@@ -5,6 +5,8 @@
 
 import * as general from '../lib';
 
+import { NftMarketplace } from './globalTypes';
+
 // ====================================================
 // GraphQL mutation operation: UpdateNftCollectionPrice
 // ====================================================
@@ -13,7 +15,7 @@ export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   id: string;
   name: string;
   price: general.numeric;
-  source: general.NftCollectionSource;
+  source: NftMarketplace;
   symbol: string | null;
   website: string | null;
 }

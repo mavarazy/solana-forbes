@@ -27,11 +27,18 @@ const UpdateNftCollectionPriceQuery = gql`
     $name: String
     $symbol: String
     $website: String
+    $thumbnail: String
     $price: numeric!
   ) {
     update_nft_collection_price_by_pk(
       pk_columns: { id: $id }
-      _set: { price: $price, name: $name, symbol: $symbol, website: $website }
+      _set: {
+        price: $price
+        name: $name
+        symbol: $symbol
+        website: $website
+        thumbnail: $thumbnail
+      }
     ) {
       id
       name
@@ -39,6 +46,7 @@ const UpdateNftCollectionPriceQuery = gql`
       source
       symbol
       website
+      thumbnail
     }
   }
 `;
@@ -48,8 +56,9 @@ const InsertNftCollectionPriceQuery = gql`
     $id: String!
     $name: String
     $symbol: String
-    $source: String!
+    $source: nft_marketplace_enum!
     $website: String
+    $thumbnail: String
     $price: numeric!
   ) {
     insert_nft_collection_price_one(
@@ -60,6 +69,7 @@ const InsertNftCollectionPriceQuery = gql`
         website: $website
         source: $source
         symbol: $symbol
+        thumbnail: $thumbnail
       }
       on_conflict: {
         constraint: nft_collection_price_pkey
@@ -71,6 +81,7 @@ const InsertNftCollectionPriceQuery = gql`
       price
       source
       website
+      thumbnail
     }
   }
 `;
@@ -86,10 +97,10 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    getExchagenArtCollections(),
+    // getExchagenArtCollections(),
     getDigitalEyesCollections(),
-    getFractalCollections(),
-    getSolanaArtCollections(),
+    // getFractalCollections(),
+    // getSolanaArtCollections(),
   ]);
 
   const totalCollections = collections

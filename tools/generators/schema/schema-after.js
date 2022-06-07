@@ -15,12 +15,12 @@ fs.readdir(rootPath, 'utf-8', function (err, files) {
           /\/\/ This file was automatically generated and should not be edited./,
           '// This file was automatically generated and should not be edited.\n\nimport * as general from "../lib";'
         )
+        .replace(/nft_marketplace_enum/g, 'NftMarketplace')
         .replace(/tokens: jsonb;/g, 'tokens: general.TokenWorthSummary;')
         .replace(/summary: jsonb;/g, 'summary: general.TokenSummary;')
         .replace(/numeric/g, 'general.numeric')
         .replace(/timestamptz/g, 'general.timestamptz')
-        .replace(/source: string;/g, 'source: general.NftCollectionSource;');
-
+        .replace(/jsonb/g, 'general.jsonb');
       fs.writeFile(filePath, result, 'utf8', function (err) {
         if (err) return console.log(err);
       });

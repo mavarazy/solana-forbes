@@ -3,3 +3,4 @@ export type numeric = number;
 export type float8 = number;
 export type timestamptz = string;
 export type date = string;
+export type jsonb = any;

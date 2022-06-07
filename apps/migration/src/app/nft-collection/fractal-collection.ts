@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 
 interface FractalCollection {
   description: string;
@@ -56,7 +56,7 @@ const getCollectionStats = async (
 
   return {
     id: collection.id,
-    source: 'fractal',
+    source: NftMarketplace.fractal,
     name: collection.title,
     website: collection.social?.web,
     price: projectStats.floorPrice,

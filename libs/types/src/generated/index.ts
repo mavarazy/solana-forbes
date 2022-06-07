@@ -11,3 +11,5 @@ export * from './GetWallets';
 export * from './GetAllPricedTokens';
 export * from './AdminGetWalletById';
 export * from './GetLargestWalletWithFlag';
+export * from './GetNftCollectionPrice';
+export * from './globalTypes';

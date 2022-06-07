@@ -1,13 +1,10 @@
-export type NftCollectionSource =
-  | 'digitaleyes'
-  | 'exchageart'
-  | 'fractal'
-  | 'solana-art';
+import { NftMarketplace } from '../generated/globalTypes';
 
 export interface NftCollectionPrice {
   id: string;
-  source: NftCollectionSource;
+  source: NftMarketplace;
   name: string;
+  thumbnail?: string | null;
   symbol?: string | null;
   website?: string | null;
   price: number;
