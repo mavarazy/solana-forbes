@@ -2,16 +2,22 @@ import React from 'react';
 import type { NextPage } from 'next';
 import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
+import {
+  GetNftCollectionPricesByMarketplace,
+  GetNftCollectionPricesByMarketplaceVariables,
+  NftCollectionPrice,
+  NftMarketplace,
+} from '@forbex-nxr/types';
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../components/nft-collection-card';
 
 const GetNftCollectionPricesByMarketplaceQuery = gql`
-  query GetNftCollectionPricesByMarketplace($source: nft_marketplace_enum!) {
+  query GetNftCollectionPricesByMarketplace(
+    $marketplace: nft_marketplace_enum!
+  ) {
     nft_collection_price(
-      where: { source: { _eq: $source } }
+      where: { source: { _eq: $marketplace } }
       order_by: { price: desc }
-      limit: 150
     ) {
       id
       name
@@ -24,15 +30,29 @@ const GetNftCollectionPricesByMarketplaceQuery = gql`
   }
 `;
 
-export async function getStaticProps(context) {
+export async function getStaticPaths() {
+  return {
+    paths: Object.values(NftMarketplace).map((marketplace) => ({
+      params: { marketplace },
+    })),
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params: { marketplace } }) {
   const {
     data: { nft_collection_price: nfts },
-  } = await hasuraClient.query<GetNftCollectionPrice>({
+  } = await hasuraClient.query<
+    GetNftCollectionPricesByMarketplace,
+    GetNftCollectionPricesByMarketplaceVariables
+  >({
     query: GetNftCollectionPricesByMarketplaceQuery,
+    variables: { marketplace: marketplace as NftMarketplace },
   });
 
   return {
     props: {
+      marketplace,
       nfts,
     },
     revalidate: 3600,
@@ -40,18 +60,18 @@ export async function getStaticProps(context) {
 }
 
 const Home: NextPage<{
+  marketplace: string;
   nfts: NftCollectionPrice[];
-}> = ({ nfts }) => (
+}> = ({ marketplace, nfts }) => (
   <>
     <Head>
-      <title>Top nft collections</title>
+      <title>NFT {marketplace} collections</title>
     </Head>
     <main className="flex flex-1 flex-col">
       <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
         <div className="max-w-5xl flex flex-col flex-1 self-start">
           <h1 className="text-3xl mt-3 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-            <span className="xl:inline ml-2">Top</span>{' '}
-            <span className="text-brand xl:inline">NFT</span>
+            <span className="xl:inline ml-2">{marketplace}</span>
           </h1>
           <h1 className="text-xl ml-3 sm:ml-5 mb-3 tracking-tight font-extrabold text-brand">
             By floor price

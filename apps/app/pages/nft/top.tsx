@@ -5,11 +5,11 @@ import { hasuraClient } from '@forbex-nxr/utils';
 import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../components/nft-collection-card';
-import { NFTCard } from '../../components/nft-panel/nft-card';
+import { NftMarketplaceSelector } from '../../components/nft-marketplace-selector';
 
 const GetNftCollectionPricesQuery = gql`
   query GetNftCollectionPrices {
-    nft_collection_price(order_by: { price: desc }, limit: 30) {
+    nft_collection_price(order_by: { price: desc }, limit: 150) {
       id
       name
       price
@@ -51,10 +51,11 @@ const TopNft: NextPage<{
             <span className="text-brand xl:inline">NFT</span>
           </h1>
           <h1 className="text-xl ml-3 sm:ml-5 mb-3 tracking-tight font-extrabold text-brand">
-            By floor price
+            250 collections by floor price
           </h1>
         </div>
       </div>
+      <NftMarketplaceSelector />
       <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
         <div className="max-w-5xl flex flex-col flex-1">
           <div
@@ -62,10 +63,7 @@ const TopNft: NextPage<{
             className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {nfts.map((nft) => (
-              <NFTCollectionCard
-                key={nft.id}
-                {...nft}
-              />
+              <NFTCollectionCard key={nft.id} {...nft} />
             ))}
           </div>
         </div>
