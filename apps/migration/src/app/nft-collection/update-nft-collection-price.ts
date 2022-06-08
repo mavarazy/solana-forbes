@@ -8,9 +8,11 @@ import {
   UpdateNftCollectionPriceVariables,
 } from '@forbex-nxr/types';
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
+import { getAlphArtCollections } from './alpha-art-collection';
 import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
 import { getFractalCollections } from './fractal-collection';
+import { getMagicEdenCollections } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
 
 const GetNftCollectionIdsQuery = gql`
@@ -97,10 +99,12 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    // getExchagenArtCollections(),
-    // getDigitalEyesCollections(),
+    getMagicEdenCollections(),
+    getExchagenArtCollections(),
+    getDigitalEyesCollections(),
     getFractalCollections(),
-    // getSolanaArtCollections(),
+    getAlphArtCollections(),
+    getSolanaArtCollections(),
   ]);
 
   const totalCollections = collections

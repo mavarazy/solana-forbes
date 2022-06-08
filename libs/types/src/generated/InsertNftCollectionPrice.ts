@@ -17,6 +17,7 @@ export interface InsertNftCollectionPrice_insert_nft_collection_price_one {
   price: general.numeric;
   source: NftMarketplace;
   website: string | null;
+  thumbnail: string | null;
 }
 
 export interface InsertNftCollectionPrice {
@@ -32,5 +33,6 @@ export interface InsertNftCollectionPriceVariables {
   symbol?: string | null;
   source: NftMarketplace;
   website?: string | null;
+  thumbnail?: string | null;
   price: general.numeric;
 }

@@ -161,10 +161,11 @@ export const getSolanaArtCollections = async (): Promise<
       if (price) {
         return {
           id: collection.url,
-          source: NftMarketplace.solana_art,
+          source: NftMarketplace.solanart,
           name: collection.name,
           website: collection.website,
           price: price.floorPrice,
+          thumbnail: `https://data.solanart.io/img/collections/${collection.url}.webp`,
           symbol,
         };
       }
@@ -178,10 +179,11 @@ export const getSolanaArtCollections = async (): Promise<
       const symbol = await getCollectionSymbol(price.url.substring(1));
       return {
         id: price.url,
-        source: NftMarketplace.solana_art,
+        source: NftMarketplace.solanart,
         name: price.name,
         symbol,
         price: parseFloat(price.floor),
+        thumbnail: `https://data.solanart.io/img/collections/${price.url}.webp`,
       };
     }),
     100,

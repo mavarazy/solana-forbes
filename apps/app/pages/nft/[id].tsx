@@ -6,9 +6,13 @@ import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../components/nft-collection-card';
 
-const GetNftCollectionPricesQuery = gql`
-  query GetNftCollectionPrices {
-    nft_collection_price(order_by: { price: desc }, limit: 150) {
+const GetNftCollectionPricesByMarketplaceQuery = gql`
+  query GetNftCollectionPricesByMarketplace($source: nft_marketplace_enum!) {
+    nft_collection_price(
+      where: { source: { _eq: $source } }
+      order_by: { price: desc }
+      limit: 150
+    ) {
       id
       name
       price
@@ -24,7 +28,7 @@ export async function getStaticProps(context) {
   const {
     data: { nft_collection_price: nfts },
   } = await hasuraClient.query<GetNftCollectionPrice>({
-    query: GetNftCollectionPricesQuery,
+    query: GetNftCollectionPricesByMarketplaceQuery,
   });
 
   return {
