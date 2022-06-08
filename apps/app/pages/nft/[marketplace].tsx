@@ -35,7 +35,7 @@ export async function getStaticPaths() {
     paths: Object.values(NftMarketplace).map((marketplace) => ({
       params: { marketplace },
     })),
-    fallback: true,
+    fallback: false,
   };
 }
 
