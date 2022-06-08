@@ -14,6 +14,7 @@ import { getExchagenArtCollections } from './exchange-art-collection';
 import { getFractalCollections } from './fractal-collection';
 import { getMagicEdenCollections } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
+import { getSolSeaCollections } from './solsea-collection';
 
 const GetNftCollectionIdsQuery = gql`
   query GetNftCollectionIds {
@@ -99,6 +100,7 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
+    getSolSeaCollections(),
     getMagicEdenCollections(),
     getExchagenArtCollections(),
     getDigitalEyesCollections(),
