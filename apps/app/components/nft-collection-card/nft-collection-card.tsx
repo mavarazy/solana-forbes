@@ -5,12 +5,19 @@ import { TokenLogo } from '../token-logo';
 
 export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   thumbnail,
+  website,
   name,
   price,
+  parent,
   source,
 }) => (
-  <div className="flex flex-1 flex-col p-4 self-center hover:text-indigo-500 rounded-3xl shadow-lg bg-white">
-    <div className="flex flex-col justify-center text-center">
+  <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-2xl rounded-3xl bg-white cursor-pointer">
+    <a
+      className="flex flex-col justify-center text-center"
+      href={website}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div>
         <TokenLogo
           image={thumbnail}
@@ -18,10 +25,15 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
           height={128}
           className="h-32 w-32 rounded-full flex flex-1 self-center mx-auto object-cover my-4"
         />
-        <span className="flex flex-col my-4 ">
+        <span className="flex flex-col my-4 relative">
           <span className="font-semibold text-xl truncate flex justify-center">
             {name}
           </span>
+          {parent && parent !== name && (
+            <span className="absolute left-0 right-0 -bottom-2 text-[8px] uppercase">
+              {parent}
+            </span>
+          )}
         </span>
         <div className="flex flex-col">
           <div className="flex justify-center">
@@ -31,6 +43,6 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
           <span className="text-[8px] font-bold uppercase">{source}</span>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 );

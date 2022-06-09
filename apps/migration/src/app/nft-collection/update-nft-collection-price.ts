@@ -32,6 +32,7 @@ const UpdateNftCollectionPriceQuery = gql`
     $website: String
     $thumbnail: String
     $price: numeric!
+    $parent: String
   ) {
     update_nft_collection_price_by_pk(
       pk_columns: { id: $id }
@@ -41,6 +42,7 @@ const UpdateNftCollectionPriceQuery = gql`
         symbol: $symbol
         website: $website
         thumbnail: $thumbnail
+        parent: $parent
       }
     ) {
       id
@@ -62,6 +64,7 @@ const InsertNftCollectionPriceQuery = gql`
     $source: nft_marketplace_enum!
     $website: String
     $thumbnail: String
+    $parent: String
     $price: numeric!
   ) {
     insert_nft_collection_price_one(
@@ -73,6 +76,7 @@ const InsertNftCollectionPriceQuery = gql`
         source: $source
         symbol: $symbol
         thumbnail: $thumbnail
+        parent: $parent
       }
       on_conflict: {
         constraint: nft_collection_price_pkey
@@ -100,13 +104,13 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    getSolSeaCollections(),
-    getMagicEdenCollections(),
-    getExchagenArtCollections(),
-    getDigitalEyesCollections(),
+    // getSolSeaCollections(),
+    // getMagicEdenCollections(),
+    // getExchagenArtCollections(),
+    // getDigitalEyesCollections(),
     getFractalCollections(),
-    getAlphArtCollections(),
-    getSolanaArtCollections(),
+    // getAlphArtCollections(),
+    // getSolanaArtCollections(),
   ]);
 
   const totalCollections = collections
@@ -114,6 +118,10 @@ export const updateNftCollectionPrice = async () => {
     .filter((nftPrice) => nftPrice.id && nftPrice.price);
 
   console.log('Extracted ', totalCollections.length);
+  console.log(
+    'Out of which with avatars ',
+    totalCollections.filter((collection) => collection.thumbnail).length
+  );
 
   const nftCollections: Array<NftCollectionPrice | null> = await throttle(
     totalCollections.map((collection) => async () => {

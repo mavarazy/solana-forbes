@@ -17,6 +17,7 @@ const GetNftCollectionPricesQuery = gql`
       website
       symbol
       thumbnail
+      parent
     }
   }
 `;

@@ -1,10 +1,11 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 
 interface FractalCollection {
-  description: string;
   id: string;
-  studio: string;
   title: string;
+  description: string;
+  studio: string;
+  handle: string;
   avatar: {
     url: string;
     height: number;
@@ -15,6 +16,16 @@ interface FractalCollection {
     twitter?: string;
     discord?: string;
   };
+}
+
+interface FractalManagedCollection {
+  id: string;
+  title: string;
+  description: string;
+  expectedTotalTokens: number;
+  productId: string;
+  rank: number;
+  visible: true;
 }
 
 interface FractalCollectionResponse {
@@ -38,34 +49,66 @@ interface FracatalStats {
   totalListed: number;
 }
 
-interface FractalStatsResponse {
-  collections: Array<{
-    collection: FracatalCollectionInfo;
-    collectionStats: FracatalStats;
-  }>;
-  projectStats: FracatalStats;
-}
-
-const getCollectionStats = async (
-  collection: FractalCollection
-): Promise<NftCollectionPrice | null> => {
-  const url = `https://api.fractal.is/admin/v1/project/${collection.id}/stats`;
+const getFractalStats = async (id: string) => {
+  const url = `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`;
   const statsRes = await fetch(url);
   if (!statsRes.ok) {
-    console.error(`Failed to fetch ${collection.id}`);
+    console.error(`Failed to fetch ${id} ${url}`);
     return null;
   }
 
-  const { projectStats } = (await statsRes.json()) as FractalStatsResponse;
+  const projectStats = (await statsRes.json()) as FracatalStats;
+  return projectStats;
+};
+
+const getCollectionStats = async (
+  collection: Pick<FractalCollection, 'id' | 'title' | 'avatar' | 'handle'> & {
+    parent: string;
+  }
+): Promise<NftCollectionPrice | null> => {
+  const stats = await getFractalStats(collection.id);
+
+  if (!stats) {
+    return null;
+  }
 
   return {
     id: collection.id,
     source: NftMarketplace.fractal,
     name: collection.title,
     thumbnail: collection.avatar.url,
-    website: collection.social?.web,
-    price: projectStats.floorPrice,
+    website: `https://www.fractal.is/${collection.handle}`,
+    parent: collection.parent,
+    price: stats.floorPrice,
   };
+};
+
+const getAllCollections = async (
+  collection: FractalCollection
+): Promise<NftCollectionPrice[]> => {
+  const managedRes = await fetch(
+    `https://api.fractal.is/admin/v1/project/manage/${collection.id}/collection/manage`
+  );
+
+  if (!managedRes.ok) {
+    return [];
+  }
+  const { collections } = (await managedRes.json()) as {
+    collections: FractalManagedCollection[];
+  };
+
+  const prices = await Promise.all(
+    collections.map((managed) =>
+      getCollectionStats({
+        ...managed,
+        avatar: collection.avatar,
+        handle: collection.handle,
+        parent: collection.title,
+      })
+    )
+  );
+
+  return prices.filter((price): price is NftCollectionPrice => price !== null);
 };
 
 export const getFractalCollections = async (): Promise<
@@ -81,11 +124,12 @@ export const getFractalCollections = async (): Promise<
   const { projects } =
     (await collectionRes.json()) as FractalCollectionResponse;
 
-  const prices = (await Promise.all(projects.map(getCollectionStats))).filter(
-    (col): col is NftCollectionPrice => col !== null
+  const allPrices = (await Promise.all(projects.map(getAllCollections))).reduce(
+    (agg, prices) => agg.concat(prices),
+    []
   );
 
-  console.log('Fractal got ', prices.length);
+  console.log('Fractal got ', allPrices.length);
 
-  return prices;
+  return allPrices;
 };
