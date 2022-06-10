@@ -118,11 +118,11 @@ export const updateNftCollectionPrice = async () => {
   const collections = await Promise.all([
     // getFractalCollections(),
     // getAlphArtCollections(),
+    getDigitalEyesCollections(),
     // getMagicEdenCollections(),
-    // getSolSeaCollections(),
-    getExchagenArtCollections(),
-    // getDigitalEyesCollections(),
+    // getExchagenArtCollections(),
     // getSolanaArtCollections(),
+    // getSolSeaCollections(),
   ]);
 
   const totalCollections = collections

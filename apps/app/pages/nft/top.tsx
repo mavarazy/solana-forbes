@@ -58,7 +58,7 @@ const TopNft: NextPage<{
             <span className="text-brand xl:inline">NFT</span>
           </h1>
           <h1 className="text-xl ml-3 sm:ml-5 mb-3 tracking-tight font-extrabold text-brand">
-            250 collections by floor price
+            150 collections by volume
           </h1>
         </div>
       </div>

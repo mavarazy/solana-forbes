@@ -100,8 +100,8 @@ export const getMagicEdenCollections = async (): Promise<
         symbol: collection.symbol,
         price: stats.floorPrice / LAMPORTS_PER_SOL,
         website: `https://magiceden.io/marketplace/${collection.symbol}`,
-        volume: stats.volumeAll,
-        supply: stats.listedTotalValue,
+        volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL),
+        supply: collection.totalItems,
       };
     }),
     1000,

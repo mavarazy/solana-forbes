@@ -19,8 +19,8 @@ export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   symbol: string | null;
   website: string | null;
   thumbnail: string | null;
-  volume: general.numeric | null;
-  supply: general.numeric | null;
+  volume: general.numeric;
+  supply: general.numeric;
 }
 
 export interface UpdateNftCollectionPrice {

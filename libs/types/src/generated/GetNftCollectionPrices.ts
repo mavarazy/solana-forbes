@@ -20,8 +20,8 @@ export interface GetNftCollectionPrices_nft_collection_price {
   symbol: string | null;
   thumbnail: string | null;
   parent: string | null;
-  volume: general.numeric | null;
-  supply: general.numeric | null;
+  volume: general.numeric;
+  supply: general.numeric;
 }
 
 export interface GetNftCollectionPrices_nft_collection_price_stats {

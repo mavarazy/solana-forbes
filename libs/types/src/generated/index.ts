@@ -14,3 +14,4 @@ export * from './GetLargestWalletWithFlag';
 export * from './GetNftCollectionPrice';
 export * from './globalTypes';
 export * from './GetNftCollectionPricesByMarketplace';
+export * from './GetNftMarketplaceStats';

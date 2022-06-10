@@ -20,8 +20,13 @@ export interface GetNftCollectionPricesByMarketplace_nft_collection_price {
   symbol: string | null;
   thumbnail: string | null;
   parent: string | null;
-  volume: general.numeric | null;
-  supply: general.numeric | null;
+  volume: general.numeric;
+  supply: general.numeric;
+}
+
+export interface GetNftCollectionPricesByMarketplace_nft_collection_price_stats {
+  count: bigint | null;
+  marketplace: string | null;
 }
 
 export interface GetNftCollectionPricesByMarketplace {
@@ -29,8 +34,14 @@ export interface GetNftCollectionPricesByMarketplace {
    * fetch data from the table: "nft_collection_price"
    */
   nft_collection_price: GetNftCollectionPricesByMarketplace_nft_collection_price[];
+  /**
+   * fetch data from the table: "nft_collection_price_stats"
+   */
+  nft_collection_price_stats: GetNftCollectionPricesByMarketplace_nft_collection_price_stats[];
 }
 
 export interface GetNftCollectionPricesByMarketplaceVariables {
   marketplace: NftMarketplace;
+  offset?: number | null;
+  limit?: number | null;
 }

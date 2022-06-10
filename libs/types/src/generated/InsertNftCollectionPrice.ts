@@ -18,8 +18,8 @@ export interface InsertNftCollectionPrice_insert_nft_collection_price_one {
   marketplace: NftMarketplace;
   website: string | null;
   thumbnail: string | null;
-  volume: general.numeric | null;
-  supply: general.numeric | null;
+  volume: general.numeric;
+  supply: general.numeric;
 }
 
 export interface InsertNftCollectionPrice {
