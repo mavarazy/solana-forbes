@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import delay from 'delay';
 import fetch from 'node-fetch';
 
 interface MagicEdenCollection {
@@ -48,6 +49,11 @@ const getMagicEdenEscrowStats = async (
   if (res.ok) {
     return ((await res.json()) as { results: MagicEdenEscrowStats }).results;
   }
+  if (res.status === 429) {
+    console.log(`Retrying ${collection.symbol}`);
+    await delay(30000);
+    return getMagicEdenEscrowStats(collection);
+  }
 
   return null;
 };
@@ -80,21 +86,26 @@ export const getMagicEdenCollections = async (): Promise<
     collections.map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
+        console.log(
+          `Missing ${collection.name} https://magiceden.io/marketplace/${collection.symbol}`
+        );
         return null;
       }
 
       return {
         id: collection.symbol,
-        source: NftMarketplace.magiceden,
+        marketplace: NftMarketplace.magiceden,
         name: collection.name,
         thumbnail: collection.image,
         symbol: collection.symbol,
-        website: collection.discord,
         price: stats.floorPrice / LAMPORTS_PER_SOL,
+        website: `https://magiceden.io/marketplace/${collection.symbol}`,
+        volume: stats.volumeAll,
+        supply: stats.listedTotalValue,
       };
     }),
     1000,
-    50
+    10
   );
 
   return nftCollectionPrices.filter((nft) => nft !== null);

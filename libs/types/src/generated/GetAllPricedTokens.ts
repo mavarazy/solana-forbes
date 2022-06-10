@@ -10,7 +10,7 @@ import * as general from '../lib';
 // ====================================================
 
 export interface GetAllPricedTokens_wallet {
-  tokens: general.TokenWorth[];
+  tokens: general.TokenWorthSummary;
 }
 
 export interface GetAllPricedTokens {

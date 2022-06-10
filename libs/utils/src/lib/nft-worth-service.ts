@@ -34,7 +34,7 @@ const estimateNftWorth = async (nfts: NftWorth[]): Promise<NftWorth[]> => {
       return {
         ...nft,
         floorPrice: nftPrice.price,
-        marketplace: nftPrice.source,
+        marketplace: nftPrice.marketplace,
       };
     }
     return nft;

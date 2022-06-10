@@ -9,7 +9,9 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   name,
   price,
   parent,
-  source,
+  marketplace,
+  volume,
+  supply,
 }) => (
   <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-2xl rounded-3xl bg-white cursor-pointer">
     <a
@@ -38,9 +40,11 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
         <div className="flex flex-col">
           <div className="flex justify-center">
             <FontAwesomeIcon icon={faSun} className="mr-2 self-center" />
-            <span className="flex justify-center font-bold">{price}</span>
+            <span className="flex justify-center font-bold">
+              {price}|{volume}|{supply}
+            </span>
           </div>
-          <span className="text-[8px] font-bold uppercase">{source}</span>
+          <span className="text-[8px] font-bold uppercase">{marketplace}</span>
         </div>
       </div>
     </a>

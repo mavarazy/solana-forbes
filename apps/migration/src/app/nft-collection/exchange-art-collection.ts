@@ -114,7 +114,8 @@ export const getExchagenArtCollections = async (): Promise<
           ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`
           : null,
         symbol: price.symbol,
-        source: NftMarketplace.exchageart,
+        marketplace: NftMarketplace.exchageart,
+        volume: price.totalVolume,
       };
       agg.push(nft);
 

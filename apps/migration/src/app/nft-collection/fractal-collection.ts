@@ -32,16 +32,6 @@ interface FractalCollectionResponse {
   projects: FractalCollection[];
 }
 
-interface FracatalCollectionInfo {
-  description: string;
-  expectedTotalTokens: number;
-  id: string;
-  productId: string;
-  rank: number;
-  title: string;
-  visible: boolean;
-}
-
 interface FracatalStats {
   floorPrice: number;
   totalSalesVolume: number;
@@ -74,12 +64,14 @@ const getCollectionStats = async (
 
   return {
     id: collection.id,
-    source: NftMarketplace.fractal,
+    marketplace: NftMarketplace.fractal,
     name: collection.title,
     thumbnail: collection.avatar.url,
     website: `https://www.fractal.is/${collection.handle}`,
     parent: collection.parent,
     price: stats.floorPrice,
+    volume: stats.totalSalesVolume,
+    supply: stats.totalListed,
   };
 };
 

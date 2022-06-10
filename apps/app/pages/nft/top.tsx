@@ -9,15 +9,21 @@ import { NftMarketplaceSelector } from '../../components/nft-marketplace-selecto
 
 const GetNftCollectionPricesQuery = gql`
   query GetNftCollectionPrices {
-    nft_collection_price(order_by: { price: desc }, limit: 150) {
+    nft_collection_price(order_by: { volume: desc }, limit: 150) {
       id
       name
       price
-      source
+      marketplace
       website
       symbol
       thumbnail
       parent
+      volume
+      supply
+    }
+    nft_collection_price_stats {
+      count
+      marketplace
     }
   }
 `;

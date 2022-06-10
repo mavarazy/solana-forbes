@@ -87,9 +87,10 @@ export const getDigitalEyesCollections = async (): Promise<
             id: collection.collectionId,
             name: collection.name,
             website: collection.website,
-            source: NftMarketplace.digitaleyes,
+            marketplace: NftMarketplace.digitaleyes,
             thumbnail: parseThumbnail(collection.thumbnail),
             price,
+            volume: collection.volumeTotal,
           };
         }
         return null;

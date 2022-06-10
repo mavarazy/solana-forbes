@@ -9,7 +9,7 @@ const GetNftCollectionPriceQuery = gql`
       id
       name
       price
-      source
+      marketplace
       symbol
     }
   }
@@ -29,7 +29,7 @@ export const exportNftCollectionPrice = async () => {
         nft_collection_price.map((price) => {
           const nftPrice: Partial<NftCollectionPrice> = {
             price: price.price,
-            source: price.source,
+            marketplace: price.source,
           };
           if (price.name) {
             nftPrice.name = price.name.toLowerCase().trim();

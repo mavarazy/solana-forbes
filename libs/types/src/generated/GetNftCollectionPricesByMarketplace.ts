@@ -15,10 +15,13 @@ export interface GetNftCollectionPricesByMarketplace_nft_collection_price {
   id: string;
   name: string;
   price: general.numeric;
-  source: NftMarketplace;
+  marketplace: NftMarketplace;
   website: string | null;
   symbol: string | null;
   thumbnail: string | null;
+  parent: string | null;
+  volume: general.numeric | null;
+  supply: general.numeric | null;
 }
 
 export interface GetNftCollectionPricesByMarketplace {

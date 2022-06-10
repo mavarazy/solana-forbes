@@ -33,6 +33,8 @@ const UpdateNftCollectionPriceQuery = gql`
     $thumbnail: String
     $price: numeric!
     $parent: String
+    $volume: numeric
+    $supply: numeric
   ) {
     update_nft_collection_price_by_pk(
       pk_columns: { id: $id }
@@ -43,15 +45,19 @@ const UpdateNftCollectionPriceQuery = gql`
         website: $website
         thumbnail: $thumbnail
         parent: $parent
+        volume: $volume
+        supply: $supply
       }
     ) {
       id
       name
       price
-      source
+      marketplace
       symbol
       website
       thumbnail
+      volume
+      supply
     }
   }
 `;
@@ -61,11 +67,13 @@ const InsertNftCollectionPriceQuery = gql`
     $id: String!
     $name: String
     $symbol: String
-    $source: nft_marketplace_enum!
+    $marketplace: nft_marketplace_enum!
     $website: String
     $thumbnail: String
     $parent: String
     $price: numeric!
+    $volume: numeric
+    $supply: numeric
   ) {
     insert_nft_collection_price_one(
       object: {
@@ -73,10 +81,12 @@ const InsertNftCollectionPriceQuery = gql`
         name: $name
         price: $price
         website: $website
-        source: $source
+        marketplace: $marketplace
         symbol: $symbol
         thumbnail: $thumbnail
         parent: $parent
+        volume: $volume
+        supply: $supply
       }
       on_conflict: {
         constraint: nft_collection_price_pkey
@@ -86,9 +96,11 @@ const InsertNftCollectionPriceQuery = gql`
       id
       name
       price
-      source
+      marketplace
       website
       thumbnail
+      volume
+      supply
     }
   }
 `;
@@ -104,12 +116,12 @@ export const updateNftCollectionPrice = async () => {
 
   console.log('Getting collections');
   const collections = await Promise.all([
-    // getSolSeaCollections(),
-    // getMagicEdenCollections(),
-    // getExchagenArtCollections(),
-    // getDigitalEyesCollections(),
-    getFractalCollections(),
+    // getFractalCollections(),
     // getAlphArtCollections(),
+    // getMagicEdenCollections(),
+    // getSolSeaCollections(),
+    getExchagenArtCollections(),
+    // getDigitalEyesCollections(),
     // getSolanaArtCollections(),
   ]);
 

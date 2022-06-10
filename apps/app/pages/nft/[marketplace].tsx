@@ -16,17 +16,19 @@ const GetNftCollectionPricesByMarketplaceQuery = gql`
     $marketplace: nft_marketplace_enum!
   ) {
     nft_collection_price(
-      where: { source: { _eq: $marketplace } }
-      order_by: { price: desc }
+      where: { marketplace: { _eq: $marketplace } }
+      order_by: { volume: desc }
     ) {
       id
       name
       price
-      source
+      marketplace
       website
       symbol
       thumbnail
       parent
+      volume
+      supply
     }
   }
 `;

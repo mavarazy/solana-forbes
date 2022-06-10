@@ -1,3 +1,4 @@
+import { NftMarketplace } from '../generated';
 import { TokenInfoSummary } from './token-worth';
 
 export type NftType = 'original' | 'print';
@@ -7,7 +8,7 @@ export interface NftWorth {
   mint: string;
   info: TokenInfoSummary;
   floorPrice?: number | null;
-  marketplace?: string;
+  marketplace?: NftMarketplace;
   collection?: {
     name: string | null;
     family: string | null;

@@ -3,7 +3,7 @@ import { Prices } from './nft-collection-price-map';
 
 type NftCollectionPriceProjection = Pick<
   NftCollectionPrice,
-  'price' | 'source'
+  'price' | 'marketplace'
 >;
 
 type NftCollectionPriceMap = {
@@ -12,12 +12,12 @@ type NftCollectionPriceMap = {
 
 const PriceMap: NftCollectionPriceMap = (
   Prices as Array<
-    Pick<NftCollectionPrice, 'name' | 'symbol' | 'price' | 'source'>
+    Pick<NftCollectionPrice, 'name' | 'symbol' | 'price' | 'marketplace'>
   >
 ).reduce((agg: NftCollectionPriceMap, nftPrice) => {
   const price: NftCollectionPriceProjection = {
     price: nftPrice.price,
-    source: nftPrice.source,
+    marketplace: nftPrice.marketplace,
   };
   if (nftPrice.name) {
     agg[nftPrice.name] = price;

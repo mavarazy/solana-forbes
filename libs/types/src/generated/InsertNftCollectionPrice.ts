@@ -15,9 +15,11 @@ export interface InsertNftCollectionPrice_insert_nft_collection_price_one {
   id: string;
   name: string;
   price: general.numeric;
-  source: NftMarketplace;
+  marketplace: NftMarketplace;
   website: string | null;
   thumbnail: string | null;
+  volume: general.numeric | null;
+  supply: general.numeric | null;
 }
 
 export interface InsertNftCollectionPrice {
@@ -31,8 +33,11 @@ export interface InsertNftCollectionPriceVariables {
   id: string;
   name?: string | null;
   symbol?: string | null;
-  source: NftMarketplace;
+  marketplace: NftMarketplace;
   website?: string | null;
   thumbnail?: string | null;
+  parent?: string | null;
   price: general.numeric;
+  volume?: general.numeric | null;
+  supply?: general.numeric | null;
 }

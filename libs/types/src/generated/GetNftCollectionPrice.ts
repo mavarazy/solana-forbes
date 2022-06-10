@@ -15,7 +15,7 @@ export interface GetNftCollectionPrice_nft_collection_price {
   id: string;
   name: string;
   price: general.numeric;
-  source: NftMarketplace;
+  marketplace: NftMarketplace;
   symbol: string | null;
 }
 
