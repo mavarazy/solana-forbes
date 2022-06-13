@@ -4,6 +4,7 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import delay from 'delay';
 import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
+import { UpdateStream } from './update-stream';
 
 interface MagicEdenCollection {
   symbol: string;
@@ -73,7 +74,7 @@ const getAllMagicEdenCollections = async (
     if (!res.ok) {
       throw new Error('Failed');
     }
-    if (res.status === 429 || res.status === 408) {
+    if (res.status === 429 || res.status === 408 || res.status === 503) {
       await delay(5000);
       return getAllMagicEdenCollections(agg);
     }
@@ -89,13 +90,15 @@ const getAllMagicEdenCollections = async (
   return [];
 };
 
-export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
+export const getMagicEdenPrices = async (
+  updateStream: UpdateStream<NftCollectionPrice>
+): Promise<void> => {
   console.log('Getting collections');
   const collections = await getAllMagicEdenCollections();
   console.log('Number of collections ', collections.length);
 
-  const nftCollectionPrices = await throttle<NftCollectionPrice | null>(
-    collections.slice(0, 500).map((collection) => async () => {
+  await throttle(
+    collections.slice(5900).map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
         console.log(
@@ -104,7 +107,9 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
         return null;
       }
 
-      return {
+      console.log(stats.volumeAll);
+
+      const price = {
         id: collection.symbol,
         marketplace: NftMarketplace.magiceden,
         name: collection.name,
@@ -112,13 +117,13 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
         symbol: collection.symbol,
         price: stats.floorPrice / LAMPORTS_PER_SOL,
         website: `https://magiceden.io/marketplace/${collection.symbol}`,
-        volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL),
+        volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
         supply: collection.totalItems || stats.listedCount,
       };
+
+      updateStream.emit(price);
     }),
     1000,
     10
   );
-
-  return nftCollectionPrices.filter((nft) => nft !== null);
 };

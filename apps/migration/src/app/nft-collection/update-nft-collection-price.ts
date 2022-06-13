@@ -8,6 +8,8 @@ import {
   UpdateNftCollectionPriceVariables,
 } from '@forbex-nxr/types';
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
+import { emit } from 'process';
+import { EventEmitter } from 'stream';
 import { getAlphArtCollections } from './alpha-art-collection';
 import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
@@ -105,6 +107,8 @@ const InsertNftCollectionPriceQuery = gql`
   }
 `;
 
+const UpdateStream = new EventEmitter();
+
 export const updateNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
@@ -114,12 +118,46 @@ export const updateNftCollectionPrice = async () => {
 
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
+  UpdateStream.on('nft', async (collection: NftCollectionPrice) => {
+    try {
+      if (existingIds.has(collection.id)) {
+        const {
+          data: { update_nft_collection_price_by_pk },
+        } = await hasuraClient.mutate<
+          UpdateNftCollectionPrice,
+          UpdateNftCollectionPriceVariables
+        >({
+          mutation: UpdateNftCollectionPriceQuery,
+          variables: collection,
+        });
+
+        return update_nft_collection_price_by_pk;
+      } else {
+        const {
+          data: { insert_nft_collection_price_one },
+        } = await hasuraClient.mutate<
+          InsertNftCollectionPrice,
+          InsertNftCollectionPriceVariables
+        >({
+          mutation: InsertNftCollectionPriceQuery,
+          variables: collection,
+        });
+        return insert_nft_collection_price_one;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   console.log('Getting collections');
+  await getMagicEdenPrices({
+    emit: (value: NftCollectionPrice) => UpdateStream.emit('nft', value),
+  });
+
   const collections = await Promise.all([
     // getFractalCollections(),
     // getAlphArtCollections(),
     // getDigitalEyesCollections(),
-    getMagicEdenPrices(),
     // getExchagenArtCollections(),
     // getSolanaArtCollections(),
     // getSolSeaCollections(),

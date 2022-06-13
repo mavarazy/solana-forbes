@@ -25,7 +25,7 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
           image={thumbnail}
           width={128}
           height={128}
-          className="h-32 w-32 rounded-full flex flex-1 self-center mx-auto object-cover my-2"
+          className="h-32 w-32 rounded-full flex flex-1 self-center mx-auto object-cover my-2 bg-brand"
         />
         <span className="flex flex-col my-2 relative">
           <span className="font-semibold text-xl truncate flex justify-center">

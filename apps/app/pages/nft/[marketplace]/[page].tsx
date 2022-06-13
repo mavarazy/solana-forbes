@@ -12,17 +12,10 @@ import {
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../../components/nft-collection-card';
 import { Pagination } from '../../../components/pagination';
+import { GetNftMarketplaceStatsQuery } from '../../../utils/get-nft-marketplace-stats';
+import { NftMarketplaceSelector } from '../../../components/nft-marketplace-selector';
 
 const ItemsPerPage = 30;
-
-const GetNftMarketplaceStatsQuery = gql`
-  query GetNftMarketplaceStats {
-    nft_collection_price_stats {
-      count
-      marketplace
-    }
-  }
-`;
 
 const GetNftCollectionPricesByMarketplaceQuery = gql`
   query GetNftCollectionPricesByMarketplace(
@@ -98,6 +91,7 @@ export async function getStaticProps({ params: { marketplace, page } }) {
       marketplace,
       nfts,
       page: parseInt(page),
+      stats: nft_collection_price_stats,
       total: nft_collection_price_stats.find(
         (nft) => nft.marketplace === marketplace
       )?.count,
@@ -107,16 +101,20 @@ export async function getStaticProps({ params: { marketplace, page } }) {
 }
 
 const NftMarketplacePage: NextPage<{
-  marketplace: string;
+  marketplace: NftMarketplace;
   page: number;
   nfts: NftCollectionPrice[];
+  stats: Array<{ marketplace: NftMarketplace; count: BigInt }>;
   total: number;
-}> = ({ marketplace, page, nfts, total }) => (
+}> = ({ marketplace, page, nfts, total, stats }) => (
   <>
     <Head>
-      <title>NFT {marketplace} collections</title>
+      <title>
+        NFT {marketplace} collections - page {page + 1}
+      </title>
     </Head>
     <main className="flex flex-1 flex-col">
+      <NftMarketplaceSelector stats={stats} marketplace={marketplace} />
       <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
         <div className="max-w-5xl flex flex-col flex-1 self-start">
           <h1 className="text-3xl mt-3 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
