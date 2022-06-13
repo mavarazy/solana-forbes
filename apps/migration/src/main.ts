@@ -13,10 +13,10 @@ import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
 const execute = async () => {
   try {
-    await updateNftCollectionPrice();
-    // await exportNftCollectionPrice();
     // await updateWalletEvaluation();
     // await updateTokenWorthSummary();
+    await updateNftCollectionPrice();
+    // await exportNftCollectionPrice();
   } catch (err) {
     console.error(err);
   }

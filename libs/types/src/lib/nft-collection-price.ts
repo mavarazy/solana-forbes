@@ -9,6 +9,6 @@ export interface NftCollectionPrice {
   symbol?: string | null;
   website?: string | null;
   price: number;
-  volume?: number;
-  supply?: number;
+  volume: number;
+  supply: number;
 }

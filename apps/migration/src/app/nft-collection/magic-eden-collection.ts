@@ -2,6 +2,7 @@ import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import delay from 'delay';
+import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
 
 interface MagicEdenCollection {
@@ -44,46 +45,57 @@ const getMagicEdenEscrowStats = async (
   collection: MagicEdenCollection
 ): Promise<MagicEdenEscrowStats | null> => {
   const res = await fetch(
-    `https://api-mainnet.magiceden.io/rpc/getCollectionEscrowStats/${collection.symbol}?edge_cache=true`
+    `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`
   );
   if (res.ok) {
-    return ((await res.json()) as { results: MagicEdenEscrowStats }).results;
+    const stats = await res.json();
+    console.log('Got stats for ', collection.name);
+    return stats;
   }
-  if (res.status === 429) {
+  if (res.status === 429 || res.status === 408) {
     console.log(`Retrying ${collection.symbol}`);
     await delay(30000);
     return getMagicEdenEscrowStats(collection);
   }
 
+  console.log('Returning null ', res.status);
   return null;
 };
 
-const getAllMagicEdenCollections = async (): Promise<MagicEdenCollection[]> => {
+const getAllMagicEdenCollections = async (
+  agg: MagicEdenCollection[] = []
+): Promise<MagicEdenCollection[]> => {
   try {
     console.log('Sending request');
     const res = await fetch(
-      'https://api-mainnet.magiceden.io/all_collections_with_escrow_data?edge_cache=true'
+      `https://api-mainnet.magiceden.dev/v2/collections?offset=${agg.length}&limit=500`
     );
-    console.log('Got reponse');
-    const { collections } = (await res.json()) as {
-      collections: MagicEdenCollection[];
-    };
+    if (!res.ok) {
+      throw new Error('Failed');
+    }
+    if (res.status === 429 || res.status === 408) {
+      await delay(5000);
+      return getAllMagicEdenCollections(agg);
+    }
+    const collections = (await res.json()) as MagicEdenCollection[];
     console.log('Fetched collection for ', collections.length);
-    return collections;
+    if (collections.length < 500) {
+      return agg.concat(collections);
+    }
+    return getAllMagicEdenCollections(agg.concat(collections));
   } catch (err) {
     console.log(err);
   }
   return [];
 };
 
-export const getMagicEdenCollections = async (): Promise<
-  NftCollectionPrice[]
-> => {
+export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
   console.log('Getting collections');
   const collections = await getAllMagicEdenCollections();
+  console.log('Number of collections ', collections.length);
 
   const nftCollectionPrices = await throttle<NftCollectionPrice | null>(
-    collections.map((collection) => async () => {
+    collections.slice(0, 500).map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
         console.log(
@@ -101,7 +113,7 @@ export const getMagicEdenCollections = async (): Promise<
         price: stats.floorPrice / LAMPORTS_PER_SOL,
         website: `https://magiceden.io/marketplace/${collection.symbol}`,
         volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL),
-        supply: collection.totalItems,
+        supply: collection.totalItems || stats.listedCount,
       };
     }),
     1000,

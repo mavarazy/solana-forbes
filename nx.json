@@ -3,9 +3,6 @@
   "affected": {
     "defaultBase": "main"
   },
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
@@ -43,5 +40,6 @@
       }
     }
   },
-  "defaultProject": "app"
+  "defaultProject": "app",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

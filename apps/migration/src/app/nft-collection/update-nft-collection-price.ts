@@ -12,7 +12,7 @@ import { getAlphArtCollections } from './alpha-art-collection';
 import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
 import { getFractalCollections } from './fractal-collection';
-import { getMagicEdenCollections } from './magic-eden-collection';
+import { getMagicEdenPrices } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
 import { getSolSeaCollections } from './solsea-collection';
 
@@ -118,8 +118,8 @@ export const updateNftCollectionPrice = async () => {
   const collections = await Promise.all([
     // getFractalCollections(),
     // getAlphArtCollections(),
-    getDigitalEyesCollections(),
-    // getMagicEdenCollections(),
+    // getDigitalEyesCollections(),
+    getMagicEdenPrices(),
     // getExchagenArtCollections(),
     // getSolanaArtCollections(),
     // getSolSeaCollections(),

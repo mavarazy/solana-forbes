@@ -116,6 +116,7 @@ export const getExchagenArtCollections = async (): Promise<
         symbol: price.symbol,
         marketplace: NftMarketplace.exchageart,
         volume: price.totalVolume,
+        supply: 0,
       };
       agg.push(nft);
 

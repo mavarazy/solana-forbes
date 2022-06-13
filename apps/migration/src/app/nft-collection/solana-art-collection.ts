@@ -167,7 +167,8 @@ export const getSolanaArtCollections = async (): Promise<
           price: price.floorPrice,
           thumbnail: `https://data.solanart.io/img/collections/${collection.url}.webp`,
           symbol,
-          supply: collection.supply,
+          supply: price.countTotal,
+          volume: price.countTotal * price.floorPrice,
         };
       }
       return null;
@@ -186,6 +187,7 @@ export const getSolanaArtCollections = async (): Promise<
         price: parseFloat(price.floor),
         thumbnail: `https://data.solanart.io/img/collections/${price.url}.webp`,
         volume: price.floor_marketcap,
+        supply: price.items,
       };
     }),
     100,
