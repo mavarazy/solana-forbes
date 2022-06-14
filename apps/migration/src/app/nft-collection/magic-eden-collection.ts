@@ -98,7 +98,7 @@ export const getMagicEdenPrices = async (
   console.log('Number of collections ', collections.length);
 
   await throttle(
-    collections.slice(5900).map((collection) => async () => {
+    collections.map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
         console.log(

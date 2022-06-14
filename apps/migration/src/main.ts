@@ -4,6 +4,7 @@
 // import { updateNftCollectionPrice } from './app/nft-collection';
 // import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 // import { updateNftCollectionPrice } from './app/nft-collection';
+import { exportNftCollectionPrice } from './app/export-nft-collection-price';
 import { updateNftCollectionPrice } from './app/nft-collection';
 import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 import { updateWalletEvaluation } from './app/update-wallet-evaluation';
@@ -15,8 +16,8 @@ const execute = async () => {
   try {
     // await updateWalletEvaluation();
     // await updateTokenWorthSummary();
-    await updateNftCollectionPrice();
-    // await exportNftCollectionPrice();
+    // await updateNftCollectionPrice();
+    await exportNftCollectionPrice();
   } catch (err) {
     console.error(err);
   }

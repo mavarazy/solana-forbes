@@ -1,42 +1,118 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
-import { io } from 'socket.io-client';
+import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import * as WebSocket from 'ws';
 
-const getAllSolSeaCollections = async () =>
-  new Promise((resolve, reject) => {
-    const socket = io('wss://api.all.art/socket.io/?EIO=3');
+interface SolSeaCollection {
+  _id: string;
+  traits: [];
+  creators: string[];
+  subcategory: string[];
+  tags: string[];
+  nftCount: number;
+  views: number;
+  totalCount: number;
+  listingDisabled: boolean;
+  status: string;
+  description: string;
+  shortDescription: string;
+  minted: true;
+  visible: true;
+  verified: true;
+  title: string;
+  twitter: string;
+  discord: string;
+  telegram: '';
+  instagram: '';
+  website: 'https://yutomo.net/';
+  symbol: '';
+  standard: '';
+  supply: null | number;
+  initialPrice: null | number;
+  reported: null;
+  nsfw: boolean;
+  floorPrice: number;
+  exhibitionId: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  headerImage: string;
+  iconImage: {
+    _id: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    destination: string;
+    filename: string;
+    path: string;
+    size: string;
+    createdAt: number;
+    updatedAt: number;
+    __v: number;
+    s3: {
+      thumbnail: string;
+      preview: string;
+    };
+  };
+  volume: number;
+}
 
-    socket.on('connect', () => {
-      console.log(socket.id);
+interface SolSeaResponse {
+  total: number;
+  limit: number;
+  skip: number;
+  data: SolSeaCollection[];
+}
+
+const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
+  new Promise((resolve) => {
+    const agg: SolSeaCollection[] = [];
+
+    const socket = new WebSocket(
+      'wss://api.all.art/socket.io/?EIO=3&transport=websocket'
+    );
+
+    const fetchCollections = (offset: number) => {
+      socket.send(
+        `4224["find","collections",{"visible":true,"$limit":50,"$skip":${offset},"$sort":{"createdAt":-1},"verified":true,"$populate":["iconImage"]}]`
+      );
+    };
+
+    socket.on('message', (data) => {
+      const str = data.toLocaleString();
+      if (str.startsWith('4324')) {
+        const { total, limit, skip, data } = JSON.parse(
+          str.substring(10, str.length - 1)
+        ) as SolSeaResponse;
+        agg.push(...data);
+        const offset = skip + limit;
+        if (offset >= total) {
+          resolve(agg);
+        } else {
+          fetchCollections(offset);
+        }
+      }
     });
 
-    socket.on('disconnect', () => {
-      console.log(socket.connected);
-      reject();
-    });
-
-    socket.on('connect_error', (...args) => {
-      console.log('Connection error ', args);
-      reject();
-      socket.close();
-    });
-
-    socket.onAny((eventName, ...args) => {
-      console.log(eventName);
-      console.log(args);
-      resolve([]);
-    });
-
-    socket.emit('find', 'collections', {
-      visible: true,
-      $limit: 21,
-      $skip: 0,
-      $sort: { createdAt: -1 },
-      verified: true,
-      $populate: ['headerImage', 'iconImage'],
+    socket.on('open', function open() {
+      console.log('Opened');
+      fetchCollections(0);
     });
   });
 
+const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
+  id: collection._id,
+  website: `https://solsea.io/collection/${collection._id}`,
+  price: collection.floorPrice / LAMPORTS_PER_SOL,
+  marketplace: NftMarketplace.solsea,
+  name: collection.title,
+  volume: collection.volume || 0,
+  supply: collection.nftCount,
+  symbol: collection.symbol,
+  thumbnail: `https://content.solsea.io/${collection.iconImage?.s3.thumbnail}`,
+});
+
 export const getSolSeaCollections = async (): Promise<NftCollectionPrice[]> => {
-  await getAllSolSeaCollections();
-  return [];
+  const collections = await getAllSolSeaCollections();
+  console.log('Extracted ', collections.length);
+  return collections.map(asPrice);
 };

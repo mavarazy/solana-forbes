@@ -18,7 +18,7 @@ import { NftMarketplaceSelector } from '../../../components/nft-marketplace-sele
 const ItemsPerPage = 30;
 
 const GetNftCollectionPricesQuery = gql`
-  query GetNftCollectionPrices($offset: Int, $limit: Int) {
+  query GetAllNftCollectionPrices($offset: Int, $limit: Int) {
     nft_collection_price(
       order_by: { volume: desc }
       offset: $offset

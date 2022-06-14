@@ -58,7 +58,7 @@ const getAllExchangeArtCollections = async (): Promise<
   try {
     console.log('Sending request');
     const res = await fetch(
-      'https://api.exchange.art/v2/sales/collections/leaderboard?offset=0&limit=274&verbosity=1&period=7d&category='
+      'https://api.exchange.art/v2/sales/collections/leaderboard?offset=0&limit=10000&verbosity=1&period=365d&category='
     );
     console.log('Got reponse');
     const { leaderboard } = await res.json();
@@ -108,7 +108,7 @@ export const getExchagenArtCollections = async (): Promise<
       const nft: NftCollectionPrice = {
         id: collection.id,
         name: collection.name,
-        website: collection.website,
+        website: `https://exchange.art/series/${collection.name}`,
         price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
         thumbnail: collection.thumbnailPath
           ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`

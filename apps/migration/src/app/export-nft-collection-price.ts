@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
 import { writeFile } from 'fs/promises';
 
@@ -18,7 +18,7 @@ const GetNftCollectionPriceQuery = gql`
 export const exportNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
-  } = await hasuraClient.query({
+  } = await hasuraClient.query<GetNftCollectionPrice>({
     query: GetNftCollectionPriceQuery,
   });
 
@@ -29,7 +29,7 @@ export const exportNftCollectionPrice = async () => {
         nft_collection_price.map((price) => {
           const nftPrice: Partial<NftCollectionPrice> = {
             price: price.price,
-            marketplace: price.source,
+            marketplace: price.marketplace,
           };
           if (price.name) {
             nftPrice.name = price.name.toLowerCase().trim();

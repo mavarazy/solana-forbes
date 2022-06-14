@@ -16,6 +16,7 @@ export enum NftMarketplace {
   fractal = 'fractal',
   magiceden = 'magiceden',
   solanart = 'solanart',
+  solsea = 'solsea',
   top = 'top',
 }
 

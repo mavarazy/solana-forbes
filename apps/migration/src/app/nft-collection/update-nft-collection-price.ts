@@ -150,17 +150,17 @@ export const updateNftCollectionPrice = async () => {
   });
 
   console.log('Getting collections');
-  // await getMagicEdenPrices({
-  //   emit: (value: NftCollectionPrice) => UpdateStream.emit('nft', value),
-  // });
+  await getMagicEdenPrices({
+    emit: (value: NftCollectionPrice) => UpdateStream.emit('nft', value),
+  });
 
   const collections = await Promise.all([
-    // getFractalCollections(),
-    // getAlphArtCollections(),
-    // getDigitalEyesCollections(),
+    getFractalCollections(),
+    getAlphArtCollections(),
+    getDigitalEyesCollections(),
     getExchagenArtCollections(),
-    // getSolanaArtCollections(),
-    // getSolSeaCollections(),
+    getSolanaArtCollections(),
+    getSolSeaCollections(),
   ]);
 
   const totalCollections = collections
