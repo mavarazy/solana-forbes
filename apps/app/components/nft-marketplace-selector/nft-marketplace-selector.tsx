@@ -4,12 +4,12 @@ import { useMemo } from 'react';
 import { classNames } from '../utils';
 
 interface NftMarketplaceSelectorProps {
-  marketplace: NftMarketplace;
+  selected: NftMarketplace;
   stats: Array<{ marketplace: string; count: BigInt }>;
 }
 
 export function NftMarketplaceSelector({
-  marketplace,
+  selected,
   stats,
 }: NftMarketplaceSelectorProps) {
   const tabs = useMemo(() => {
@@ -26,22 +26,27 @@ export function NftMarketplaceSelector({
   return (
     <div>
       <div className="sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        <select
-          id="tabs"
-          name="tabs"
-          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-          defaultValue={
-            tabs.find((tab) => tab.marketplace === marketplace).marketplace
-          }
-        >
-          <option key="all">All</option>
-          {tabs.map((tab) => (
-            <option key={tab.marketplace}>{tab.marketplace}</option>
-          ))}
-        </select>
+        <div className="flex justify-center my-4">
+          <div className="flex flex-wrap justify-center max-w-4xl">
+            {tabs.map(({ marketplace, count }) => (
+              <Link href={`/nft/${marketplace}/0`} key={marketplace}>
+                <span
+                  key={marketplace}
+                  className={classNames(
+                    selected === marketplace
+                      ? 'bg-green-500 shadow-lg text-white'
+                      : 'bg-white',
+                    'px-2 py-0.5 text-xs uppercase font-bold rounded-full border border-green text-md mx-1 my-1.5 cursor-pointer flex'
+                  )}
+                >
+                  <span className="flex items-center">
+                    {marketplace} | {count}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="hidden sm:block">
         <div className="flex justify-center">
@@ -56,20 +61,20 @@ export function NftMarketplaceSelector({
                   <a
                     key={tab.marketplace}
                     className={classNames(
-                      tab.marketplace === marketplace
+                      tab.marketplace === selected
                         ? 'border-brand text-brand'
                         : 'border-transparent text-gray-500 hover:text-brand hover:border-brand hover:b',
                       'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm'
                     )}
                     aria-current={
-                      tab.marketplace === marketplace ? 'page' : undefined
+                      tab.marketplace === selected ? 'page' : undefined
                     }
                   >
                     {tab.marketplace}
 
                     <span
                       className={classNames(
-                        tab.marketplace === marketplace
+                        tab.marketplace === selected
                           ? 'bg-brand text-white'
                           : '',
                         'hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block'
