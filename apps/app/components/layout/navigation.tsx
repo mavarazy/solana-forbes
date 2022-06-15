@@ -100,7 +100,7 @@ export function Navigation() {
                   </>
                 </NavigationLink>
                 <NavigationLink
-                  href="/nft/top/0"
+                  href="/nft/all/0"
                   active={router.asPath.startsWith('/nft')}
                 >
                   <>

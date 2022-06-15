@@ -17,7 +17,7 @@ export function NftMarketplaceSelector({
 
     const tabs = stats
       .map(({ marketplace, count }) => ({ marketplace, count: Number(count) }))
-      .concat({ marketplace: NftMarketplace.top, count: total });
+      .concat({ marketplace: NftMarketplace.all, count: total });
 
     tabs.sort((a, b) => b.count - a.count);
     return tabs;

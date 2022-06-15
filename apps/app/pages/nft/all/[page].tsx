@@ -103,7 +103,7 @@ const NftMarketplacePage: NextPage<{
         <title>Top nft collections - page {page + 1}</title>
       </Head>
       <main className="flex flex-1 flex-col">
-        <NftMarketplaceSelector stats={stats} selected={NftMarketplace.top} />
+        <NftMarketplaceSelector stats={stats} selected={NftMarketplace.all} />
         <div className="flex flex-1 m-2 sm:m-4 justify-center items-center">
           <div className="max-w-5xl flex flex-col flex-1 self-start">
             <h1 className="text-3xl mt-3 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">

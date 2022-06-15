@@ -10,6 +10,7 @@ import * as general from '../lib';
 //==============================================================
 
 export enum NftMarketplace {
+  all = 'all',
   alphart = 'alphart',
   digitaleyes = 'digitaleyes',
   exchageart = 'exchageart',
@@ -17,7 +18,6 @@ export enum NftMarketplace {
   magiceden = 'magiceden',
   solanart = 'solanart',
   solsea = 'solsea',
-  top = 'top',
 }
 
 /**
