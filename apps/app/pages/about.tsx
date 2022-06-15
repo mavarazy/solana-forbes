@@ -106,22 +106,18 @@ const About: NextPage = () => (
           </p>
           <ul role="list">
             <li>
-              <a
-                href="https://www.fractal.is/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Fractal
-              </a>
-            </li>
-            <li>
-              <a href="https://exchange.art/" target="_blank" rel="noreferrer">
-                Exchange Art
+              <a href="https://magiceden.io/" target="_blank" rel="noreferrer">
+                Magic Eden
               </a>
             </li>
             <li>
               <a href="https://solanart.io/" target="_blank" rel="noreferrer">
                 Solana Art
+              </a>
+            </li>
+            <li>
+              <a href="https://solsea.io/" target="_blank" rel="noreferrer">
+                Solsea
               </a>
             </li>
             <li>
@@ -131,6 +127,25 @@ const About: NextPage = () => (
                 rel="noreferrer"
               >
                 Digital Eyes
+              </a>
+            </li>
+            <li>
+              <a href="https://exchange.art/" target="_blank" rel="noreferrer">
+                Exchange Art
+              </a>
+            </li>
+            <li>
+              <a href="https://alpha.art/" target="_blank" rel="noreferrer">
+                Alpha Art
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.fractal.is/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Fractal
               </a>
             </li>
           </ul>

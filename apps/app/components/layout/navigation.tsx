@@ -1,17 +1,11 @@
-import {
-  faHexagonVerticalNftSlanted,
-  faInfoCircle,
-  faSpinner,
-  faWallet,
-} from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PublicKey } from '@solana/web3.js';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { ProgramIcon } from '../program-icon';
+import { InfoIcon } from '../info-icon';
 import { TokenTypeIcon } from '../token-type-icon';
 import { classNames } from '../utils';
+import { WalletIcon } from '../wallet-icon';
 
 const NavigationLink = ({
   href,
@@ -56,7 +50,7 @@ export function Navigation() {
   const router = useRouter();
 
   const onSubmit = async (form: SearchForm) => {
-    await router.push(`/wallet/${form.search}`);
+    await router.push(`/wallet/check/${form.search}`);
   };
 
   return (
@@ -66,36 +60,25 @@ export function Navigation() {
           <div className="flex px-2 lg:px-0">
             <div className="flex h-16 sm:ml-6 sm:space-x-8">
               <div className="flex space-x-4">
-                <NavigationLink href="/" active={router.asPath === '/'}>
-                  Top
-                </NavigationLink>
                 <NavigationLink
-                  href="/top/person"
-                  active={router.asPath === '/top/person'}
+                  href="/wallet/all"
+                  active={router.asPath.startsWith('/wallet')}
                 >
                   <>
-                    <ProgramIcon program={false} />
-                    <span className="ml-2 hidden sm:block">Person</span>
-                  </>
-                </NavigationLink>
-                <NavigationLink
-                  href="/top/machine"
-                  active={router.asPath === '/top/machine'}
-                >
-                  <>
-                    <ProgramIcon program />
-                    <span className="ml-2 hidden sm:block">Machine</span>
-                  </>
-                </NavigationLink>
-                <NavigationLink
-                  href="/top/token"
-                  active={router.asPath === '/top/token'}
-                >
-                  <>
-                    <TokenTypeIcon
-                      type="priced"
-                      className="h-5 w-5 text-white shadow-xl rounded-full"
+                    <WalletIcon
+                      isSubmitting={isSubmitting}
+                      className="h-5 w-5"
+                      aria-hidden="true"
                     />
+                    <span className="ml-2 hidden sm:block">Wallets</span>
+                  </>
+                </NavigationLink>
+                <NavigationLink
+                  href="/token/all"
+                  active={router.asPath.startsWith('/token')}
+                >
+                  <>
+                    <TokenTypeIcon type="priced" className="h-5 w-5" />
                     <span className="ml-2 hidden sm:block">Tokens</span>
                   </>
                 </NavigationLink>
@@ -104,11 +87,8 @@ export function Navigation() {
                   active={router.asPath.startsWith('/nft')}
                 >
                   <>
-                    <FontAwesomeIcon
-                      icon={faHexagonVerticalNftSlanted}
-                      className="h-5 w-5 text-white shadow-xl rounded-full"
-                    />
-                    <span className="ml-2 hidden sm:block">NFT</span>
+                    <TokenTypeIcon type="nfts" className="h-5 w-5 " />
+                    <span className="ml-2 hidden sm:block">NFTs</span>
                   </>
                 </NavigationLink>
                 <NavigationLink
@@ -116,10 +96,7 @@ export function Navigation() {
                   active={router.asPath === '/about'}
                 >
                   <>
-                    <FontAwesomeIcon
-                      icon={faInfoCircle}
-                      className="h-5 w-5 text-white shadow-xl rounded-full"
-                    />
+                    <InfoIcon className="h-5 w-5 text-white shadow-xl rounded-full" />
                     <span className="ml-2 hidden sm:block">About</span>
                   </>
                 </NavigationLink>
@@ -134,9 +111,8 @@ export function Navigation() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FontAwesomeIcon
-                    icon={isSubmitting ? faSpinner : faWallet}
-                    spin={isSubmitting}
+                  <WalletIcon
+                    isSubmitting={isSubmitting}
                     className="h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />

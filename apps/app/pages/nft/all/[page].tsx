@@ -131,7 +131,7 @@ const NftMarketplacePage: NextPage<{
           page={page}
           pageSize={ItemsPerPage}
           total={total}
-          origin="/nft/top"
+          origin="/nft/all"
         />
       </main>
     </>
