@@ -65,7 +65,7 @@ export const WalletWorthCard = ({
           </span>
         </span>
         <span className="flex sm:text-base font-bold truncate">
-          {id.substring(0, 8)}...{id.substring(id.length - 8)}
+          {id && `${id.substring(0, 8)}...${id.substring(id.length - 8)}`}
         </span>
       </div>
     </div>
