@@ -1,9 +1,12 @@
 import { faUserRobot, faUserSecret } from '@fortawesome/pro-light-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome';
 
-export const ProgramIcon = ({ program }: { program: boolean }) => (
-  <FontAwesomeIcon
-    icon={program ? faUserRobot : faUserSecret}
-    className="text-white"
-  />
+export const ProgramIcon = ({
+  program,
+  ...rest
+}: { program: boolean } & Omit<FontAwesomeIconProps, 'icon'>) => (
+  <FontAwesomeIcon icon={program ? faUserRobot : faUserSecret} {...rest} />
 );

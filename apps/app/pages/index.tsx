@@ -9,7 +9,7 @@ import Head from 'next/head';
 
 const GetLargestWalletsQuery = gql`
   query GetLargestWallets {
-    wallet(order_by: { worth: desc }, limit: 250) {
+    wallet(order_by: { worth: desc }, limit: 150) {
       id
       sol
       summary
@@ -52,7 +52,7 @@ const Home: NextPage<{
             <span className="text-brand xl:inline">wallets</span>
           </h1>
           <h1 className="text-xl ml-3 sm:ml-5 mb-3 tracking-tight font-extrabold text-brand">
-            Top 250 accounts on Solana
+            Top {wallets.length} accounts on Solana
           </h1>
         </div>
       </div>

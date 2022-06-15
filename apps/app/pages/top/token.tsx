@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gql } from '@apollo/client';
 import { hasuraClient } from '@forbex-nxr/utils';
 import Head from 'next/head';
+import { Badge } from '../../components/badge';
 
 export const GetLargestTokensQuery = gql`
   query GetLargestTokens {
@@ -67,13 +68,15 @@ const TopTokensPage: NextPage<{
           >
             {tokens.map((token) => (
               <div key={token.mint} className="relative">
-                <span className="absolute top-4 left-4 text-xs text-white font-bold bg-green-500 rounded-full px-2 py-1">
-                  <FontAwesomeIcon
-                    icon={faWallet}
-                    className="h-3 w-3"
-                    aria-hidden="true"
-                  />
-                  <span className="ml-1">{token.count}</span>
+                <span className="absolute top-4 left-4 z-10">
+                  <Badge>
+                    <FontAwesomeIcon
+                      icon={faWallet}
+                      className="self-center flex"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-1">{token.count}</span>
+                  </Badge>
                 </span>
                 <TokenWorthCard key={token.mint} {...token} />
               </div>

@@ -1,31 +1,39 @@
 import { TokenSummary } from '@forbex-nxr/types';
+import { Badge } from '../badge';
 import { TokenTypeIcon } from '../token-type-icon';
 
+const formatNumber = (num: number) => {
+  if (num > 1000) {
+    return `${Math.round(num / 1000)}K`;
+  }
+  return `${num}`;
+};
+
 export const SummaryBadge = ({ nfts, priced, general, dev }: TokenSummary) => (
-  <span className="flex justify-center text-[8px] sm:text-base rounded-full px-1 sm:px-3 sm:py-0.5 bg-gray-500 text-white font-semibold">
+  <Badge>
     {nfts > 0 && (
       <>
         <TokenTypeIcon type="nfts" className="flex self-center" />
-        <span className="self-center mx-1 sm:mx-2">{nfts}</span>
+        <span className="self-center mx-1">{formatNumber(nfts)}</span>
       </>
     )}
     {priced > 0 && (
       <>
         <TokenTypeIcon type="priced" className="flex self-center" />
-        <span className="self-center mx-1 sm:mx-2">{priced}</span>
+        <span className="self-center mx-1">{formatNumber(priced)}</span>
       </>
     )}
     {general > 0 && (
       <>
         <TokenTypeIcon type="general" className="flex self-center" />
-        <span className="self-center mx-1 sm:mx-2">{general}</span>
+        <span className="self-center mx-1">{formatNumber(general)}</span>
       </>
     )}
     {dev > 0 && (
       <>
         <TokenTypeIcon type="dev" className="flex self-center" />
-        <span className="self-center mx-1 sm:mx-2">{dev}</span>
+        <span className="self-center mx-1">{formatNumber(dev)}</span>
       </>
     )}
-  </span>
+  </Badge>
 );

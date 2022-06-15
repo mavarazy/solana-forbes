@@ -13,7 +13,7 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   volume,
   supply,
 }) => (
-  <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-2xl rounded-3xl bg-white cursor-pointer">
+  <div className="flex flex-1 flex-col p-4 self-center border border-brand hover:bg-brand hover:text-white hover:shadow-xl shadow-sm rounded-3xl bg-white cursor-pointer">
     <a
       className="flex flex-col justify-center text-center"
       href={website}
@@ -25,7 +25,7 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
           image={thumbnail}
           width={128}
           height={128}
-          className="h-32 w-32 rounded-full flex flex-1 self-center mx-auto object-cover my-2 bg-brand"
+          className="h-32 w-32 rounded-full flex flex-1 self-center mx-auto object-cover my-2 bg-brand p-2"
         />
         <span className="flex flex-col my-2 relative">
           <span className="font-semibold text-xl truncate flex justify-center">

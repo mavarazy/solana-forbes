@@ -5,7 +5,7 @@ export const GetLargestWalletWithFlagQuery = gql`
     wallet(
       where: { program: { _eq: $program } }
       order_by: { worth: desc }
-      limit: 250
+      limit: 150
     ) {
       id
       sol

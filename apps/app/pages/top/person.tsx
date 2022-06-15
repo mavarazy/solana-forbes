@@ -46,7 +46,7 @@ const TopPersonPage: NextPage<{
             <span className="text-brand xl:inline">wallets</span>
           </h1>
           <h1 className="text-xl ml-3 sm:ml-5 mb-3 tracking-tight font-extrabold text-brand">
-            Top 250 accounts on Solana
+            Top {wallets.length} accounts on Solana
           </h1>
         </div>
       </div>

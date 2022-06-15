@@ -2,6 +2,8 @@ import { TokenWorth } from '@forbex-nxr/types';
 import { NumberUtils } from '../utils';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';
+import { Card } from '../card';
+import { Badge } from '../badge';
 
 export const TokenWorthCard: React.FC<TokenWorth> = ({
   amount,
@@ -14,8 +16,8 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
   source,
   symbol,
 }) => (
-  <div className="flex flex-1 flex-col p-4 self-center hover:bg-indigo-500 hover:text-white shadow-2xl rounded-3xl bg-white">
-    <div className="flex flex-col justify-center text-center relative ">
+  <Card>
+    <div className="flex flex-col justify-center text-center">
       {worth > 0 && (
         <span className="text-xs mb-4 font-bold">
           $ {NumberUtils.asHuman(worth)}
@@ -31,8 +33,8 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
           />
         </span>
         {percent > 1 && (
-          <span className="absolute top-0 right-0 text-xs font-bold bg-green-500 px-2 py-0.5 rounded-full text-white shadow-lg">
-            {percent.toFixed(1)} %
+          <span className="absolute top-4 right-4">
+            <Badge>{percent.toFixed(1)} %</Badge>
           </span>
         )}
         <span className="items-center font-semibold mt-2 text-[8px] xl:text-[10px]">
@@ -54,5 +56,5 @@ export const TokenWorthCard: React.FC<TokenWorth> = ({
         </span>
       </AddressLink>
     </div>
-  </div>
+  </Card>
 );
