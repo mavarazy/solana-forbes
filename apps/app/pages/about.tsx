@@ -84,16 +84,18 @@ const About: NextPage = () => (
           <p>
             Some additional correction for token worth estimate was made, based
             on market capitalization of the token.
-            <ul>
-              <li>
-                If market capitalization is 0, maximum estimate token worth is
-                $100 000.
-              </li>
-              <li>
-                If person holds significant percentage of specified Token, this
-                percentage in capitalization is taken in account.
-              </li>
-            </ul>
+          </p>
+          <ul>
+            <li>
+              If market capitalization is 0, maximum estimate token worth is
+              $100 000.
+            </li>
+            <li>
+              If person holds significant percentage of specified Token, this
+              percentage in capitalization is taken in account.
+            </li>
+          </ul>
+          <p>
             Without thouse corrections some accounts were counted to trillions
             of dollars.
           </p>

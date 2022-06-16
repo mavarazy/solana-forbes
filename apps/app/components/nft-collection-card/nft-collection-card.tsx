@@ -1,6 +1,7 @@
 import { NftCollectionPrice } from '@forbex-nxr/types';
 import { faHashtag, faSun } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Card } from '../card';
 import { TokenLogo } from '../token-logo';
 
 export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
@@ -13,7 +14,7 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   volume,
   supply,
 }) => (
-  <div className="flex flex-1 flex-col p-4 self-center border border-brand hover:bg-brand hover:text-white hover:shadow-xl shadow-sm rounded-3xl bg-white cursor-pointer">
+  <Card>
     <a
       className="flex flex-col justify-center text-center"
       href={website}
@@ -70,5 +71,5 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
       </div>
       <span className="text-[8px] font-bold uppercase">{marketplace}</span>
     </a>
-  </div>
+  </Card>
 );
