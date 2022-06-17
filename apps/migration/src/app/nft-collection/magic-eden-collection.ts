@@ -2,7 +2,6 @@ import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import delay from 'delay';
-import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
 import { UpdateStream } from './update-stream';
 
@@ -115,7 +114,7 @@ export const getMagicEdenPrices = async (
         name: collection.name,
         thumbnail: collection.image,
         symbol: collection.symbol,
-        price: stats.floorPrice / LAMPORTS_PER_SOL,
+        price: stats.floorPrice / LAMPORTS_PER_SOL || 0,
         website: `https://magiceden.io/marketplace/${collection.symbol}`,
         volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
         supply: collection.totalItems || stats.listedCount,

@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { UpdateStream } from './update-stream';
 
 interface DigitalEyeCollection {
   '24h_sales': number;
@@ -71,9 +72,9 @@ const parseThumbnail = (thumbnail?: string) => {
   return thumbnail;
 };
 
-export const getDigitalEyesCollections = async (): Promise<
-  NftCollectionPrice[]
-> => {
+export const getDigitalEyesCollections = async (
+  updateStream: UpdateStream<NftCollectionPrice>
+): Promise<NftCollectionPrice[]> => {
   console.log('Getting collections');
   const collections = await getCollections();
   console.log('Processing ', collections.length);
@@ -84,7 +85,7 @@ export const getDigitalEyesCollections = async (): Promise<
         const price = await getCollectionPrice(collection.name);
         if (price) {
           const slug = collection.name.replace(/\s/g, '-');
-          return {
+          const collectionPrice = {
             id: collection.collectionId,
             name: collection.name,
             website: `https://digitaleyes.market/collections/${slug}`,
@@ -94,6 +95,9 @@ export const getDigitalEyesCollections = async (): Promise<
             volume: collection.volumeTotal / LAMPORTS_PER_SOL,
             supply: 0,
           };
+
+          updateStream.emit(collectionPrice);
+          return collectionPrice;
         }
         return null;
       }

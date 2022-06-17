@@ -1,5 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { UpdateStream } from './update-stream';
 
 interface AlphaArtCollection {
   id: string;
@@ -60,9 +61,9 @@ const getAllAlphaArtCollections = async (
   return getAllAlphaArtCollections(agg.concat(items));
 };
 
-export const getAlphArtCollections = async (): Promise<
-  NftCollectionPrice[]
-> => {
+export const getAlphArtCollections = async (
+  updateStream: UpdateStream<NftCollectionPrice>
+): Promise<NftCollectionPrice[]> => {
   const collections = await getAllAlphaArtCollections();
   console.log('Fetched ', collections.length);
 
@@ -75,17 +76,21 @@ export const getAlphArtCollections = async (): Promise<
         return null;
       }
 
-      return {
+      const collectionPrice = {
         id: collection.id,
         marketplace: NftMarketplace.alphart,
         name: collection.title,
         thumbnail: collection.thumbnail,
         symbol: collection.slug,
         price: price / LAMPORTS_PER_SOL,
-        volume: volume / LAMPORTS_PER_SOL,
+        volume: volume / LAMPORTS_PER_SOL || 0,
         website: `https://alpha.art/collection/${collection.slug}`,
         supply: collection.totalItems,
       };
+
+      updateStream.emit(collectionPrice);
+
+      return collectionPrice;
     })
   );
 

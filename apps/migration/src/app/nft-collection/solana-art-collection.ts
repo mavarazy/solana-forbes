@@ -3,6 +3,7 @@ import { throttle } from '@forbex-nxr/utils';
 import fetch from 'node-fetch';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { UpdateStream } from './update-stream';
 
 interface SolanaArtCollection {
   id: number;
@@ -147,9 +148,9 @@ const getAllSolanaArtPrices = async (): Promise<SolanaArtCollectionPrice[]> => {
   return [];
 };
 
-export const getSolanaArtCollections = async (): Promise<
-  NftCollectionPrice[]
-> => {
+export const getSolanaArtCollections = async (
+  updateStream: UpdateStream<NftCollectionPrice>
+): Promise<NftCollectionPrice[]> => {
   console.log('Getting collections');
   const collections = await getAllSolanaArtCollections();
   const prices = await getAllSolanaArtPrices();
@@ -159,7 +160,7 @@ export const getSolanaArtCollections = async (): Promise<
       const price = await getSolanaPrice(collection);
       const symbol = await getCollectionSymbol(collection.url);
       if (price) {
-        return {
+        const collectionPrice = {
           id: collection.url,
           marketplace: NftMarketplace.solanart,
           name: collection.name,
@@ -170,6 +171,10 @@ export const getSolanaArtCollections = async (): Promise<
           supply: price.countTotal,
           volume: price.countTotal * price.floorPrice,
         };
+
+        updateStream.emit(collectionPrice);
+
+        return collectionPrice;
       }
       return null;
     }

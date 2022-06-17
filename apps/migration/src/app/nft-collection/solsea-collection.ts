@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import * as WebSocket from 'ws';
+import { UpdateStream } from './update-stream';
 
 interface SolSeaCollection {
   _id: string;
@@ -111,8 +112,12 @@ const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
   thumbnail: `https://content.solsea.io/${collection.iconImage?.s3.thumbnail}`,
 });
 
-export const getSolSeaCollections = async (): Promise<NftCollectionPrice[]> => {
+export const getSolSeaCollections = async (
+  updateStream: UpdateStream<NftCollectionPrice>
+): Promise<NftCollectionPrice[]> => {
   const collections = await getAllSolSeaCollections();
   console.log('Extracted ', collections.length);
-  return collections.map(asPrice);
+  const collectionPrices = collections.map(asPrice);
+  collectionPrices.forEach(updateStream.emit);
+  return collectionPrices;
 };

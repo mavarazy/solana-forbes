@@ -7,8 +7,7 @@ import {
   UpdateNftCollectionPrice,
   UpdateNftCollectionPriceVariables,
 } from '@forbex-nxr/types';
-import { hasuraClient, throttle } from '@forbex-nxr/utils';
-import { emit } from 'process';
+import { hasuraClient } from '@forbex-nxr/utils';
 import { EventEmitter } from 'stream';
 import { getAlphArtCollections } from './alpha-art-collection';
 import { getDigitalEyesCollections } from './digitaleye-collection';
@@ -17,6 +16,7 @@ import { getFractalCollections } from './fractal-collection';
 import { getMagicEdenPrices } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
 import { getSolSeaCollections } from './solsea-collection';
+import { UpdateStream } from './update-stream';
 
 const GetNftCollectionIdsQuery = gql`
   query GetNftCollectionIds {
@@ -118,9 +118,9 @@ export const updateNftCollectionPrice = async () => {
 
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
-  UpdateStream.on('nft', async (collection: NftCollectionPrice) => {
+  UpdateStream.on('nft', async (collectionPrice: NftCollectionPrice) => {
     try {
-      if (existingIds.has(collection.id)) {
+      if (existingIds.has(collectionPrice.id)) {
         const {
           data: { update_nft_collection_price_by_pk },
         } = await hasuraClient.mutate<
@@ -128,7 +128,7 @@ export const updateNftCollectionPrice = async () => {
           UpdateNftCollectionPriceVariables
         >({
           mutation: UpdateNftCollectionPriceQuery,
-          variables: collection,
+          variables: collectionPrice,
         });
 
         return update_nft_collection_price_by_pk;
@@ -140,80 +140,27 @@ export const updateNftCollectionPrice = async () => {
           InsertNftCollectionPriceVariables
         >({
           mutation: InsertNftCollectionPriceQuery,
-          variables: collection,
+          variables: collectionPrice,
         });
         return insert_nft_collection_price_one;
       }
     } catch (err) {
+      console.log('Failed to save ', JSON.stringify(collectionPrice));
       console.log(err);
     }
   });
 
-  console.log('Getting collections');
-  await getMagicEdenPrices({
+  const updateStream: UpdateStream<NftCollectionPrice> = {
     emit: (value: NftCollectionPrice) => UpdateStream.emit('nft', value),
-  });
+  };
 
-  const collections = await Promise.all([
-    getFractalCollections(),
-    getAlphArtCollections(),
-    getDigitalEyesCollections(),
-    getExchagenArtCollections(),
-    getSolanaArtCollections(),
-    getSolSeaCollections(),
+  await Promise.all([
+    getMagicEdenPrices(updateStream),
+    getFractalCollections(updateStream),
+    getAlphArtCollections(updateStream),
+    getDigitalEyesCollections(updateStream),
+    getExchagenArtCollections(updateStream),
+    getSolanaArtCollections(updateStream),
+    getSolSeaCollections(updateStream),
   ]);
-
-  const totalCollections = collections
-    .reduce((agg, collections) => agg.concat(collections), [])
-    .filter((nftPrice) => nftPrice.id && nftPrice.price);
-
-  console.log('Extracted ', totalCollections.length);
-  console.log(
-    'Out of which with avatars ',
-    totalCollections.filter((collection) => collection.thumbnail).length
-  );
-
-  const nftCollections: Array<NftCollectionPrice | null> = await throttle(
-    totalCollections.map((collection) => async () => {
-      if (existingIds.has(collection.id)) {
-        const {
-          data: { update_nft_collection_price_by_pk },
-        } = await hasuraClient.mutate<
-          UpdateNftCollectionPrice,
-          UpdateNftCollectionPriceVariables
-        >({
-          mutation: UpdateNftCollectionPriceQuery,
-          variables: collection,
-        });
-
-        return update_nft_collection_price_by_pk;
-      } else {
-        try {
-          const {
-            data: { insert_nft_collection_price_one },
-          } = await hasuraClient.mutate<
-            InsertNftCollectionPrice,
-            InsertNftCollectionPriceVariables
-          >({
-            mutation: InsertNftCollectionPriceQuery,
-            variables: collection,
-          });
-          return insert_nft_collection_price_one;
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      return null;
-    }),
-    1000,
-    10
-  );
-
-  const savedNftCollections = nftCollections.filter(
-    (nft): nft is NftCollectionPrice => nft !== null
-  );
-
-  console.log('Saved ', savedNftCollections.length);
-
-  return nftCollections;
 };
