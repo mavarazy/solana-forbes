@@ -18,6 +18,7 @@ export enum NftMarketplace {
   magiceden = 'magiceden',
   solanart = 'solanart',
   solsea = 'solsea',
+  solport = 'solport',
 }
 
 /**

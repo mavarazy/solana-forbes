@@ -22,31 +22,29 @@ interface SolanaArtCollection {
   collectionAddr: string;
 }
 
-interface SolanaArtCollectionPrice {
-  floor: string;
-  floor_marketcap: number;
-  floor_marketcap_pretty: string;
-  holders: number;
-  items: number;
-  logo: string;
-  name: string;
-  on_sale: number;
-  url: string;
+interface SolanaArtVolume {
+  category: string;
+  collection: string;
+  dailySales: number;
+  dailyVolume: number;
+  floorPrice: number;
+  lastUpdated: number;
+  listedTotal: number;
+  ownerCount: number;
+  prevDailySales: number;
+  prevDailyVolume: number;
+  prevWeeklySales: number;
+  prevWeeklyVolume: number;
+  totalSales: number;
+  totalVolume: number;
+  weeklySales: number;
+  weeklyVolume: number;
 }
 
 interface SolanaArtPrice {
   countTotal: number;
   count_listed: number;
   floorPrice: number;
-}
-
-interface SolanaArtPriceResponse {
-  api_version: string;
-  result: {
-    api_code: number;
-    api_response: string;
-    data: SolanaArtCollectionPrice[];
-  };
 }
 
 interface SolanaArtListedItem {
@@ -129,19 +127,14 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
   return [];
 };
 
-const getAllSolanaArtPrices = async (): Promise<SolanaArtCollectionPrice[]> => {
+const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
   try {
     console.log('Sending request');
-    const res = await fetch('https://api.solanart.io/howrare/collections');
+    const res = await fetch('https://api.solanart.io/query_volume_all');
     console.log('Got reponse');
-    if (!res.ok) {
-      throw new Error('Failed to fetch the result');
-    }
-    const {
-      result: { data: prices },
-    } = (await res.json()) as SolanaArtPriceResponse;
-    console.log('Fetched prices for ', prices.length);
-    return prices;
+    const collections = (await res.json()) as SolanaArtVolume[];
+    console.log('Fetched collection for ', collections.length);
+    return collections;
   } catch (err) {
     console.log(err);
   }
@@ -150,60 +143,49 @@ const getAllSolanaArtPrices = async (): Promise<SolanaArtCollectionPrice[]> => {
 
 export const getSolanaArtCollections = async (
   updateStream: UpdateStream<NftCollectionPrice>
-): Promise<NftCollectionPrice[]> => {
+): Promise<void> => {
   console.log('Getting collections');
   const collections = await getAllSolanaArtCollections();
-  const prices = await getAllSolanaArtPrices();
 
-  const collectionPriceTasks = collections.map(
-    (collection) => async (): Promise<NftCollectionPrice | null> => {
-      const price = await getSolanaPrice(collection);
-      const symbol = await getCollectionSymbol(collection.url);
-      if (price) {
-        const collectionPrice = {
-          id: collection.url,
-          marketplace: NftMarketplace.solanart,
-          name: collection.name,
-          website: collection.website,
-          price: price.floorPrice,
-          thumbnail: `https://data.solanart.io/img/collections/${collection.url}.webp`,
-          symbol,
-          supply: price.countTotal,
-          volume: price.countTotal * price.floorPrice,
-        };
+  const volume = await getAllSolanaArtVolume();
 
-        updateStream.emit(collectionPrice);
-
-        return collectionPrice;
-      }
-      return null;
-    }
+  const volumeByUrl: { [key in string]: SolanaArtVolume } = volume.reduce(
+    (agg, volume) => Object.assign(agg, { [volume.collection]: volume }),
+    {}
   );
 
-  const collectionPrices = await throttle(collectionPriceTasks, 100, 5);
-  const pricesWithSymbol = await throttle(
-    prices.map((price) => async (): Promise<NftCollectionPrice> => {
-      const symbol = await getCollectionSymbol(price.url.substring(1));
-      return {
-        id: price.url,
-        marketplace: NftMarketplace.solanart,
-        name: price.name,
-        symbol,
-        price: parseFloat(price.floor),
-        thumbnail: `https://data.solanart.io/img/collections/${price.url}.webp`,
-        volume: price.floor_marketcap,
-        supply: price.items,
+  const collectionPriceTasks = collections.map((collection) => async () => {
+    const symbol = await getCollectionSymbol(collection.url);
+    const base: Omit<NftCollectionPrice, 'supply' | 'volume' | 'price'> = {
+      id: collection.url,
+      marketplace: NftMarketplace.solanart,
+      name: collection.name,
+      website: `https://solanart.io/collections/${collection.url}`,
+      thumbnail: `https://data.solanart.io/img/collections/${collection.url}.webp`,
+      symbol,
+    };
+    const volume = volumeByUrl[collection.url];
+    if (volume) {
+      const collectionPrice: NftCollectionPrice = {
+        ...base,
+        supply: volume.listedTotal,
+        price: volume.floorPrice,
+        volume: volume.totalVolume,
       };
-    }),
-    100,
-    5
-  );
 
-  const nftPrices: NftCollectionPrice[] = pricesWithSymbol.concat(
-    collectionPrices.filter(
-      (price): price is NftCollectionPrice => price !== null
-    )
-  );
+      updateStream.emit(collectionPrice);
+    } else {
+      const price = await getSolanaPrice(collection);
+      const collectionPrice: NftCollectionPrice = {
+        ...base,
+        supply: price.countTotal,
+        price: price.floorPrice,
+        volume: 0,
+      };
 
-  return nftPrices;
+      updateStream.emit(collectionPrice);
+    }
+  });
+
+  await throttle(collectionPriceTasks, 100, 5);
 };
