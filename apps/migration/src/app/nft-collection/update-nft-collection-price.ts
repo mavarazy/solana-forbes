@@ -15,6 +15,7 @@ import { getExchagenArtCollections } from './exchange-art-collection';
 import { getFractalCollections } from './fractal-collection';
 import { getMagicEdenPrices } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
+import { getSolPortCollections } from './solport-collection';
 import { getSolSeaCollections } from './solsea-collection';
 import { UpdateStream } from './update-stream';
 
@@ -162,5 +163,6 @@ export const updateNftCollectionPrice = async () => {
     getExchagenArtCollections(updateStream),
     getSolanaArtCollections(updateStream),
     getSolSeaCollections(updateStream),
+    getSolPortCollections(updateStream),
   ]);
 };
