@@ -5,7 +5,7 @@ import {
   WalletBalance,
 } from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet';
+import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet-with-flag-query';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { WalletPage } from '../../components/wallet-page';

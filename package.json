@@ -7,7 +7,7 @@
     "build": "nx build",
     "test": "nx test",
     "format": "nx format:write",
-    "schema": "apollo schema:download --endpoint https://hasura.snapihealth.com/v1/graphql --header \"X-Hasura-Admin-Secret: ${HASURA_ADMIN_SECRET}\" && apollo codegen:generate --target=typescript --tagName=gql --passthroughCustomScalars --no-addTypename --outputFlat libs/types/src/generated && node ./tools/generators/schema/schema-after && yarn format"
+    "schema": "apollo schema:download --endpoint https://hasura-onr0.onrender.com/v1/graphql --header \"X-Hasura-Admin-Secret: ${HASURA_ADMIN_SECRET}\" && apollo codegen:generate --target=typescript --tagName=gql --passthroughCustomScalars --no-addTypename --outputFlat libs/types/src/generated && node ./tools/generators/schema/schema-after && yarn format"
   },
   "private": true,
   "dependencies": {

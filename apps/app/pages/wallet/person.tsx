@@ -8,7 +8,7 @@ import {
   WalletBalance,
 } from '@forbex-nxr/types';
 import { TokenInfo } from '@solana/spl-token-registry';
-import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet';
+import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet-with-flag-query';
 import Head from 'next/head';
 import { WalletNav } from '../../components/wallet-nav';
 
