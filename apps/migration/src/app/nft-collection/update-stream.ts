@@ -1,3 +1,3 @@
 export interface UpdateStream<T> {
-  emit(value: T): void;
+  update(value: T): Promise<T>;
 }

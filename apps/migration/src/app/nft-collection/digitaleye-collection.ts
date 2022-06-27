@@ -96,8 +96,7 @@ export const getDigitalEyesCollections = async (
             supply: 0,
           };
 
-          updateStream.emit(collectionPrice);
-          return collectionPrice;
+          return updateStream.update(collectionPrice);
         }
         return null;
       }

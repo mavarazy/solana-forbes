@@ -120,7 +120,7 @@ export const getMagicEdenPrices = async (
         supply: collection.totalItems || stats.listedCount,
       };
 
-      updateStream.emit(price);
+      return updateStream.update(price);
     }),
     1000,
     10

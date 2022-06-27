@@ -173,7 +173,7 @@ export const getSolanaArtCollections = async (
         volume: volume.totalVolume,
       };
 
-      updateStream.emit(collectionPrice);
+      await updateStream.update(collectionPrice);
     } else {
       const price = await getSolanaPrice(collection);
       const collectionPrice: NftCollectionPrice = {
@@ -183,7 +183,7 @@ export const getSolanaArtCollections = async (
         volume: 0,
       };
 
-      updateStream.emit(collectionPrice);
+      await updateStream.update(collectionPrice);
     }
   });
 

@@ -1,5 +1,5 @@
 import { updateNftCollectionPrice } from './app/nft-collection';
-import { updateTokenWorthSummary } from './app/update-token-worth-summary';
+// import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
 const execute = async () => {

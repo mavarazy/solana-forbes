@@ -118,6 +118,5 @@ export const getSolSeaCollections = async (
   const collections = await getAllSolSeaCollections();
   console.log('Extracted ', collections.length);
   const collectionPrices = collections.map(asPrice);
-  collectionPrices.forEach(updateStream.emit);
-  return collectionPrices;
+  return Promise.all(collectionPrices.map(updateStream.update));
 };

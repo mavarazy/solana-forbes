@@ -67,17 +67,22 @@ export const getSolPortCollections = async (
   updateStream: UpdateStream<NftCollectionPrice>
 ): Promise<void> => {
   const collections = await getCollectionsPage([]);
-  collections.map((collection) => {
-    const nftPrice: NftCollectionPrice = {
-      id: `SOLPORT-${collection.id}`,
-      marketplace: NftMarketplace.solport,
-      name: collection.name,
-      thumbnail: collection.cdn_featured_image,
-      website: `https://solport.io/collection/${collection.route}`,
-      price: collection.floor,
-      volume: collection.volume,
-      supply: collection.items,
-    };
-    updateStream.emit(nftPrice);
-  });
+  console.log('Extracted ', collections.length);
+  await Promise.all(
+    collections.map(async (collection) => {
+      console.log('Updating ', collection.name);
+      const nftPrice: NftCollectionPrice = {
+        id: `SOLPORT-${collection.id}`,
+        marketplace: NftMarketplace.solport,
+        name: collection.name,
+        thumbnail: collection.cdn_featured_image,
+        website: `https://solport.io/collection/${collection.route}`,
+        price: collection.floor,
+        volume: collection.volume,
+        supply: collection.items,
+      };
+
+      await updateStream.update(nftPrice);
+    })
+  );
 };

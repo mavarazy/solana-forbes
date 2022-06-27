@@ -108,8 +108,6 @@ const InsertNftCollectionPriceQuery = gql`
   }
 `;
 
-const UpdateStream = new EventEmitter();
-
 export const updateNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
@@ -119,40 +117,39 @@ export const updateNftCollectionPrice = async () => {
 
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
 
-  UpdateStream.on('nft', async (collectionPrice: NftCollectionPrice) => {
-    try {
-      if (existingIds.has(collectionPrice.id)) {
-        const {
-          data: { update_nft_collection_price_by_pk },
-        } = await hasuraClient.mutate<
-          UpdateNftCollectionPrice,
-          UpdateNftCollectionPriceVariables
-        >({
-          mutation: UpdateNftCollectionPriceQuery,
-          variables: collectionPrice,
-        });
-
-        return update_nft_collection_price_by_pk;
-      } else {
-        const {
-          data: { insert_nft_collection_price_one },
-        } = await hasuraClient.mutate<
-          InsertNftCollectionPrice,
-          InsertNftCollectionPriceVariables
-        >({
-          mutation: InsertNftCollectionPriceQuery,
-          variables: collectionPrice,
-        });
-        return insert_nft_collection_price_one;
-      }
-    } catch (err) {
-      console.log('Failed to save ', JSON.stringify(collectionPrice));
-      console.log(err);
-    }
-  });
-
   const updateStream: UpdateStream<NftCollectionPrice> = {
-    emit: (value: NftCollectionPrice) => UpdateStream.emit('nft', value),
+    update: async (collectionPrice: NftCollectionPrice) => {
+      try {
+        if (existingIds.has(collectionPrice.id)) {
+          const {
+            data: { update_nft_collection_price_by_pk },
+          } = await hasuraClient.mutate<
+            UpdateNftCollectionPrice,
+            UpdateNftCollectionPriceVariables
+          >({
+            mutation: UpdateNftCollectionPriceQuery,
+            variables: collectionPrice,
+          });
+
+          return update_nft_collection_price_by_pk;
+        } else {
+          const {
+            data: { insert_nft_collection_price_one },
+          } = await hasuraClient.mutate<
+            InsertNftCollectionPrice,
+            InsertNftCollectionPriceVariables
+          >({
+            mutation: InsertNftCollectionPriceQuery,
+            variables: collectionPrice,
+          });
+          return insert_nft_collection_price_one;
+        }
+      } catch (err) {
+        console.log('Failed to save ', JSON.stringify(collectionPrice));
+        console.log(err);
+      }
+      return collectionPrice;
+    },
   };
 
   await Promise.all([

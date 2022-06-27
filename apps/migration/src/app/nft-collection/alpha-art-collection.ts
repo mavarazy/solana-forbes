@@ -88,9 +88,7 @@ export const getAlphArtCollections = async (
         supply: collection.totalItems,
       };
 
-      updateStream.emit(collectionPrice);
-
-      return collectionPrice;
+      return await updateStream.update(collectionPrice);
     })
   );
 

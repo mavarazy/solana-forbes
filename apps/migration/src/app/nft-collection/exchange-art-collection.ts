@@ -99,8 +99,8 @@ export const getExchagenArtCollections = async (
     {}
   );
 
-  const nftColl: NftCollectionPrice[] = collections.reduce(
-    (agg: NftCollectionPrice[], collection) => {
+  const nftColl: Promise<NftCollectionPrice>[] = collections.reduce(
+    (agg: Promise<NftCollectionPrice>[], collection) => {
       const price = priceToStats[collection.name];
       if (!price || !price.floorPrice || !price.highestSale) {
         return agg;
@@ -119,9 +119,8 @@ export const getExchagenArtCollections = async (
         volume: price.totalVolume / LAMPORTS_PER_SOL,
         supply: 0,
       };
-      updateStream.emit(collectionPrice);
 
-      agg.push(collectionPrice);
+      agg.push(updateStream.update(collectionPrice));
 
       return agg;
     },
@@ -130,5 +129,5 @@ export const getExchagenArtCollections = async (
 
   console.log(nftColl.length);
 
-  return nftColl;
+  return Promise.all(nftColl);
 };

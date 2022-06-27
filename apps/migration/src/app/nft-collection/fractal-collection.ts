@@ -118,14 +118,12 @@ export const getFractalCollections = async (
     (await collectionRes.json()) as FractalCollectionResponse;
 
   const allPrices = (await Promise.all(projects.map(getAllCollections))).reduce(
-    (agg, prices) => {
-      prices.forEach(updateStream.emit);
-      return agg.concat(prices);
-    },
+    (agg: Promise<NftCollectionPrice>[], prices) =>
+      agg.concat(prices.map(updateStream.update)),
     []
   );
 
   console.log('Fractal got ', allPrices.length);
 
-  return allPrices;
+  return Promise.all(allPrices);
 };
