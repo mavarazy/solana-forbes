@@ -75,7 +75,7 @@ export const getSolPortCollections = async (
         id: `SOLPORT-${collection.id}`,
         marketplace: NftMarketplace.solport,
         name: collection.name,
-        thumbnail: collection.cdn_featured_image,
+        thumbnail: collection.cdn_image,
         website: `https://solport.io/collection/${collection.route}`,
         price: collection.floor,
         volume: collection.volume,
