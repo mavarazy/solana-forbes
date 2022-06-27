@@ -3,6 +3,7 @@ import { faHashtag, faSun } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from '../card';
 import { TokenLogo } from '../token-logo';
+import { NumberUtils } from '../utils';
 
 export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   thumbnail,
@@ -43,7 +44,9 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
             <span className="text-[5px] font-bold uppercase">Floor price</span>
             <div className="flex justify-center">
               <FontAwesomeIcon icon={faSun} className="mr-2 self-center" />
-              <span className="flex justify-center font-bold">{price}</span>
+              <span className="flex justify-center font-bold">
+                {NumberUtils.asHuman(price)}
+              </span>
             </div>
           </div>
           <div className="flex flex-1 flex-col justify-center">

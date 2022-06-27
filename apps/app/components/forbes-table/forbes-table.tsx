@@ -17,7 +17,9 @@ export function ForbesList({ wallets }: ForbesTableProps) {
         >
           {wallets.map((wallet, i) => (
             <Link href={`/wallet/${wallet.id}`} passHref key={wallet.id}>
-              <WalletWorthCard rank={i + 1} wallet={wallet} />
+              <a>
+                <WalletWorthCard rank={i + 1} wallet={wallet} />
+              </a>
             </Link>
           ))}
         </div>
