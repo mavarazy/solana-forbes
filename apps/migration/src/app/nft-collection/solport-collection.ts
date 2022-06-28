@@ -1,5 +1,4 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { UpdateStream } from './update-stream';
 
 interface SolPortPriceChange {
   perc: number;
@@ -50,6 +49,7 @@ const getCollectionsPage = async (
   agg: SolPortCollection[],
   page = 1
 ): Promise<SolPortCollection[]> => {
+  console.log('Requesting ', page);
   const res = await fetch(
     `https://lapi.solport.io/nft/collections?page=${page}`
   );
@@ -63,26 +63,19 @@ const getCollectionsPage = async (
   return getCollectionsPage(agg.concat(collections), page + 1);
 };
 
-export const getSolPortCollections = async (
-  updateStream: UpdateStream<NftCollectionPrice>
-): Promise<void> => {
+export const getSolPortCollections = async (): Promise<
+  NftCollectionPrice[]
+> => {
   const collections = await getCollectionsPage([]);
   console.log('Extracted ', collections.length);
-  await Promise.all(
-    collections.map(async (collection) => {
-      console.log('Updating ', collection.name);
-      const nftPrice: NftCollectionPrice = {
-        id: `SOLPORT-${collection.id}`,
-        marketplace: NftMarketplace.solport,
-        name: collection.name,
-        thumbnail: collection.cdn_image,
-        website: `https://solport.io/collection/${collection.route}`,
-        price: collection.floor,
-        volume: collection.volume,
-        supply: collection.items,
-      };
-
-      await updateStream.update(nftPrice);
-    })
-  );
+  return collections.map<NftCollectionPrice>((collection) => ({
+    id: `SOLPORT-${collection.id}`,
+    marketplace: NftMarketplace.solport,
+    name: collection.name,
+    thumbnail: collection.cdn_image,
+    website: `https://solport.io/collection/${collection.route}`,
+    price: collection.floor,
+    volume: collection.volume,
+    supply: collection.items,
+  }));
 };

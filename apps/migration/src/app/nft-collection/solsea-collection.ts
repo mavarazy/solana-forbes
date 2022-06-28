@@ -1,7 +1,8 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import * as WebSocket from 'ws';
-import { UpdateStream } from './update-stream';
+
+const log = console.log;
 
 interface SolSeaCollection {
   _id: string;
@@ -73,6 +74,7 @@ const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
     );
 
     const fetchCollections = (offset: number) => {
+      log('Sending request with offset %o', offset);
       socket.send(
         `4224["find","collections",{"visible":true,"$limit":50,"$skip":${offset},"$sort":{"createdAt":-1},"verified":true,"$populate":["iconImage"]}]`
       );
@@ -87,15 +89,17 @@ const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
         agg.push(...data);
         const offset = skip + limit;
         if (offset >= total) {
+          log('Offset is bigger, than total %o >= %o', offset, total);
           resolve(agg);
         } else {
+          log('Fetch more %o', offset);
           fetchCollections(offset);
         }
       }
     });
 
     socket.on('open', function open() {
-      console.log('Opened');
+      log('Opened');
       fetchCollections(0);
     });
   });
@@ -103,7 +107,7 @@ const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
 const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
   id: collection._id,
   website: `https://solsea.io/collection/${collection._id}`,
-  price: collection.floorPrice / LAMPORTS_PER_SOL,
+  price: collection.floorPrice / LAMPORTS_PER_SOL || 0,
   marketplace: NftMarketplace.solsea,
   name: collection.title,
   volume: collection.volume || 0,
@@ -112,11 +116,8 @@ const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
   thumbnail: `https://content.solsea.io/${collection.iconImage?.s3.thumbnail}`,
 });
 
-export const getSolSeaCollections = async (
-  updateStream: UpdateStream<NftCollectionPrice>
-): Promise<NftCollectionPrice[]> => {
+export const getSolSeaCollections = async (): Promise<NftCollectionPrice[]> => {
   const collections = await getAllSolSeaCollections();
-  console.log('Extracted ', collections.length);
-  const collectionPrices = collections.map(asPrice);
-  return Promise.all(collectionPrices.map(updateStream.update));
+  log('Extracted ', collections.length);
+  return collections.map(asPrice);
 };

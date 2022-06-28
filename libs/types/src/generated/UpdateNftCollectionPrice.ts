@@ -23,11 +23,19 @@ export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   supply: general.numeric | null;
 }
 
+export interface UpdateNftCollectionPrice_insert_nft_collection_price_change_one {
+  id: general.uuid;
+}
+
 export interface UpdateNftCollectionPrice {
   /**
    * update single row of the table: "nft_collection_price"
    */
   update_nft_collection_price_by_pk: UpdateNftCollectionPrice_update_nft_collection_price_by_pk | null;
+  /**
+   * insert a single row into the table: "nft_collection_price_change"
+   */
+  insert_nft_collection_price_change_one: UpdateNftCollectionPrice_insert_nft_collection_price_change_one | null;
 }
 
 export interface UpdateNftCollectionPriceVariables {
@@ -36,8 +44,10 @@ export interface UpdateNftCollectionPriceVariables {
   symbol?: string | null;
   website?: string | null;
   thumbnail?: string | null;
+  marketplace: NftMarketplace;
   price: general.numeric;
   parent?: string | null;
   volume?: general.numeric | null;
   supply?: general.numeric | null;
+  date: general.date;
 }

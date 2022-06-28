@@ -26,6 +26,7 @@ export async function throttle<T>(
 
   const completeTasks: T[] = pending.filter((res): res is T => res !== null);
   if (start + num >= tasks.length) {
+    console.log('Throttle done');
     return agg.concat(completeTasks);
   }
 

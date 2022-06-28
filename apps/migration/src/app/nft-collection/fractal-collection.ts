@@ -1,5 +1,4 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { UpdateStream } from './update-stream';
 
 interface FractalCollection {
   id: string;
@@ -104,9 +103,9 @@ const getAllCollections = async (
   return prices.filter((price): price is NftCollectionPrice => price !== null);
 };
 
-export const getFractalCollections = async (
-  updateStream: UpdateStream<NftCollectionPrice>
-): Promise<NftCollectionPrice[]> => {
+export const getFractalCollections = async (): Promise<
+  NftCollectionPrice[]
+> => {
   const collectionRes = await fetch(
     'https://api.fractal.is/admin/v1/project/manage'
   );
@@ -118,8 +117,7 @@ export const getFractalCollections = async (
     (await collectionRes.json()) as FractalCollectionResponse;
 
   const allPrices = (await Promise.all(projects.map(getAllCollections))).reduce(
-    (agg: Promise<NftCollectionPrice>[], prices) =>
-      agg.concat(prices.map(updateStream.update)),
+    (agg: NftCollectionPrice[], prices) => agg.concat(prices),
     []
   );
 

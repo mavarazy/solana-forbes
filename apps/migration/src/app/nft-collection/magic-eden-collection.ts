@@ -3,7 +3,6 @@ import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import delay from 'delay';
 import fetch from 'node-fetch';
-import { UpdateStream } from './update-stream';
 
 interface MagicEdenCollection {
   symbol: string;
@@ -89,14 +88,12 @@ const getAllMagicEdenCollections = async (
   return [];
 };
 
-export const getMagicEdenPrices = async (
-  updateStream: UpdateStream<NftCollectionPrice>
-): Promise<void> => {
+export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
   console.log('Getting collections');
   const collections = await getAllMagicEdenCollections();
   console.log('Number of collections ', collections.length);
 
-  await throttle(
+  return await throttle(
     collections.map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
@@ -108,7 +105,7 @@ export const getMagicEdenPrices = async (
 
       console.log(stats.volumeAll);
 
-      const price = {
+      return {
         id: collection.symbol,
         marketplace: NftMarketplace.magiceden,
         name: collection.name,
@@ -119,8 +116,6 @@ export const getMagicEdenPrices = async (
         volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
         supply: collection.totalItems || stats.listedCount,
       };
-
-      return updateStream.update(price);
     }),
     1000,
     10

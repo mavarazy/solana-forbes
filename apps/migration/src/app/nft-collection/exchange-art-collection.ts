@@ -1,7 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { UpdateStream } from './update-stream';
 
 interface ExchangeArtCollection {
   artists: string[];
@@ -71,9 +70,9 @@ const getAllExchangeArtCollections = async (): Promise<
   return [];
 };
 
-export const getExchagenArtCollections = async (
-  updateStream: UpdateStream<NftCollectionPrice>
-): Promise<NftCollectionPrice[]> => {
+export const getExchagenArtCollections = async (): Promise<
+  NftCollectionPrice[]
+> => {
   console.log('Getting collections');
   const collections = await getAllExchangeArtCollections();
   const ids = collections.map(({ id }) => id);
@@ -99,8 +98,8 @@ export const getExchagenArtCollections = async (
     {}
   );
 
-  const nftColl: Promise<NftCollectionPrice>[] = collections.reduce(
-    (agg: Promise<NftCollectionPrice>[], collection) => {
+  const nftColl: NftCollectionPrice[] = collections.reduce(
+    (agg: NftCollectionPrice[], collection) => {
       const price = priceToStats[collection.name];
       if (!price || !price.floorPrice || !price.highestSale) {
         return agg;
@@ -120,7 +119,7 @@ export const getExchagenArtCollections = async (
         supply: 0,
       };
 
-      agg.push(updateStream.update(collectionPrice));
+      agg.push(collectionPrice);
 
       return agg;
     },
