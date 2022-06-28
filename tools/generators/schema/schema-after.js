@@ -20,6 +20,10 @@ fs.readdir(rootPath, 'utf-8', function (err, files) {
         .replace(/summary: jsonb;/g, 'summary: general.TokenSummary;')
         .replace(/numeric/g, 'general.numeric')
         .replace(/timestamptz/g, 'general.timestamptz')
+        .replace(/: date;/g, ': general.date;')
+        .replace(/: date \| null;/g, ': general.date | null;')
+        .replace(/: uuid;/g, ': general.uuid;')
+        .replace(/: uuid \| null;/g, ': general.uuid | null;')
         .replace(/jsonb/g, 'general.jsonb');
       fs.writeFile(filePath, result, 'utf8', function (err) {
         if (err) return console.log(err);

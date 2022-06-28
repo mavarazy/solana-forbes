@@ -22,6 +22,18 @@ export enum NftMarketplace {
 }
 
 /**
+ * input type for inserting data into table "nft_collection_price_change"
+ */
+export interface nft_collection_price_change_insert_input {
+  collection?: string | null;
+  date?: general.date | null;
+  id?: general.uuid | null;
+  marketplace?: NftMarketplace | null;
+  price?: general.numeric | null;
+  volume?: general.numeric | null;
+}
+
+/**
  * input type for inserting data into table "token_worth_summary"
  */
 export interface token_worth_summary_insert_input {

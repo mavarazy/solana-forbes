@@ -168,9 +168,9 @@ export const getSolanaArtCollections = async (
     if (volume) {
       const collectionPrice: NftCollectionPrice = {
         ...base,
-        supply: volume.listedTotal,
-        price: volume.floorPrice,
-        volume: volume.totalVolume,
+        supply: volume.listedTotal || 0,
+        price: volume.floorPrice || 0,
+        volume: volume.totalVolume || 0,
       };
 
       await updateStream.update(collectionPrice);
@@ -178,8 +178,8 @@ export const getSolanaArtCollections = async (
       const price = await getSolanaPrice(collection);
       const collectionPrice: NftCollectionPrice = {
         ...base,
-        supply: price.countTotal,
-        price: price.floorPrice,
+        supply: price.countTotal || 0,
+        price: price.floorPrice || 0,
         volume: 0,
       };
 

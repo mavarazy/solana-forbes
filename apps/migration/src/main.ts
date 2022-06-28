@@ -4,8 +4,8 @@ import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 
 const execute = async () => {
   try {
-    await updateWalletEvaluation();
-    await updateTokenWorthSummary();
+    // await updateWalletEvaluation();
+    // await updateTokenWorthSummary();
     await updateNftCollectionPrice();
   } catch (err) {
     console.error(err);

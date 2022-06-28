@@ -2,13 +2,17 @@ import { gql } from '@apollo/client';
 import {
   GetNftCollectionIds,
   InsertNftCollectionPrice,
+  InsertNftCollectionPriceChange,
+  InsertNftCollectionPriceChangeVariables,
   InsertNftCollectionPriceVariables,
   NftCollectionPrice,
+  NftCollectionPriceChange,
   UpdateNftCollectionPrice,
   UpdateNftCollectionPriceVariables,
 } from '@forbex-nxr/types';
 import { hasuraClient } from '@forbex-nxr/utils';
-import { EventEmitter } from 'stream';
+import { format } from 'date-fns';
+import { randomUUID } from 'crypto';
 import { getAlphArtCollections } from './alpha-art-collection';
 import { getDigitalEyesCollections } from './digitaleye-collection';
 import { getExchagenArtCollections } from './exchange-art-collection';
@@ -23,6 +27,21 @@ const GetNftCollectionIdsQuery = gql`
   query GetNftCollectionIds {
     nft_collection_price {
       id
+    }
+  }
+`;
+
+const InsertNftCollectionPriceChangeQuery = gql`
+  mutation InsertNftCollectionPriceChange(
+    $change: nft_collection_price_change_insert_input = {}
+  ) {
+    insert_nft_collection_price_change_one(object: $change) {
+      id
+      marketplace
+      price
+      volume
+      date
+      collection
     }
   }
 `;
@@ -108,6 +127,33 @@ const InsertNftCollectionPriceQuery = gql`
   }
 `;
 
+const trackPriceChange = async (collectionPrice: NftCollectionPrice) => {
+  try {
+    const priceChange: Omit<NftCollectionPriceChange, 'id'> = {
+      price: collectionPrice.price,
+      volume: collectionPrice.volume,
+      marketplace: collectionPrice.marketplace,
+      date: format(Date.now(), 'MM/dd/yyyy'),
+      collection: collectionPrice.id,
+    };
+
+    await hasuraClient.mutate<
+      InsertNftCollectionPriceChange,
+      InsertNftCollectionPriceChangeVariables
+    >({
+      mutation: InsertNftCollectionPriceChangeQuery,
+      variables: {
+        change: {
+          id: randomUUID(),
+          ...priceChange,
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const updateNftCollectionPrice = async () => {
   const {
     data: { nft_collection_price },
@@ -119,6 +165,7 @@ export const updateNftCollectionPrice = async () => {
 
   const updateStream: UpdateStream<NftCollectionPrice> = {
     update: async (collectionPrice: NftCollectionPrice) => {
+      await trackPriceChange(collectionPrice);
       try {
         if (existingIds.has(collectionPrice.id)) {
           const {

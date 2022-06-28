@@ -1,4 +1,5 @@
 import { NftMarketplace } from '../generated/globalTypes';
+import { uuid } from './common';
 
 export interface NftCollectionPrice {
   id: string;
@@ -12,3 +13,12 @@ export interface NftCollectionPrice {
   volume: number;
   supply: number;
 }
+
+export type NftCollectionPriceChange = {
+  id: uuid;
+  price: number;
+  volume: number;
+  marketplace: NftMarketplace;
+  date: string;
+  collection: string;
+};
