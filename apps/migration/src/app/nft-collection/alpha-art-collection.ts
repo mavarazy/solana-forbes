@@ -82,7 +82,7 @@ export const getAlphArtCollections = async (
         name: collection.title,
         thumbnail: collection.thumbnail,
         symbol: collection.slug,
-        price: price / LAMPORTS_PER_SOL,
+        price: price / LAMPORTS_PER_SOL || 0,
         volume: volume / LAMPORTS_PER_SOL || 0,
         website: `https://alpha.art/collection/${collection.slug}`,
         supply: collection.totalItems,
