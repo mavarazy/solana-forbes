@@ -51,15 +51,19 @@ const getCollectionsPage = async (
   page = 1
 ): Promise<SolPortCollection[]> => {
   console.log('Requesting ', page);
-  const {
-    data: { max_page, collections },
-  } = await axios.get<SolPortRequest>(
-    `https://lapi.solport.io/nft/collections?page=${page}`
-  );
-  if (page === max_page) {
-    return agg.concat(collections);
+  try {
+    const {
+      data: { max_page, collections },
+    } = await axios.get<SolPortRequest>(
+      `https://lapi.solport.io/nft/collections?page=${page}`
+    );
+    if (page === max_page) {
+      return agg.concat(collections);
+    }
+    return getCollectionsPage(agg.concat(collections), page + 1);
+  } catch (err) {
+    return agg;
   }
-  return getCollectionsPage(agg.concat(collections), page + 1);
 };
 
 export const getSolPortCollections = async (): Promise<

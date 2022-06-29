@@ -43,12 +43,17 @@ interface MagicEdenEscrowStats {
 const getMagicEdenEscrowStats = async (
   collection: MagicEdenCollection
 ): Promise<MagicEdenEscrowStats | null> => {
-  const res = await axios.get<MagicEdenEscrowStats>(
-    `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`
-  );
-  const stats = res.data;
-  console.log('Got stats for ', collection.name);
-  return stats;
+  try {
+    const res = await axios.get<MagicEdenEscrowStats>(
+      `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`
+    );
+    const stats = res.data;
+    console.log('Got stats for ', collection.name);
+    return stats;
+  } catch (err) {
+    console.error(err);
+  }
+  return null;
 };
 
 const getAllMagicEdenCollections = async (
@@ -65,7 +70,7 @@ const getAllMagicEdenCollections = async (
     }
     return getAllMagicEdenCollections(agg.concat(collections));
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return [];
 };

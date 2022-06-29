@@ -40,13 +40,18 @@ interface FracatalStats {
   totalListed: number;
 }
 
-const getFractalStats = async (id: string) => {
-  const projectStats = (
-    await axios.get<FracatalStats>(
-      `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`
-    )
-  ).data;
-  return projectStats;
+const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
+  try {
+    const projectStats = (
+      await axios.get<FracatalStats>(
+        `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`
+      )
+    ).data;
+    return projectStats;
+  } catch (err) {
+    console.error(err);
+  }
+  return null;
 };
 
 const getCollectionStats = async (
@@ -76,42 +81,53 @@ const getCollectionStats = async (
 const getAllCollections = async (
   collection: FractalCollection
 ): Promise<NftCollectionPrice[]> => {
-  const {
-    data: { collections },
-  } = await axios.get<{
-    collections: FractalManagedCollection[];
-  }>(
-    `https://api.fractal.is/admin/v1/project/manage/${collection.id}/collection/manage`
-  );
+  try {
+    const {
+      data: { collections },
+    } = await axios.get<{
+      collections: FractalManagedCollection[];
+    }>(
+      `https://api.fractal.is/admin/v1/project/manage/${collection.id}/collection/manage`
+    );
 
-  const prices = await Promise.all(
-    collections.map((managed) =>
-      getCollectionStats({
-        ...managed,
-        avatar: collection.avatar,
-        handle: collection.handle,
-        parent: collection.title,
-      })
-    )
-  );
+    const prices = await Promise.all(
+      collections.map((managed) =>
+        getCollectionStats({
+          ...managed,
+          avatar: collection.avatar,
+          handle: collection.handle,
+          parent: collection.title,
+        })
+      )
+    );
 
-  return prices.filter((price): price is NftCollectionPrice => price !== null);
+    return prices.filter(
+      (price): price is NftCollectionPrice => price !== null
+    );
+  } catch (err) {
+    console.error(err);
+  }
+  return [];
 };
 
 export const getFractalCollections = async (): Promise<
   NftCollectionPrice[]
 > => {
-  const {
-    data: { projects },
-  } = await axios.get<FractalCollectionResponse>(
-    'https://api.fractal.is/admin/v1/project/manage'
-  );
+  try {
+    const {
+      data: { projects },
+    } = await axios.get<FractalCollectionResponse>(
+      'https://api.fractal.is/admin/v1/project/manage'
+    );
 
-  const allPrices = (await Promise.all(projects.map(getAllCollections))).reduce(
-    (agg: NftCollectionPrice[], prices) => agg.concat(prices),
-    []
-  );
-  console.log('Fractal got ', allPrices.length);
+    const allPrices = (
+      await Promise.all(projects.map(getAllCollections))
+    ).reduce((agg: NftCollectionPrice[], prices) => agg.concat(prices), []);
+    console.log('Fractal got ', allPrices.length);
 
-  return Promise.all(allPrices);
+    return Promise.all(allPrices);
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
 };

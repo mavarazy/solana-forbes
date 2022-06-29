@@ -70,23 +70,23 @@ const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 const metaplex = new Metaplex(connection);
 
 const getCollectionSymbol = async (url: string): Promise<string | null> => {
-  const {
-    data: { items },
-  } = await axios.get<{ items: SolanaArtListedItem[] }>(
-    `https://api.solanart.io/get_nft?collection=${url}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
-  );
-
-  if (items.length === 0) {
-    return null;
-  }
-
   try {
+    const {
+      data: { items },
+    } = await axios.get<{ items: SolanaArtListedItem[] }>(
+      `https://api.solanart.io/get_nft?collection=${url}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
+    );
+
+    if (items.length === 0) {
+      return null;
+    }
+
     const tokenAddr = items[0].token_add;
     const nft = await metaplex.nfts().findByMint(new PublicKey(tokenAddr));
 
     return nft.symbol;
   } catch (err) {
-    console.log('Failed to fetch NFT info for ', items[0].token_add);
+    console.log('Failed to fetch NFT info for');
   }
   return null;
 };

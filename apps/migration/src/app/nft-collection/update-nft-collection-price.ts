@@ -12,14 +12,14 @@ import { NftCollectionRepository } from './nft-collection-repository';
 export const updateNftCollectionPrice = async () => {
   console.log('Nft collection price update start');
   const prices = await Promise.all([
-    getMagicEdenPrices(),
-    getFractalCollections(),
-    getAlphArtCollections(),
-    getDigitalEyesCollections(),
-    getExchagenArtCollections(),
-    getSolanaArtCollections(),
-    getSolSeaCollections(),
-    getSolPortCollections(),
+    getMagicEdenPrices().catch(() => []),
+    getFractalCollections().catch(() => []),
+    getAlphArtCollections().catch(() => []),
+    getDigitalEyesCollections().catch(() => []),
+    getExchagenArtCollections().catch(() => []),
+    getSolanaArtCollections().catch(() => []),
+    getSolSeaCollections().catch(() => []),
+    getSolPortCollections().catch(() => []),
   ]);
 
   const allCollections: NftCollectionPrice[] = prices.reduce(
