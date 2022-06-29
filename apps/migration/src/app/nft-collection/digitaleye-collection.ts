@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import axios from 'axios';
 
 interface DigitalEyeCollection {
   '24h_sales': number;
@@ -32,10 +33,9 @@ const getCollectionPrice = async (
 ): Promise<number | null> => {
   try {
     console.log('Checking collection', collection);
-    const res = await fetch(
+    const { data: offer } = await axios.get<DigitalEyeOffer>(
       `https://us-central1-digitaleyes-prod.cloudfunctions.net/offers-retriever?collection=${collection}&price=asc`
     );
-    const offer: DigitalEyeOffer = (await res.json()) as DigitalEyeOffer;
     console.log('Got an offer for ', collection, ' ', offer.price_floor);
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
@@ -48,13 +48,11 @@ const getCollectionPrice = async (
 const getCollections = async (): Promise<DigitalEyeCollection[]> => {
   try {
     console.log('Sending request');
-    const res = await fetch(
+    const res = await axios.get<DigitalEyeCollection[]>(
       'https://us-central1-digitaleyes-prod.cloudfunctions.net/collection-retriever'
     );
-    console.log('Got reponse');
-    const collections = await res.json();
-    console.log('Fetched ', collections.length);
-    return collections;
+    console.log('Fetched ', res.data.length);
+    return res.data;
   } catch (err) {
     console.log(err);
   }

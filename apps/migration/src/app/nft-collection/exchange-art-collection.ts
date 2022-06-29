@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import axios from 'axios';
 
 interface ExchangeArtCollection {
   artists: string[];
@@ -38,12 +39,7 @@ const getAllExchangeArtStats = async (
   const url = `https://api.exchange.art/v2/collections/sales/stats?period=30d&${collectionIds}`;
   console.log(`${ids[0]}: Fetching`);
   try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      const text = await res.text();
-      console.log(text);
-    }
-    const stats: ExchangeArtStats[] = (await res.json()) as ExchangeArtStats[];
+    const stats = (await axios.get<ExchangeArtStats[]>(url)).data;
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
@@ -57,11 +53,11 @@ const getAllExchangeArtCollections = async (): Promise<
 > => {
   try {
     console.log('Sending request');
-    const res = await fetch(
+    const {
+      data: { leaderboard },
+    } = await axios.get<{ leaderboard: ExchangeArtCollection[] }>(
       'https://api.exchange.art/v2/sales/collections/leaderboard?offset=0&limit=10000&verbosity=1&period=365d&category='
     );
-    console.log('Got reponse');
-    const { leaderboard } = await res.json();
     console.log('Fetched ', leaderboard.length);
     return leaderboard;
   } catch (err) {

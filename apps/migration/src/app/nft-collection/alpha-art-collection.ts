@@ -1,5 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import axios from 'axios';
 
 interface AlphaArtCollection {
   id: string;
@@ -34,30 +35,34 @@ interface AlphaArtCollectionDetails {
   floorPrice: string;
 }
 
-const getCollectionDetails = async (collection: AlphaArtCollection) => {
-  const detailsRes = await fetch(
-    `https://apis.alpha.art/api/v1/collection/${collection.slug}`
-  );
-  if (!detailsRes) {
+const getCollectionDetails = async (
+  collection: AlphaArtCollection
+): Promise<AlphaArtCollectionDetails> => {
+  try {
+    const detailsRes = await axios.get<AlphaArtCollectionDetails>(
+      `https://apis.alpha.art/api/v1/collection/${collection.slug}`
+    );
+    return detailsRes.data;
+  } catch (err) {
     return null;
   }
-  return (await detailsRes.json()) as AlphaArtCollectionDetails;
 };
 
 const getAllAlphaArtCollections = async (
   agg: AlphaArtCollection[] = []
 ): Promise<AlphaArtCollection[]> => {
-  const res = await fetch(
-    `https://apis.alpha.art/api/v2/collection/list/collections?limit=24&offset=${agg.length}&order=title&dir=asc`
-  );
-  if (!res.ok) {
+  try {
+    const res = await axios.get<AlphaArtCollection[]>(
+      `https://apis.alpha.art/api/v2/collection/list/collections?limit=24&offset=${agg.length}&order=title&dir=asc`
+    );
+    const items = res.data;
+    if (items.length < 24) {
+      return agg.concat(items);
+    }
+    return getAllAlphaArtCollections(agg.concat(items));
+  } catch (err) {
     return agg;
   }
-  const items = (await res.json()) as AlphaArtCollection[];
-  if (items.length < 24) {
-    return agg.concat(items);
-  }
-  return getAllAlphaArtCollections(agg.concat(items));
 };
 
 export const getAlphArtCollections = async (): Promise<
@@ -69,6 +74,10 @@ export const getAlphArtCollections = async (): Promise<
   const nftPrices = await Promise.all(
     collections.map<Promise<NftCollectionPrice | null>>(async (collection) => {
       const details = await getCollectionDetails(collection);
+      if (details === null) {
+        return null;
+      }
+
       const floorPrice = parseInt(details.floorPrice);
       const volume = parseInt(details.collection.volume);
       if (floorPrice === 0) {

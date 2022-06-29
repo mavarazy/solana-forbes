@@ -1,8 +1,8 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import axios from 'axios';
 import delay from 'delay';
-import fetch from 'node-fetch';
 
 interface MagicEdenCollection {
   symbol: string;
@@ -43,22 +43,12 @@ interface MagicEdenEscrowStats {
 const getMagicEdenEscrowStats = async (
   collection: MagicEdenCollection
 ): Promise<MagicEdenEscrowStats | null> => {
-  const res = await fetch(
+  const res = await axios.get<MagicEdenEscrowStats>(
     `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`
   );
-  if (res.ok) {
-    const stats = await res.json();
-    console.log('Got stats for ', collection.name);
-    return stats;
-  }
-  if (res.status === 429 || res.status === 408) {
-    console.log(`Retrying ${collection.symbol}`);
-    await delay(30000);
-    return getMagicEdenEscrowStats(collection);
-  }
-
-  console.log('Returning null ', res.status);
-  return null;
+  const stats = res.data;
+  console.log('Got stats for ', collection.name);
+  return stats;
 };
 
 const getAllMagicEdenCollections = async (
@@ -66,17 +56,9 @@ const getAllMagicEdenCollections = async (
 ): Promise<MagicEdenCollection[]> => {
   try {
     console.log('Sending request');
-    const res = await fetch(
+    const { data: collections } = await axios.get<MagicEdenCollection[]>(
       `https://api-mainnet.magiceden.dev/v2/collections?offset=${agg.length}&limit=500`
     );
-    if (!res.ok) {
-      throw new Error('Failed');
-    }
-    if (res.status === 429 || res.status === 408 || res.status === 503) {
-      await delay(5000);
-      return getAllMagicEdenCollections(agg);
-    }
-    const collections = (await res.json()) as MagicEdenCollection[];
     console.log('Fetched collection for ', collections.length);
     if (collections.length < 500) {
       return agg.concat(collections);

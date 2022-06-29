@@ -1,8 +1,8 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
-import fetch from 'node-fetch';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import axios from 'axios';
 
 interface SolanaArtCollection {
   id: number;
@@ -70,15 +70,12 @@ const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 const metaplex = new Metaplex(connection);
 
 const getCollectionSymbol = async (url: string): Promise<string | null> => {
-  const res = await fetch(
+  const {
+    data: { items },
+  } = await axios.get<{ items: SolanaArtListedItem[] }>(
     `https://api.solanart.io/get_nft?collection=${url}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
   );
-  if (!res.ok) {
-    console.log('Failed to fetch data for ', url);
-    return null;
-  }
 
-  const items = (await res.json()).items as SolanaArtListedItem[];
   if (items.length === 0) {
     return null;
   }
@@ -97,27 +94,22 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 const getSolanaPrice = async (
   collection: SolanaArtCollection
 ): Promise<SolanaArtPrice> => {
-  const res = await fetch(
-    `https://api.solanart.io/get_floor_price?collection=${collection.url}`
-  );
-  if (res.ok) {
-    return (await res.json()) as SolanaArtPrice;
+  try {
+    const { data: price } = await axios.get<SolanaArtPrice>(
+      `https://api.solanart.io/get_floor_price?collection=${collection.url}`
+    );
+    return price;
+  } catch (err) {
+    return null;
   }
-  console.log(
-    'Failed to get a price for ',
-    collection.url,
-    ' ',
-    collection.name
-  );
-  return null;
 };
 
 const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
   try {
     console.log('Sending request');
-    const res = await fetch('https://api.solanart.io/get_collections');
-    console.log('Got reponse');
-    const collections = (await res.json()) as SolanaArtCollection[];
+    const { data: collections } = await axios.get<SolanaArtCollection[]>(
+      'https://api.solanart.io/get_collections'
+    );
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
@@ -129,9 +121,9 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
 const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
   try {
     console.log('Sending request');
-    const res = await fetch('https://api.solanart.io/query_volume_all');
-    console.log('Got reponse');
-    const collections = (await res.json()) as SolanaArtVolume[];
+    const { data: collections } = await axios.get<SolanaArtVolume[]>(
+      'https://api.solanart.io/query_volume_all'
+    );
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {

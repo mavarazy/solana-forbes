@@ -1,4 +1,5 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import axios from 'axios';
 
 interface SolPortPriceChange {
   perc: number;
@@ -50,13 +51,11 @@ const getCollectionsPage = async (
   page = 1
 ): Promise<SolPortCollection[]> => {
   console.log('Requesting ', page);
-  const res = await fetch(
+  const {
+    data: { max_page, collections },
+  } = await axios.get<SolPortRequest>(
     `https://lapi.solport.io/nft/collections?page=${page}`
   );
-  if (!res.ok) {
-    throw new Error('Failed to parse solPort');
-  }
-  const { max_page, collections } = (await res.json()) as SolPortRequest;
   if (page === max_page) {
     return agg.concat(collections);
   }

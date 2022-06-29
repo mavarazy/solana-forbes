@@ -1,4 +1,5 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import axios from 'axios';
 
 interface FractalCollection {
   id: string;
@@ -40,14 +41,11 @@ interface FracatalStats {
 }
 
 const getFractalStats = async (id: string) => {
-  const url = `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`;
-  const statsRes = await fetch(url);
-  if (!statsRes.ok) {
-    console.error(`Failed to fetch ${id} ${url}`);
-    return null;
-  }
-
-  const projectStats = (await statsRes.json()) as FracatalStats;
+  const projectStats = (
+    await axios.get<FracatalStats>(
+      `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`
+    )
+  ).data;
   return projectStats;
 };
 
@@ -78,16 +76,13 @@ const getCollectionStats = async (
 const getAllCollections = async (
   collection: FractalCollection
 ): Promise<NftCollectionPrice[]> => {
-  const managedRes = await fetch(
+  const {
+    data: { collections },
+  } = await axios.get<{
+    collections: FractalManagedCollection[];
+  }>(
     `https://api.fractal.is/admin/v1/project/manage/${collection.id}/collection/manage`
   );
-
-  if (!managedRes.ok) {
-    return [];
-  }
-  const { collections } = (await managedRes.json()) as {
-    collections: FractalManagedCollection[];
-  };
 
   const prices = await Promise.all(
     collections.map((managed) =>
@@ -106,21 +101,16 @@ const getAllCollections = async (
 export const getFractalCollections = async (): Promise<
   NftCollectionPrice[]
 > => {
-  const collectionRes = await fetch(
+  const {
+    data: { projects },
+  } = await axios.get<FractalCollectionResponse>(
     'https://api.fractal.is/admin/v1/project/manage'
   );
-  if (!collectionRes.ok) {
-    throw new Error('Failed to fetch collections');
-  }
-
-  const { projects } =
-    (await collectionRes.json()) as FractalCollectionResponse;
 
   const allPrices = (await Promise.all(projects.map(getAllCollections))).reduce(
     (agg: NftCollectionPrice[], prices) => agg.concat(prices),
     []
   );
-
   console.log('Fractal got ', allPrices.length);
 
   return Promise.all(allPrices);
