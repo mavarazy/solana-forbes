@@ -1,4 +1,5 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import * as Sentry from '@sentry/node';
 import axios from 'axios';
 
 interface FractalCollection {
@@ -49,6 +50,13 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
     ).data;
     return projectStats;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getFractalStats',
+        marketplace: NftMarketplace.fractal,
+        id,
+      },
+    });
     console.error(err);
   }
   return null;

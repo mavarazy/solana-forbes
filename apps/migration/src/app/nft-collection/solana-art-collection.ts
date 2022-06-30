@@ -3,6 +3,7 @@ import { throttle } from '@forbex-nxr/utils';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import axios from 'axios';
+import * as Sentry from '@sentry/node';
 
 interface SolanaArtCollection {
   id: number;
@@ -86,6 +87,13 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 
     return nft.symbol;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getCollectionSymbol',
+        marketplace: NftMarketplace.solanart,
+        url,
+      },
+    });
     console.log('Failed to fetch NFT info for');
   }
   return null;
@@ -94,12 +102,19 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 const getSolanaPrice = async (
   collection: SolanaArtCollection
 ): Promise<SolanaArtPrice> => {
+  const url = `https://api.solanart.io/get_floor_price?collection=${collection.url}`;
   try {
-    const { data: price } = await axios.get<SolanaArtPrice>(
-      `https://api.solanart.io/get_floor_price?collection=${collection.url}`
-    );
+    const { data: price } = await axios.get<SolanaArtPrice>(url);
     return price;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getSolanaPrice',
+        marketplace: NftMarketplace.solanart,
+        collection,
+        url,
+      },
+    });
     return null;
   }
 };
@@ -113,6 +128,12 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getAllSolanaArtCollections',
+        marketplace: NftMarketplace.solanart,
+      },
+    });
     console.log(err);
   }
   return [];
@@ -127,7 +148,12 @@ const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
-    console.log(err);
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getAllSolanaArtVolume',
+        marketplace: NftMarketplace.solanart,
+      },
+    });
   }
   return [];
 };

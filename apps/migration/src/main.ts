@@ -3,6 +3,16 @@ import { updateTokenWorthSummary } from './app/update-token-worth-summary';
 import { updateWalletEvaluation } from './app/update-wallet-evaluation';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
+import * as Sentry from '@sentry/node';
+
+Sentry.init({
+  dsn: 'https://1859802ae9d5487fa989701899175f35@o970258.ingest.sentry.io/6541229',
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 axiosRetry(axios, {
   retries: 5,

@@ -1,4 +1,5 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import * as Sentry from '@sentry/node';
 import axios from 'axios';
 
 interface SolPortPriceChange {
@@ -62,6 +63,12 @@ const getCollectionsPage = async (
     }
     return getCollectionsPage(agg.concat(collections), page + 1);
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getAllSolanaArtVolume',
+        marketplace: NftMarketplace.solanart,
+      },
+    });
     return agg;
   }
 };

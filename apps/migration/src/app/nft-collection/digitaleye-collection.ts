@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import * as Sentry from '@sentry/node';
 import axios from 'axios';
 
 interface DigitalEyeCollection {
@@ -40,7 +41,13 @@ const getCollectionPrice = async (
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
   } catch (err) {
-    console.log('Error fetching ', collection);
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getCollectionPrice',
+        marketplace: NftMarketplace.digitaleyes,
+        collection,
+      },
+    });
   }
   return null;
 };
@@ -54,7 +61,12 @@ const getCollections = async (): Promise<DigitalEyeCollection[]> => {
     console.log('Fetched ', res.data.length);
     return res.data;
   } catch (err) {
-    console.log(err);
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getCollections',
+        marketplace: NftMarketplace.digitaleyes,
+      },
+    });
   }
   return [];
 };

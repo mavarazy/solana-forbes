@@ -1,5 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import * as Sentry from '@sentry/node';
 import axios from 'axios';
 
 interface AlphaArtCollection {
@@ -44,6 +45,12 @@ const getCollectionDetails = async (
     );
     return detailsRes.data;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        marketplace: NftMarketplace.alphart,
+        collection,
+      },
+    });
     return null;
   }
 };
@@ -61,6 +68,12 @@ const getAllAlphaArtCollections = async (
     }
     return getAllAlphaArtCollections(agg.concat(items));
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        marketplace: NftMarketplace.alphart,
+        offset: agg.length,
+      },
+    });
     return agg;
   }
 };

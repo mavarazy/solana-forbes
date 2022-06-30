@@ -7,6 +7,7 @@ import { clusterApiUrl, Connection } from '@solana/web3.js';
 import delay from 'delay';
 import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';
 import { WalletRepository } from './wallet-repository';
+import * as Sentry from '@sentry/node';
 
 export const updateWalletEvaluation = async () => {
   const {
@@ -41,6 +42,12 @@ export const updateWalletEvaluation = async () => {
         console.log('Updating: done for ', id);
         return updatedWallet;
       } catch (err) {
+        Sentry.captureException(err, {
+          extra: {
+            action: 'updateWalletEvaluation',
+            id,
+          },
+        });
         console.log(err);
         if (attempt < 20) {
           console.log(`Trying again in ${attempt} minute`);

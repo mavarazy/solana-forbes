@@ -21,6 +21,8 @@
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "@metaplex-foundation/js-next": "^0.10.0",
+    "@sentry/node": "^7.3.1",
+    "@sentry/tracing": "^7.3.1",
     "@solana/spl-token": "^0.2.0",
     "@solana/spl-token-registry": "^0.2.3913",
     "@solana/web3.js": "^1.41.6",

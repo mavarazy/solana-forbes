@@ -1,6 +1,7 @@
 import { PriceService, throttle } from '@forbex-nxr/utils';
 import { getMint } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import * as Sentry from '@sentry/node';
 import { writeFile } from 'fs/promises';
 
 export const updateTokenToSupply = async () => {
@@ -20,6 +21,11 @@ export const updateTokenToSupply = async () => {
         supply: Math.round(Number(mint.supply) / Math.pow(10, mint.decimals)),
       };
     } catch (err) {
+      Sentry.captureException(err, {
+        extra: {
+          action: 'updateTokenToSupply',
+        },
+      });
       console.log(token.mint, ' ', err);
       return null;
     }

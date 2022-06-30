@@ -1,6 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import * as Sentry from '@sentry/node';
 import axios from 'axios';
 
 interface ExchangeArtCollection {
@@ -38,13 +39,23 @@ const getAllExchangeArtStats = async (
   const collectionIds = ids.map((id) => `collectionIds=${id}`).join('&');
   const url = `https://api.exchange.art/v2/collections/sales/stats?period=30d&${collectionIds}`;
   console.log(`${ids[0]}: Fetching`);
+
   try {
     const stats = (await axios.get<ExchangeArtStats[]>(url)).data;
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
     console.log(`${ids[0]}: Error fetching `, err);
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getAllExchangeArtStats',
+        marketplace: NftMarketplace.exchageart,
+        ids: ids.join(', '),
+        url,
+      },
+    });
   }
+
   return [];
 };
 
@@ -61,6 +72,12 @@ const getAllExchangeArtCollections = async (): Promise<
     console.log('Fetched ', leaderboard.length);
     return leaderboard;
   } catch (err) {
+    Sentry.captureException(err, {
+      extra: {
+        action: 'getAllExchangeArtCollections',
+        marketplace: NftMarketplace.exchageart,
+      },
+    });
     console.log(err);
   }
   return [];
