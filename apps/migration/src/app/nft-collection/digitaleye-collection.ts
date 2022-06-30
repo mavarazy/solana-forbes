@@ -40,7 +40,7 @@ const getCollectionPrice = async (
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
   } catch (err) {
-    trackNftError(NftMarketplace.digitaleyes, 'getCollectionPrice', err, {
+    trackNftError(err, NftMarketplace.digitaleyes, 'getCollectionPrice', {
       collection,
       url,
     });
@@ -57,7 +57,7 @@ const getCollections = async (): Promise<DigitalEyeCollection[]> => {
     console.log('Fetched ', res.data.length);
     return res.data;
   } catch (err) {
-    trackNftError(NftMarketplace.digitaleyes, 'getCollections', err, {});
+    trackNftError(err, NftMarketplace.digitaleyes, 'getCollections', {});
   }
   return [];
 };

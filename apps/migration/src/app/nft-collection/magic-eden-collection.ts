@@ -49,7 +49,7 @@ const getMagicEdenEscrowStats = async (
     console.log('Got stats for ', collection.name);
     return stats;
   } catch (err) {
-    trackNftError(NftMarketplace.magiceden, 'getMagicEdenEscrowStats', err, {
+    trackNftError(err, NftMarketplace.magiceden, 'getMagicEdenEscrowStats', {
       collection,
     });
   }
@@ -70,7 +70,7 @@ const getAllMagicEdenCollections = async (
     }
     return getAllMagicEdenCollections(agg.concat(collections));
   } catch (err) {
-    trackNftError(NftMarketplace.magiceden, 'getAllMagicEdenCollections', err, {
+    trackNftError(err, NftMarketplace.magiceden, 'getAllMagicEdenCollections', {
       offset: agg.length,
     });
   }

@@ -63,7 +63,7 @@ const getCollectionsPage = async (
     }
     return getCollectionsPage(agg.concat(collections), page + 1);
   } catch (err) {
-    trackNftError(NftMarketplace.solport, 'getCollectionsPage', err, {
+    trackNftError(err, NftMarketplace.solport, 'getCollectionsPage', {
       page,
     });
     return agg;

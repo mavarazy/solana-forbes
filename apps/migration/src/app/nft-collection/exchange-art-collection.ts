@@ -45,7 +45,7 @@ const getAllExchangeArtStats = async (
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
-    trackNftError(NftMarketplace.exchageart, 'getAllExchangeArtStats', err, {
+    trackNftError(err, NftMarketplace.exchageart, 'getAllExchangeArtStats', {
       ids: ids.join(', '),
       url,
     });
@@ -68,9 +68,9 @@ const getAllExchangeArtCollections = async (): Promise<
     return leaderboard;
   } catch (err) {
     trackNftError(
+      err,
       NftMarketplace.exchageart,
       'getAllExchangeArtCollections',
-      err,
       {}
     );
   }

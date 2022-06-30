@@ -87,7 +87,7 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 
     return nft.symbol;
   } catch (err) {
-    trackNftError(NftMarketplace.solanart, 'getCollectionSymbol', err, {
+    trackNftError(err, NftMarketplace.solanart, 'getCollectionSymbol', {
       url,
     });
   }
@@ -102,7 +102,7 @@ const getSolanaPrice = async (
     const { data: price } = await axios.get<SolanaArtPrice>(url);
     return price;
   } catch (err) {
-    trackNftError(NftMarketplace.solanart, 'getSolanaPrice', err, {
+    trackNftError(err, NftMarketplace.solanart, 'getSolanaPrice', {
       collection,
       url,
     });
@@ -120,9 +120,9 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
     return collections;
   } catch (err) {
     trackNftError(
+      err,
       NftMarketplace.solanart,
       'getAllSolanaArtCollections',
-      err,
       {}
     );
   }
@@ -138,7 +138,7 @@ const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
-    trackNftError(NftMarketplace.solanart, 'getAllSolanaArtVolume', err, {});
+    trackNftError(err, NftMarketplace.solanart, 'getAllSolanaArtVolume', {});
   }
   return [];
 };

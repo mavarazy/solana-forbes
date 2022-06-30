@@ -44,7 +44,7 @@ const getCollectionDetails = async (
     const { data } = await axios.get<AlphaArtCollectionDetails>(url);
     return data;
   } catch (err) {
-    trackNftError(NftMarketplace.alphart, 'getCollectionDetails', err, {
+    trackNftError(err, NftMarketplace.alphart, 'getCollectionDetails', {
       collection,
       url,
     });
@@ -65,7 +65,7 @@ const getAllAlphaArtCollections = async (
     }
     return getAllAlphaArtCollections(agg.concat(items));
   } catch (err) {
-    trackNftError(NftMarketplace.alphart, 'getAllAlphaArtCollections', err, {
+    trackNftError(err, NftMarketplace.alphart, 'getAllAlphaArtCollections', {
       offset: agg.length,
     });
 
