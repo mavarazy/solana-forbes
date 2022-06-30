@@ -183,8 +183,8 @@ const updateInBatch = (
 ): Promise<NftCollectionPrice[]> =>
   throttle(
     prices.map((price) => async () => update(price)),
-    10,
-    10
+    500,
+    5
   );
 
 export const NftCollectionRepository = {
