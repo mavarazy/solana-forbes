@@ -18,9 +18,9 @@ axiosRetry(axios, {
 
 const execute = async () => {
   try {
+    await updateNftCollectionPrice();
     await updateWalletEvaluation();
     await updateTokenWorthSummary();
-    await updateNftCollectionPrice();
   } catch (err) {
     console.error(err);
   }
