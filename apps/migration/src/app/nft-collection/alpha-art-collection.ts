@@ -39,12 +39,12 @@ interface AlphaArtCollectionDetails {
 const getCollectionDetails = async (
   collection: AlphaArtCollection
 ): Promise<AlphaArtCollectionDetails> => {
+  const url = `https://apis.alpha.art/api/v1/collection/${collection.slug}`;
   try {
-    const detailsRes = await axios.get<AlphaArtCollectionDetails>(
-      `https://apis.alpha.art/api/v1/collection/${collection.slug}`
-    );
-    return detailsRes.data;
+    const { data } = await axios.get<AlphaArtCollectionDetails>(url);
+    return data;
   } catch (err) {
+    console.warn(`${err.status}:alphart:Failed to get ${url}`);
     Sentry.captureException(err, {
       extra: {
         marketplace: NftMarketplace.alphart,
@@ -68,6 +68,9 @@ const getAllAlphaArtCollections = async (
     }
     return getAllAlphaArtCollections(agg.concat(items));
   } catch (err) {
+    console.warn(
+      `${err.status}:alphart.getAllAlphaArtCollections: Failed to get with offset ${agg.length}`
+    );
     Sentry.captureException(err, {
       extra: {
         marketplace: NftMarketplace.alphart,

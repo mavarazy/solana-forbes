@@ -41,6 +41,9 @@ const getCollectionPrice = async (
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
   } catch (err) {
+    console.warn(
+      `${err.status}:digitaeye.getCollectionPrice: Failed to get ${collection}`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getCollectionPrice',
@@ -61,6 +64,7 @@ const getCollections = async (): Promise<DigitalEyeCollection[]> => {
     console.log('Fetched ', res.data.length);
     return res.data;
   } catch (err) {
+    console.warn(`${err.status}:DigitalEye.getCollections: Failed`);
     Sentry.captureException(err, {
       extra: {
         action: 'getCollections',

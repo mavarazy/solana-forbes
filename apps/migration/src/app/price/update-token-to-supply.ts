@@ -21,12 +21,12 @@ export const updateTokenToSupply = async () => {
         supply: Math.round(Number(mint.supply) / Math.pow(10, mint.decimals)),
       };
     } catch (err) {
+      console.log('Failed to get mint', token.mint, ' ', err);
       Sentry.captureException(err, {
         extra: {
           action: 'updateTokenToSupply',
         },
       });
-      console.log(token.mint, ' ', err);
       return null;
     }
   });

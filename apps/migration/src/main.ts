@@ -17,13 +17,14 @@ Sentry.init({
 axiosRetry(axios, {
   retries: 5,
   retryCondition: (e) => {
+    console.log('Retrying ', e.config.url, ' ', e.status);
     return (
       axiosRetry.isNetworkOrIdempotentRequestError(e) ||
       e.response.status === 429 ||
       e.response.status === 508
     );
   },
-  retryDelay: axiosRetry.exponentialDelay,
+  retryDelay: (retryCount: number) => retryCount * 60000,
 });
 
 const execute = async () => {

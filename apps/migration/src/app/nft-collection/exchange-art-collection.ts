@@ -45,7 +45,9 @@ const getAllExchangeArtStats = async (
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
-    console.log(`${ids[0]}: Error fetching `, err);
+    console.warn(
+      `${err.status}:exchangeart.getAllExchangeArtStats: Failed to get url ${url}`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getAllExchangeArtStats',
@@ -72,13 +74,15 @@ const getAllExchangeArtCollections = async (): Promise<
     console.log('Fetched ', leaderboard.length);
     return leaderboard;
   } catch (err) {
+    console.warn(
+      `${err.status}:exchangeart.getAllExchangeArtCollections: Failed`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getAllExchangeArtCollections',
         marketplace: NftMarketplace.exchageart,
       },
     });
-    console.log(err);
   }
   return [];
 };

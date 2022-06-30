@@ -87,6 +87,7 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 
     return nft.symbol;
   } catch (err) {
+    console.warn(`${err.status}:solanart.getCollectionSymbol: Failed ${url}`);
     Sentry.captureException(err, {
       extra: {
         action: 'getCollectionSymbol',
@@ -94,7 +95,6 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
         url,
       },
     });
-    console.log('Failed to fetch NFT info for');
   }
   return null;
 };
@@ -107,6 +107,7 @@ const getSolanaPrice = async (
     const { data: price } = await axios.get<SolanaArtPrice>(url);
     return price;
   } catch (err) {
+    console.warn(`${err.status}:solanart.getSolanaPrice: Failed ${url}`);
     Sentry.captureException(err, {
       extra: {
         action: 'getSolanaPrice',
@@ -128,13 +129,13 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
+    console.warn(`${err.status}:solanart.getAllSolanaArtCollections: Failed`);
     Sentry.captureException(err, {
       extra: {
         action: 'getAllSolanaArtCollections',
         marketplace: NftMarketplace.solanart,
       },
     });
-    console.log(err);
   }
   return [];
 };
@@ -148,6 +149,7 @@ const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
+    console.warn(`${err.status}:solanart.getAllSolanaArtVolume: Failed`);
     Sentry.captureException(err, {
       extra: {
         action: 'getAllSolanaArtVolume',

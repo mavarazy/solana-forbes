@@ -43,14 +43,15 @@ interface MagicEdenEscrowStats {
 const getMagicEdenEscrowStats = async (
   collection: MagicEdenCollection
 ): Promise<MagicEdenEscrowStats | null> => {
+  const url = `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`;
   try {
-    const res = await axios.get<MagicEdenEscrowStats>(
-      `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`
-    );
-    const stats = res.data;
+    const { data: stats } = await axios.get<MagicEdenEscrowStats>(url);
     console.log('Got stats for ', collection.name);
     return stats;
   } catch (err) {
+    console.warn(
+      `${err.status}:magiceden.getMagicEdenEscrowStats: Failed url ${url}`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getMagicEdenEscrowStats',
@@ -58,7 +59,6 @@ const getMagicEdenEscrowStats = async (
         collection,
       },
     });
-    console.error(err);
   }
   return null;
 };
@@ -77,6 +77,9 @@ const getAllMagicEdenCollections = async (
     }
     return getAllMagicEdenCollections(agg.concat(collections));
   } catch (err) {
+    console.warn(
+      `${err.status}:magiceden.getAllMagicEdenCollections: Failed offset ${agg.length}`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getAllMagicEdenCollections',
@@ -84,7 +87,6 @@ const getAllMagicEdenCollections = async (
         offset: agg.length,
       },
     });
-    console.error(err);
   }
   return [];
 };

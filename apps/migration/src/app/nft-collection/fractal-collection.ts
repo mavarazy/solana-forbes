@@ -42,14 +42,14 @@ interface FracatalStats {
 }
 
 const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
+  const url = `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`;
   try {
-    const projectStats = (
-      await axios.get<FracatalStats>(
-        `https://api.fractal.is/admin/v1/collection/stats?collectionId=${id}`
-      )
-    ).data;
+    const { data: projectStats } = await axios.get<FracatalStats>(url);
     return projectStats;
   } catch (err) {
+    console.warn(
+      `${err.status}:fractal.getFractalStats: Failed ${id}, url ${url}`
+    );
     Sentry.captureException(err, {
       extra: {
         action: 'getFractalStats',
@@ -57,7 +57,6 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
         id,
       },
     });
-    console.error(err);
   }
   return null;
 };

@@ -63,6 +63,7 @@ const getCollectionsPage = async (
     }
     return getCollectionsPage(agg.concat(collections), page + 1);
   } catch (err) {
+    console.log(`Solport: Failed to get page ${page} status ${err.status}`);
     Sentry.captureException(err, {
       extra: {
         action: 'getAllSolanaArtVolume',

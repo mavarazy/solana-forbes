@@ -48,7 +48,7 @@ export const updateWalletEvaluation = async () => {
             id,
           },
         });
-        console.log(err);
+
         if (attempt < 20) {
           console.log(`Trying again in ${attempt} minute`);
           await delay(attempt * 60000);
