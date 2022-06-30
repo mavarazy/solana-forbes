@@ -1,6 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import * as Sentry from '@sentry/node';
 import axios from 'axios';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface SolPortPriceChange {
   perc: number;
@@ -63,12 +63,8 @@ const getCollectionsPage = async (
     }
     return getCollectionsPage(agg.concat(collections), page + 1);
   } catch (err) {
-    console.log(`Solport: Failed to get page ${page} status ${err.status}`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllSolanaArtVolume',
-        marketplace: NftMarketplace.solanart,
-      },
+    trackNftError(NftMarketplace.solport, 'getCollectionsPage', err, {
+      page,
     });
     return agg;
   }

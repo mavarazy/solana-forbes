@@ -2,7 +2,7 @@ import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import axios from 'axios';
-import * as Sentry from '@sentry/node';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface MagicEdenCollection {
   symbol: string;
@@ -49,15 +49,8 @@ const getMagicEdenEscrowStats = async (
     console.log('Got stats for ', collection.name);
     return stats;
   } catch (err) {
-    console.warn(
-      `${err.status}:magiceden.getMagicEdenEscrowStats: Failed url ${url}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getMagicEdenEscrowStats',
-        marketplace: NftMarketplace.magiceden,
-        collection,
-      },
+    trackNftError(NftMarketplace.magiceden, 'getMagicEdenEscrowStats', err, {
+      collection,
     });
   }
   return null;
@@ -77,15 +70,8 @@ const getAllMagicEdenCollections = async (
     }
     return getAllMagicEdenCollections(agg.concat(collections));
   } catch (err) {
-    console.warn(
-      `${err.status}:magiceden.getAllMagicEdenCollections: Failed offset ${agg.length}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllMagicEdenCollections',
-        marketplace: NftMarketplace.magiceden,
-        offset: agg.length,
-      },
+    trackNftError(NftMarketplace.magiceden, 'getAllMagicEdenCollections', err, {
+      offset: agg.length,
     });
   }
   return [];

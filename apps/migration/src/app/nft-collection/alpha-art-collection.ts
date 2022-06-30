@@ -1,7 +1,7 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import * as Sentry from '@sentry/node';
 import axios from 'axios';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface AlphaArtCollection {
   id: string;
@@ -44,12 +44,9 @@ const getCollectionDetails = async (
     const { data } = await axios.get<AlphaArtCollectionDetails>(url);
     return data;
   } catch (err) {
-    console.warn(`${err.status}:alphart:Failed to get ${url}`);
-    Sentry.captureException(err, {
-      extra: {
-        marketplace: NftMarketplace.alphart,
-        collection,
-      },
+    trackNftError(NftMarketplace.alphart, 'getCollectionDetails', err, {
+      collection,
+      url,
     });
     return null;
   }
@@ -68,15 +65,10 @@ const getAllAlphaArtCollections = async (
     }
     return getAllAlphaArtCollections(agg.concat(items));
   } catch (err) {
-    console.warn(
-      `${err.status}:alphart.getAllAlphaArtCollections: Failed to get with offset ${agg.length}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        marketplace: NftMarketplace.alphart,
-        offset: agg.length,
-      },
+    trackNftError(NftMarketplace.alphart, 'getAllAlphaArtCollections', err, {
+      offset: agg.length,
     });
+
     return agg;
   }
 };

@@ -1,6 +1,6 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import * as Sentry from '@sentry/node';
 import axios from 'axios';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface FractalCollection {
   id: string;
@@ -47,16 +47,7 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
     const { data: projectStats } = await axios.get<FracatalStats>(url);
     return projectStats;
   } catch (err) {
-    console.warn(
-      `${err.status}:fractal.getFractalStats: Failed ${id}, url ${url}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getFractalStats',
-        marketplace: NftMarketplace.fractal,
-        id,
-      },
-    });
+    trackNftError(NftMarketplace.fractal, 'getFractalStats', err, { id });
   }
   return null;
 };
@@ -112,7 +103,7 @@ const getAllCollections = async (
       (price): price is NftCollectionPrice => price !== null
     );
   } catch (err) {
-    console.error(err);
+    trackNftError(NftMarketplace.fractal, 'getAllCollections', err, {});
   }
   return [];
 };

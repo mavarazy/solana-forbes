@@ -3,7 +3,7 @@ import { throttle } from '@forbex-nxr/utils';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import axios from 'axios';
-import * as Sentry from '@sentry/node';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface SolanaArtCollection {
   id: number;
@@ -87,13 +87,8 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 
     return nft.symbol;
   } catch (err) {
-    console.warn(`${err.status}:solanart.getCollectionSymbol: Failed ${url}`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getCollectionSymbol',
-        marketplace: NftMarketplace.solanart,
-        url,
-      },
+    trackNftError(NftMarketplace.solanart, 'getCollectionSymbol', err, {
+      url,
     });
   }
   return null;
@@ -107,14 +102,9 @@ const getSolanaPrice = async (
     const { data: price } = await axios.get<SolanaArtPrice>(url);
     return price;
   } catch (err) {
-    console.warn(`${err.status}:solanart.getSolanaPrice: Failed ${url}`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getSolanaPrice',
-        marketplace: NftMarketplace.solanart,
-        collection,
-        url,
-      },
+    trackNftError(NftMarketplace.solanart, 'getSolanaPrice', err, {
+      collection,
+      url,
     });
     return null;
   }
@@ -129,13 +119,12 @@ const getAllSolanaArtCollections = async (): Promise<SolanaArtCollection[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
-    console.warn(`${err.status}:solanart.getAllSolanaArtCollections: Failed`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllSolanaArtCollections',
-        marketplace: NftMarketplace.solanart,
-      },
-    });
+    trackNftError(
+      NftMarketplace.solanart,
+      'getAllSolanaArtCollections',
+      err,
+      {}
+    );
   }
   return [];
 };
@@ -149,13 +138,7 @@ const getAllSolanaArtVolume = async (): Promise<SolanaArtVolume[]> => {
     console.log('Fetched collection for ', collections.length);
     return collections;
   } catch (err) {
-    console.warn(`${err.status}:solanart.getAllSolanaArtVolume: Failed`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllSolanaArtVolume',
-        marketplace: NftMarketplace.solanart,
-      },
-    });
+    trackNftError(NftMarketplace.solanart, 'getAllSolanaArtVolume', err, {});
   }
   return [];
 };

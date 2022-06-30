@@ -1,8 +1,8 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import * as Sentry from '@sentry/node';
 import axios from 'axios';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface DigitalEyeCollection {
   '24h_sales': number;
@@ -32,24 +32,17 @@ interface DigitalEyeOffer {
 const getCollectionPrice = async (
   collection: string
 ): Promise<number | null> => {
+  const url = `https://us-central1-digitaleyes-prod.cloudfunctions.net/offers-retriever?collection=${collection}&price=asc`;
   try {
     console.log('Checking collection', collection);
-    const { data: offer } = await axios.get<DigitalEyeOffer>(
-      `https://us-central1-digitaleyes-prod.cloudfunctions.net/offers-retriever?collection=${collection}&price=asc`
-    );
+    const { data: offer } = await axios.get<DigitalEyeOffer>(url);
     console.log('Got an offer for ', collection, ' ', offer.price_floor);
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
   } catch (err) {
-    console.warn(
-      `${err.status}:digitaeye.getCollectionPrice: Failed to get ${collection}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getCollectionPrice',
-        marketplace: NftMarketplace.digitaleyes,
-        collection,
-      },
+    trackNftError(NftMarketplace.digitaleyes, 'getCollectionPrice', err, {
+      collection,
+      url,
     });
   }
   return null;
@@ -64,13 +57,7 @@ const getCollections = async (): Promise<DigitalEyeCollection[]> => {
     console.log('Fetched ', res.data.length);
     return res.data;
   } catch (err) {
-    console.warn(`${err.status}:DigitalEye.getCollections: Failed`);
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getCollections',
-        marketplace: NftMarketplace.digitaleyes,
-      },
-    });
+    trackNftError(NftMarketplace.digitaleyes, 'getCollections', err, {});
   }
   return [];
 };

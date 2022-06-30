@@ -1,8 +1,8 @@
 import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
 import { throttle } from '@forbex-nxr/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import * as Sentry from '@sentry/node';
 import axios from 'axios';
+import { trackNftError } from './track-nft-collection-errors';
 
 interface ExchangeArtCollection {
   artists: string[];
@@ -45,16 +45,9 @@ const getAllExchangeArtStats = async (
     console.log('Retrieved stats of ', stats.length);
     return stats;
   } catch (err) {
-    console.warn(
-      `${err.status}:exchangeart.getAllExchangeArtStats: Failed to get url ${url}`
-    );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllExchangeArtStats',
-        marketplace: NftMarketplace.exchageart,
-        ids: ids.join(', '),
-        url,
-      },
+    trackNftError(NftMarketplace.exchageart, 'getAllExchangeArtStats', err, {
+      ids: ids.join(', '),
+      url,
     });
   }
 
@@ -74,15 +67,12 @@ const getAllExchangeArtCollections = async (): Promise<
     console.log('Fetched ', leaderboard.length);
     return leaderboard;
   } catch (err) {
-    console.warn(
-      `${err.status}:exchangeart.getAllExchangeArtCollections: Failed`
+    trackNftError(
+      NftMarketplace.exchageart,
+      'getAllExchangeArtCollections',
+      err,
+      {}
     );
-    Sentry.captureException(err, {
-      extra: {
-        action: 'getAllExchangeArtCollections',
-        marketplace: NftMarketplace.exchageart,
-      },
-    });
   }
   return [];
 };
