@@ -190,13 +190,13 @@ const updateInBatch = async (
         console.warn(`Failed to save ${price}`);
         Sentry.captureException(err, {
           extra: {
-            price
+            price,
           },
         });
       }
       return null;
     }),
-    500,
+    1000,
     5
   );
 

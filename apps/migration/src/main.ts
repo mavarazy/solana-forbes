@@ -24,7 +24,7 @@ axiosRetry(axios, {
     console.log('Retrying ', e.config.url, ' ', e.response.status, ' ', retry);
     return retry;
   },
-  retryDelay: (retryCount: number) => retryCount * 60000,
+  retryDelay: (retryCount: number) => retryCount * 30000,
 });
 
 const execute = async () => {
