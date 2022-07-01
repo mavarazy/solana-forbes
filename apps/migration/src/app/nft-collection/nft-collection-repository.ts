@@ -8,6 +8,7 @@ import {
   UpdateNftCollectionPriceVariables,
 } from '@forbex-nxr/types';
 import { hasuraClient, throttle } from '@forbex-nxr/utils';
+import * as Sentry from '@sentry/node';
 import { format } from 'date-fns';
 
 const GetNftCollectionIdsQuery = gql`
@@ -178,14 +179,29 @@ const update = async (collectionPrice: NftCollectionPrice) => {
   return collectionPrice;
 };
 
-const updateInBatch = (
+const updateInBatch = async (
   prices: NftCollectionPrice[]
-): Promise<NftCollectionPrice[]> =>
-  throttle(
-    prices.map((price) => async () => update(price)),
+): Promise<NftCollectionPrice[]> => {
+  const collectionPrices = await throttle<NftCollectionPrice | null>(
+    prices.map((price) => async () => {
+      try {
+        return update(price);
+      } catch (err) {
+        console.warn(`Failed to save ${price}`);
+        Sentry.captureException(err, {
+          extra: {
+            price
+          },
+        });
+      }
+      return null;
+    }),
     500,
     5
   );
+
+  return collectionPrices.filter((price) => price !== null);
+};
 
 export const NftCollectionRepository = {
   update,
