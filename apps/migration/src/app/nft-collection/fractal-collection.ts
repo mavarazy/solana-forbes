@@ -68,7 +68,7 @@ const getCollectionStats = async (
     marketplace: NftMarketplace.fractal,
     name: collection.title,
     thumbnail: collection.avatar.url,
-    website: `https://www.fractal.is/${collection.handle}`,
+    website: `https://www.fractal.is/${encodeURIComponent(collection.handle)}`,
     parent: collection.parent,
     price: stats.floorPrice,
     volume: stats.totalSalesVolume,

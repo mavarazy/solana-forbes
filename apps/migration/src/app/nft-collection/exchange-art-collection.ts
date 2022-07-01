@@ -57,13 +57,13 @@ const getAllExchangeArtStats = async (
 const getAllExchangeArtCollections = async (): Promise<
   ExchangeArtCollection[]
 > => {
+  const url =
+    'https://api.exchange.art/v2/sales/collections/leaderboard?offset=0&limit=10000&verbosity=1&period=365d&category=';
   try {
     console.log('Sending request');
     const {
       data: { leaderboard },
-    } = await axios.get<{ leaderboard: ExchangeArtCollection[] }>(
-      'https://api.exchange.art/v2/sales/collections/leaderboard?offset=0&limit=10000&verbosity=1&period=365d&category='
-    );
+    } = await axios.get<{ leaderboard: ExchangeArtCollection[] }>(url);
     console.log('Fetched ', leaderboard.length);
     return leaderboard;
   } catch (err) {
@@ -71,7 +71,9 @@ const getAllExchangeArtCollections = async (): Promise<
       err,
       NftMarketplace.exchageart,
       'getAllExchangeArtCollections',
-      {}
+      {
+        url,
+      }
     );
   }
   return [];

@@ -75,7 +75,9 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
     const {
       data: { items },
     } = await axios.get<{ items: SolanaArtListedItem[] }>(
-      `https://api.solanart.io/get_nft?collection=${url}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
+      `https://api.solanart.io/get_nft?collection=${encodeURIComponent(
+        url
+      )}&page=0&limit=1&order=price-ASC&min=0&max=99999&search=&listed=true&fits=all`
     );
 
     if (items.length === 0) {
@@ -97,7 +99,9 @@ const getCollectionSymbol = async (url: string): Promise<string | null> => {
 const getSolanaPrice = async (
   collection: SolanaArtCollection
 ): Promise<SolanaArtPrice> => {
-  const url = `https://api.solanart.io/get_floor_price?collection=${collection.url}`;
+  const url = `https://api.solanart.io/get_floor_price?collection=${encodeURIComponent(
+    collection.url
+  )}`;
   try {
     const { data: price } = await axios.get<SolanaArtPrice>(url);
     return price;
@@ -162,8 +166,12 @@ export const getSolanaArtCollections = async (): Promise<
       id: collection.url,
       marketplace: NftMarketplace.solanart,
       name: collection.name,
-      website: `https://solanart.io/collections/${collection.url}`,
-      thumbnail: `https://data.solanart.io/img/collections/${collection.url}.webp`,
+      website: `https://solanart.io/collections/${encodeURIComponent(
+        collection.url
+      )}`,
+      thumbnail: `https://data.solanart.io/img/collections/${encodeURIComponent(
+        collection.url
+      )}.webp`,
       symbol,
     };
     const volume = volumeByUrl[collection.url];

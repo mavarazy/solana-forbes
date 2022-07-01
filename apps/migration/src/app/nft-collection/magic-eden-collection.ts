@@ -43,7 +43,9 @@ interface MagicEdenEscrowStats {
 const getMagicEdenEscrowStats = async (
   collection: MagicEdenCollection
 ): Promise<MagicEdenEscrowStats | null> => {
-  const url = `https://api-mainnet.magiceden.dev/v2/collections/${collection.symbol}/stats`;
+  const url = `https://api-mainnet.magiceden.dev/v2/collections/${encodeURIComponent(
+    collection.symbol
+  )}/stats`;
   try {
     const { data: stats } = await axios.get<MagicEdenEscrowStats>(url);
     console.log('Got stats for ', collection.name);
@@ -86,9 +88,6 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
     collections.map((collection) => async () => {
       const stats = await getMagicEdenEscrowStats(collection);
       if (!stats) {
-        console.log(
-          `Missing ${collection.name} https://magiceden.io/marketplace/${collection.symbol}`
-        );
         return null;
       }
 

@@ -32,7 +32,9 @@ interface DigitalEyeOffer {
 const getCollectionPrice = async (
   collection: string
 ): Promise<number | null> => {
-  const url = `https://us-central1-digitaleyes-prod.cloudfunctions.net/offers-retriever?collection=${collection}&price=asc`;
+  const url = `https://us-central1-digitaleyes-prod.cloudfunctions.net/offers-retriever?collection=${encodeURIComponent(
+    collection
+  )}&price=asc`;
   try {
     console.log('Checking collection', collection);
     const { data: offer } = await axios.get<DigitalEyeOffer>(url);
