@@ -29,9 +29,12 @@ axiosRetry(axios, {
 
 const execute = async () => {
   try {
-    await updateNftCollectionPrice();
-    await updateWalletEvaluation();
-    await updateTokenWorthSummary();
+    await Promise.all([
+      updateNftCollectionPrice(),
+      updateWalletEvaluation().then(() => {
+        updateTokenWorthSummary();
+      }),
+    ]);
   } catch (err) {
     console.error(err);
   }
