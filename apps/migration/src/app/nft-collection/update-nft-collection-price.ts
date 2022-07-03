@@ -6,27 +6,37 @@ import { getMagicEdenPrices } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
 import { getSolPortCollections } from './solport-collection';
 import { getSolSeaCollections } from './solsea-collection';
-import { NftCollectionPrice } from '@forbex-nxr/types';
 import { NftCollectionRepository } from './nft-collection-repository';
 
 export const updateNftCollectionPrice = async () => {
   console.log('Nft collection price update start');
-  const prices = await Promise.all([
-    getMagicEdenPrices().catch(() => []),
-    getFractalCollections().catch(() => []),
-    getAlphArtCollections().catch(() => []),
-    getDigitalEyesCollections().catch(() => []),
-    getExchagenArtCollections().catch(() => []),
-    getSolanaArtCollections().catch(() => []),
-    getSolSeaCollections().catch(() => []),
-    getSolPortCollections().catch(() => []),
+
+  await Promise.all([
+    getMagicEdenPrices()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getFractalCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getAlphArtCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getDigitalEyesCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getExchagenArtCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getSolanaArtCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getSolSeaCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
+    getSolPortCollections()
+      .catch(() => [])
+      .then(NftCollectionRepository.updateInBatch),
   ]);
 
-  const allCollections: NftCollectionPrice[] = prices.reduce(
-    (agg: NftCollectionPrice[], prices) => agg.concat(prices),
-    []
-  );
-
-  await NftCollectionRepository.updateInBatch(allCollections);
   console.log('Nft collection price update finished');
 };
