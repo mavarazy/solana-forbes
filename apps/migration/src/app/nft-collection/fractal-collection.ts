@@ -47,7 +47,9 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
     const { data: projectStats } = await axios.get<FracatalStats>(url);
     return projectStats;
   } catch (err) {
-    trackNftError(err, NftMarketplace.fractal, 'getFractalStats', { id });
+    if (err?.response?.statsu !== 404) {
+      trackNftError(err, NftMarketplace.fractal, 'getFractalStats', { id });
+    }
   }
   return null;
 };
@@ -59,8 +61,22 @@ const getCollectionStats = async (
 ): Promise<NftCollectionPrice | null> => {
   const stats = await getFractalStats(collection.id);
 
+  const website = `https://www.fractal.is/${encodeURIComponent(
+    collection.handle
+  )}`;
+
   if (!stats) {
-    return null;
+    return {
+      id: collection.id,
+      marketplace: NftMarketplace.fractal,
+      name: collection.title,
+      thumbnail: collection.avatar.url,
+      website,
+      parent: collection.parent,
+      price: 0,
+      volume: 0,
+      supply: 0,
+    };
   }
 
   return {
@@ -68,11 +84,11 @@ const getCollectionStats = async (
     marketplace: NftMarketplace.fractal,
     name: collection.title,
     thumbnail: collection.avatar.url,
-    website: `https://www.fractal.is/${encodeURIComponent(collection.handle)}`,
+    website,
     parent: collection.parent,
-    price: stats.floorPrice,
-    volume: stats.totalSalesVolume,
-    supply: stats.totalListed,
+    price: stats.floorPrice || 0,
+    volume: stats.totalSalesVolume || 0,
+    supply: stats.totalListed || 0,
   };
 };
 
@@ -99,9 +115,7 @@ const getAllCollections = async (
       )
     );
 
-    return prices.filter(
-      (price): price is NftCollectionPrice => price !== null
-    );
+    return prices;
   } catch (err) {
     trackNftError(err, NftMarketplace.fractal, 'getAllCollections', {});
   }
