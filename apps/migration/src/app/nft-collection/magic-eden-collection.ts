@@ -85,26 +85,28 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
   console.log('Number of collections ', collections.length);
 
   return await throttle(
-    collections.map((collection) => async () => {
-      const stats = await getMagicEdenEscrowStats(collection);
-      if (!stats) {
-        return null;
-      }
+    collections
+      .filter((collection) => collection.symbol?.trim().length > 0)
+      .map((collection) => async () => {
+        const stats = await getMagicEdenEscrowStats(collection);
+        if (!stats) {
+          return null;
+        }
 
-      console.log(stats.volumeAll);
+        console.log(stats.volumeAll);
 
-      return {
-        id: collection.symbol,
-        marketplace: NftMarketplace.magiceden,
-        name: collection.name,
-        thumbnail: collection.image,
-        symbol: collection.symbol,
-        price: stats.floorPrice / LAMPORTS_PER_SOL || 0,
-        website: `https://magiceden.io/marketplace/${collection.symbol}`,
-        volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
-        supply: collection.totalItems || stats.listedCount,
-      };
-    }),
+        return {
+          id: collection.symbol,
+          marketplace: NftMarketplace.magiceden,
+          name: collection.name,
+          thumbnail: collection.image,
+          symbol: collection.symbol,
+          price: stats.floorPrice / LAMPORTS_PER_SOL || 0,
+          website: `https://magiceden.io/marketplace/${collection.symbol}`,
+          volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
+          supply: collection.totalItems || stats.listedCount,
+        };
+      }),
     1000,
     10
   );

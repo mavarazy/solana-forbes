@@ -42,10 +42,12 @@ const getCollectionPrice = async (
 
     return Number(offer.price_floor) / LAMPORTS_PER_SOL;
   } catch (err) {
-    trackNftError(err, NftMarketplace.digitaleyes, 'getCollectionPrice', {
-      collection,
-      url,
-    });
+    if (err?.response?.status !== 500) {
+      trackNftError(err, NftMarketplace.digitaleyes, 'getCollectionPrice', {
+        collection,
+        url,
+      });
+    }
   }
   return null;
 };
@@ -85,22 +87,20 @@ export const getDigitalEyesCollections = async (): Promise<
     collections.map(
       (collection) => async (): Promise<NftCollectionPrice | null> => {
         const floorPrice = await getCollectionPrice(collection.name);
-        if (floorPrice) {
-          const slug = collection.name.replace(/\s/g, '-');
-          const collectionPrice = {
-            id: collection.collectionId,
-            name: collection.name,
-            website: `https://digitaleyes.market/collections/${slug}`,
-            marketplace: NftMarketplace.digitaleyes,
-            thumbnail: parseThumbnail(collection.thumbnail),
-            price: floorPrice,
-            volume: collection.volumeTotal / LAMPORTS_PER_SOL,
-            supply: 0,
-          };
+        const slug = collection.name.replace(/\s/g, '-');
 
-          return collectionPrice;
-        }
-        return null;
+        const collectionPrice = {
+          id: collection.collectionId,
+          name: collection.name,
+          website: `https://digitaleyes.market/collections/${slug}`,
+          marketplace: NftMarketplace.digitaleyes,
+          thumbnail: parseThumbnail(collection.thumbnail),
+          price: floorPrice || 0,
+          volume: collection.volumeTotal / LAMPORTS_PER_SOL || 0,
+          supply: 0,
+        };
+
+        return collectionPrice;
       }
     ),
     1000,
