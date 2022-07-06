@@ -47,7 +47,7 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
     const { data: projectStats } = await axios.get<FracatalStats>(url);
     return projectStats;
   } catch (err) {
-    if (err?.response?.statsu !== 404) {
+    if (err?.response?.status !== 404) {
       trackNftError(err, NftMarketplace.fractal, 'getFractalStats', { id });
     }
   }
@@ -139,7 +139,7 @@ export const getFractalCollections = async (): Promise<
 
     return Promise.all(allPrices);
   } catch (err) {
-    console.error(err);
+    trackNftError(err, NftMarketplace.fractal, 'getFractalCollections', {});
     return [];
   }
 };
