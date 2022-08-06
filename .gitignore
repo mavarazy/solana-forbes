@@ -43,3 +43,6 @@ Thumbs.db
 schema.json
 
 **/assets
+
+# Next.js
+.next

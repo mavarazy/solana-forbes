@@ -5,16 +5,16 @@
   "targets": {
     "build": {
       "executor": "@nrwl/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/app",
         "outputPath": "dist/apps/app"
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "outputPath": "apps/app"
+        },
         "production": {}
       }
     },
@@ -44,9 +44,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/app"
-      ],
+      "outputs": ["coverage/apps/app"],
       "options": {
         "jestConfig": "apps/app/jest.config.ts",
         "passWithNoTests": true
@@ -54,13 +52,9 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/app/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/app/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
