@@ -78,9 +78,10 @@ export const getSolPortCollections = async (): Promise<
   return collections.map<NftCollectionPrice>((collection) => ({
     id: `SOLPORT-${collection.id}`,
     marketplace: NftMarketplace.solport,
+    marketplaceUrl: `https://solport.io/collection/${collection.route}`,
+    website: `https://solport.io/collection/${collection.route}`,
     name: collection.name,
     thumbnail: collection.cdn_image,
-    website: `https://solport.io/collection/${collection.route}`,
     price: collection.floor,
     volume: collection.volume,
     supply: collection.items,

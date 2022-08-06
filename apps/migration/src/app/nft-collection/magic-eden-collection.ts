@@ -17,6 +17,7 @@ interface MagicEdenCollection {
   name: string;
   totalItems: number;
   twitter: string;
+  website?: string;
   updatedAt: string;
   watchlistCount: number;
   volumeAll: number;
@@ -87,7 +88,7 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
   return await throttle(
     collections
       .filter((collection) => collection.symbol?.trim().length > 0)
-      .map((collection) => async () => {
+      .map((collection) => async (): Promise<NftCollectionPrice | null> => {
         const stats = await getMagicEdenEscrowStats(collection);
         if (!stats) {
           return null;
@@ -102,7 +103,10 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
           thumbnail: collection.image,
           symbol: collection.symbol,
           price: stats.floorPrice / LAMPORTS_PER_SOL || 0,
-          website: `https://magiceden.io/marketplace/${collection.symbol}`,
+          website:
+            collection.website ??
+            `https://magiceden.io/marketplace/${collection.symbol}`,
+          marketplaceUrl: `https://magiceden.io/marketplace/${collection.symbol}`,
           volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
           supply: collection.totalItems || stats.listedCount,
         };

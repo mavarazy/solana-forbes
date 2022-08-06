@@ -23,11 +23,11 @@ interface SolSeaCollection {
   title: string;
   twitter: string;
   discord: string;
-  telegram: '';
-  instagram: '';
-  website: 'https://yutomo.net/';
-  symbol: '';
-  standard: '';
+  telegram: string;
+  instagram: string;
+  website: string;
+  symbol: string;
+  standard: string;
   supply: null | number;
   initialPrice: null | number;
   reported: null;
@@ -106,9 +106,10 @@ const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
 
 const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
   id: collection._id,
-  website: `https://solsea.io/collection/${collection._id}`,
   price: collection.floorPrice / LAMPORTS_PER_SOL || 0,
+  website: collection.website,
   marketplace: NftMarketplace.solsea,
+  marketplaceUrl: `https://solsea.io/collection/${collection._id}`,
   name: collection.title,
   volume: collection.volume || 0,
   supply: collection.nftCount,

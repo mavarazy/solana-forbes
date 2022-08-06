@@ -8,7 +8,8 @@ export interface NftCollectionPrice {
   parent?: string;
   thumbnail?: string | null;
   symbol?: string | null;
-  website?: string | null;
+  website: string;
+  marketplaceUrl?: string | null;
   price: number;
   volume: number;
   supply: number;

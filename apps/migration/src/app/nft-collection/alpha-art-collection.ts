@@ -9,6 +9,7 @@ interface AlphaArtCollection {
   title: string;
   thumbnail: string;
   totalItems: number;
+  links?: string[];
   addedAt: string;
   listedCount: string;
   floorPrice: string;
@@ -92,7 +93,7 @@ export const getAlphArtCollections = async (): Promise<
         return null;
       }
 
-      const price = {
+      return {
         id: collection.id,
         marketplace: NftMarketplace.alphart,
         name: collection.title,
@@ -100,11 +101,12 @@ export const getAlphArtCollections = async (): Promise<
         symbol: collection.slug,
         price: floorPrice / LAMPORTS_PER_SOL || 0,
         volume: volume / LAMPORTS_PER_SOL || 0,
-        website: `https://alpha.art/collection/${collection.slug}`,
+        website:
+          collection.links?.[0] ??
+          `https://alphart.market/collections/${collection.slug}`,
+        marketplaceUrl: `https://alpha.art/collection/${collection.slug}`,
         supply: collection.totalItems,
       };
-
-      return price;
     })
   );
 

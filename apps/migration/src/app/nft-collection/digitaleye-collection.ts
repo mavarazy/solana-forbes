@@ -89,18 +89,17 @@ export const getDigitalEyesCollections = async (): Promise<
         const floorPrice = await getCollectionPrice(collection.name);
         const slug = collection.name.replace(/\s/g, '-');
 
-        const collectionPrice = {
+        return {
           id: collection.collectionId,
           name: collection.name,
-          website: `https://digitaleyes.market/collections/${slug}`,
+          website: collection.website,
           marketplace: NftMarketplace.digitaleyes,
+          marketplaceUrl: `https://digitaleyes.market/collections/${slug}`,
           thumbnail: parseThumbnail(collection.thumbnail),
           price: floorPrice || 0,
           volume: collection.volumeTotal / LAMPORTS_PER_SOL || 0,
           supply: 0,
         };
-
-        return collectionPrice;
       }
     ),
     1000,

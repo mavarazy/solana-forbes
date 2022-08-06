@@ -22,7 +22,7 @@ interface ExchangeArtCollection {
   tertiaryCategory: string;
   thumbnailPath: string;
   twitter: string;
-  website: string;
+  website?: string;
 }
 
 interface ExchangeArtStats {
@@ -117,7 +117,10 @@ export const getExchagenArtCollections = async (): Promise<
       const collectionPrice: NftCollectionPrice = {
         id: collection.id,
         name: collection.name,
-        website: `https://exchange.art/series/${collection.name}`,
+        website:
+          collection.website ??
+          `https://exchange.art/series/${collection.name}`,
+        marketplaceUrl: `https://exchange.art/series/${collection.name}`,
         price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
         thumbnail: collection.thumbnailPath
           ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`

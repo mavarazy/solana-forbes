@@ -55,7 +55,10 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
 };
 
 const getCollectionStats = async (
-  collection: Pick<FractalCollection, 'id' | 'title' | 'avatar' | 'handle'> & {
+  collection: Pick<
+    FractalCollection,
+    'id' | 'title' | 'avatar' | 'handle' | 'social'
+  > & {
     parent: string;
   }
 ): Promise<NftCollectionPrice | null> => {
@@ -71,7 +74,8 @@ const getCollectionStats = async (
       marketplace: NftMarketplace.fractal,
       name: collection.title,
       thumbnail: collection.avatar.url,
-      website,
+      website: collection.social.web ?? website,
+      marketplaceUrl: website,
       parent: collection.parent,
       price: 0,
       volume: 0,
@@ -84,7 +88,8 @@ const getCollectionStats = async (
     marketplace: NftMarketplace.fractal,
     name: collection.title,
     thumbnail: collection.avatar.url,
-    website,
+    website: collection.social.web ?? website,
+    marketplaceUrl: website,
     parent: collection.parent,
     price: stats.floorPrice || 0,
     volume: stats.totalSalesVolume || 0,
@@ -111,6 +116,7 @@ const getAllCollections = async (
           avatar: collection.avatar,
           handle: collection.handle,
           parent: collection.title,
+          social: collection.social,
         })
       )
     );

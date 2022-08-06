@@ -7,7 +7,7 @@ import { NumberUtils } from '../utils';
 
 export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   thumbnail,
-  website,
+  marketplaceUrl,
   name,
   price,
   parent,
@@ -18,7 +18,7 @@ export const NFTCollectionCard: React.FC<NftCollectionPrice> = ({
   <Card>
     <a
       className="flex flex-col justify-center text-center"
-      href={website}
+      href={marketplaceUrl}
       target="_blank"
       rel="noreferrer"
     >

@@ -164,9 +164,10 @@ export const getSolanaArtCollections = async (): Promise<
     const symbol = await getCollectionSymbol(collection.url);
     const base: Omit<NftCollectionPrice, 'supply' | 'volume' | 'price'> = {
       id: collection.url,
-      marketplace: NftMarketplace.solanart,
       name: collection.name,
-      website: `https://solanart.io/collections/${encodeURIComponent(
+      website: collection.website,
+      marketplace: NftMarketplace.solanart,
+      marketplaceUrl: `https://solanart.io/collections/${encodeURIComponent(
         collection.url
       )}`,
       thumbnail: `https://data.solanart.io/img/collections/${encodeURIComponent(

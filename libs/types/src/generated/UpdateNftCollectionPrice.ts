@@ -16,6 +16,7 @@ export interface UpdateNftCollectionPrice_update_nft_collection_price_by_pk {
   name: string;
   price: general.numeric;
   marketplace: NftMarketplace;
+  marketplaceUrl: string | null;
   symbol: string | null;
   website: string | null;
   thumbnail: string | null;
@@ -44,6 +45,7 @@ export interface UpdateNftCollectionPriceVariables {
   symbol?: string | null;
   website?: string | null;
   thumbnail?: string | null;
+  marketplaceUrl?: string | null;
   marketplace: NftMarketplace;
   price: general.numeric;
   parent?: string | null;

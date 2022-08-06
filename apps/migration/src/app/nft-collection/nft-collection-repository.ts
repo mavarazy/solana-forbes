@@ -26,6 +26,7 @@ const UpdateNftCollectionPriceQuery = gql`
     $symbol: String
     $website: String
     $thumbnail: String
+    $marketplaceUrl: String
     $marketplace: nft_marketplace_enum!
     $price: numeric!
     $parent: String
@@ -40,6 +41,7 @@ const UpdateNftCollectionPriceQuery = gql`
         name: $name
         symbol: $symbol
         website: $website
+        marketplaceUrl: $marketplaceUrl
         thumbnail: $thumbnail
         parent: $parent
         volume: $volume
@@ -50,6 +52,7 @@ const UpdateNftCollectionPriceQuery = gql`
       name
       price
       marketplace
+      marketplaceUrl
       symbol
       website
       thumbnail
@@ -77,6 +80,7 @@ const InsertNftCollectionPriceQuery = gql`
     $name: String
     $symbol: String
     $marketplace: nft_marketplace_enum!
+    $marketplaceUrl: String
     $website: String
     $thumbnail: String
     $parent: String
@@ -92,6 +96,7 @@ const InsertNftCollectionPriceQuery = gql`
         price: $price
         website: $website
         marketplace: $marketplace
+        marketplaceUrl: $marketplaceUrl
         symbol: $symbol
         thumbnail: $thumbnail
         parent: $parent
@@ -107,6 +112,7 @@ const InsertNftCollectionPriceQuery = gql`
       name
       price
       marketplace
+      marketplaceUrl
       website
       thumbnail
       volume
