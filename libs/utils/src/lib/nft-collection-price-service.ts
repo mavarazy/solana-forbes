@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice } from '@solana-forbes/types';
 import { Prices } from './nft-collection-price-map';
 
 type NftCollectionPriceProjection = Pick<

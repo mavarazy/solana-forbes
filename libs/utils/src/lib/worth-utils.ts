@@ -1,4 +1,4 @@
-import { TokenPrice, TokenWorthSummary } from '@forbex-nxr/types';
+import { TokenPrice, TokenWorthSummary } from '@solana-forbes/types';
 
 const getTokenWorth = (amount: number, price: TokenPrice) => {
   const baseWorth = amount * price.usd;

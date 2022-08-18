@@ -1,4 +1,8 @@
-import { NftWorth, TokenWorthSummary, WalletBalance } from '@forbex-nxr/types';
+import {
+  NftWorth,
+  TokenWorthSummary,
+  WalletBalance,
+} from '@solana-forbes/types';
 import { NextPage } from 'next';
 import {
   NFTWorthService,
@@ -7,7 +11,7 @@ import {
   TokenWorthService,
   WalletService,
   WorthUtils,
-} from '@forbex-nxr/utils';
+} from '@solana-forbes/utils';
 import { Reducer, useEffect, useReducer, useState } from 'react';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

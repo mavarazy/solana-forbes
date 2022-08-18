@@ -6,8 +6,8 @@ import {
   NftCollectionPrice,
   UpdateNftCollectionPrice,
   UpdateNftCollectionPriceVariables,
-} from '@forbex-nxr/types';
-import { hasuraClient, throttle } from '@forbex-nxr/utils';
+} from '@solana-forbes/types';
+import { hasuraClient, throttle } from '@solana-forbes/utils';
 import * as Sentry from '@sentry/node';
 import { format } from 'date-fns';
 

@@ -1,5 +1,5 @@
 {
-  "npmScope": "forbex-nxr",
+  "npmScope": "solana-forbes",
   "affected": {
     "defaultBase": "main"
   },
@@ -44,7 +44,12 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },

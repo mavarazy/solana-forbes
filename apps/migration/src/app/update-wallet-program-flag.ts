@@ -1,11 +1,15 @@
 import { gql } from '@apollo/client';
-import { hasuraClient, ProgramFlagService, throttle } from '@forbex-nxr/utils';
+import {
+  hasuraClient,
+  ProgramFlagService,
+  throttle,
+} from '@solana-forbes/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
 import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';
 import {
   GetAllWalletsUpdatedBefore,
   GetAllWalletsUpdatedBeforeVariables,
-} from '@forbex-nxr/types';
+} from '@solana-forbes/types';
 
 const UpdateWalletProgramFlagQuery = gql`
   mutation UpdateWalletProgramFlagById($id: String!, $program: Boolean!) {

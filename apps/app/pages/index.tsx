@@ -1,8 +1,8 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesList } from '../components/forbes-table';
-import { hasuraClient } from '@forbex-nxr/utils';
-import { WalletBalance } from '@forbex-nxr/types';
+import { hasuraClient } from '@solana-forbes/utils';
+import { WalletBalance } from '@solana-forbes/types';
 import { TokenInfo } from '@solana/spl-token-registry';
 import Head from 'next/head';
 import { GetLargestWalletsQuery } from '../utils/get-largest-wallet';

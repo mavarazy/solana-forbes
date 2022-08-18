@@ -1,4 +1,4 @@
-import { WalletBalance } from '@forbex-nxr/types';
+import { WalletBalance } from '@solana-forbes/types';
 import { AddressLink } from '../address-link';
 import { NftPanel } from '../nft-panel';
 import { TokenPanel } from '../token-panel';

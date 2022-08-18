@@ -1,5 +1,9 @@
 import { Connection, PublicKey } from '@solana/web3.js';
-import { NftWorth, TokenWorthSummary, WalletBalance } from '@forbex-nxr/types';
+import {
+  NftWorth,
+  TokenWorthSummary,
+  WalletBalance,
+} from '@solana-forbes/types';
 import { TokenWorthService } from './token-worth-service';
 import { ProgramFlagService } from './program-flag-service';
 import { NFTWorthService } from './nft-worth-service';

@@ -1,4 +1,4 @@
-import { TokenPrice, TokenPriceMap } from '@forbex-nxr/types';
+import { TokenPrice, TokenPriceMap } from '@solana-forbes/types';
 import { TokenListProvider } from '@solana/spl-token-registry';
 import { TokenToSupply } from './token-to-supply';
 

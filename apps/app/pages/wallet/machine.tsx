@@ -1,12 +1,12 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { ForbesList } from '../../components/forbes-table';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { hasuraClient } from '@solana-forbes/utils';
 import {
   GetLargestWalletWithFlag,
   GetLargestWalletWithFlagVariables,
   WalletBalance,
-} from '@forbex-nxr/types';
+} from '@solana-forbes/types';
 import { TokenInfo } from '@solana/spl-token-registry';
 import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet-with-flag-query';
 import Head from 'next/head';

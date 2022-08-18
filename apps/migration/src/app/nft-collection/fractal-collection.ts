@@ -1,4 +1,4 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
 

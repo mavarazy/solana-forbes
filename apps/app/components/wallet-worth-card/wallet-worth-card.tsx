@@ -1,4 +1,4 @@
-import { WalletBalance } from '@forbex-nxr/types';
+import { WalletBalance } from '@solana-forbes/types';
 import React from 'react';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';

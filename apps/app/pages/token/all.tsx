@@ -1,11 +1,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import { TokenWorth } from '@forbex-nxr/types';
+import { TokenWorth } from '@solana-forbes/types';
 import { TokenWorthCard } from '../../components/token-worth-card';
 import { faWallet } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gql } from '@apollo/client';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { hasuraClient } from '@solana-forbes/utils';
 import Head from 'next/head';
 import { Badge } from '../../components/badge';
 

@@ -1,5 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { throttle } from '@forbex-nxr/utils';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { throttle } from '@solana-forbes/utils';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import axios from 'axios';

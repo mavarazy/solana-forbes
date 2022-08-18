@@ -1,6 +1,6 @@
 import { AccountLayout, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
-import { TokenWorth, TokenWorthSummary } from '@forbex-nxr/types';
+import { TokenWorth, TokenWorthSummary } from '@solana-forbes/types';
 import { PriceService } from './price-service';
 import { WorthUtils } from './worth-utils';
 

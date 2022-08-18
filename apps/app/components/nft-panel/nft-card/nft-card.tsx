@@ -1,4 +1,4 @@
-import { NftWorth } from '@forbex-nxr/types';
+import { NftWorth } from '@solana-forbes/types';
 import {
   faFingerprint,
   faPrint,

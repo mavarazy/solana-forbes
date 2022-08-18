@@ -1,4 +1,4 @@
-import { NftMarketplace } from '@forbex-nxr/types';
+import { NftMarketplace } from '@solana-forbes/types';
 import { SVGProps } from 'react';
 import { ReactComponent as MagicEdenImg } from './images/magic-eden.svg';
 import { ReactComponent as SolSeaImg } from './images/solsea.svg';

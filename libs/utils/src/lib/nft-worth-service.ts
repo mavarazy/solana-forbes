@@ -1,6 +1,6 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Nft, Metaplex } from '@metaplex-foundation/js-next';
-import { TokenWorth, NftWorth } from '@forbex-nxr/types';
+import { TokenWorth, NftWorth } from '@solana-forbes/types';
 import { NftCollectionWorthService } from './nft-collection-price-service';
 import { throttle } from './throttle';
 
