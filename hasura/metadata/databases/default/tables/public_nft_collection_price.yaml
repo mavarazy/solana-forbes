@@ -1,0 +1,14 @@
+table:
+  name: nft_collection_price
+  schema: public
+configuration:
+  column_config:
+    marketplace_url:
+      custom_name: marketplaceUrl
+  custom_column_names:
+    marketplace_url: marketplaceUrl
+  custom_root_fields: {}
+object_relationships:
+  - name: nft_marketplace
+    using:
+      foreign_key_constraint_on: marketplace

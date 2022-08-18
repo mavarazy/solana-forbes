@@ -1,0 +1,3 @@
+table:
+  name: token_worth_summary
+  schema: public

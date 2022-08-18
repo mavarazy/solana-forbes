@@ -1,0 +1,8 @@
+- "!include public_nft_collection.yaml"
+- "!include public_nft_collection_price.yaml"
+- "!include public_nft_collection_price_change.yaml"
+- "!include public_nft_collection_price_stats.yaml"
+- "!include public_nft_collection_social.yaml"
+- "!include public_nft_marketplace.yaml"
+- "!include public_token_worth_summary.yaml"
+- "!include public_wallet.yaml"

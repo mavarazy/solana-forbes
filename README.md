@@ -1,94 +1,57 @@
+# About
 
+  This is a pet project of mine, exploring Solana Web3 libraries and related DeFi ecosystem. A crypto Forbes, with net worth and anonymity.
 
-# ForbexNxr
+## Wallet sources
 
-This project was generated using [Nx](https://nx.dev).
+  To get a list of top accounts Solana native ```getTokenLargestAccounts``` was used for all tokens in official Solana [token list](https://github.com/solana-labs/token-list). This is not ideal and most likely missed few accounts here and ther, but for MVP it was good enough.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Token price estimate
 
-🔎 **Smart, Fast and Extensible Build System**
+  For token estimates 2 sources were used
 
-## Adding capabilities to your workspace
+- [Coingecko](https://coingecko.com/)
+- [Raydium](https://raydium.io/)
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Both would be only partially reliable, because again for both official Solana token list was used. Coin Gecko ```extensions.coingeckoId``` was used as a primary reference, and for Raydium ```symbol``` was used for pair matching.
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Token list is not verified, and does not guarantee uniqueness of
+data, so both symbol or coingeckoId can be repeated as many times as
+possible.Anyone can state any coingeckoId and create a token on
+mainnet-beta, without any verification.
 
-Below are our core plugins:
+Some additional correction for token worth estimate was made, based
+on market capitalization of the token.
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+- If market capitalization is 0, maximum estimate token worth is $100 000.
+- If person holds significant percentage of specified Token, this percentage in capitalization is taken in account.
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+Without thouse corrections some accounts were counted to trillions of dollars.
 
-## Generate an application
+## NFT price estimates
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+There is no direct way to estimate NFT price on Solana, so to solve this few marketplaces were scrapped for collection floor prices, and best matched to the NFT. Matching mechanism is based on collection, family, name or symbol. List of scrapped NFT marketplaces follows.
 
-> You can use any of the plugins above to generate applications as well.
+- [Magic Eden](https://magiceden.io/)
+- [Solana Art](https://solanart.io/)
+- [Solsea](https://solsea.io/)
+- [Digital Eyes](https://digitaleyes.market/)
+- [Exchange Art](https://exchange.art/)
+- [Alpha Art](https://alpha.art/)
+- [Fractal](https://www.fractal.is/)
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+## Machine vs People
 
-## Generate a library
+  To distinguish accounts of contracts from those of real people, average slot difference was used to calculate average transaction frequency, which is expected to be much higher for a machine.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+# Tech
 
-> You can also use any of the plugins above to generate libraries as well.
+The project is written in:
+- [NX.dev](https://nx.dev/) for monorepo
+- Hasura as a data layer (hasura folder)
+- React with next.js
+- Node for updating NFT collection prices, wallet evaluation
 
-Libraries are shareable across libraries and applications. They can be imported from `@solana-forbes/mylib`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Deployment
+- [Vercel](https://vercel.app/) for hosting next.js
+- [Render](https://render.com/) for hasura and update tasks

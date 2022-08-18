@@ -1,0 +1,3 @@
+table:
+  name: nft_collection_price_change
+  schema: public

@@ -1,18 +1,16 @@
 import { NftMarketplace } from '../generated/globalTypes';
 import { uuid } from './common';
+import { NftCollection } from './nft-collection';
 
 export interface NftCollectionPrice {
   id: string;
+  web: string;
   marketplace: NftMarketplace;
-  name: string;
-  parent?: string;
-  thumbnail?: string | null;
-  symbol?: string | null;
-  website: string;
-  marketplaceUrl?: string | null;
+  marketplaceUrl: string;
   price: number;
   volume: number;
   supply: number;
+  collection: NftCollection;
 }
 
 export type NftCollectionPriceChange = {

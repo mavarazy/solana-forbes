@@ -1,0 +1,11 @@
+table:
+  name: nft_collection
+  schema: public
+object_relationships:
+  - name: social
+    using:
+      foreign_key_constraint_on:
+        column: web
+        table:
+          name: nft_collection_social
+          schema: public
