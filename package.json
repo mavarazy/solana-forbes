@@ -1,5 +1,5 @@
 {
-  "name": "forbex-nxr",
+  "name": "solana-forbes",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -36,6 +36,7 @@
     "debug": "^4.3.4",
     "delay": "^5.0.0",
     "next": "12.2.3",
+    "normalize-url": "^7.0.3",
     "postcss": "^8.4.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",

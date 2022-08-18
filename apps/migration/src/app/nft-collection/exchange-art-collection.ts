@@ -1,5 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { throttle } from '@forbex-nxr/utils';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { throttle } from '@solana-forbes/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
@@ -114,21 +114,30 @@ export const getExchagenArtCollections = async (): Promise<
         return agg;
       }
 
+      const web =
+        collection.website ?? `https://exchange.art/series/${collection.name}`;
+      const thumbnail = collection.thumbnailPath
+        ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`
+        : null;
+
       const collectionPrice: NftCollectionPrice = {
         id: collection.id,
-        name: collection.name,
-        website:
-          collection.website ??
-          `https://exchange.art/series/${collection.name}`,
+        web,
         marketplaceUrl: `https://exchange.art/series/${collection.name}`,
         price: (price.floorPrice || price.highestSale) / LAMPORTS_PER_SOL,
-        thumbnail: collection.thumbnailPath
-          ? `https://images-cdn.exchange.art/${collection.thumbnailPath}`
-          : null,
-        symbol: price.symbol,
         marketplace: NftMarketplace.exchageart,
         volume: price.totalVolume / LAMPORTS_PER_SOL,
         supply: 0,
+        collection: {
+          web,
+          name: collection.name,
+          thumbnail,
+          symbol: price.symbol,
+          social: {
+            web,
+            twitter: collection.twitter,
+          },
+        },
       };
 
       agg.push(collectionPrice);

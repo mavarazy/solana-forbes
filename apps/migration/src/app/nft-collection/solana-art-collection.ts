@@ -1,5 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { throttle } from '@forbex-nxr/utils';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { throttle } from '@solana-forbes/utils';
 import { Metaplex } from '@metaplex-foundation/js-next';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import axios from 'axios';
@@ -162,19 +162,26 @@ export const getSolanaArtCollections = async (): Promise<
 
   const collectionPriceTasks = collections.map((collection) => async () => {
     const symbol = await getCollectionSymbol(collection.url);
+    const colUrl = encodeURIComponent(collection.url);
+
     const base: Omit<NftCollectionPrice, 'supply' | 'volume' | 'price'> = {
       id: collection.url,
-      name: collection.name,
-      website: collection.website,
+      web: collection.website,
       marketplace: NftMarketplace.solanart,
-      marketplaceUrl: `https://solanart.io/collections/${encodeURIComponent(
-        collection.url
-      )}`,
-      thumbnail: `https://data.solanart.io/img/collections/${encodeURIComponent(
-        collection.url
-      )}.webp`,
-      symbol,
+      marketplaceUrl: `https://solanart.io/collections/${colUrl}`,
+      collection: {
+        web: collection.website,
+        name: collection.name,
+        description: collection.description,
+        thumbnail: `https://data.solanart.io/img/collections/${colUrl}.webp`,
+        symbol,
+        social: {
+          web: collection.website,
+          discord: collection.discord,
+        },
+      },
     };
+
     const volume = volumeByUrl[collection.url];
     if (volume) {
       const collectionPrice: NftCollectionPrice = {

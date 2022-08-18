@@ -1,4 +1,4 @@
-import { TokenWorth } from '@forbex-nxr/types';
+import { TokenWorth } from '@solana-forbes/types';
 import { NumberUtils } from '../utils';
 import { AddressLink } from '../address-link';
 import { TokenLogo } from '../token-logo';

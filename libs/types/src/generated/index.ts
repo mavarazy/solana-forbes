@@ -17,3 +17,6 @@ export * from './GetNftCollectionPricesByMarketplace';
 export * from './GetNftMarketplaceStats';
 export * from './GetNftCollectionPricesByMarketplace';
 export * from './GetNftCollectionPrices';
+export * from './GetNftCollectionPriceIds';
+export * from './InsertNftCollection';
+export * from './UpdateNftCollection';

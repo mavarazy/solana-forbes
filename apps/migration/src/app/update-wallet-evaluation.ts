@@ -1,8 +1,8 @@
 import {
   GetAllWalletsUpdatedBefore,
   GetAllWalletsUpdatedBeforeVariables,
-} from '@forbex-nxr/types';
-import { hasuraClient, throttle, WalletService } from '@forbex-nxr/utils';
+} from '@solana-forbes/types';
+import { hasuraClient, throttle, WalletService } from '@solana-forbes/utils';
 import { clusterApiUrl, Connection } from '@solana/web3.js';
 import delay from 'delay';
 import { GetAllWalletsUpdatedBeforeQuery } from './update-wallets';

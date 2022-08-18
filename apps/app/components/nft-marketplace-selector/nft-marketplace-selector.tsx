@@ -1,11 +1,11 @@
-import { NftMarketplace } from '@forbex-nxr/types';
+import { NftMarketplace } from '@solana-forbes/types';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import { classNames } from '../utils';
 
 interface NftMarketplaceSelectorProps {
   selected: NftMarketplace;
-  stats: Array<{ marketplace: string; count: BigInt }>;
+  stats: Array<{ marketplace: string; count: bigint }>;
 }
 
 export function NftMarketplaceSelector({

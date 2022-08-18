@@ -1,14 +1,14 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { gql } from '@apollo/client';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { hasuraClient } from '@solana-forbes/utils';
 import {
   GetNftCollectionPricesByMarketplace,
   GetNftCollectionPricesByMarketplaceVariables,
   GetNftMarketplaceStats,
   NftCollectionPrice,
   NftMarketplace,
-} from '@forbex-nxr/types';
+} from '@solana-forbes/types';
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../../components/nft-collection-card';
 import { Pagination } from '../../../components/pagination';
@@ -104,7 +104,7 @@ const NftMarketplacePage: NextPage<{
   marketplace: NftMarketplace;
   page: number;
   nfts: NftCollectionPrice[];
-  stats: Array<{ marketplace: NftMarketplace; count: BigInt }>;
+  stats: Array<{ marketplace: NftMarketplace; count: bigint }>;
   total: number;
 }> = ({ marketplace, page, nfts, total, stats }) => (
   <>

@@ -1,14 +1,14 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import { gql } from '@apollo/client';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { hasuraClient } from '@solana-forbes/utils';
 import {
   GetNftCollectionPrices,
   GetNftCollectionPricesVariables,
   GetNftMarketplaceStats,
   NftCollectionPrice,
   NftMarketplace,
-} from '@forbex-nxr/types';
+} from '@solana-forbes/types';
 import Head from 'next/head';
 import { NFTCollectionCard } from '../../../components/nft-collection-card';
 import { Pagination } from '../../../components/pagination';
@@ -93,7 +93,7 @@ export async function getStaticProps({ params: { page } }) {
 const NftMarketplacePage: NextPage<{
   page: number;
   nfts: NftCollectionPrice[];
-  stats: Array<{ marketplace: NftMarketplace; count: BigInt }>;
+  stats: Array<{ marketplace: NftMarketplace; count: bigint }>;
 }> = ({ page, nfts, stats }) => {
   const total = stats.reduce((sum, { count }) => sum + Number(count), 0);
 

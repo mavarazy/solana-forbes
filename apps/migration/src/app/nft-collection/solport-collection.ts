@@ -1,4 +1,4 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
 
@@ -75,15 +75,27 @@ export const getSolPortCollections = async (): Promise<
 > => {
   const collections = await getCollectionsPage([]);
   console.log('Extracted ', collections.length);
-  return collections.map<NftCollectionPrice>((collection) => ({
-    id: `SOLPORT-${collection.id}`,
-    marketplace: NftMarketplace.solport,
-    marketplaceUrl: `https://solport.io/collection/${collection.route}`,
-    website: `https://solport.io/collection/${collection.route}`,
-    name: collection.name,
-    thumbnail: collection.cdn_image,
-    price: collection.floor,
-    volume: collection.volume,
-    supply: collection.items,
-  }));
+  return collections.map<NftCollectionPrice>((collection) => {
+    const web = `https://solport.io/collection/${collection.route}`;
+    return {
+      id: `SOLPORT-${collection.id}`,
+      marketplace: NftMarketplace.solport,
+      marketplaceUrl: web,
+      web,
+      price: collection.floor,
+      volume: collection.volume,
+      supply: collection.items,
+      collection: {
+        web,
+        name: collection.name,
+        description: collection.description,
+        thumbnail: collection.cdn_image,
+        social: {
+          web,
+          discord: collection.discord,
+          twitter: collection.twitter,
+        },
+      },
+    };
+  });
 };

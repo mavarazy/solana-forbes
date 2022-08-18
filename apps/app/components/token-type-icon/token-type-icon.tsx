@@ -1,4 +1,4 @@
-import { TokenType } from '@forbex-nxr/types';
+import { TokenType } from '@solana-forbes/types';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faCode,

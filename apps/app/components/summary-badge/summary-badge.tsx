@@ -1,4 +1,4 @@
-import { TokenSummary } from '@forbex-nxr/types';
+import { TokenSummary } from '@solana-forbes/types';
 import { Badge } from '../badge';
 import { TokenTypeIcon } from '../token-type-icon';
 

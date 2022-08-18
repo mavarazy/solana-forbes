@@ -6,16 +6,16 @@
 import * as general from '../lib';
 
 // ====================================================
-// GraphQL query operation: GetNftCollectionIds
+// GraphQL query operation: GetNftCollectionPriceIds
 // ====================================================
 
-export interface GetNftCollectionIds_nft_collection {
+export interface GetNftCollectionPriceIds_nft_collection_price {
   id: string;
 }
 
-export interface GetNftCollectionIds {
+export interface GetNftCollectionPriceIds {
   /**
-   * fetch data from the table: "nft_collection"
+   * fetch data from the table: "nft_collection_price"
    */
-  nft_collection: GetNftCollectionIds_nft_collection[];
+  nft_collection_price: GetNftCollectionPriceIds_nft_collection_price[];
 }

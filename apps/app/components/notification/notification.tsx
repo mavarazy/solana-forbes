@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import {
   ForwardedRef,
   forwardRef,
@@ -27,7 +26,7 @@ export interface NotificationProps {
 }
 
 export const Notification = forwardRef(
-  (_: any, ref: ForwardedRef<NotificationProps>) => {
+  (_, ref: ForwardedRef<NotificationProps>) => {
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState('');
 

@@ -1,4 +1,4 @@
-import { NftCollectionPrice } from '@forbex-nxr/types';
+import { NftCollectionPrice } from '@solana-forbes/types';
 import { faHashtag, faSun } from '@fortawesome/pro-light-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from '../card';

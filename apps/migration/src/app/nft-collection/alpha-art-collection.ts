@@ -1,4 +1,4 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
@@ -93,19 +93,27 @@ export const getAlphArtCollections = async (): Promise<
         return null;
       }
 
+      const web =
+        collection.links?.[0] ??
+        `https://alphart.market/collections/${collection.slug}`;
+
       return {
         id: collection.id,
         marketplace: NftMarketplace.alphart,
-        name: collection.title,
-        thumbnail: collection.thumbnail,
-        symbol: collection.slug,
         price: floorPrice / LAMPORTS_PER_SOL || 0,
         volume: volume / LAMPORTS_PER_SOL || 0,
-        website:
-          collection.links?.[0] ??
-          `https://alphart.market/collections/${collection.slug}`,
+        web,
         marketplaceUrl: `https://alpha.art/collection/${collection.slug}`,
         supply: collection.totalItems,
+        collection: {
+          web,
+          name: collection.title,
+          thumbnail: collection.thumbnail,
+          symbol: collection.slug,
+          social: {
+            web,
+          },
+        },
       };
     })
   );

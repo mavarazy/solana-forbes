@@ -1,4 +1,8 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import {
+  NftCollection,
+  NftCollectionPrice,
+  NftMarketplace,
+} from '@solana-forbes/types';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
 
@@ -12,12 +16,33 @@ interface FractalCollection {
     url: string;
     height: number;
     width: number;
+    cover: string;
   };
-  social: {
+  banner: {
+    url: string;
+    height: number;
+    width: number;
+    cover: string;
+  };
+  socials: {
     web?: string;
     twitter?: string;
     discord?: string;
   };
+  about: {
+    yearFounded: string;
+    teamSize: string;
+    title: string;
+    description: string;
+    footerImage: string;
+  };
+  approved: boolean;
+  active: boolean;
+  iframeUrl: string;
+  proofOfJustin: string;
+  fractalRadio: string;
+  trailer: string;
+  doxxed: boolean;
 }
 
 interface FractalManagedCollection {
@@ -27,7 +52,7 @@ interface FractalManagedCollection {
   expectedTotalTokens: number;
   productId: string;
   rank: number;
-  visible: true;
+  visible: boolean;
 }
 
 interface FractalCollectionResponse {
@@ -55,45 +80,50 @@ const getFractalStats = async (id: string): Promise<FracatalStats | null> => {
 };
 
 const getCollectionStats = async (
-  collection: Pick<
-    FractalCollection,
-    'id' | 'title' | 'avatar' | 'handle' | 'social'
-  > & {
-    parent: string;
-  }
+  fractalCollection: FractalCollection,
+  fractalManagedCollection: FractalManagedCollection
 ): Promise<NftCollectionPrice | null> => {
-  const stats = await getFractalStats(collection.id);
+  const stats = await getFractalStats(fractalManagedCollection.id);
 
-  const website = `https://www.fractal.is/${encodeURIComponent(
-    collection.handle
-  )}`;
+  const handleUrl = encodeURIComponent(fractalCollection.handle);
+
+  const marketplaceUrl = `https://www.fractal.is/${handleUrl}`;
+  const web = fractalCollection.socials.web ?? marketplaceUrl;
+
+  const collection: NftCollection = {
+    web,
+    name: fractalCollection.title,
+    thumbnail: fractalCollection.avatar.url,
+    social: {
+      web,
+      discord: fractalCollection.socials.discord,
+      twitter: fractalCollection.socials.twitter,
+    },
+    parent: fractalCollection.title,
+  };
 
   if (!stats) {
     return {
-      id: collection.id,
+      id: fractalCollection.id,
+      web,
       marketplace: NftMarketplace.fractal,
-      name: collection.title,
-      thumbnail: collection.avatar.url,
-      website: collection.social.web ?? website,
-      marketplaceUrl: website,
-      parent: collection.parent,
+      marketplaceUrl,
       price: 0,
       volume: 0,
       supply: 0,
+      collection,
     };
   }
 
   return {
-    id: collection.id,
+    id: fractalCollection.id,
+    web,
     marketplace: NftMarketplace.fractal,
-    name: collection.title,
-    thumbnail: collection.avatar.url,
-    website: collection.social.web ?? website,
-    marketplaceUrl: website,
-    parent: collection.parent,
+    marketplaceUrl: marketplaceUrl,
     price: stats.floorPrice || 0,
     volume: stats.totalSalesVolume || 0,
     supply: stats.totalListed || 0,
+    collection,
   };
 };
 
@@ -110,15 +140,7 @@ const getAllCollections = async (
     );
 
     const prices = await Promise.all(
-      collections.map((managed) =>
-        getCollectionStats({
-          ...managed,
-          avatar: collection.avatar,
-          handle: collection.handle,
-          parent: collection.title,
-          social: collection.social,
-        })
-      )
+      collections.map((managed) => getCollectionStats(collection, managed))
     );
 
     return prices;

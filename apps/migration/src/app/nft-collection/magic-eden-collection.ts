@@ -1,5 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { throttle } from '@forbex-nxr/utils';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { throttle } from '@solana-forbes/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
@@ -95,20 +95,29 @@ export const getMagicEdenPrices = async (): Promise<NftCollectionPrice[]> => {
         }
 
         console.log(stats.volumeAll);
+        const web =
+          collection.website ??
+          `https://magiceden.io/marketplace/${collection.symbol}`;
 
         return {
+          web,
           id: collection.symbol,
           marketplace: NftMarketplace.magiceden,
-          name: collection.name,
-          thumbnail: collection.image,
-          symbol: collection.symbol,
           price: stats.floorPrice / LAMPORTS_PER_SOL || 0,
-          website:
-            collection.website ??
-            `https://magiceden.io/marketplace/${collection.symbol}`,
           marketplaceUrl: `https://magiceden.io/marketplace/${collection.symbol}`,
           volume: Math.round(stats.volumeAll / LAMPORTS_PER_SOL) || 0,
           supply: collection.totalItems || stats.listedCount,
+          collection: {
+            web,
+            name: collection.name,
+            thumbnail: collection.image,
+            symbol: collection.symbol,
+            social: {
+              web,
+              discord: collection.discord,
+              twitter: collection.twitter,
+            },
+          },
         };
       }),
     1000,

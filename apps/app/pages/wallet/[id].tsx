@@ -3,8 +3,8 @@ import {
   GetLargestWalletWithFlag,
   GetLargestWalletWithFlagVariables,
   WalletBalance,
-} from '@forbex-nxr/types';
-import { hasuraClient } from '@forbex-nxr/utils';
+} from '@solana-forbes/types';
+import { hasuraClient } from '@solana-forbes/utils';
 import { GetLargestWalletWithFlagQuery } from '../../utils/get-largest-wallet-with-flag-query';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';

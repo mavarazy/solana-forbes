@@ -6,7 +6,7 @@ import { getMagicEdenPrices } from './magic-eden-collection';
 import { getSolanaArtCollections } from './solana-art-collection';
 import { getSolPortCollections } from './solport-collection';
 import { getSolSeaCollections } from './solsea-collection';
-import { NftCollectionRepository } from './nft-collection-repository';
+import { NftCollectionPriceRepository } from './repository/nft-collection-price-repository';
 
 export const updateNftCollectionPrice = async () => {
   console.log('Nft collection price update start');
@@ -14,28 +14,28 @@ export const updateNftCollectionPrice = async () => {
   await Promise.all([
     getMagicEdenPrices()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getFractalCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getAlphArtCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getDigitalEyesCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getExchagenArtCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getSolanaArtCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getSolSeaCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
     getSolPortCollections()
       .catch(() => [])
-      .then(NftCollectionRepository.updateInBatch),
+      .then(NftCollectionPriceRepository.updateInBatch),
   ]);
 
   console.log('Nft collection price update finished');

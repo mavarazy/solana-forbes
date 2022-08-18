@@ -47,6 +47,7 @@ export const TokenLogo = ({
   }
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       className={className}
       src={url}

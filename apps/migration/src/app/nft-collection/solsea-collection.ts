@@ -1,4 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { asUrl } from '@solana-forbes/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import * as WebSocket from 'ws';
 
@@ -104,18 +105,35 @@ const getAllSolSeaCollections = async (): Promise<SolSeaCollection[]> =>
     });
   });
 
-const asPrice = (collection: SolSeaCollection): NftCollectionPrice => ({
-  id: collection._id,
-  price: collection.floorPrice / LAMPORTS_PER_SOL || 0,
-  website: collection.website,
-  marketplace: NftMarketplace.solsea,
-  marketplaceUrl: `https://solsea.io/collection/${collection._id}`,
-  name: collection.title,
-  volume: collection.volume || 0,
-  supply: collection.nftCount,
-  symbol: collection.symbol,
-  thumbnail: `https://content.solsea.io/${collection.iconImage?.s3.thumbnail}`,
-});
+const asPrice = (collection: SolSeaCollection): NftCollectionPrice => {
+  const marketplaceUrl = `https://solsea.io/collection/${collection._id}`;
+
+  const web = asUrl(collection.website || marketplaceUrl);
+  return {
+    id: collection._id,
+    price: collection.floorPrice / LAMPORTS_PER_SOL || 0,
+    web,
+    marketplace: NftMarketplace.solsea,
+    marketplaceUrl: marketplaceUrl,
+    volume: collection.volume || 0,
+    supply: collection.nftCount,
+
+    collection: {
+      web,
+      name: collection.title,
+      symbol: collection.symbol,
+      description: collection.description,
+      thumbnail: `https://content.solsea.io/${collection.iconImage?.s3.thumbnail}`,
+      social: {
+        web,
+        telegram: collection.telegram,
+        twitter: collection.twitter,
+        discord: collection.discord,
+        instagram: collection.instagram,
+      },
+    },
+  };
+};
 
 export const getSolSeaCollections = async (): Promise<NftCollectionPrice[]> => {
   const collections = await getAllSolSeaCollections();

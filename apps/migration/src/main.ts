@@ -6,7 +6,7 @@ import axiosRetry from 'axios-retry';
 import * as Sentry from '@sentry/node';
 
 Sentry.init({
-  dsn: 'https://1859802ae9d5487fa989701899175f35@o970258.ingest.sentry.io/6541229',
+  dsn: process.env.SENTY_DSN,
 
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
@@ -30,9 +30,8 @@ axiosRetry(axios, {
 const execute = async () => {
   try {
     await updateNftCollectionPrice();
-    await updateWalletEvaluation().then(() => {
-      updateTokenWorthSummary();
-    });
+    await updateWalletEvaluation();
+    await updateTokenWorthSummary();
   } catch (err) {
     console.error(err);
   }

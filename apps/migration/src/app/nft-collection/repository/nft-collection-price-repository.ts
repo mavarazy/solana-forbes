@@ -1,18 +1,18 @@
 import { gql } from '@apollo/client';
 import {
-  GetNftCollectionIds,
+  GetNftCollectionPriceIds,
   InsertNftCollectionPrice,
   InsertNftCollectionPriceVariables,
   NftCollectionPrice,
   UpdateNftCollectionPrice,
   UpdateNftCollectionPriceVariables,
-} from '@forbex-nxr/types';
-import { hasuraClient, throttle } from '@forbex-nxr/utils';
+} from '@solana-forbes/types';
+import { asUrl, hasuraClient, throttle } from '@solana-forbes/utils';
 import * as Sentry from '@sentry/node';
 import { format } from 'date-fns';
 
-const GetNftCollectionIdsQuery = gql`
-  query GetNftCollectionIds {
+const GetNftCollectionPriceIdsQuery = gql`
+  query GetNftCollectionPriceIds {
     nft_collection_price {
       id
     }
@@ -133,11 +133,19 @@ const InsertNftCollectionPriceQuery = gql`
   }
 `;
 
+const normalize = (
+  collectionPrice: NftCollectionPrice
+): NftCollectionPrice => ({
+  ...collectionPrice,
+  marketplaceUrl: asUrl(collectionPrice.marketplaceUrl),
+  web: asUrl(collectionPrice.web),
+});
+
 const existingIdsPromise: Promise<Set<string>> = (async () => {
   const {
     data: { nft_collection_price },
-  } = await hasuraClient.query<GetNftCollectionIds>({
-    query: GetNftCollectionIdsQuery,
+  } = await hasuraClient.query<GetNftCollectionPriceIds>({
+    query: GetNftCollectionPriceIdsQuery,
   });
 
   const existingIds = new Set<string>(nft_collection_price.map(({ id }) => id));
@@ -145,7 +153,9 @@ const existingIdsPromise: Promise<Set<string>> = (async () => {
   return existingIds;
 })();
 
-const update = async (collectionPrice: NftCollectionPrice) => {
+const doUpdate = async (
+  collectionPrice: NftCollectionPrice
+): Promise<NftCollectionPrice> => {
   try {
     const existingIds = await existingIdsPromise;
     if (existingIds.has(collectionPrice.id)) {
@@ -185,13 +195,19 @@ const update = async (collectionPrice: NftCollectionPrice) => {
   return collectionPrice;
 };
 
+const update = async (
+  price: NftCollectionPrice
+): Promise<NftCollectionPrice> => {
+  return doUpdate(normalize(price));
+};
+
 const updateInBatch = async (
   prices: NftCollectionPrice[]
 ): Promise<NftCollectionPrice[]> => {
   const collectionPrices = await throttle<NftCollectionPrice | null>(
-    prices.map((price) => async () => {
+    prices.map(normalize).map((price) => async () => {
       try {
-        return update(price);
+        return doUpdate(normalize(price));
       } catch (err) {
         console.warn(`Failed to save ${price}`);
         Sentry.captureException(err, {
@@ -209,7 +225,7 @@ const updateInBatch = async (
   return collectionPrices.filter((price) => price !== null);
 };
 
-export const NftCollectionRepository = {
+export const NftCollectionPriceRepository = {
   update,
   updateInBatch,
 };

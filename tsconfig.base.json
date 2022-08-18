@@ -10,15 +10,25 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@forbex-nxr/types": ["libs/types/src/index.ts"],
-      "@forbex-nxr/utils": ["libs/utils/src/index.ts"]
+      "@solana-forbes/types": [
+        "libs/types/src/index.ts"
+      ],
+      "@solana-forbes/utils": [
+        "libs/utils/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

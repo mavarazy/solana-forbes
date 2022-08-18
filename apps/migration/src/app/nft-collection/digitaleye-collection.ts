@@ -1,5 +1,5 @@
-import { NftCollectionPrice, NftMarketplace } from '@forbex-nxr/types';
-import { throttle } from '@forbex-nxr/utils';
+import { NftCollectionPrice, NftMarketplace } from '@solana-forbes/types';
+import { throttle } from '@solana-forbes/utils';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import axios from 'axios';
 import { trackNftError } from './track-nft-collection-errors';
@@ -89,16 +89,25 @@ export const getDigitalEyesCollections = async (): Promise<
         const floorPrice = await getCollectionPrice(collection.name);
         const slug = collection.name.replace(/\s/g, '-');
 
+        const makretplaceUrl = `https://digitaleyes.market/collections/${slug}`;
+        const web = collection.website || makretplaceUrl;
+
         return {
           id: collection.collectionId,
-          name: collection.name,
-          website: collection.website,
+          web,
           marketplace: NftMarketplace.digitaleyes,
           marketplaceUrl: `https://digitaleyes.market/collections/${slug}`,
-          thumbnail: parseThumbnail(collection.thumbnail),
           price: floorPrice || 0,
           volume: collection.volumeTotal / LAMPORTS_PER_SOL || 0,
           supply: 0,
+          collection: {
+            web,
+            name: collection.name,
+            thumbnail: parseThumbnail(collection.thumbnail),
+            social: {
+              web,
+            },
+          },
         };
       }
     ),

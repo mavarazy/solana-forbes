@@ -1,6 +1,9 @@
 import { gql } from '@apollo/client';
-import { GetNftCollectionPrice, NftCollectionPrice } from '@forbex-nxr/types';
-import { hasuraClient } from '@forbex-nxr/utils';
+import {
+  GetNftCollectionPrice,
+  NftCollectionPrice,
+} from '@solana-forbes/types';
+import { hasuraClient } from '@solana-forbes/utils';
 import { writeFile } from 'fs/promises';
 
 const GetNftCollectionPriceQuery = gql`

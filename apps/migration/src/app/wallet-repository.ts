@@ -9,8 +9,8 @@ import {
   UpdateWalletById,
   UpdateWalletByIdVariables,
   WalletBalance,
-} from '@forbex-nxr/types';
-import { hasuraClient } from '@forbex-nxr/utils';
+} from '@solana-forbes/types';
+import { hasuraClient } from '@solana-forbes/utils';
 
 const GetWalletsInQuery = gql`
   query GetWallets($wallets: [String!]) {

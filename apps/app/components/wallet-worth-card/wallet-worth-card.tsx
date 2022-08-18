@@ -1,25 +1,12 @@
-import { WalletBalance } from '@forbex-nxr/types';
+import { WalletBalance } from '@solana-forbes/types';
 import React from 'react';
 import { SummaryBadge } from '../summary-badge';
 import { SolBadge } from '../sol-badge';
 import { ProgramIcon } from '../program-icon';
-import { classNames } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/pro-solid-svg-icons';
 import { Badge } from '../badge';
 import { Card } from '../card';
-
-const ChangeBadge = ({ change }: { change: number }) => (
-  <span
-    className={classNames(
-      change > 0 ? 'bg-green-600' : 'bg-red-600',
-      'absolute sm:text-sm text-[8px] bottom-4 left-4 font-bold px-2 py-0.5 rounded-full shadow-lg text-white'
-    )}
-  >
-    <FontAwesomeIcon icon={change > 0 ? faPlus : faMinus} className="mr-1" />
-    {Math.round(Math.abs(change)).toLocaleString()}
-  </span>
-);
 
 interface WalletWorthCardProps {
   wallet: Pick<

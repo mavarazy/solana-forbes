@@ -1,4 +1,4 @@
-import { PriceService, throttle } from '@forbex-nxr/utils';
+import { PriceService, throttle } from '@solana-forbes/utils';
 import { getMint } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import * as Sentry from '@sentry/node';

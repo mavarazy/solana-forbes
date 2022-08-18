@@ -1,4 +1,4 @@
-import { NftMarketplace } from '@forbex-nxr/types';
+import { NftMarketplace } from '@solana-forbes/types';
 import * as Sentry from '@sentry/node';
 import { AxiosError } from 'axios';
 

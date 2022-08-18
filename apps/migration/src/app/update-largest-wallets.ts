@@ -1,5 +1,5 @@
-import { WalletBalance } from '@forbex-nxr/types';
-import { PriceService, throttle, WalletService } from '@forbex-nxr/utils';
+import { WalletBalance } from '@solana-forbes/types';
+import { PriceService, throttle, WalletService } from '@solana-forbes/utils';
 import { AccountLayout } from '@solana/spl-token';
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
 import { WalletRepository } from './wallet-repository';

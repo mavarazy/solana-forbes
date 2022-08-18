@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
-import { GetAllPricedTokens, TokenWorth } from '@forbex-nxr/types';
-import { hasuraClient } from '@forbex-nxr/utils';
+import { GetAllPricedTokens, TokenWorth } from '@solana-forbes/types';
+import { hasuraClient } from '@solana-forbes/utils';
 
 const GetAllPricedTokensQuery = gql`
   query GetAllPricedTokens {
