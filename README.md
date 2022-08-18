@@ -10,10 +10,10 @@
 
   For token estimates 2 sources were used
 
-    - [Coingecko](https://coingecko.com/)
-    - [Raydium](https://raydium.io/)
+- [Coingecko](https://coingecko.com/)
+- [Raydium](https://raydium.io/)
 
-Both would be only partially reliable, because again for both official Solana token list was used. Coin Gecko ```extensions.coingeckoId``` was used as a primary reference, and for Raydium ````symbol``` was used for pair matching.
+Both would be only partially reliable, because again for both official Solana token list was used. Coin Gecko ```extensions.coingeckoId``` was used as a primary reference, and for Raydium ```symbol``` was used for pair matching.
 
 Token list is not verified, and does not guarantee uniqueness of
 data, so both symbol or coingeckoId can be repeated as many times as
