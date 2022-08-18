@@ -1,0 +1,7 @@
+version: 3
+endpoint: https://hasura-onr0.onrender.com
+admin_secret: erCD4i41b4FL41cqVzbBW4HXnYaboOAV
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
